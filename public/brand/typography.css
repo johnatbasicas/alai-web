@@ -1,0 +1,172 @@
+/**
+ * ALAI Typography System
+ * System font stack optimized for performance and native feel
+ *
+ * Usage:
+ * h1 { font: var(--alai-font-h1); }
+ * p { font: var(--alai-font-body); }
+ */
+
+:root {
+  /* Font Family */
+  --alai-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --alai-font-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+
+  /* Font Weights */
+  --alai-weight-regular: 400;
+  --alai-weight-medium: 500;
+  --alai-weight-semibold: 600;
+  --alai-weight-bold: 700;
+
+  /* Display */
+  --alai-font-display-size: 96px;
+  --alai-font-display-weight: var(--alai-weight-bold);
+  --alai-font-display-height: 1.0;
+  --alai-font-display-spacing: -0.02em;
+  --alai-font-display: var(--alai-weight-bold) 96px/1.0 var(--alai-font-family);
+
+  /* H1 */
+  --alai-font-h1-size: 72px;
+  --alai-font-h1-weight: var(--alai-weight-bold);
+  --alai-font-h1-height: 1.1;
+  --alai-font-h1-spacing: -0.015em;
+  --alai-font-h1: var(--alai-weight-bold) 72px/1.1 var(--alai-font-family);
+
+  /* H2 */
+  --alai-font-h2-size: 48px;
+  --alai-font-h2-weight: var(--alai-weight-semibold);
+  --alai-font-h2-height: 1.2;
+  --alai-font-h2-spacing: -0.01em;
+  --alai-font-h2: var(--alai-weight-semibold) 48px/1.2 var(--alai-font-family);
+
+  /* H3 */
+  --alai-font-h3-size: 36px;
+  --alai-font-h3-weight: var(--alai-weight-semibold);
+  --alai-font-h3-height: 1.3;
+  --alai-font-h3-spacing: normal;
+  --alai-font-h3: var(--alai-weight-semibold) 36px/1.3 var(--alai-font-family);
+
+  /* H4 */
+  --alai-font-h4-size: 24px;
+  --alai-font-h4-weight: var(--alai-weight-medium);
+  --alai-font-h4-height: 1.4;
+  --alai-font-h4-spacing: normal;
+  --alai-font-h4: var(--alai-weight-medium) 24px/1.4 var(--alai-font-family);
+
+  /* H5 */
+  --alai-font-h5-size: 20px;
+  --alai-font-h5-weight: var(--alai-weight-medium);
+  --alai-font-h5-height: 1.5;
+  --alai-font-h5-spacing: normal;
+  --alai-font-h5: var(--alai-weight-medium) 20px/1.5 var(--alai-font-family);
+
+  /* Body */
+  --alai-font-body-size: 16px;
+  --alai-font-body-weight: var(--alai-weight-regular);
+  --alai-font-body-height: 1.6;
+  --alai-font-body-spacing: normal;
+  --alai-font-body: var(--alai-weight-regular) 16px/1.6 var(--alai-font-family);
+
+  /* Small */
+  --alai-font-small-size: 14px;
+  --alai-font-small-weight: var(--alai-weight-regular);
+  --alai-font-small-height: 1.5;
+  --alai-font-small-spacing: normal;
+  --alai-font-small: var(--alai-weight-regular) 14px/1.5 var(--alai-font-family);
+
+  /* Caption */
+  --alai-font-caption-size: 12px;
+  --alai-font-caption-weight: var(--alai-weight-medium);
+  --alai-font-caption-height: 1.4;
+  --alai-font-caption-spacing: 0.05em;
+  --alai-font-caption: var(--alai-weight-medium) 12px/1.4 var(--alai-font-family);
+}
+
+/* Base Typography */
+body {
+  font-family: var(--alai-font-family);
+  font-size: var(--alai-font-body-size);
+  font-weight: var(--alai-font-body-weight);
+  line-height: var(--alai-font-body-height);
+  letter-spacing: var(--alai-font-body-spacing);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Heading Styles */
+.alai-display {
+  font: var(--alai-font-display);
+  letter-spacing: var(--alai-font-display-spacing);
+}
+
+h1, .alai-h1 {
+  font: var(--alai-font-h1);
+  letter-spacing: var(--alai-font-h1-spacing);
+}
+
+h2, .alai-h2 {
+  font: var(--alai-font-h2);
+  letter-spacing: var(--alai-font-h2-spacing);
+}
+
+h3, .alai-h3 {
+  font: var(--alai-font-h3);
+  letter-spacing: var(--alai-font-h3-spacing);
+}
+
+h4, .alai-h4 {
+  font: var(--alai-font-h4);
+  letter-spacing: var(--alai-font-h4-spacing);
+}
+
+h5, .alai-h5 {
+  font: var(--alai-font-h5);
+  letter-spacing: var(--alai-font-h5-spacing);
+}
+
+/* Body Text */
+p, .alai-body {
+  font: var(--alai-font-body);
+  letter-spacing: var(--alai-font-body-spacing);
+}
+
+.alai-small, small {
+  font: var(--alai-font-small);
+  letter-spacing: var(--alai-font-small-spacing);
+}
+
+.alai-caption {
+  font: var(--alai-font-caption);
+  letter-spacing: var(--alai-font-caption-spacing);
+  text-transform: uppercase;
+}
+
+/* Code */
+code, pre, .alai-code {
+  font-family: var(--alai-font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  :root {
+    --alai-font-display-size: 64px;
+    --alai-font-h1-size: 48px;
+    --alai-font-h2-size: 36px;
+    --alai-font-h3-size: 28px;
+    --alai-font-h4-size: 22px;
+    --alai-font-h5-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --alai-font-display-size: 48px;
+    --alai-font-h1-size: 36px;
+    --alai-font-h2-size: 28px;
+    --alai-font-h3-size: 24px;
+    --alai-font-h4-size: 20px;
+    --alai-font-h5-size: 18px;
+  }
+}

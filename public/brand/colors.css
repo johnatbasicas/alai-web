@@ -1,0 +1,76 @@
+/**
+ * ALAI Color Palette
+ * Premium dark-mode Scandinavian minimalism
+ *
+ * Usage:
+ * background-color: var(--alai-bg);
+ * color: var(--alai-accent);
+ */
+
+:root {
+  /* Primary Colors */
+  --alai-bg: #09090b;
+  --alai-bg-rgb: 9, 9, 11;
+
+  --alai-text: #fafafa;
+  --alai-text-rgb: 250, 250, 250;
+
+  --alai-accent: #00E5A0;
+  --alai-accent-rgb: 0, 229, 160;
+
+  /* Surface Colors */
+  --alai-surface: #111113;
+  --alai-surface-rgb: 17, 17, 19;
+
+  --alai-border: #222222;
+  --alai-border-rgb: 34, 34, 34;
+
+  --alai-muted: #888888;
+  --alai-muted-rgb: 136, 136, 136;
+
+  /* Semantic Colors */
+  --alai-success: #22C55E;
+  --alai-success-rgb: 34, 197, 94;
+
+  --alai-warning: #F59E0B;
+  --alai-warning-rgb: 245, 158, 11;
+
+  --alai-error: #EF4444;
+  --alai-error-rgb: 239, 68, 68;
+
+  --alai-info: #3B82F6;
+  --alai-info-rgb: 59, 130, 246;
+
+  /* Opacity Variants */
+  --alai-accent-10: rgba(var(--alai-accent-rgb), 0.1);
+  --alai-accent-20: rgba(var(--alai-accent-rgb), 0.2);
+  --alai-accent-50: rgba(var(--alai-accent-rgb), 0.5);
+
+  --alai-surface-50: rgba(var(--alai-surface-rgb), 0.5);
+  --alai-surface-80: rgba(var(--alai-surface-rgb), 0.8);
+
+  --alai-muted-50: rgba(var(--alai-muted-rgb), 0.5);
+  --alai-muted-80: rgba(var(--alai-muted-rgb), 0.8);
+}
+
+/* Theme Class */
+.alai-theme {
+  background-color: var(--alai-bg);
+  color: var(--alai-text);
+}
+
+/* Utility Classes */
+.alai-bg-primary { background-color: var(--alai-bg); }
+.alai-bg-surface { background-color: var(--alai-surface); }
+.alai-bg-accent { background-color: var(--alai-accent); }
+
+.alai-text-primary { color: var(--alai-text); }
+.alai-text-muted { color: var(--alai-muted); }
+.alai-text-accent { color: var(--alai-accent); }
+
+.alai-border { border-color: var(--alai-border); }
+
+.alai-success { color: var(--alai-success); }
+.alai-warning { color: var(--alai-warning); }
+.alai-error { color: var(--alai-error); }
+.alai-info { color: var(--alai-info); }

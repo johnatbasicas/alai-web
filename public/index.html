@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ALAI Holding AS — We build digital. You build business. Full-service digital agency: software, design, security, AI. Fixed prices, AI-native delivery. Based in Norway.">
+    <title>ALAI — We build digital. You build business.</title>
+    <link rel="canonical" href="https://alai.no/">
+    <link rel="icon" type="image/svg+xml" href="brand/logos/logo-icon.svg">
+    <link rel="apple-touch-icon" href="brand/social/linkedin-profile.png">
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="en" href="https://alai.no/?lang=en">
+    <link rel="alternate" hreflang="no" href="https://alai.no/?lang=no">
+    <link rel="alternate" hreflang="bs" href="https://alai.no/?lang=bs">
+    <link rel="alternate" hreflang="x-default" href="https://alai.no/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ALAI — We build digital. You build business.">
+    <meta property="og:description" content="Full-service digital agency: software, design, security, AI. Fixed prices, AI-native delivery. Based in Norway.">
+    <meta property="og:image" content="https://alai.no/brand/social/og-image.png">
+    <meta property="og:url" content="https://alai.no/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ALAI Holding AS">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="nb_NO">
+    <meta property="og:locale:alternate" content="bs_BA">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ALAI — We build digital. You build business.">
+    <meta name="twitter:description" content="Full-service digital agency: software, design, security, AI. Fixed prices, AI-native delivery.">
+    <meta name="twitter:image" content="https://alai.no/brand/social/og-image.png">
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="ALAI Holding AS">
+    <meta name="geo.region" content="NO">
+    <meta name="geo.placename" content="Klofta, Norway">
+    <meta name="theme-color" content="#09090b">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ALAI Holding AS",
+        "alternateName": "ALAI",
+        "url": "https://alai.no",
+        "logo": "https://alai.no/brand/logos/profile-pic.png",
+        "description": "Full-service digital agency: software, design, security, AI. Fixed prices, AI-native delivery.",
+        "foundingDate": "2024",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Klofta",
+            "addressCountry": "NO"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "info@alai.no",
+            "contactType": "customer service",
+            "availableLanguage": ["English", "Norwegian", "Bosnian"]
+        },
+        "sameAs": [
+            "https://linkedin.com/company/alai-as"
+        ],
+        "knowsAbout": ["Software Development", "UI/UX Design", "Cybersecurity", "Artificial Intelligence", "Cloud Infrastructure", "Digital Marketing"],
+        "areaServed": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+                "@type": "GeoCoordinates",
+                "latitude": 60.0,
+                "longitude": 11.1
+            }
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Digital Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Landing Page", "description": "Single-page responsive site" },
+                    "priceCurrency": "NOK",
+                    "price": "16000"
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Web App MVP", "description": "Auth, CRUD, dashboard" },
+                    "priceCurrency": "NOK",
+                    "price": "60000"
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Automation", "description": "Single workflow, 2-3 integrations" },
+                    "priceCurrency": "NOK",
+                    "price": "8000"
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Brand Identity", "description": "Logo, colors, typography, guidelines" },
+                    "priceCurrency": "NOK",
+                    "price": "30000"
+                }
+            ]
+        }
+    }
+    </script>
+
+    <style>
+        /* ================================================
+           ALAI — Visual Language
+           Premium dark theme with green energy + section variety
+           ================================================ */
+        :root {
+            --bg: #09090b;
+            --bg-alt: #0d1117;
+            --text: #fafafa;
+            --accent: #00E5A0;
+            --accent-primary: #5E46BF;
+            --accent-primary-light: #7C5FD9;
+            --accent-dim: rgba(94, 70, 191, 0.35);
+            --accent-glow: rgba(94, 70, 191, 0.4);
+            --surface: #111113;
+            --surface-hover: #161618;
+            --border: #222;
+            --border-light: #2a2a2e;
+            --text-muted: #999;
+            --text-dim: #555;
+            --gradient-hero: linear-gradient(135deg, #00E5A0 0%, #00C9B7 40%, #0ea5e9 100%);
+            --shadow-glow: 0 0 30px rgba(94, 70, 191, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        ::selection { background: var(--accent); color: var(--bg); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ---- Eyebrow labels ---- */
+        .eyebrow {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        /* ================================================
+           NAVIGATION
+           ================================================ */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            z-index: 1000;
+            transition: border-color var(--transition), background var(--transition);
+        }
+        nav.scrolled {
+            border-bottom-color: var(--border);
+            background: rgba(9, 9, 11, 0.95);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all var(--transition);
+        }
+        .logo:hover { opacity: 0.9; }
+        .logo:hover .logo-mark { filter: drop-shadow(0 0 8px rgba(0, 229, 160, 0.6)); }
+        .logo-text { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+        .logo-mark { transition: filter var(--transition); }
+        @keyframes logoPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .logo-dot { animation: logoPulse 3s ease-in-out infinite; }
+        .nav-right { display: flex; align-items: center; gap: 24px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 15px;
+            transition: color var(--transition);
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width var(--transition);
+        }
+        nav a:hover { color: var(--text); }
+        nav a:hover::after { width: 100%; }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 2px;
+            flex-shrink: 0;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-transform: uppercase;
+        }
+        .lang-btn:hover { color: var(--text); }
+        .lang-btn.active {
+            background: var(--accent-primary);
+            color: #fff;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* ================================================
+           HERO — Photo with dark overlay
+           ================================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(9, 9, 11, 0.65) 0%, rgba(15, 23, 42, 0.55) 100%);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            padding: 0 24px;
+        }
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+            color: #fff;
+        }
+        .hero p {
+            font-size: clamp(18px, 2.5vw, 22px);
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 580px;
+            margin: 0 auto 44px;
+            line-height: 1.7;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--accent-primary);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            transition: transform var(--transition), box-shadow var(--transition);
+            box-shadow: 0 0 20px rgba(94, 70, 191, 0.2), 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(94, 70, 191, 0.35), 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .cta-ghost {
+            display: inline-block;
+            padding: 16px 40px;
+            background: transparent;
+            color: var(--accent-primary-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--accent-primary);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .cta-ghost:hover {
+            background: var(--accent-primary);
+            color: #fff;
+            box-shadow: 0 0 30px rgba(94, 70, 191, 0.25);
+        }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* ================================================
+           TRUST BAR
+           ================================================ */
+        .trust-bar {
+            padding: 48px 0;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .trust-bar p {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+        .trust-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .trust-logos span {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+            opacity: 0.6;
+            transition: opacity var(--transition);
+        }
+        .trust-logos span:hover { opacity: 1; }
+
+        /* ================================================
+           SECTION BASE
+           ================================================ */
+        section { padding: 120px 0; position: relative; }
+        section h2 {
+            font-size: clamp(36px, 5vw, 52px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+        .section-line {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+        }
+
+        /* ================================================
+           ABOUT — Slightly warm dark bg
+           ================================================ */
+        .about { background: var(--bg-alt); }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .about-content p {
+            margin: 0 auto 24px;
+            font-size: 19px;
+            line-height: 1.8;
+            color: #bbb;
+        }
+        .founder-section {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-top: 56px;
+            padding: 36px;
+            background: rgba(17, 17, 19, 0.6);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            text-align: left;
+        }
+        .founder-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid var(--border-light);
+        }
+        .founder-info h3 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+        .founder-info .founder-role { color: var(--text-muted); font-size: 14px; margin-bottom: 12px; }
+        .founder-info p { color: #bbb; font-size: 16px; line-height: 1.7; margin: 0; }
+        .also-offering {
+            margin-top: 32px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+        .also-offering span { color: var(--text-dim); }
+
+        /* ================================================
+           SERVICES — Core cards grid
+           ================================================ */
+        .services { background: var(--bg); }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 56px;
+        }
+        .service-card {
+            background: rgba(17, 17, 19, 0.6);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            transition: all var(--transition);
+        }
+        .service-card:hover {
+            border-color: rgba(94, 70, 191, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        .service-card .icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 20px;
+            color: #fafafa;
+        }
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .service-card p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ================================================
+           PORTFOLIO — Glass cards
+           ================================================ */
+        .portfolio { background: var(--surface); }
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            margin-top: 56px;
+        }
+        .company-card {
+            background: rgba(17, 17, 19, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .company-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-md);
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-dim), transparent 60%);
+            opacity: 0;
+            transition: opacity var(--transition);
+            pointer-events: none;
+        }
+        .company-card:hover::before { opacity: 1; }
+        .company-card:hover {
+            border-color: rgba(94, 70, 191, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 40px rgba(94, 70, 191, 0.15);
+            background: rgba(94, 70, 191, 0.08);
+        }
+        .company-card h3 { font-size: 28px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.01em; }
+        .company-card p { margin-bottom: 24px; line-height: 1.7; color: #aaa; font-size: 16px; }
+        .company-card .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #27272a;
+            color: #a1a1aa;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            border: 1px solid #3f3f46;
+        }
+        .learn-more {
+            color: #a1a1aa;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap var(--transition), color var(--transition);
+        }
+        .learn-more:hover { gap: 12px; color: #fafafa; }
+        .learn-more::after { content: '\2192'; }
+
+        /* ================================================
+           TESTIMONIALS
+           ================================================ */
+        .testimonials { background: var(--bg); }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 56px;
+        }
+        .testimonial-card {
+            background: rgba(17, 17, 19, 0.6);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 36px;
+        }
+        .testimonial-card blockquote {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #ccc;
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+        .testimonial-card blockquote::before { content: '\201C'; font-size: 32px; color: var(--accent-primary-light); line-height: 0; vertical-align: -12px; margin-right: 4px; }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .testimonial-author .author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .testimonial-author .author-name { font-weight: 600; font-size: 15px; }
+        .testimonial-author .author-role { color: var(--text-muted); font-size: 13px; }
+
+        /* ================================================
+           PROCESS — INVERTED ACCENT SECTION
+           ================================================ */
+        .process {
+            background: var(--accent-primary);
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .process::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(0, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0, 0, 0, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .process .eyebrow { color: rgba(255,255,255,0.5); }
+        .process h2 { color: #fff; }
+        .process .section-subtitle { color: rgba(255,255,255,0.6); }
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 56px;
+        }
+        .process-step { position: relative; }
+        .process-step .step-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.22);
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+        .process-step h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .process-step p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* ================================================
+           CTA BANNER
+           ================================================ */
+        .cta-banner {
+            background: var(--bg);
+            text-align: center;
+        }
+        .cta-banner h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .cta-banner p {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 560px;
+            margin: 0 auto 32px;
+        }
+
+        /* ================================================
+           CONTACT
+           ================================================ */
+        .contact { background: var(--bg-alt); }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 56px;
+        }
+        .contact-info h3 { font-size: 26px; font-weight: 600; margin-bottom: 24px; }
+        .contact-info p { margin-bottom: 20px; font-size: 17px; line-height: 1.7; color: #bbb; }
+        .contact-info a { color: var(--accent-primary-light); text-decoration: none; transition: opacity var(--transition); }
+        .contact-info a:hover { text-decoration: underline; opacity: 0.85; }
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+        .form-group input, .form-group textarea {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            color: var(--text);
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(94, 70, 191, 0.1);
+        }
+        .form-group textarea { min-height: 140px; resize: vertical; }
+        .form-error { color: #EF4444; font-size: 13px; display: none; }
+        .form-group.error input, .form-group.error textarea { border-color: #EF4444; }
+        .form-group.error .form-error { display: block; }
+        .submit-button {
+            padding: 16px;
+            background: var(--accent-primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform var(--transition), box-shadow var(--transition);
+            box-shadow: 0 0 20px rgba(94, 70, 191, 0.15);
+        }
+        .submit-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(94, 70, 191, 0.3);
+        }
+        .submit-button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .form-success {
+            display: none;
+            padding: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid #10b981;
+            border-radius: var(--radius-sm);
+            color: #10b981;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* ================================================
+           FOOTER
+           ================================================ */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 0 36px;
+            background: var(--bg);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+        .footer-tagline { color: var(--text-muted); font-style: italic; }
+        .footer-links { display: flex; gap: 28px; }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color var(--transition);
+        }
+        .footer-links a:hover { color: #fafafa; }
+        .back-to-top {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color var(--transition);
+        }
+        .back-to-top:hover { color: #fafafa; }
+
+        /* ================================================
+           SCROLL REVEAL
+           ================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.revealed { opacity: 1; transform: translateY(0); }
+        .reveal-stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0.05s; }
+        .reveal-stagger.revealed > *:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-stagger.revealed > *:nth-child(3) { transition-delay: 0.15s; }
+        .reveal-stagger.revealed > *:nth-child(4) { transition-delay: 0.2s; }
+        .reveal-stagger.revealed > *:nth-child(5) { transition-delay: 0.25s; }
+        .reveal-stagger.revealed > *:nth-child(6) { transition-delay: 0.3s; }
+        .reveal-stagger.revealed > *:nth-child(7) { transition-delay: 0.35s; }
+        .reveal-stagger.revealed > *:nth-child(8) { transition-delay: 0.4s; }
+        .reveal-stagger.revealed > * { opacity: 1; transform: translateY(0); }
+
+        /* ================================================
+           REDUCED MOTION
+           ================================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+            .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
+        }
+
+        /* ================================================
+           MOBILE — 768px
+           ================================================ */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0; right: 0;
+                background: rgba(17, 17, 19, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 16px 24px 24px;
+                border-bottom: 1px solid var(--border);
+                gap: 4px;
+            }
+            nav ul.active { display: flex; }
+            nav ul li a { display: block; padding: 12px 0; font-size: 16px; color: var(--text); }
+            .mobile-toggle { display: block; }
+            .nav-right { gap: 12px; }
+            .lang-switcher { order: -1; }
+            section { padding: 80px 0; }
+            .hero { min-height: 85vh; }
+            .companies-grid, .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+            .contact-wrapper { grid-template-columns: 1fr; gap: 48px; }
+            .founder-section { flex-direction: column; text-align: center; }
+            .process-grid { grid-template-columns: 1fr; gap: 32px; }
+            .trust-logos { gap: 32px; }
+            .footer-content { flex-direction: column; text-align: center; gap: 16px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            section { padding: 64px 0; }
+            .hero { min-height: 80vh; }
+            .companies-grid, .services-grid { grid-template-columns: 1fr; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .cta-button, .cta-ghost { width: 100%; text-align: center; }
+            .lang-btn { padding: 5px 8px; font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="container">
+            <a href="#" class="logo" aria-label="ALAI Home">
+                <svg class="logo-mark" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                            <stop offset="0%" stop-color="#5E46BF"/>
+                            <stop offset="100%" stop-color="#00E5A0"/>
+                        </linearGradient>
+                        <filter id="logoGlow">
+                            <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                        </filter>
+                    </defs>
+                    <rect width="40" height="40" rx="10" fill="#111113" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                    <path d="M12 28L20 12L28 28" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#logoGlow)"/>
+                    <line x1="15" y1="23" x2="25" y2="23" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                    <circle class="logo-dot" cx="30" cy="12" r="3" fill="#00E5A0"/>
+                </svg>
+                <span class="logo-text">ALAI</span>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+            <div class="nav-right">
+                <ul id="nav-menu">
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                    <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
+                    <li><a href="#process" data-i18n="nav.process">Process</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+                <div class="lang-switcher" aria-label="Language selector">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="no">NO</button>
+                    <button class="lang-btn" data-lang="bs">BiH</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <img src="assets/hero-aerial.png" alt="Aerial view of Norwegian fjord landscape" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 data-i18n="hero.title">We build digital.</h1>
+            <p data-i18n="hero.subtitle">Software, design, security, and AI — delivered by one team. Fixed prices. No surprises.</p>
+            <p style="font-size:15px;color:rgba(255,255,255,0.5);margin-top:-28px;margin-bottom:40px;letter-spacing:0.02em;" data-i18n="hero.tagline">We build digital. You build business. We build the future.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="cta-button" data-i18n="hero.cta_primary">Start a project</a>
+                <a href="#contact" class="cta-ghost" data-i18n="hero.cta_secondary">Contact us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <p data-i18n="trust.label">We work with</p>
+            <div class="trust-logos">
+                <span>Ren Dr&oslash;m</span>
+                <span>Wizard</span>
+                <span>SnowIT</span>
+                <span>Authority Partners</span>
+                <span>Medon</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="section-line"></div>
+        <div class="container">
+            <div class="about-content reveal">
+                <span class="eyebrow" data-i18n="about.eyebrow">About us</span>
+                <h2 data-i18n="about.title">One partner. Complete delivery.</h2>
+                <p data-i18n="about.p1">ALAI is a Norwegian digital agency that builds, deploys, and maintains software from A to Z. From the first pixel to production server — one partner, complete delivery.</p>
+                <p data-i18n="about.p2">We use the same AI we build for clients. That means faster delivery, lower cost, and fewer errors. Humans set the direction. AI does the rest.</p>
+            </div>
+            <div class="founder-section reveal">
+                <img src="brand/logos/profile-pic.png" alt="Alem, Founder & CEO" class="founder-photo">
+                <div class="founder-info">
+                    <h3>Alem</h3>
+                    <div class="founder-role" data-i18n="about.founder_role">Founder &amp; CEO</div>
+                    <p data-i18n="about.founder_bio">Engineer turned entrepreneur. 25+ years shipping enterprise software across Norway and Europe. Built ALAI to prove that a small team with the right AI can outdeliver agencies ten times its size. No subcontractors. No finger-pointing. One person, full accountability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="reveal">
+                <span class="eyebrow" data-i18n="services.eyebrow">Services</span>
+                <h2 data-i18n="services.title">Full-service digital</h2>
+                <p class="section-subtitle" data-i18n="services.subtitle">Everything you need to build, launch, and grow — from one team.</p>
+            </div>
+            <div class="services-grid reveal-stagger">
+                <div class="service-card">
+                    <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 13 6 24 16 35"/><polyline points="32 13 42 24 32 35"/><line x1="27" y1="10" x2="21" y2="38"/></svg>
+                    <h3 data-i18n="services.software.title">Software</h3>
+                    <p data-i18n="services.software.desc">Custom web apps, mobile, APIs, and integrations. Modern stack, production-grade.</p>
+                </div>
+                <div class="service-card">
+                    <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4L4 14v20l20 10 20-10V14L24 4z"/><line x1="4" y1="14" x2="24" y2="24"/><line x1="44" y1="14" x2="24" y2="24"/><line x1="24" y1="24" x2="24" y2="44"/></svg>
+                    <h3 data-i18n="services.design.title">Design</h3>
+                    <p data-i18n="services.design.desc">UI/UX, brand identity, and design systems. Production-ready components, not just mockups.</p>
+                </div>
+                <div class="service-card">
+                    <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="18" r="10"/><circle cx="14" cy="32" r="4"/><circle cx="34" cy="32" r="4"/><circle cx="24" cy="42" r="4"/><line x1="18" y1="26" x2="16" y2="29"/><line x1="30" y1="26" x2="32" y2="29"/><line x1="24" y1="28" x2="24" y2="38"/></svg>
+                    <h3 data-i18n="services.ai.title">Data &amp; AI</h3>
+                    <p data-i18n="services.ai.desc">Business intelligence, ML models, LLM integrations. Turn data into decisions.</p>
+                </div>
+                <div class="service-card">
+                    <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4C14 4 6 10 6 18c0 10 18 26 18 26s18-16 18-26c0-8-8-14-18-14z"/><path d="M18 18l4 4 8-8"/></svg>
+                    <h3 data-i18n="services.security.title">Security</h3>
+                    <p data-i18n="services.security.desc">Audits, penetration testing, vulnerability assessment. Protect before you launch.</p>
+                </div>
+            </div>
+            <div class="also-offering reveal">
+                <span data-i18n="services.also">Also offering:</span> Infrastructure &middot; Marketing &middot; Training &middot; Support
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-line"></div>
+        <div class="container">
+            <div class="reveal">
+                <span class="eyebrow" data-i18n="portfolio.eyebrow">Portfolio</span>
+                <h2 data-i18n="portfolio.title">What we've built</h2>
+                <p class="section-subtitle" data-i18n="portfolio.subtitle">Products, platforms, and partnerships — solutions across industries.</p>
+            </div>
+            <div class="companies-grid reveal-stagger">
+                <div class="company-card">
+                    <div class="tag" data-i18n="portfolio.basic.tag">Digital Agency</div>
+                    <h3>Basic Consulting</h3>
+                    <p data-i18n="portfolio.basic.desc">Full-service agency delivering software, design, security, and cloud infrastructure. Serving enterprise clients across Norway and Europe.</p>
+                    <a href="https://basicconsulting.no" class="learn-more">basicconsulting.no</a>
+                </div>
+                <div class="company-card">
+                    <div class="tag" data-i18n="portfolio.fakta.tag">AI Product</div>
+                    <h3>BasicFakta</h3>
+                    <p data-i18n="portfolio.fakta.desc">AI-powered fact-checking for the Norwegian market. Automated claim verification and source tracking — fighting misinformation with technology.</p>
+                    <a href="https://basicfakta.no" class="learn-more">basicfakta.no</a>
+                </div>
+                <div class="company-card">
+                    <div class="tag">Fintech</div>
+                    <h3>Drop</h3>
+                    <p data-i18n="portfolio.drop.desc">Remittance and QR-based payments built for speed and simplicity. Making international money transfers accessible.</p>
+                    <a href="https://getdrop.no" class="learn-more">getdrop.no</a>
+                </div>
+                <div class="company-card">
+                    <div class="tag" data-i18n="portfolio.snowit.tag">Technology Partner</div>
+                    <h3>Snowit</h3>
+                    <p data-i18n="portfolio.snowit.desc">Software and engineering partner based in Bosnia. Extending our delivery capacity with custom development and enterprise solutions.</p>
+                    <a href="https://snowit.ba" class="learn-more">snowit.ba</a>
+                </div>
+                <div class="company-card">
+                    <div class="tag" data-i18n="portfolio.agents.tag">AI Agents</div>
+                    <h3 data-i18n="portfolio.agents.title">Custom Agents</h3>
+                    <p data-i18n="portfolio.agents.desc">Custom AI agents for marketing, sales, legal, and operations. Automate routine tasks and accelerate decision-making with intelligent assistants.</p>
+                    <a href="#contact" class="learn-more" data-i18n="portfolio.agents.link">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-line"></div>
+        <div class="container">
+            <div class="reveal">
+                <span class="eyebrow" data-i18n="testimonials.eyebrow">Testimonials</span>
+                <h2 data-i18n="testimonials.title">What our partners say</h2>
+            </div>
+            <div class="testimonials-grid reveal-stagger">
+                <div class="testimonial-card">
+                    <blockquote data-i18n="testimonials.q1">From idea to full automation in record time. They built a complete accounting automation system that caught a 150,000 NOK error I had missed. ALAI doesn't just build software — they solve real business problems.</blockquote>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div>
+                            <div class="author-name">Ren Dr&oslash;m</div>
+                            <div class="author-role" data-i18n="testimonials.a1_role">Real Estate, Norway</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <blockquote data-i18n="testimonials.q2">BasicFakta went from concept to production in record time. AI-powered fact-checking for the Norwegian market — built, tested, and deployed with zero external dependencies.</blockquote>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">B</div>
+                        <div>
+                            <div class="author-name">BasicFakta</div>
+                            <div class="author-role" data-i18n="testimonials.a2_role">AI Product — In-house</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <blockquote data-i18n="testimonials.q3">Drop was designed, built, and shipped by a two-person team powered by AI. Full fintech stack — payments, QR, remittance — delivered in weeks, not months.</blockquote>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">D</div>
+                        <div>
+                            <div class="author-name">Drop</div>
+                            <div class="author-role" data-i18n="testimonials.a3_role">Fintech Product — In-house</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process — Inverted accent section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="reveal">
+                <span class="eyebrow" data-i18n="process.eyebrow">Process</span>
+                <h2 data-i18n="process.title">Six steps to your goal</h2>
+                <p class="section-subtitle" data-i18n="process.subtitle">Transparent process. No surprises at any stage.</p>
+            </div>
+            <div class="process-grid reveal-stagger">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h3 data-i18n="process.s1.title">Discovery</h3>
+                    <p data-i18n="process.s1.desc">We listen first. Understanding your business, users, and constraints before writing a single line of code.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h3 data-i18n="process.s2.title">Scope &amp; price</h3>
+                    <p data-i18n="process.s2.desc">Fixed price or custom quote. No ambiguity. You approve before we start.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h3 data-i18n="process.s3.title">Build</h3>
+                    <p data-i18n="process.s3.desc">AI-assisted development with human oversight. Automated testing, continuous integration, daily progress visibility.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h3 data-i18n="process.s4.title">Validation</h3>
+                    <p data-i18n="process.s4.desc">Independent QA review. Security scan, performance test, accessibility check — all before you see it.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">05</div>
+                    <h3 data-i18n="process.s5.title">Deploy</h3>
+                    <p data-i18n="process.s5.desc">Staging preview for your approval. Production deploy with zero downtime.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">06</div>
+                    <h3 data-i18n="process.s6.title">Support</h3>
+                    <p data-i18n="process.s6.desc">Post-launch monitoring, bug fixes, new features. We stay as long as you need us.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner" id="quote">
+        <div class="container">
+            <div class="reveal">
+                <span class="eyebrow" data-i18n="cta.eyebrow">Ready?</span>
+                <h2 data-i18n="cta.title">Let's build something great</h2>
+                <p data-i18n="cta.subtitle">Every project is unique. Tell us what you need and we'll craft a tailored proposal within 24 hours.</p>
+                <a href="#contact" class="cta-button" data-i18n="cta.button">Get a free quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="section-line"></div>
+        <div class="container">
+            <div class="reveal">
+                <span class="eyebrow" data-i18n="contact.eyebrow">Contact</span>
+                <h2 data-i18n="contact.title">Get in touch</h2>
+                <p class="section-subtitle" data-i18n="contact.subtitle">Tell us what you need. We'll respond within 24 hours.</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info reveal">
+                    <h3 data-i18n="contact.info_title">Contact information</h3>
+                    <p><strong data-i18n="contact.email_label">Email:</strong><br><a href="mailto:info@alai.no">info@alai.no</a></p>
+                    <p><strong data-i18n="contact.location_label">Location:</strong><br><span data-i18n="contact.location">Klofta, Norway</span></p>
+                    <p><strong data-i18n="contact.business_label">Business inquiries:</strong><br><span data-i18n="contact.business_desc">For partnerships or larger projects, send us an email with a brief description.</span></p>
+                </div>
+                <form class="contact-form reveal" id="contact-form">
+                    <!-- Honeypot — hidden from humans, bots fill it -->
+                    <div style="position:absolute;left:-9999px;" aria-hidden="true">
+                        <input type="text" name="_honey" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" data-i18n="contact.form.name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="form-error" data-i18n="contact.form.name_error">Please enter your name</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-i18n="contact.form.email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="form-error" data-i18n="contact.form.email_error">Please enter a valid email address</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-i18n="contact.form.message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us about your project: goals, timeline, and any specific needs..."></textarea>
+                        <span class="form-error" data-i18n="contact.form.message_error">Please enter your message</span>
+                    </div>
+                    <button type="submit" class="submit-button" data-i18n="contact.form.submit">Book a discovery call</button>
+                    <div class="form-success" id="form-success" data-i18n="contact.form.success">Thank you! We'll get back to you within 24 hours.</div>
+                    <div class="form-error-msg" id="form-error" style="display:none;padding:20px;background:rgba(239,68,68,0.1);border:1px solid #EF4444;border-radius:8px;color:#EF4444;text-align:center;font-weight:500;"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div>&copy; 2026 ALAI Holding AS &middot; Org.nr 932 516 136</div>
+                    <div class="footer-tagline" data-i18n="footer.tagline">We build digital. You build business.</div>
+                </div>
+                <div class="footer-links">
+                    <a href="https://linkedin.com/company/alai-as" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="mailto:info@alai.no">info@alai.no</a>
+                </div>
+                <a href="#nav" class="back-to-top" data-i18n="footer.top">Back to top &uarr;</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // i18n — Multilanguage System (EN / NO / BS)
+        // ============================================
+        const T = {
+            en: {
+                // Nav
+                'nav.about': 'About',
+                'nav.services': 'Services',
+                'nav.portfolio': 'Portfolio',
+                'nav.process': 'Process',
+                'nav.contact': 'Contact',
+                // Hero
+                'hero.title': 'We build digital.',
+                'hero.subtitle': 'Software, design, security, and AI \u2014 delivered by one team. Fixed prices. No surprises.',
+                'hero.tagline': 'We build digital. You build business. We build the future.',
+                'hero.cta_primary': 'Start a project',
+                'hero.cta_secondary': 'Contact us',
+                // Trust
+                'trust.label': 'We work with',
+                // About
+                'about.eyebrow': 'About us',
+                'about.title': 'One partner. Complete delivery.',
+                'about.p1': 'ALAI is a Norwegian digital agency that builds, deploys, and maintains software from A to Z. From the first pixel to production server \u2014 one partner, complete delivery.',
+                'about.p2': 'We use the same AI we build for clients. That means faster delivery, lower cost, and fewer errors. Humans set the direction. AI does the rest.',
+                'about.founder_role': 'Founder & CEO',
+                'about.founder_bio': 'Engineer turned entrepreneur. 25+ years shipping enterprise software across Norway and Europe. Built ALAI to prove that a small team with the right AI can outdeliver agencies ten times its size. No subcontractors. No finger-pointing. One person, full accountability.',
+                // Services
+                'services.eyebrow': 'Services',
+                'services.title': 'Full-service digital',
+                'services.subtitle': 'Everything you need to build, launch, and grow \u2014 from one team.',
+                'services.software.title': 'Software',
+                'services.software.desc': 'Custom web apps, mobile, APIs, and integrations. Modern stack, production-grade.',
+                'services.design.title': 'Design',
+                'services.design.desc': 'UI/UX, brand identity, and design systems. Production-ready components, not just mockups.',
+                'services.security.title': 'Security',
+                'services.security.desc': 'Audits, penetration testing, vulnerability assessment. Protect before you launch.',
+                'services.ai.title': 'Data & AI',
+                'services.ai.desc': 'Business intelligence, ML models, LLM integrations. Turn data into decisions.',
+                'services.infra.title': 'Infrastructure',
+                'services.infra.desc': 'Cloud setup, CI/CD pipelines, monitoring. The foundation your software runs on.',
+                'services.marketing.title': 'Marketing',
+                'services.marketing.desc': 'SEO, content, digital campaigns. Get found. Get leads. Get customers.',
+                'services.training.title': 'Training',
+                'services.training.desc': 'Technical workshops, team onboarding, documentation. Knowledge transfer, not just deliverables.',
+                'services.support.title': 'Support',
+                'services.support.desc': 'SLA-based maintenance, bug fixes, monitoring. We don\'t disappear after launch.',
+                'services.also': 'Also offering:',
+                // Portfolio
+                'portfolio.eyebrow': 'Portfolio',
+                'portfolio.title': 'What we\'ve built',
+                'portfolio.subtitle': 'Products, platforms, and partnerships \u2014 solutions across industries.',
+                'portfolio.basic.tag': 'Digital Agency',
+                'portfolio.basic.desc': 'Full-service agency delivering software, design, security, and cloud infrastructure. Serving enterprise clients across Norway and Europe.',
+                'portfolio.fakta.tag': 'AI Product',
+                'portfolio.fakta.desc': 'AI-powered fact-checking for the Norwegian market. Automated claim verification and source tracking \u2014 fighting misinformation with technology.',
+                'portfolio.drop.desc': 'Remittance and QR-based payments built for speed and simplicity. Making international money transfers accessible.',
+                'portfolio.snowit.tag': 'Technology Partner',
+                'portfolio.snowit.desc': 'Software and engineering partner based in Bosnia. Extending our delivery capacity with custom development and enterprise solutions.',
+                'portfolio.agents.tag': 'AI Agents',
+                'portfolio.agents.title': 'Custom Agents',
+                'portfolio.agents.desc': 'Custom AI agents for marketing, sales, legal, and operations. Automate routine tasks and accelerate decision-making with intelligent assistants.',
+                'portfolio.agents.link': 'Learn more',
+                // Testimonials
+                'testimonials.eyebrow': 'Testimonials',
+                'testimonials.title': 'What our partners say',
+                'testimonials.q1': 'From idea to full automation in record time. They built a complete accounting automation system that caught a 150,000 NOK error I had missed. ALAI doesn\'t just build software \u2014 they solve real business problems.',
+                'testimonials.a1_role': 'Real Estate, Norway',
+                'testimonials.q2': 'BasicFakta went from concept to production in record time. AI-powered fact-checking for the Norwegian market \u2014 built, tested, and deployed with zero external dependencies.',
+                'testimonials.a2_role': 'AI Product \u2014 In-house',
+                'testimonials.q3': 'Drop was designed, built, and shipped by a two-person team powered by AI. Full fintech stack \u2014 payments, QR, remittance \u2014 delivered in weeks, not months.',
+                'testimonials.a3_role': 'Fintech Product \u2014 In-house',
+                // Process
+                'process.eyebrow': 'Process',
+                'process.title': 'Six steps to your goal',
+                'process.subtitle': 'Transparent process. No surprises at any stage.',
+                'process.s1.title': 'Discovery',
+                'process.s1.desc': 'We listen first. Understanding your business, users, and constraints before writing a single line of code.',
+                'process.s2.title': 'Scope & price',
+                'process.s2.desc': 'Fixed price or custom quote. No ambiguity. You approve before we start.',
+                'process.s3.title': 'Build',
+                'process.s3.desc': 'AI-assisted development with human oversight. Automated testing, continuous integration, daily progress visibility.',
+                'process.s4.title': 'Validation',
+                'process.s4.desc': 'Independent QA review. Security scan, performance test, accessibility check \u2014 all before you see it.',
+                'process.s5.title': 'Deploy',
+                'process.s5.desc': 'Staging preview for your approval. Production deploy with zero downtime.',
+                'process.s6.title': 'Support',
+                'process.s6.desc': 'Post-launch monitoring, bug fixes, new features. We stay as long as you need us.',
+                // CTA
+                'cta.eyebrow': 'Ready?',
+                'cta.title': 'Let\'s build something great',
+                'cta.subtitle': 'Every project is unique. Tell us what you need and we\'ll craft a tailored proposal within 24 hours.',
+                'cta.button': 'Get a free quote',
+                // Contact
+                'contact.eyebrow': 'Contact',
+                'contact.title': 'Get in touch',
+                'contact.subtitle': 'Tell us what you need. We\'ll respond within 24 hours.',
+                'contact.info_title': 'Contact information',
+                'contact.email_label': 'Email:',
+                'contact.location_label': 'Location:',
+                'contact.location': 'Klofta, Norway',
+                'contact.business_label': 'Business inquiries:',
+                'contact.business_desc': 'For partnerships or larger projects, send us an email with a brief description.',
+                'contact.form.name': 'Name *',
+                'contact.form.name_error': 'Please enter your name',
+                'contact.form.email': 'Email *',
+                'contact.form.email_error': 'Please enter a valid email address',
+                'contact.form.message': 'Message *',
+                'contact.form.message_error': 'Please enter your message',
+                'contact.form.submit': 'Book a discovery call',
+                'contact.form.success': 'Thank you! We\'ll get back to you within 24 hours.',
+                'contact.form.sending': 'Sending...',
+                // Footer
+                'footer.tagline': 'We build digital. You build business.',
+                'footer.top': 'Back to top \u2191'
+            },
+            no: {
+                // Nav
+                'nav.about': 'Om oss',
+                'nav.services': 'Tjenester',
+                'nav.portfolio': 'Portfolio',
+                'nav.process': 'Prosess',
+                'nav.contact': 'Kontakt',
+                // Hero
+                'hero.title': 'Vi bygger digitalt.',
+                'hero.subtitle': 'Programvare, design, sikkerhet og AI \u2014 levert av \u00e9tt team. Faste priser. Ingen overraskelser.',
+                'hero.tagline': 'Vi bygger digitalt. Du bygger virksomhet. Vi bygger fremtiden.',
+                'hero.cta_primary': 'Start et prosjekt',
+                'hero.cta_secondary': 'Kontakt oss',
+                // Trust
+                'trust.label': 'Vi jobber med',
+                // About
+                'about.eyebrow': 'Om oss',
+                'about.title': '\u00c9n partner. Komplett leveranse.',
+                'about.p1': 'ALAI er et norsk digitalbyr\u00e5 som bygger, deployer og vedlikeholder software fra A til \u00c5. Fra f\u00f8rste piksel til produksjonsserver \u2014 \u00e9n partner, komplett leveranse.',
+                'about.p2': 'Vi bruker den samme AI-en vi bygger for kunder. Det betyr raskere leveranse, lavere kostnad og f\u00e6rre feil. Mennesker setter retningen. AI gj\u00f8r resten.',
+                'about.founder_role': 'Grunnlegger og daglig leder',
+                'about.founder_bio': 'Ingeni\u00f8r som ble grunder. 25+ \u00e5r med leveranse av enterprise-programvare i Norge og Europa. Bygde ALAI for \u00e5 bevise at et lite team med riktig AI kan levere bedre enn byr\u00e5er ti ganger st\u00f8rre. Ingen underleverand\u00f8rer. Ingen ansvarsfraskrivelse. \u00c9n person, fullt ansvar.',
+                // Services
+                'services.eyebrow': 'Tjenester',
+                'services.title': 'Full-service digital',
+                'services.subtitle': 'Alt du trenger for \u00e5 bygge, lansere og vokse \u2014 fra \u00e9tt team.',
+                'services.software.title': 'Programvare',
+                'services.software.desc': 'Skreddersydde webapper, mobilapper, API-er og integrasjoner. Moderne stack, produksjonsklart.',
+                'services.design.title': 'Design',
+                'services.design.desc': 'UI/UX, merkevaridentitet og designsystemer. Produksjonsklare komponenter, ikke bare mockups.',
+                'services.security.title': 'Sikkerhet',
+                'services.security.desc': 'Revisjoner, penetrasjonstesting, s\u00e5rbarhetsanalyse. Beskytt f\u00f8r du lanserer.',
+                'services.ai.title': 'Data & AI',
+                'services.ai.desc': 'Forretningsintelligens, ML-modeller, LLM-integrasjoner. Gj\u00f8r data til beslutninger.',
+                'services.infra.title': 'Infrastruktur',
+                'services.infra.desc': 'Skykonfigurasjon, CI/CD-pipelines, overv\u00e5kning. Fundamentet programvaren din kj\u00f8rer p\u00e5.',
+                'services.marketing.title': 'Markedsf\u00f8ring',
+                'services.marketing.desc': 'SEO, innhold, digitale kampanjer. Bli funnet. F\u00e5 leads. F\u00e5 kunder.',
+                'services.training.title': 'Oppl\u00e6ring',
+                'services.training.desc': 'Tekniske workshops, onboarding, dokumentasjon. Kunnskapsoverf\u00f8ring, ikke bare leveranser.',
+                'services.support.title': 'Support',
+                'services.support.desc': 'SLA-basert vedlikehold, feilretting, overv\u00e5kning. Vi forsvinner ikke etter lansering.',
+                'services.also': 'Ogs\u00e5 tilbyr vi:',
+                // Portfolio
+                'portfolio.eyebrow': 'Portfolio',
+                'portfolio.title': 'Hva vi har bygget',
+                'portfolio.subtitle': 'Produkter, plattformer og partnerskap \u2014 l\u00f8sninger p\u00e5 tvers av bransjer.',
+                'portfolio.basic.tag': 'Digitalbyr\u00e5',
+                'portfolio.basic.desc': 'Full-service byr\u00e5 som leverer programvare, design, sikkerhet og skyinfrastruktur. Betjener bedriftskunder i Norge og Europa.',
+                'portfolio.fakta.tag': 'AI-produkt',
+                'portfolio.fakta.desc': 'AI-drevet faktasjekk for det norske markedet. Automatisert verifisering og kildesp\u00f8ring \u2014 bekjemper feilinformasjon med teknologi.',
+                'portfolio.drop.desc': 'Pengeoverf\u00f8ringer og QR-baserte betalinger bygget for hastighet og enkelhet. Gj\u00f8r internasjonale overf\u00f8ringer tilgjengelige.',
+                'portfolio.snowit.tag': 'Teknologipartner',
+                'portfolio.snowit.desc': 'Programvare- og ingeni\u00f8rpartner basert i Bosnia. Utvider v\u00e5r leveransekapasitet med skreddersydd utvikling og bedriftsl\u00f8sninger.',
+                'portfolio.agents.tag': 'AI-agenter',
+                'portfolio.agents.title': 'Tilpassede agenter',
+                'portfolio.agents.desc': 'Tilpassede AI-agenter for markedsf\u00f8ring, salg, jus og drift. Automatiser rutineoppgaver og akseler\u00e9r beslutningstaking med intelligente assistenter.',
+                'portfolio.agents.link': 'Les mer',
+                // Testimonials
+                'testimonials.eyebrow': 'Referanser',
+                'testimonials.title': 'Hva v\u00e5re partnere sier',
+                'testimonials.q1': 'Fra id\u00e9 til full automatisering p\u00e5 rekordtid. De bygde et komplett regnskapsautomatiseringssystem som fanget en feil p\u00e5 150 000 kr jeg hadde oversett. ALAI bygger ikke bare software \u2014 de l\u00f8ser reelle forretningsproblemer.',
+                'testimonials.a1_role': 'Eiendom, Norge',
+                'testimonials.q2': 'BasicFakta gikk fra konsept til produksjon p\u00e5 rekordtid. AI-drevet faktasjekk for det norske markedet \u2014 bygget, testet og deployet uten eksterne avhengigheter.',
+                'testimonials.a2_role': 'AI-produkt \u2014 Internt',
+                'testimonials.q3': 'Drop ble designet, bygget og lansert av et tomannsteam drevet av AI. Full fintech-stack \u2014 betalinger, QR, overf\u00f8ringer \u2014 levert p\u00e5 uker, ikke m\u00e5neder.',
+                'testimonials.a3_role': 'Fintech-produkt \u2014 Internt',
+                // Process
+                'process.eyebrow': 'Prosess',
+                'process.title': 'Seks steg til m\u00e5let',
+                'process.subtitle': 'Transparent prosess. Ingen overraskelser i noen fase.',
+                'process.s1.title': 'Oppdagelse',
+                'process.s1.desc': 'Vi lytter f\u00f8rst. Forst\u00e5r din virksomhet, brukere og begrensninger f\u00f8r vi skriver en eneste linje kode.',
+                'process.s2.title': 'Omfang & pris',
+                'process.s2.desc': 'Fast pris eller tilpasset tilbud. Ingen uklarheter. Du godkjenner f\u00f8r vi starter.',
+                'process.s3.title': 'Bygging',
+                'process.s3.desc': 'AI-assistert utvikling med menneskelig tilsyn. Automatisert testing, kontinuerlig integrasjon, daglig innsikt i fremdrift.',
+                'process.s4.title': 'Validering',
+                'process.s4.desc': 'Uavhengig QA-gjennomgang. Sikkerhetssjekk, ytelsestest, tilgjengelighetssjekk \u2014 alt f\u00f8r du ser det.',
+                'process.s5.title': 'Utrulling',
+                'process.s5.desc': 'Staging-forh\u00e5ndsvisning for din godkjenning. Produksjonsdeployment uten nedetid.',
+                'process.s6.title': 'Support',
+                'process.s6.desc': 'Overv\u00e5kning etter lansering, feilretting, nye funksjoner. Vi blir s\u00e5 lenge du trenger oss.',
+                // CTA
+                'cta.eyebrow': 'Klar?',
+                'cta.title': 'La oss bygge noe flott',
+                'cta.subtitle': 'Hvert prosjekt er unikt. Fortell oss hva du trenger, s\u00e5 lager vi et skreddersydd tilbud innen 24 timer.',
+                'cta.button': 'F\u00e5 et gratis tilbud',
+                // Contact
+                'contact.eyebrow': 'Kontakt',
+                'contact.title': 'Ta kontakt',
+                'contact.subtitle': 'Fortell oss hva du trenger. Vi svarer innen 24 timer.',
+                'contact.info_title': 'Kontaktinformasjon',
+                'contact.email_label': 'E-post:',
+                'contact.location_label': 'Lokasjon:',
+                'contact.location': 'Klofta, Norge',
+                'contact.business_label': 'Forretningshenvendelser:',
+                'contact.business_desc': 'For partnerskap eller st\u00f8rre prosjekter, send oss en e-post med en kort beskrivelse.',
+                'contact.form.name': 'Navn *',
+                'contact.form.name_error': 'Vennligst skriv inn navnet ditt',
+                'contact.form.email': 'E-post *',
+                'contact.form.email_error': 'Vennligst skriv inn en gyldig e-postadresse',
+                'contact.form.message': 'Melding *',
+                'contact.form.message_error': 'Vennligst skriv inn meldingen din',
+                'contact.form.submit': 'Book et uforpliktende m\u00f8te',
+                'contact.form.success': 'Takk! Vi tar kontakt innen 24 timer.',
+                'contact.form.sending': 'Sender...',
+                // Footer
+                'footer.tagline': 'Vi bygger digitalt. Du bygger virksomhet.',
+                'footer.top': 'Tilbake til toppen \u2191'
+            },
+            bs: {
+                // Nav
+                'nav.about': 'O nama',
+                'nav.services': 'Usluge',
+                'nav.portfolio': 'Portfolio',
+                'nav.process': 'Proces',
+                'nav.contact': 'Kontakt',
+                // Hero
+                'hero.title': 'Mi gradimo digitalno.',
+                'hero.subtitle': 'Software, dizajn, sigurnost i AI \u2014 isporuka jednog tima. Fiksne cijene. Bez iznena\u0111enja.',
+                'hero.tagline': 'Mi gradimo digitalno. Vi gradite biznis. Mi gradimo budu\u0107nost.',
+                'hero.cta_primary': 'Pokrenite projekat',
+                'hero.cta_secondary': 'Kontaktirajte nas',
+                // Trust
+                'trust.label': 'Radimo sa',
+                // About
+                'about.eyebrow': 'O nama',
+                'about.title': 'Jedan partner. Kompletna isporuka.',
+                'about.p1': 'ALAI je norve\u0161ka digitalna agencija koja gradi, deployira i odr\u017eava software od A do \u017d. Od prvog piksela do produkcionog servera \u2014 jedan partner, kompletna isporuka.',
+                'about.p2': 'Koristimo isti AI koji gradimo za klijente. To zna\u010di br\u017eu isporuku, ni\u017eu cijenu i manje gre\u0161aka. Ljudi postavljaju smjer. AI radi ostatak.',
+                'about.founder_role': 'Osniva\u010d i direktor',
+                'about.founder_bio': 'In\u017einjer koji je postao preduzetnik. 25+ godina isporuke enterprise softwarea u Norve\u0161koj i Evropi. Osnovao ALAI da doka\u017ee da mali tim sa pravim AI-em mo\u017ee nadma\u0161iti agencije deset puta ve\u0107e. Bez podizvo\u0111a\u010da. Bez prebacivanja odgovornosti. Jedna osoba, puna odgovornost.',
+                // Services
+                'services.eyebrow': 'Usluge',
+                'services.title': 'Full-service digitalno',
+                'services.subtitle': 'Sve \u0161to vam treba da izgradite, lansirate i rastete \u2014 od jednog tima.',
+                'services.software.title': 'Software',
+                'services.software.desc': 'Web aplikacije po mjeri, mobilne, API-ji i integracije. Moderan stack, produkcioni kvalitet.',
+                'services.design.title': 'Dizajn',
+                'services.design.desc': 'UI/UX, brend identitet i dizajn sistemi. Komponente spremne za produkciju, ne samo mockupi.',
+                'services.security.title': 'Sigurnost',
+                'services.security.desc': 'Revizije, penetraciono testiranje, analiza ranjivosti. Za\u0161titite se prije lansiranja.',
+                'services.ai.title': 'Data & AI',
+                'services.ai.desc': 'Poslovna inteligencija, ML modeli, LLM integracije. Pretvorite podatke u odluke.',
+                'services.infra.title': 'Infrastruktura',
+                'services.infra.desc': 'Cloud setup, CI/CD pipeline, monitoring. Temelj na kojem va\u0161 software radi.',
+                'services.marketing.title': 'Marketing',
+                'services.marketing.desc': 'SEO, sadr\u017eaj, digitalne kampanje. Budite prona\u0111eni. Dobijte leadove. Dobijte klijente.',
+                'services.training.title': 'Obuka',
+                'services.training.desc': 'Tehni\u010dke radionice, onboarding tima, dokumentacija. Transfer znanja, ne samo isporuka.',
+                'services.support.title': 'Podr\u0161ka',
+                'services.support.desc': 'SLA-bazirano odr\u017eavanje, ispravke gre\u0161aka, monitoring. Ne nestajemo nakon lansiranja.',
+                'services.also': 'Tako\u0111er nudimo:',
+                // Portfolio
+                'portfolio.eyebrow': 'Portfolio',
+                'portfolio.title': '\u0160ta smo izgradili',
+                'portfolio.subtitle': 'Produkti, platforme i partnerstva \u2014 rje\u0161enja za razne industrije.',
+                'portfolio.basic.tag': 'Digitalna agencija',
+                'portfolio.basic.desc': 'Full-service agencija koja isporu\u010duje software, dizajn, sigurnost i cloud infrastrukturu. Slu\u017eimo enterprise klijente u Norve\u0161koj i Evropi.',
+                'portfolio.fakta.tag': 'AI produkt',
+                'portfolio.fakta.desc': 'AI-pokretana provjera \u010dinjenica za norve\u0161ko tr\u017ei\u0161te. Automatska verifikacija tvrdnji i pra\u0107enje izvora \u2014 borba protiv dezinformacija tehnologijom.',
+                'portfolio.drop.desc': 'Doznake i QR pla\u0107anja gra\u0111ena za brzinu i jednostavnost. Me\u0111unarodne nov\u010dane transfere \u010dinimo dostupnim.',
+                'portfolio.snowit.tag': 'Tehnolo\u0161ki partner',
+                'portfolio.snowit.desc': 'Software i in\u017einjerski partner baziran u Bosni. Pro\u0161irujemo na\u0161 kapacitet isporuke sa razvojem po mjeri i enterprise rje\u0161enjima.',
+                'portfolio.agents.tag': 'AI agenti',
+                'portfolio.agents.title': 'Custom agenti',
+                'portfolio.agents.desc': 'Prilago\u0111eni AI agenti za marketing, prodaju, legal i operacije. Automatizujte rutinske zadatke i ubrzajte dono\u0161enje odluka sa inteligentnim asistentima.',
+                'portfolio.agents.link': 'Saznajte vi\u0161e',
+                // Testimonials
+                'testimonials.eyebrow': 'Reference',
+                'testimonials.title': '\u0160ta na\u0161i partneri ka\u017eu',
+                'testimonials.q1': 'Od ideje do potpune automatizacije u rekordnom roku. Izgradili su kompletan sistem za automatizaciju ra\u010dunovodstva koji je uhvatio gre\u0161ku od 150.000 NOK koju sam previdio. ALAI ne gradi samo software \u2014 oni rje\u0161avaju prave poslovne probleme.',
+                'testimonials.a1_role': 'Nekretnine, Norve\u0161ka',
+                'testimonials.q2': 'BasicFakta je pro\u0161la od koncepta do produkcije u rekordnom roku. AI provjera \u010dinjenica za norve\u0161ko tr\u017ei\u0161te \u2014 izgra\u0111ena, testirana i deployirana bez eksternih zavisnosti.',
+                'testimonials.a2_role': 'AI produkt \u2014 Interno',
+                'testimonials.q3': 'Drop je dizajniran, izgra\u0111en i lansiran od strane dvočlanog tima pokretanog AI-em. Kompletan fintech stack \u2014 pla\u0107anja, QR, doznake \u2014 isporu\u010den za sedmice, ne mjesece.',
+                'testimonials.a3_role': 'Fintech produkt \u2014 Interno',
+                // Process
+                'process.eyebrow': 'Proces',
+                'process.title': '\u0160est koraka do cilja',
+                'process.subtitle': 'Transparentan proces. Bez iznena\u0111enja u bilo kojoj fazi.',
+                'process.s1.title': 'Otkrivanje',
+                'process.s1.desc': 'Prvo slu\u0161amo. Razumijemo va\u0161 posao, korisnike i ograni\u010denja prije nego napi\u0161emo jednu liniju koda.',
+                'process.s2.title': 'Opseg & cijena',
+                'process.s2.desc': 'Fiksna cijena ili prilago\u0111ena ponuda. Bez nejasno\u0107a. Vi odobravate prije nego \u0161to po\u010dnemo.',
+                'process.s3.title': 'Gradnja',
+                'process.s3.desc': 'AI-potpomognut razvoj sa ljudskim nadzorom. Automatsko testiranje, kontinuirana integracija, dnevni uvid u napredak.',
+                'process.s4.title': 'Validacija',
+                'process.s4.desc': 'Nezavisna QA provjera. Sigurnosni sken, test performansi, provjera pristupa\u010dnosti \u2014 sve prije nego vi to vidite.',
+                'process.s5.title': 'Deploy',
+                'process.s5.desc': 'Staging pregled za va\u0161u potvrdu. Produkcijski deploy bez prekida rada.',
+                'process.s6.title': 'Podr\u0161ka',
+                'process.s6.desc': 'Post-launch monitoring, ispravke gre\u0161aka, nove funkcionalnosti. Ostajemo koliko god trebate.',
+                // CTA
+                'cta.eyebrow': 'Spremni?',
+                'cta.title': 'Izgradimo ne\u0161to veliko',
+                'cta.subtitle': 'Svaki projekat je jedinstven. Recite nam \u0161ta trebate i napravit \u0107emo prilago\u0111enu ponudu u roku od 24 sata.',
+                'cta.button': 'Dobijte besplatnu ponudu',
+                // Contact
+                'contact.eyebrow': 'Kontakt',
+                'contact.title': 'Javite nam se',
+                'contact.subtitle': 'Recite nam \u0161ta trebate. Odgovori\u0107emo u roku od 24 sata.',
+                'contact.info_title': 'Kontakt informacije',
+                'contact.email_label': 'E-mail:',
+                'contact.location_label': 'Lokacija:',
+                'contact.location': 'Klofta, Norve\u0161ka',
+                'contact.business_label': 'Poslovni upiti:',
+                'contact.business_desc': 'Za partnerstva ili ve\u0107e projekte, po\u0161aljite nam e-mail sa kratkim opisom.',
+                'contact.form.name': 'Ime *',
+                'contact.form.name_error': 'Molimo unesite va\u0161e ime',
+                'contact.form.email': 'E-mail *',
+                'contact.form.email_error': 'Molimo unesite validnu e-mail adresu',
+                'contact.form.message': 'Poruka *',
+                'contact.form.message_error': 'Molimo unesite va\u0161u poruku',
+                'contact.form.submit': 'Zakažite besplatan poziv',
+                'contact.form.success': 'Hvala na poruci! Javi\u0107emo vam se u roku od 24 sata.',
+                'contact.form.sending': '\u0160alje se...',
+                // Footer
+                'footer.tagline': 'Mi gradimo digitalno. Vi gradite budu\u0107nost.',
+                'footer.top': 'Nazad na vrh \u2191'
+            }
+        };
+
+        // Language state
+        const langMap = { en: 'en', no: 'nb', bs: 'bs' };
+        let currentLang = localStorage.getItem('alai-lang') || 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('alai-lang', lang);
+            document.documentElement.lang = langMap[lang] || lang;
+
+            // Update all data-i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (T[lang] && T[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = T[lang][key];
+                    } else {
+                        el.innerHTML = T[lang][key];
+                    }
+                }
+            });
+
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update meta description
+            const metaDesc = {
+                en: 'ALAI Holding AS \u2014 We build digital. You build business. Full-service digital agency: software, design, security, AI. Fixed prices, AI-native delivery. Based in Norway.',
+                no: 'ALAI Holding AS \u2014 Vi bygger digitalt. Du bygger virksomhet. Full-service digitalbyr\u00e5: programvare, design, sikkerhet, AI. Faste priser. Basert i Norge.',
+                bs: 'ALAI Holding AS \u2014 Mi gradimo digitalno. Vi gradite biznis. Full-service digitalna agencija: software, dizajn, sigurnost, AI. Fiksne cijene. Bazirani u Norve\u0161koj.'
+            };
+            const descTag = document.querySelector('meta[name="description"]');
+            if (descTag && metaDesc[lang]) descTag.setAttribute('content', metaDesc[lang]);
+        }
+
+        // Init language switcher
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLang(btn.dataset.lang));
+        });
+
+        // Apply saved language on load
+        if (currentLang !== 'en') setLang(currentLang);
+        else {
+            // Still set active button state for EN
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === 'en');
+            });
+        }
+
+        // Also detect from URL param ?lang=no
+        const urlLang = new URLSearchParams(window.location.search).get('lang');
+        if (urlLang && T[urlLang]) setLang(urlLang);
+
+        // ============================================
+        // Mobile menu
+        // ============================================
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        mobileToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navMenu.classList.remove('active'));
+        });
+
+        // Nav scroll state
+        window.addEventListener('scroll', () => {
+            document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('revealed');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+
+        // Card mouse-follow glow
+        document.querySelectorAll('.company-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
+                card.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height * 100) + '%');
+            });
+        });
+
+        // Form validation + submission
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+        const formError = document.getElementById('form-error');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.form-group').forEach(g => g.classList.remove('error'));
+            formError.style.display = 'none';
+            let valid = true;
+            const nameEl = document.getElementById('name');
+            const emailEl = document.getElementById('email');
+            const messageEl = document.getElementById('message');
+            const honeyEl = contactForm.querySelector('[name="_honey"]');
+            if (!nameEl.value.trim()) { nameEl.closest('.form-group').classList.add('error'); valid = false; }
+            if (!emailEl.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) { emailEl.closest('.form-group').classList.add('error'); valid = false; }
+            if (!messageEl.value.trim()) { messageEl.closest('.form-group').classList.add('error'); valid = false; }
+            if (valid) {
+                const btn = contactForm.querySelector('.submit-button');
+                btn.disabled = true;
+                btn.textContent = T[currentLang]['contact.form.sending'] || 'Sending...';
+                try {
+                    const resp = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: nameEl.value.trim(),
+                            email: emailEl.value.trim(),
+                            message: messageEl.value.trim(),
+                            _honey: honeyEl ? honeyEl.value : ''
+                        })
+                    });
+                    const data = await resp.json();
+                    if (resp.ok && data.ok) {
+                        contactForm.style.display = 'none';
+                        formSuccess.style.display = 'block';
+                    } else {
+                        throw new Error(data.error || 'Failed to send');
+                    }
+                } catch (err) {
+                    btn.disabled = false;
+                    btn.textContent = T[currentLang]['contact.form.submit'] || 'Book a discovery call';
+                    formError.textContent = err.message || 'Something went wrong. Please email info@alai.no directly.';
+                    formError.style.display = 'block';
+                }
+            }
+        });
+        ['name', 'email', 'message'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                this.closest('.form-group').classList.remove('error');
+                formError.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
