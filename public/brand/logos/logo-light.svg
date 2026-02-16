@@ -1,4 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
-  <text x="10" y="45" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" fill="#fafafa" letter-spacing="-0.02em">ALA<tspan>I</tspan></text>
-  <circle cx="181" cy="18" r="5" fill="#00E5A0"/>
+<svg viewBox="0 0 480 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00E5A0;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#00E5A0;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+    </filter>
+  </defs>
+  <!-- A icon mark (scaled) -->
+  <g transform="translate(5,5) scale(0.0107421875)">
+    <g transform="translate(0,1024) scale(0.1,-0.1)" fill="#fafafa" stroke="none">
+      <path d="M4620 6913 c-7 -16 -71 -161 -142 -323 -72 -162 -163 -369 -203 -460
+-204 -464 -264 -599 -330 -750 -40 -91 -129 -293 -198 -450 -69 -157 -187
+-427 -262 -600 -171 -392 -306 -699 -396 -898 -38 -84 -69 -158 -69 -163 0 -5
+171 -9 428 -9 l428 0 51 123 c29 67 107 248 174 402 67 154 159 366 204 470
+272 629 355 819 427 985 44 102 122 282 173 400 51 118 101 234 111 258 9 24
+20 40 25 35 9 -9 45 -90 194 -433 70 -163 268 -614 332 -757 4 -10 -66 -13
+-318 -15 l-322 -3 -39 -95 c-22 -52 -76 -180 -121 -285 -108 -255 -146 -353
+-139 -360 3 -3 287 -5 631 -4 l626 1 13 -24 c17 -31 208 -466 262 -595 l42
+-103 429 0 c289 0 429 3 429 10 0 6 -37 93 -81 193 -120 269 -257 579 -469
+1062 -48 110 -138 315 -200 455 -62 140 -147 336 -191 435 -180 415 -297 670
+-310 676 -8 4 -39 11 -71 17 -92 17 -166 58 -244 136 -114 114 -162 243 -151
+403 6 98 28 167 72 233 19 29 35 54 35 56 0 2 -184 4 -408 4 l-409 0 -13 -27z"/>
+    </g>
+    <circle cx="580" cy="310" r="35" fill="#00E5A0"/>
+  </g>
+  <!-- ALAI text -->
+  <text x="140" y="82" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="72" font-weight="700" fill="#fafafa" letter-spacing="-0.02em">ALAI</text>
+  <!-- Green dot replacing i tittle -->
+  <circle cx="420" cy="38" r="6" fill="#00E5A0"/>
+  <circle cx="420" cy="38" r="12" fill="url(#glow)" filter="url(#blur)"/>
 </svg>

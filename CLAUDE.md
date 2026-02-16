@@ -24,7 +24,7 @@ public/
 3. **About** — Company story, mission, values
 4. **Services** — 3-6 service cards with icons
 5. **Testimonials** — 2-4 client quotes with names
-6. **Pricing** — 2-3 tier cards (highlight recommended)
+6. **CTA Banner** — "Get a quote" call-to-action leading to contact form
 7. **Contact** — Form (name, email, message) + address + phone + map placeholder
 8. **Footer** — Copyright + social links + back-to-top
 

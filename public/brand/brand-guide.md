@@ -152,8 +152,8 @@ Caption:  Medium, 12px, 0.05em tracking, 1.4 line-height, uppercase
 [Title]
 ALAI Holding AS
 
-Sandtorv, 5765 Norway
-Org.nr. 935 705 637
+Ilemoen 4A, 2040 Kløfta, Norway
+Org.nr. 932 516 136
 
 [email]@alai.no
 alai.no
@@ -209,8 +209,8 @@ Each subsidiary maintains its own brand identity while adhering to ALAI's premiu
 ### Contact
 - **Primary:** info@alai.no
 - **General:** post@alai.no
-- **Address:** Sandtorv, 5765, Norway
-- **Org.nr:** 935 705 637
+- **Address:** Ilemoen 4A, 2040 Kløfta, Norway
+- **Org.nr:** 932 516 136
 
 ---
 
