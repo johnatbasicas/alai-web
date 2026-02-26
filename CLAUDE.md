@@ -1,5 +1,8 @@
 # ALAI
 
+## BookStack — Provjeri PRVO
+Prije traženja bilo čega — provjeri BookStack (http://localhost:6875). Centralna baza znanja za tools, skills, hooks, agents, rules, projekte, klijente, dokumentaciju. Ako odgovor postoji tamo — NE TRAŽI dalje.
+
 ## Project Info
 - Created: 2026-02-09
 - Type: Landing Page
