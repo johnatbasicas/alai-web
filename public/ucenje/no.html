@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="no" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Det fantastiske tallet 19 i Koranen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-surface: #16213e;
+            --bg-light: #0f3460;
+            --text-primary: #fafafa;
+            --text-secondary: #b0b0b0;
+            --accent: #f7b731;
+            --accent-hover: #f0a500;
+            --blue: #4361ee;
+            --blue-light: #5a7dff;
+            --success: #00e5a0;
+            --success-light: #1fffc0;
+            --gold: #f7b731;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* TYPOGRAPHY */
+        h1 {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 0.8em;
+            color: var(--blue);
+        }
+
+        h3 {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 0.6em;
+            color: var(--accent);
+        }
+
+        p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            margin-bottom: 1.2em;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-secondary);
+            margin-bottom: 1em;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(67, 97, 238, 0.15);
+            color: var(--blue-light);
+            padding: 0.4em 0.8em;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0.3em 0.3em 0.3em 0;
+        }
+
+        /* LAYOUT */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .container-xl {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-light) 100%);
+            padding: 5rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(247, 183, 49, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            background: var(--blue);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 20px 60px rgba(67, 97, 238, 0.3);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .bismillah {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 2rem 0;
+            font-family: system-ui;
+            letter-spacing: 0.05em;
+            animation: slide-in-down 1s ease-out;
+        }
+
+        .bismillah-info {
+            background: rgba(247, 183, 49, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .bismillah-info p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.8em;
+        }
+
+        .letter-count {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 1rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 20px 60px rgba(67, 97, 238, 0.3); }
+            50% { box-shadow: 0 20px 80px rgba(67, 97, 238, 0.5); }
+        }
+
+        @keyframes slide-in-down {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 4rem 1.5rem;
+            background-color: var(--bg-primary);
+        }
+
+        .section:nth-child(odd) {
+            background-color: var(--bg-surface);
+        }
+
+        .section:nth-child(3) {
+            background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-light) 100%);
+        }
+
+        .section:nth-child(5) {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-surface) 100%);
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .intro-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(67, 97, 238, 0.1);
+            border: 1px solid rgba(67, 97, 238, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue) 0%, var(--accent) 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .card:hover {
+            background: rgba(67, 97, 238, 0.15);
+            border-color: rgba(67, 97, 238, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-stat {
+            background: rgba(247, 183, 49, 0.15);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1.1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .card-fact {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(247, 183, 49, 0.2);
+        }
+
+        /* LETTER COUNTER */
+        .letter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .letter-box {
+            background: rgba(0, 229, 160, 0.1);
+            border: 2px solid rgba(0, 229, 160, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .letter-box h4 {
+            color: var(--success);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .letter-count-large {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success);
+            margin: 0.8rem 0;
+        }
+
+        .letter-formula {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+
+        /* SURAH 96 SPECIAL */
+        .surah-96 {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.2) 0%, rgba(247, 183, 49, 0.1) 100%);
+            border: 2px solid var(--blue);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .surah-96 h3 {
+            color: var(--blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .surah-96-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .surah-96-fact {
+            background: rgba(0, 229, 160, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--success);
+        }
+
+        .surah-96-fact .label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .surah-96-fact .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        /* GRID CONCEPT */
+        .grid-visual {
+            background: rgba(67, 97, 238, 0.1);
+            border: 2px dashed var(--blue);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.5rem;
+        }
+
+        .grid-cell {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--accent) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-cell:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .grid-note {
+            grid-column: 1 / -1;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* STAIRCASE PATTERN */
+        .staircase {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(0, 229, 160, 0.05);
+            border-radius: 12px;
+        }
+
+        .staircase-step {
+            background: rgba(67, 97, 238, 0.15);
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .staircase-step .multiplier {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        /* DISCOVERY COUNTER */
+        .discoveries {
+            background: rgba(247, 183, 49, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .discoveries h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .big-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin: 1.5rem 0;
+            animation: count-up 2s ease-out;
+        }
+
+        @keyframes count-up {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .discoveries p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .discovery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .discovery-item {
+            background: var(--blue);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.3s ease;
+        }
+
+        .discovery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .discovery-item span {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* DID YOU KNOW */
+        .fun-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.15) 0%, rgba(0, 229, 160, 0.1) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(67, 97, 238, 0.3);
+            position: relative;
+        }
+
+        .fun-fact::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background: var(--blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .fun-fact h4 {
+            color: var(--accent);
+            margin-top: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .fun-fact p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-light);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(67, 97, 238, 0.3);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-arabic {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: system-ui;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-meaning {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .alai-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(67, 97, 238, 0.2);
+        }
+
+        .alai-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .alai-text strong {
+            color: var(--accent);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 1.5rem;
+                min-height: 50vh;
+            }
+
+            .hero-logo {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .bismillah {
+                font-size: 1.5rem;
+            }
+
+            .container,
+            .container-xl {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .section {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-visual {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .grid-cell {
+                font-size: 0.8rem;
+            }
+
+            .discoveries {
+                padding: 2rem;
+            }
+
+            .big-number {
+                font-size: 3rem;
+            }
+
+            .discovery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero::before,
+            .hero::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .surah-96-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-visual {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .discovery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .staircase-step {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .bismillah {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            * {
+                background: white !important;
+                color: black !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .hero {
+                page-break-after: avoid;
+                padding: 2rem 1rem;
+                background: white;
+            }
+
+            .hero::before,
+            .hero::after {
+                display: none;
+            }
+
+            .hero h1 {
+                -webkit-text-fill-color: unset;
+                color: black;
+                background: none;
+            }
+
+            h1, h2, h3, h4 {
+                page-break-after: avoid;
+                color: #1a1a2e;
+            }
+
+            .section {
+                page-break-inside: avoid;
+                padding: 1.5rem 0;
+                background: white;
+            }
+
+            .card,
+            .fun-fact,
+            .card-stat,
+            .surah-96,
+            .discoveries {
+                page-break-inside: avoid;
+                border: 1px solid #ccc !important;
+                background: white !important;
+                color: black !important;
+            }
+
+            .card::before {
+                display: none;
+            }
+
+            .card h3,
+            .card-stat,
+            h2,
+            h3 {
+                color: #1a1a2e !important;
+            }
+
+            .tag,
+            .card-number {
+                background: #f5f5f5 !important;
+                border: 1px solid #ddd !important;
+                color: black !important;
+            }
+
+            .letter-box,
+            .bismillah-info,
+            .grid-visual {
+                background: #f9f9f9 !important;
+                border: 1px solid #ccc !important;
+            }
+
+            .bismillah,
+            .letter-count-large,
+            .big-number {
+                color: #4361ee !important;
+            }
+
+            .accent,
+            .footer-arabic {
+                color: #f7b731 !important;
+            }
+
+            .alai-brand {
+                margin-top: 1rem;
+                page-break-inside: avoid;
+            }
+
+            footer {
+                background: white;
+                border-top: 2px solid #ccc;
+            }
+
+            a {
+                color: #4361ee;
+                text-decoration: underline;
+            }
+
+            .discovery-item {
+                background: #f5f5f5 !important;
+                border: 1px solid #ccc !important;
+                color: black !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">✦</div>
+            <h1>Det fantastiske tallet 19 i Koranen</h1>
+            <p class="subtitle">Et matematisk mirakel forklart for unge elever</p>
+
+            <div class="bismillah-info">
+                <div class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+                <p><strong>Oversettelse:</strong> "I Guds navn, Den Nådigste, Barmhjertighetsgiveren"</p>
+                <div class="letter-count">
+                    19 bokstaver
+                </div>
+                <p>Åpningsfrasen i Koranen inneholder nøyaktig 19 bokstaver—et hint til ett av Koranens mest bemerkelsesverdige matematiske mønstre.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT IS 19? -->
+    <section class="section">
+        <div class="container">
+            <h2>Hva er 19?</h2>
+            <div class="intro-text">
+                <p>
+                    19 er et <span class="tag">primtall</span>—det kan bare deles på 1 og seg selv.
+                    Men i Koranen er 19 mye mer enn et tall. Det dukker opp gjennom Koranens struktur på måter som virker for perfekt til å være tilfeldige.
+                </p>
+                <p>
+                    Forskere, matematikere og Koranforskere har oppdaget minst <strong>34 verifiserte matematiske relasjoner</strong>
+                    som omfatter tallet 19. La oss utforske dem sammen!
+                </p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-number">1</div>
+                    <h3>Et primtall</h3>
+                    <p>19 kan bare deles jevnt på 1 og 19. Ingen andre tall fungerer.</p>
+                    <div class="card-stat">19 ÷ 19 = 1</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">2</div>
+                    <h3>I Koranen</h3>
+                    <p>Tallet 19 dukker opp mange ganger som en spesifikk telling—suraer, bokstaver, ord.</p>
+                    <div class="card-stat">34 mønstre funnet</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">3</div>
+                    <h3>Et tegn på design</h3>
+                    <p>Forskere tror disse mønstrene viser Koranens mirakuløse struktur.</p>
+                    <div class="card-stat">Ikke tilfeldig</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BUILDING BLOCKS -->
+    <section class="section">
+        <div class="container">
+            <h2>Byggesteinene</h2>
+            <div class="intro-text">
+                <p>
+                    Koranens grunnlag er bygget på tallet 19. La oss se på to av de viktigste byggesteinene.
+                </p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>114 suraer</h3>
+                    <p>Koranen er delt inn i 114 kapitler, kalt suraer.</p>
+                    <div class="card-stat">114 ÷ 19 = 6</div>
+                    <div class="card-fact">114 = 6 × 19 (perfekt delelig!)</div>
+                </div>
+
+                <div class="card">
+                    <h3>Bisimillahs 19 bokstaver</h3>
+                    <p>Åpningsfrasen vises på starten av nesten hver sura og har nøyaktig 19 bokstaver.</p>
+                    <div class="card-stat">19 bokstaver</div>
+                    <div class="card-fact">ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م</div>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem; color: var(--text-secondary); font-style: italic;">
+                Disse tallene er ingen tilfeldighet. De er de første ledetråder til et enormt matematisk mønster.
+            </p>
+        </div>
+    </section>
+
+    <!-- LETTER MIRACLES -->
+    <section class="section">
+        <div class="container">
+            <h2>Bokstavmiraklene</h2>
+            <div class="intro-text">
+                <p>
+                    Forskere har oppdaget at spesifikke bokstaver dukker opp et antall ganger som alltid er et multiplum av 19.
+                    Dette er sant på tvers av ulike suraer (kapitler). Her er de mest fantastiske:
+                </p>
+            </div>
+
+            <div class="letter-grid">
+                <div class="letter-box">
+                    <h4>Bokstaven "Qaf" (ق)</h4>
+                    <div class="letter-count-large">57</div>
+                    <div class="letter-formula">57 = 19 × 3</div>
+                    <p>I sura 50 (Qaf)</p>
+                </div>
+
+                <div class="letter-box">
+                    <h4>Bokstaven "Qaf" (ق)</h4>
+                    <div class="letter-count-large">57</div>
+                    <div class="letter-formula">57 = 19 × 3</div>
+                    <p>I sura 42 også!</p>
+                </div>
+
+                <div class="letter-box">
+                    <h4>Kombinert Qaf</h4>
+                    <div class="letter-count-large">114</div>
+                    <div class="letter-formula">114 = 19 × 6</div>
+                    <p>Suraer 50 + 42 = 114 suraer totalt</p>
+                </div>
+            </div>
+
+            <div class="letter-grid" style="margin-top: 2rem;">
+                <div class="letter-box">
+                    <h4>Ha-Mim bokstaver</h4>
+                    <div class="letter-count-large">2,147</div>
+                    <div class="letter-formula">2,147 = 19 × 113</div>
+                    <p>På tvers av suraer 40-46</p>
+                </div>
+
+                <div class="letter-box">
+                    <h4>Ya-Sin bokstaver</h4>
+                    <div class="letter-count-large">285</div>
+                    <div class="letter-formula">285 = 19 × 15</div>
+                    <p>I sura 36 (Ya-Sin)</p>
+                </div>
+
+                <div class="letter-box">
+                    <h4>KHYAS bokstaver</h4>
+                    <div class="letter-count-large">798</div>
+                    <div class="letter-formula">798 = 19 × 42</div>
+                    <p>I sura 19 (Maryam)</p>
+                </div>
+            </div>
+
+            <div class="letter-grid" style="margin-top: 2rem;">
+                <div class="letter-box">
+                    <h4>ALM bokstaver</h4>
+                    <div class="letter-count-large">9,614</div>
+                    <div class="letter-formula">9,614 = 19 × 506</div>
+                    <p>I sura 2 (Al-Baqara)</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 3rem; color: var(--text-secondary);">
+                Hver eneste en av disse tellingene er delelig på 19—nøyaktig!
+            </p>
+        </div>
+    </section>
+
+    <!-- SURAH 96 SPECIAL -->
+    <section class="section">
+        <div class="container">
+            <h2>Sura 96: Den spesielle suraen</h2>
+            <div class="intro-text">
+                <p>
+                    Sura 96 (Al-Alaq, som betyr "Blodklumpen") er ekstra spesiell. Den er knyttet til tallet 19 på fire fantastiske måter:
+                </p>
+            </div>
+
+            <div class="surah-96">
+                <h3>Hvorfor sura 96 er mirakuløs</h3>
+                <div class="surah-96-grid">
+                    <div class="surah-96-fact">
+                        <div class="label">Først åpenbart</div>
+                        <div class="value">1. sura</div>
+                        <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Det var den aller første suraen som ble åpenbart for profet Muhammad.</p>
+                    </div>
+
+                    <div class="surah-96-fact">
+                        <div class="label">Posisjon fra slutten</div>
+                        <div class="value">19. fra slutten</div>
+                        <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Hvis du teller bakover fra sura 114, er det den 19.</p>
+                    </div>
+
+                    <div class="surah-96-fact">
+                        <div class="label">Antall vers</div>
+                        <div class="value">19 ayaher</div>
+                        <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Den inneholder nøyaktig 19 vers.</p>
+                    </div>
+
+                    <div class="surah-96-fact">
+                        <div class="label">Totalt antall bokstaver</div>
+                        <div class="value">304 = 19 × 16</div>
+                        <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Hele suraen har totalt 304 bokstaver.</p>
+                    </div>
+                </div>
+
+                <p style="text-align: center; margin-top: 2rem; color: var(--text-secondary);">
+                    Det er FIRE forbindelser til 19—i en enkelt sura!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRID CONCEPT -->
+    <section class="section">
+        <div class="container">
+            <h2>Det hemmelige rutenettet</h2>
+            <div class="intro-text">
+                <p>
+                    Tenk deg at du ordner de 114 suraene i et rutenett med 6 rader og 19 kolonner.
+                    Når du gjør dette, skjer noe utrolig: tallene langs diagonalen
+                    (øverst til venstre til nederst til høyre) følger alle et skjult mønster!
+                </p>
+            </div>
+
+            <div class="grid-visual">
+                <div class="grid-cell">1</div>
+                <div class="grid-cell">2</div>
+                <div class="grid-cell">3</div>
+                <div class="grid-cell">4</div>
+                <div class="grid-cell">5</div>
+                <div class="grid-cell">6</div>
+                <div class="grid-cell">7</div>
+                <div class="grid-cell">8</div>
+                <div class="grid-cell">9</div>
+                <div class="grid-cell">10</div>
+                <div class="grid-cell">11</div>
+                <div class="grid-cell">12</div>
+                <div class="grid-cell">13</div>
+                <div class="grid-cell">14</div>
+                <div class="grid-cell">15</div>
+                <div class="grid-cell">16</div>
+                <div class="grid-cell">17</div>
+                <div class="grid-cell">18</div>
+                <div class="grid-cell">19</div>
+                <div class="grid-cell">20</div>
+                <div class="grid-cell">21</div>
+                <div class="grid-cell">22</div>
+                <div class="grid-cell">23</div>
+                <div class="grid-cell">24</div>
+                <div class="grid-cell">25</div>
+                <div class="grid-cell">26</div>
+                <div class="grid-cell">27</div>
+                <div class="grid-cell">28</div>
+                <div class="grid-cell">29</div>
+                <div class="grid-cell">30</div>
+                <div class="grid-cell">31</div>
+                <div class="grid-cell">32</div>
+                <div class="grid-cell">33</div>
+                <div class="grid-cell">34</div>
+                <div class="grid-cell">35</div>
+                <div class="grid-cell">36</div>
+                <div class="grid-cell">37</div>
+                <div class="grid-cell">38</div>
+                <div class="grid-cell">39</div>
+                <div class="grid-cell">40</div>
+                <div class="grid-cell">41</div>
+                <div class="grid-cell">42</div>
+                <div class="grid-cell">43</div>
+                <div class="grid-cell">44</div>
+                <div class="grid-cell">45</div>
+                <div class="grid-cell">46</div>
+                <div class="grid-cell">47</div>
+                <div class="grid-cell">48</div>
+                <div class="grid-cell">49</div>
+                <div class="grid-cell">50</div>
+                <div class="grid-cell">51</div>
+                <div class="grid-cell">52</div>
+                <div class="grid-cell">53</div>
+                <div class="grid-cell">54</div>
+                <div class="grid-cell">55</div>
+                <div class="grid-cell">56</div>
+                <div class="grid-cell">57</div>
+                <div class="grid-cell">58</div>
+                <div class="grid-cell">59</div>
+                <div class="grid-cell">60</div>
+                <div class="grid-cell">61</div>
+                <div class="grid-cell">62</div>
+                <div class="grid-cell">63</div>
+                <div class="grid-cell">64</div>
+                <div class="grid-cell">65</div>
+                <div class="grid-cell">66</div>
+                <div class="grid-cell">67</div>
+                <div class="grid-cell">68</div>
+                <div class="grid-cell">69</div>
+                <div class="grid-cell">70</div>
+                <div class="grid-cell">71</div>
+                <div class="grid-cell">72</div>
+                <div class="grid-cell">73</div>
+                <div class="grid-cell">74</div>
+                <div class="grid-cell">75</div>
+                <div class="grid-cell">76</div>
+                <div class="grid-cell">77</div>
+                <div class="grid-cell">78</div>
+                <div class="grid-cell">79</div>
+                <div class="grid-cell">80</div>
+                <div class="grid-cell">81</div>
+                <div class="grid-cell">82</div>
+                <div class="grid-cell">83</div>
+                <div class="grid-cell">84</div>
+                <div class="grid-cell">85</div>
+                <div class="grid-cell">86</div>
+                <div class="grid-cell">87</div>
+                <div class="grid-cell">88</div>
+                <div class="grid-cell">89</div>
+                <div class="grid-cell">90</div>
+                <div class="grid-cell">91</div>
+                <div class="grid-cell">92</div>
+                <div class="grid-cell">93</div>
+                <div class="grid-cell">94</div>
+                <div class="grid-cell">95</div>
+                <div class="grid-cell">96</div>
+                <div class="grid-cell">97</div>
+                <div class="grid-cell">98</div>
+                <div class="grid-cell">99</div>
+                <div class="grid-cell">100</div>
+                <div class="grid-cell">101</div>
+                <div class="grid-cell">102</div>
+                <div class="grid-cell">103</div>
+                <div class="grid-cell">104</div>
+                <div class="grid-cell">105</div>
+                <div class="grid-cell">106</div>
+                <div class="grid-cell">107</div>
+                <div class="grid-cell">108</div>
+                <div class="grid-cell">109</div>
+                <div class="grid-cell">110</div>
+                <div class="grid-cell">111</div>
+                <div class="grid-cell">112</div>
+                <div class="grid-cell">113</div>
+                <div class="grid-cell">114</div>
+                <div class="grid-note">Et 6 × 19 rutenett som representerer alle 114 suraer. Anti-diagonal summen = 399 = 19 × 21</div>
+            </div>
+
+            <div style="background: rgba(247, 183, 49, 0.1); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <p style="color: var(--text-secondary);">
+                    <strong>Anti-diagonal sum:</strong> Når du legger sammen spesifikke tall langs rutenettet diagonalmønster,
+                    summerer de alltid til <strong style="color: var(--accent);">399 = 19 × 21</strong>.
+                    Ikke bare noe mønster—19s mønster igjen!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STAIRCASE PATTERN -->
+    <section class="section">
+        <div class="container">
+            <h2>Trappemønsteret</h2>
+            <div class="intro-text">
+                <p>
+                    Det finnes en spesiell gruppe på 12 suraer hvor suranummeret pluss antall vers skaper en trapp av multipler av 19:
+                </p>
+            </div>
+
+            <div class="staircase">
+                <div class="staircase-step">
+                    <span>Gruppe 1</span>
+                    <span class="multiplier">19 × 5</span>
+                </div>
+                <div class="staircase-step">
+                    <span>Gruppe 2</span>
+                    <span class="multiplier">19 × 6</span>
+                </div>
+                <div class="staircase-step">
+                    <span>Gruppe 3</span>
+                    <span class="multiplier">19 × 7</span>
+                </div>
+                <div class="staircase-step">
+                    <span>Gruppe 4</span>
+                    <span class="multiplier">19 × 8</span>
+                </div>
+                <div class="staircase-step">
+                    <span>Gruppe 5</span>
+                    <span class="multiplier">19 × 9</span>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem; color: var(--text-secondary);">
+                12 suraer ordnet i en perfekt sekvens av multipler av 19—fra 95 til 114!
+            </p>
+        </div>
+    </section>
+
+    <!-- DID YOU KNOW -->
+    <section class="section">
+        <div class="container">
+            <h2>Visste du?</h2>
+            <div class="intro-text">
+                <p>
+                    Her er noen flere fascinerende fakta om tallet 19 i Koranen:
+                </p>
+            </div>
+
+            <div class="fun-facts">
+                <div class="fun-fact">
+                    <h4>Summen av alle suranumre</h4>
+                    <p>
+                        Hvis du legger sammen alle suranumre fra 1 til 114:
+                        <br><strong style="color: var(--blue);">1 + 2 + 3 + ... + 114 = 6,555</strong>
+                        <br><span style="color: var(--accent);">6,555 ÷ 19 = 345</span>
+                    </p>
+                </div>
+
+                <div class="fun-fact">
+                    <h4>Bisimillahs manglende gap</h4>
+                    <p>
+                        Det finnes en sura hvor Bismillah dukker opp bare en gang, og skaper et spesielt gap.
+                        Når du teller de påfølgende suraene i det gapet:
+                        <br><strong style="color: var(--blue);">19 påfølgende suraer</strong>
+                        <br>Fra sura 9 til sura 27.
+                    </p>
+                </div>
+
+                <div class="fun-fact">
+                    <h4>Tallet 19 selv</h4>
+                    <p>
+                        I Koranen blir selve tallet 19 nevnt bare på ett sted:
+                        <br><strong style="color: var(--blue);">Sura 74, vers 30</strong>
+                        <br>"Over den er nitten..."
+                    </p>
+                </div>
+
+                <div class="fun-fact">
+                    <h4>Et primtall</h4>
+                    <p>
+                        19 er det 8. primtall i matematikken.
+                        Primtall (bare delbare på 1 og seg selv) regnes som
+                        "byggesteinene" i alle tall—akkurat som 19 er byggsteinen for Koranens struktur.
+                    </p>
+                </div>
+
+                <div class="fun-fact">
+                    <h4>Menneskelig valg?</h4>
+                    <p>
+                        Kunne noen ha ordnet Koranen til å inkludere alle disse 19-mønstrene ved tilfeldighet?
+                        Matematikere sier at sannsynligheten er så lav at det ville ta tusenvis av livstider å oppnå det tilfeldig.
+                    </p>
+                </div>
+
+                <div class="fun-fact">
+                    <h4>En kode innenfor en kode</h4>
+                    <p>
+                        Disse mønstrene tyder på at Koranen har en matematisk struktur skjult under ordene—
+                        som en hemmelig kode som bare avslører seg for dem som studerer den nøye.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 34 DISCOVERIES -->
+    <section class="section">
+        <div class="container">
+            <div class="discoveries">
+                <h2>34 verifiserte matematiske relasjoner</h2>
+                <p>Forskere og lærde har dokumentert 34 ulike måter tallet 19 dukker opp i Koranens struktur:</p>
+
+                <div class="big-number">34</div>
+
+                <p>Hver enkelt verifisert, studert og dokumentert av flere forskere rundt omkring i verden.</p>
+
+                <div class="discovery-grid">
+                    <div class="discovery-item"><span>✓</span>114 suraer</div>
+                    <div class="discovery-item"><span>✓</span>Bismillah 19 bokstaver</div>
+                    <div class="discovery-item"><span>✓</span>Qaf bokstavtellinger</div>
+                    <div class="discovery-item"><span>✓</span>Ha-Mim bokstaver</div>
+                    <div class="discovery-item"><span>✓</span>Ya-Sin bokstaver</div>
+                    <div class="discovery-item"><span>✓</span>KHYAS bokstaver</div>
+                    <div class="discovery-item"><span>✓</span>ALM bokstaver</div>
+                    <div class="discovery-item"><span>✓</span>Sura 96 ayaher</div>
+                    <div class="discovery-item"><span>✓</span>Rutenett anti-diagonal</div>
+                    <div class="discovery-item"><span>✓</span>Trappemønster</div>
+                    <div class="discovery-item"><span>✓</span>Suranummer summer</div>
+                    <div class="discovery-item"><span>✓</span>Manglende Bismillah gap</div>
+                    <div class="discovery-item"><span>✓</span>Og 22 til...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-arabic">والله أعلم</div>
+            <div class="footer-meaning">"Allah vet best"</div>
+
+            <p style="color: var(--text-secondary); margin: 1.5rem 0;">
+                Det mirakuløse tallet 19 er ett av mange tegn som peker på visdommen,
+                nøyaktigheten og den guddommelige naturen til den kuranskne teksten. Disse matematiske mønstrene
+                har inspirert millioner til å studere Koranen dypere.
+            </p>
+
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
+                Denne utdanningssiden ble laget for å hjelpe unge elever med å sette pris på de matematiske
+                miraklene i Koranen og inspirere nysgjerrighet om vår hellige tekst.
+            </p>
+
+            <div class="alai-brand">
+                <span class="alai-text">
+                    Laget av <strong>ALAI</strong>
+                </span>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1.5rem;">
+                © 2026 ALAI. Utdanningsinnhold for alle aldre.
+                <span style="color: var(--accent);">Kunnskap er lys.</span>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
