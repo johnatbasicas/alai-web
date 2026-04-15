@@ -1,7 +1,7 @@
 # ALAI
 
 ## BookStack — Provjeri PRVO
-Prije traženja bilo čega — provjeri BookStack (http://localhost:6875). Centralna baza znanja za tools, skills, hooks, agents, rules, projekte, klijente, dokumentaciju. Ako odgovor postoji tamo — NE TRAŽI dalje.
+Prije traženja bilo čega — provjeri BookStack (https://docs.basicconsulting.no). Centralna baza znanja za tools, skills, hooks, agents, rules, projekte, klijente, dokumentaciju. Ako odgovor postoji tamo — NE TRAŽI dalje.
 
 ## Project Info
 - Created: 2026-02-09
@@ -11,14 +11,27 @@ Prije traženja bilo čega — provjeri BookStack (http://localhost:6875). Centr
 
 ## Tech Stack
 - HTML5 + CSS3 + Vanilla JS (NO frameworks, NO build tools)
-- Single file: `public/index.html`
-- Deploy: Vercel (static)
+- Deploy: **Vercel** (static, `public/` dir served directly)
 - Language: en (English)
+
+## ⚠️ Deployment — READ THIS FIRST
+- **Live URL:** https://alai.no
+- **Hosting:** Vercel (confirmed — `server: Vercel` header)
+- **Repo root:** `~/ALAI/web` ← THIS is the correct repo
+- **Deploy command:** `cd ~/ALAI/web && vercel --prod`
+- ❌ `~/projects/ALAI/landing` — stale Next.js + Firebase experiment, NOT live, IGNORE
 
 ## Structure
 ```
 public/
-  index.html    ← Entire site (HTML + inline CSS + inline JS)
+  index.html          ← Main site
+  ucenje/             ← Hidden learning pages (noindex)
+    index.html        ← Entry — links to subpages via .html extension (NOT trailing slash)
+    mladi.html
+    matematika.html
+    teologija.html
+    narod.html
+    bs.html / no.html / en.html
 ```
 
 ## Required Sections (in order)

@@ -4,128 +4,934 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Učenje — ALAI</title>
+    <title>Broj 19 u Kur'anu — ALAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --bg: #1a1a2e;
-            --surface: #16213e;
+            --bg: #0a0a14;
+            --surface: #12121f;
+            --surface2: #1a1a2e;
             --blue: #4361ee;
             --gold: #f7b731;
+            --gold-light: #ffd166;
+            --gold-dark: #c9881a;
+            --green: #00E5A0;
             --text: #fafafa;
-            --muted: #b0b0b0;
+            --muted: #8a8a9a;
+
+            /* Audience palette variables */
+            --mladi-primary: #6C63FF;
+            --mladi-secondary: #a78bfa;
+            --mladi-bg: rgba(108, 99, 255, 0.08);
+            --mladi-border: rgba(108, 99, 255, 0.35);
+
+            --math-primary: #00D4AA;
+            --math-secondary: #34d399;
+            --math-bg: rgba(0, 212, 170, 0.08);
+            --math-border: rgba(0, 212, 170, 0.35);
+
+            --teo-primary: #D4A55A;
+            --teo-secondary: #f7b731;
+            --teo-bg: rgba(212, 165, 90, 0.08);
+            --teo-border: rgba(212, 165, 90, 0.35);
+
+            --narod-primary: #FF6B6B;
+            --narod-secondary: #ff9f43;
+            --narod-bg: rgba(255, 107, 107, 0.08);
+            --narod-border: rgba(255, 107, 107, 0.35);
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
+            background-color: var(--bg);
             color: var(--text);
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ===== STICKY LANG SWITCHER ===== */
+        .lang-sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 20, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(247, 183, 49, 0.15);
+            padding: 0.65rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.45rem 1.1rem;
+            border: 1px solid rgba(247, 183, 49, 0.2);
+            background: transparent;
+            color: var(--muted);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .lang-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #0a0a14;
+        }
+
+        /* ===== PARTICLES ===== */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            color: var(--gold);
+            opacity: 0.06;
+            font-weight: 700;
+            animation: floatParticle linear infinite;
+            user-select: none;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.04; }
+            33% { opacity: 0.10; }
+            66% { opacity: 0.06; }
+            100% { transform: translateY(-60px) rotate(15deg); opacity: 0.04; }
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+            padding-top: 3.5rem;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .container {
             text-align: center;
-            padding: 2rem;
-            max-width: 600px;
+            padding: 5rem 1.5rem 4rem;
+            position: relative;
         }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(247, 183, 49, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 780px;
+        }
+
         .bismillah {
-            font-size: 1.8rem;
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
             color: var(--gold);
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        h1 {
-            font-size: 2.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--blue), var(--gold));
+            letter-spacing: 0.04em;
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 0 40px rgba(247, 183, 49, 0.35), 0 2px 8px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .bismillah::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .ayah {
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            color: var(--green);
+            margin: 1.5rem 0 2rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 7vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, #f7b731 0%, #ffd166 40%, #4361ee 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
+            background-size: 200% 200%;
+            animation: gradientShimmer 4s ease-in-out infinite;
         }
+
+        @keyframes gradientShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
         .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
             color: var(--muted);
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
+            font-weight: 400;
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
+
+        /* ===== AUDIENCE CARDS ===== */
+        .cards-section {
+            padding: 0 1.5rem 5rem;
+        }
+
+        .cards-section-title {
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 2.5rem;
+        }
+
         .cards {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
         }
-        a.card {
-            display: block;
-            background: var(--surface);
-            border: 1px solid rgba(67, 97, 238, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
+
+        /* Base card */
+        .card {
+            border-radius: 16px;
+            padding: 2rem 1.75rem 1.75rem;
             text-decoration: none;
             color: var(--text);
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1.5px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            opacity: 0.07;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+        }
+
+        .card:hover::after {
+            opacity: 0.14;
+        }
+
+        /* Mladi */
+        .card-mladi {
+            background: linear-gradient(145deg, rgba(108, 99, 255, 0.12) 0%, rgba(167, 139, 250, 0.06) 100%);
+            border-color: var(--mladi-border);
+            box-shadow: 0 4px 24px rgba(108, 99, 255, 0.1);
+        }
+
+        .card-mladi::before {
+            background: linear-gradient(135deg, var(--mladi-primary), var(--mladi-secondary));
+        }
+
+        .card-mladi::after {
+            background: var(--mladi-primary);
+        }
+
+        .card-mladi:hover {
+            box-shadow: 0 16px 48px rgba(108, 99, 255, 0.25);
+            border-color: var(--mladi-primary);
+        }
+
+        /* Matematika */
+        .card-math {
+            background: linear-gradient(145deg, rgba(0, 212, 170, 0.10) 0%, rgba(52, 211, 153, 0.05) 100%);
+            border-color: var(--math-border);
+            box-shadow: 0 4px 24px rgba(0, 212, 170, 0.08);
+        }
+
+        .card-math::before {
+            background: linear-gradient(135deg, var(--math-primary), var(--math-secondary));
+        }
+
+        .card-math::after {
+            background: var(--math-primary);
+        }
+
+        .card-math:hover {
+            box-shadow: 0 16px 48px rgba(0, 212, 170, 0.22);
+            border-color: var(--math-primary);
+        }
+
+        /* Teologija */
+        .card-teo {
+            background: linear-gradient(145deg, rgba(212, 165, 90, 0.10) 0%, rgba(247, 183, 49, 0.05) 100%);
+            border-color: var(--teo-border);
+            box-shadow: 0 4px 24px rgba(212, 165, 90, 0.08);
+        }
+
+        .card-teo::before {
+            background: linear-gradient(135deg, var(--teo-primary), var(--teo-secondary));
+        }
+
+        .card-teo::after {
+            background: var(--teo-primary);
+        }
+
+        .card-teo:hover {
+            box-shadow: 0 16px 48px rgba(212, 165, 90, 0.22);
+            border-color: var(--teo-primary);
+        }
+
+        /* Narod */
+        .card-narod {
+            background: linear-gradient(145deg, rgba(255, 107, 107, 0.10) 0%, rgba(255, 159, 67, 0.05) 100%);
+            border-color: var(--narod-border);
+            box-shadow: 0 4px 24px rgba(255, 107, 107, 0.08);
+        }
+
+        .card-narod::before {
+            background: linear-gradient(135deg, var(--narod-primary), var(--narod-secondary));
+        }
+
+        .card-narod::after {
+            background: var(--narod-primary);
+        }
+
+        .card-narod:hover {
+            box-shadow: 0 16px 48px rgba(255, 107, 107, 0.22);
+            border-color: var(--narod-primary);
+        }
+
+        /* Card internals */
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-icon svg {
+            width: 48px;
+            height: 48px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+        }
+
+        .card-mladi .card-title { color: var(--mladi-secondary); }
+        .card-math .card-title { color: var(--math-primary); }
+        .card-teo .card-title { color: var(--teo-secondary); }
+        .card-narod .card-title { color: var(--narod-secondary); }
+
+        .card-desc {
+            font-size: 0.97rem;
+            color: var(--muted);
+            line-height: 1.55;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            padding: 0.5rem 0;
+            transition: gap 0.2s ease;
+        }
+
+        .card:hover .card-cta {
+            gap: 0.7rem;
+        }
+
+        .card-mladi .card-cta { color: var(--mladi-secondary); }
+        .card-math .card-cta { color: var(--math-primary); }
+        .card-teo .card-cta { color: var(--teo-secondary); }
+        .card-narod .card-cta { color: var(--narod-secondary); }
+
+        .card-age-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-mladi .card-age-badge {
+            background: rgba(108, 99, 255, 0.2);
+            color: var(--mladi-secondary);
+        }
+
+        .card-math .card-age-badge {
+            background: rgba(0, 212, 170, 0.15);
+            color: var(--math-primary);
+        }
+
+        .card-teo .card-age-badge {
+            background: rgba(212, 165, 90, 0.15);
+            color: var(--teo-secondary);
+        }
+
+        .card-narod .card-age-badge {
+            background: rgba(255, 107, 107, 0.15);
+            color: var(--narod-secondary);
+        }
+
+        /* ===== KONVERZACIJE / PODCAST SECTION ===== */
+        .podcast-section {
+            max-width: 800px;
+            margin: 0 auto 5rem;
+            padding: 0 1.5rem;
+        }
+
+        .podcast-card {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.12), rgba(247, 183, 49, 0.07));
+            border: 1.5px solid rgba(247, 183, 49, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
             position: relative;
             overflow: hidden;
         }
-        a.card::before {
+
+        .podcast-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--blue), var(--gold));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-            transform-origin: left;
+            top: -40px;
+            right: -40px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(247, 183, 49, 0.12) 0%, transparent 70%);
+            pointer-events: none;
         }
-        a.card:hover {
-            border-color: var(--blue);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.2);
+
+        .podcast-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
-        a.card:hover::before { transform: scaleX(1); }
-        .card-title {
+
+        .podcast-mic {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(247, 183, 49, 0.2), rgba(67, 97, 238, 0.15));
+            border: 1.5px solid rgba(247, 183, 49, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .podcast-mic svg {
+            width: 32px;
+            height: 32px;
+            display: block;
+        }
+
+        .podcast-header-text h3 {
             font-size: 1.3rem;
-            font-weight: 600;
+            font-weight: 800;
+            color: var(--gold);
             margin-bottom: 0.3rem;
         }
-        .card-desc {
-            color: var(--muted);
+
+        .podcast-header-text p {
             font-size: 0.9rem;
-        }
-        .footer {
-            margin-top: 3rem;
             color: var(--muted);
-            font-size: 0.8rem;
         }
+
+        .podcast-wave {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin: 1.5rem 0;
+            height: 40px;
+        }
+
+        .wave-bar {
+            width: 4px;
+            border-radius: 2px;
+            background: linear-gradient(180deg, var(--gold) 0%, rgba(247, 183, 49, 0.3) 100%);
+            animation: wavePulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes wavePulse {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+
+        .podcast-coming-soon {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(247, 183, 49, 0.1);
+            border: 1px dashed rgba(247, 183, 49, 0.35);
+            border-radius: 8px;
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .coming-soon-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.4; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 2rem 1.5rem 3rem;
+            border-top: 1px solid rgba(67, 97, 238, 0.15);
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
         .footer a {
             color: var(--blue);
             text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: var(--gold);
+        }
+
+        /* ===== TEXT VISIBILITY ===== */
+        .text-bs { display: none; }
+        .text-no { display: none; }
+        .text-en { display: none; }
+        .text-bs.active { display: block; }
+        .text-no.active { display: block; }
+        .text-en.active { display: block; }
+
+        span.text-bs, span.text-no, span.text-en { display: none; }
+        span.text-bs.active, span.text-no.active, span.text-en.active { display: inline; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 4rem 1.25rem 3rem;
+            }
+
+            .podcast-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .podcast-wave {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lang-sticky {
+                padding: 0.5rem 1rem;
+            }
+
+            .lang-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
-        <h1>Broj 19 u Kur'anu</h1>
-        <p class="subtitle">Matematičko čudo za mlade istraživače</p>
-
-        <div class="cards">
-            <a class="card" href="bs.html">
-                <div class="card-title">Bosanski</div>
-                <div class="card-desc">Nevjerovatni broj 19 u Kur'anu</div>
-            </a>
-            <a class="card" href="no.html">
-                <div class="card-title">Norsk</div>
-                <div class="card-desc">Det fantastiske tallet 19 i Koranen</div>
-            </a>
-            <a class="card" href="en.html">
-                <div class="card-title">English</div>
-                <div class="card-desc">The Amazing Number 19 in the Quran</div>
-            </a>
-        </div>
-
-        <div class="footer">
-            <p>ALAI &mdash; <a href="https://alai.no">alai.no</a></p>
-        </div>
+    <!-- Sticky language switcher -->
+    <div class="lang-sticky">
+        <button class="lang-btn active" data-lang="bs" onclick="switchLanguage('bs')">Bosanski</button>
+        <button class="lang-btn" data-lang="no" onclick="switchLanguage('no')">Norsk</button>
+        <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">English</button>
     </div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="page-wrap">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-inner">
+                <div class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+                <div class="ayah">عَلَيْهَا تِسْعَةَ عَشَرَ</div>
+
+                <h1 id="main-title">Broj 19 u Kur'anu</h1>
+
+                <p class="subtitle text-bs active">Matematičko čudo za različite istraživače</p>
+                <p class="subtitle text-no" style="display:none">Det fantastiske tallet 19 i Koranen</p>
+                <p class="subtitle text-en" style="display:none">The Amazing Number 19 in the Quran</p>
+
+                <div style="margin-top:2rem; display:inline-flex; align-items:center; gap:0.6rem; padding:0.6rem 1.2rem; background:rgba(0,229,160,0.1); border:1px solid rgba(0,229,160,0.25); border-radius:10px; flex-wrap:wrap; justify-content:center;">
+                    <span style="font-size:0.8rem; font-weight:700; color:#00E5A0;">Potvrdjeno od 3 AI modela:</span>
+                    <span style="font-size:0.75rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:20px; background:rgba(0,229,160,0.14); color:#00E5A0; border:1px solid rgba(0,229,160,0.3);">Claude · Gemini · Qwen</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUDIENCE CARDS -->
+        <section class="cards-section">
+            <p class="cards-section-title">
+                <span class="text-bs active">Odaberi svoju perspektivu</span>
+                <span class="text-no" style="display:none">Velg ditt perspektiv</span>
+                <span class="text-en" style="display:none">Choose your perspective</span>
+            </p>
+
+            <div class="cards">
+                <!-- Za Mlade -->
+                <a href="/ucenje/mladi.html" class="card card-mladi">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <!-- Crescent moon -->
+                            <path d="M32 12C27.5 12 23.5 14.5 21.5 18.5C19.5 22.5 19.9 27.3 22.5 30.8C25.1 34.3 29.4 36 33.7 35.4C30.8 37.1 27.5 38 24 38C14.1 38 6 29.9 6 20C6 10.1 14.1 2 24 2C27.2 2 30.2 2.9 32.8 4.5C32.2 6.9 32 9.4 32 12Z" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Stars -->
+                            <path d="M38 8L38.9 10.7L42 10.7L39.5 12.5L40.4 15.2L38 13.4L35.6 15.2L36.5 12.5L34 10.7L37.1 10.7Z" stroke="#6C63FF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="43" cy="20" r="1.2" stroke="#6C63FF" stroke-width="1.2"/>
+                            <circle cx="40" cy="26" r="0.9" stroke="#6C63FF" stroke-width="1.2"/>
+                        </svg>
+                    </span>
+                    <div class="card-age-badge text-bs active">Uzrast 10–16</div>
+                    <div class="card-age-badge text-no" style="display:none">Alder 10–16</div>
+                    <div class="card-age-badge text-en" style="display:none">Age 10–16</div>
+
+                    <div class="card-title text-bs active">Za Mlade</div>
+                    <div class="card-title text-no" style="display:none">For Ungdommen</div>
+                    <div class="card-title text-en" style="display:none">For the Young</div>
+
+                    <p class="card-desc text-bs active">Matematička magija za male istraživače koji vole tajne broja — interaktivni counter i lako razumljiva priča.</p>
+                    <p class="card-desc text-no" style="display:none">Matematisk magi for unge utforskere som elsker tallmystikk — interaktiv teller og lett forståelig historie.</p>
+                    <p class="card-desc text-en" style="display:none">Mathematical magic for young explorers who love number mysteries — interactive counter and easy story.</p>
+
+                    <span class="card-cta text-bs active">Istraži tajni kod &rarr;</span>
+                    <span class="card-cta text-no" style="display:none">Utforsk den hemmelige koden &rarr;</span>
+                    <span class="card-cta text-en" style="display:none">Explore the secret code &rarr;</span>
+                </a>
+
+                <!-- Za Matematičare -->
+                <a href="/ucenje/matematika.html" class="card card-math">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <!-- Infinity / sigma symbol — geometric elegance -->
+                            <!-- Infinity loop -->
+                            <path d="M10 24C10 19.6 13.6 16 18 16C22.4 16 25.5 19.5 28 24C30.5 28.5 33.6 32 38 32C42.4 32 46 28.4 46 24C46 19.6 42.4 16 38 16C33.6 16 30.5 19.5 28 24C25.5 28.5 22.4 32 18 32C13.6 32 10 28.4 10 24Z" stroke="#00D4AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Small dividing dot -->
+                            <circle cx="28" cy="24" r="1.5" fill="#00D4AA"/>
+                        </svg>
+                    </span>
+                    <div class="card-age-badge text-bs active">Formalni dokazi</div>
+                    <div class="card-age-badge text-no" style="display:none">Formelle bevis</div>
+                    <div class="card-age-badge text-en" style="display:none">Formal proofs</div>
+
+                    <div class="card-title text-bs active">Za Matematičare</div>
+                    <div class="card-title text-no" style="display:none">For Matematikere</div>
+                    <div class="card-title text-en" style="display:none">For Mathematicians</div>
+
+                    <p class="card-desc text-bs active">Formalni dokazi, verifikacija Python skriptom, mod-19 aritmetika, baza-19 reprezentacija i potpuna tablica.</p>
+                    <p class="card-desc text-no" style="display:none">Formelle bevis, Python-verifikasjon, mod-19 aritmetikk, base-19 representasjon og komplett tabell.</p>
+                    <p class="card-desc text-en" style="display:none">Formal proofs, Python verification, mod-19 arithmetic, base-19 representation and full table.</p>
+
+                    <span class="card-cta text-bs active">Vidi dokaze &rarr;</span>
+                    <span class="card-cta text-no" style="display:none">Se bevisene &rarr;</span>
+                    <span class="card-cta text-en" style="display:none">See the proofs &rarr;</span>
+                </a>
+
+                <!-- Za Teologe -->
+                <a href="/ucenje/teologija.html" class="card card-teo">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <!-- Open book -->
+                            <path d="M24 10C24 10 18 8 10 10V38C18 36 24 38 24 38C24 38 30 36 38 38V10C30 8 24 10 24 10Z" stroke="#D4A55A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Spine -->
+                            <line x1="24" y1="10" x2="24" y2="38" stroke="#D4A55A" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Left page lines -->
+                            <line x1="13" y1="17" x2="21" y2="16" stroke="#D4A55A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+                            <line x1="13" y1="22" x2="21" y2="21" stroke="#D4A55A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+                            <line x1="13" y1="27" x2="21" y2="26.5" stroke="#D4A55A" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+                            <!-- Right page lines -->
+                            <line x1="27" y1="16" x2="35" y2="17" stroke="#D4A55A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+                            <line x1="27" y1="21" x2="35" y2="22" stroke="#D4A55A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+                            <line x1="27" y1="26.5" x2="35" y2="27" stroke="#D4A55A" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+                            <!-- Quill / pen above -->
+                            <path d="M36 6L40 8L34 16" stroke="#D4A55A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M34 16L32 18L33.5 14.5" stroke="#D4A55A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <div class="card-age-badge text-bs active">Dubinska analiza</div>
+                    <div class="card-age-badge text-no" style="display:none">Dyp analyse</div>
+                    <div class="card-age-badge text-en" style="display:none">Deep analysis</div>
+
+                    <div class="card-title text-bs active">Za Teologe</div>
+                    <div class="card-title text-no" style="display:none">For Teologer</div>
+                    <div class="card-title text-en" style="display:none">For Theologians</div>
+
+                    <p class="card-desc text-bs active">Lingvistika, semantika, Laylat al-Qadr astronomija, muqatta'at i Metonski ciklus — kontekstualna dubina.</p>
+                    <p class="card-desc text-no" style="display:none">Lingvistikk, semantikk, Laylat al-Qadr astronomi, muqatta'at og metonsk syklus — kontekstuell dybde.</p>
+                    <p class="card-desc text-en" style="display:none">Linguistics, semantics, Laylat al-Qadr astronomy, muqatta'at and Metonic cycle — contextual depth.</p>
+
+                    <span class="card-cta text-bs active">Ulaz u teologiju &rarr;</span>
+                    <span class="card-cta text-no" style="display:none">Inn i teologien &rarr;</span>
+                    <span class="card-cta text-en" style="display:none">Enter theology &rarr;</span>
+                </a>
+
+                <!-- Za Narod -->
+                <a href="/ucenje/narod.html" class="card card-narod">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <!-- Globe -->
+                            <circle cx="24" cy="24" r="16" stroke="#FF6B6B" stroke-width="1.5"/>
+                            <!-- Meridian lines -->
+                            <path d="M24 8C24 8 18 15 18 24C18 33 24 40 24 40" stroke="#FF6B6B" stroke-width="1.2" stroke-linecap="round"/>
+                            <path d="M24 8C24 8 30 15 30 24C30 33 24 40 24 40" stroke="#FF6B6B" stroke-width="1.2" stroke-linecap="round"/>
+                            <!-- Equator -->
+                            <path d="M8 24C8 24 15 20 24 20C33 20 40 24 40 24" stroke="#FF6B6B" stroke-width="1.2" stroke-linecap="round"/>
+                            <!-- Latitude mid -->
+                            <path d="M10 30C10 30 16.5 27 24 27C31.5 27 38 30 38 30" stroke="#FF6B6B" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+                            <!-- People silhouettes — 3 figures at base -->
+                            <circle cx="24" cy="42.5" r="1.8" stroke="#FF6B6B" stroke-width="1.2"/>
+                            <circle cx="18" cy="42.5" r="1.8" stroke="#FF6B6B" stroke-width="1.2"/>
+                            <circle cx="30" cy="42.5" r="1.8" stroke="#FF6B6B" stroke-width="1.2"/>
+                        </svg>
+                    </span>
+                    <div class="card-age-badge text-bs active">Za svakoga</div>
+                    <div class="card-age-badge text-no" style="display:none">For alle</div>
+                    <div class="card-age-badge text-en" style="display:none">For everyone</div>
+
+                    <div class="card-title text-bs active">Za Narod</div>
+                    <div class="card-title text-no" style="display:none">For Folket</div>
+                    <div class="card-title text-en" style="display:none">For Everyone</div>
+
+                    <p class="card-desc text-bs active">Priča koja mijenja perspektivu, AI verifikacija od tri sistema, stvarni brojevi — dostupno svima.</p>
+                    <p class="card-desc text-no" style="display:none">En historie som endrer perspektiv, AI-verifisering fra tre systemer, reelle tall — tilgjengelig for alle.</p>
+                    <p class="card-desc text-en" style="display:none">A story that changes perspective, AI verification from three systems, real numbers — accessible to all.</p>
+
+                    <span class="card-cta text-bs active">Otkrij priču &rarr;</span>
+                    <span class="card-cta text-no" style="display:none">Oppdag historien &rarr;</span>
+                    <span class="card-cta text-en" style="display:none">Discover the story &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- DEEP DIVE LINKS -->
+        <section style="max-width:800px; margin:0 auto 3rem; padding:0 1.5rem; text-align:center;">
+            <p style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); margin-bottom:1.25rem;" class="text-bs active">Ili citaj sveobuhvatnu analizu</p>
+            <p style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); margin-bottom:1.25rem; display:none" class="text-no">Eller les den omfattende analysen</p>
+            <p style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); margin-bottom:1.25rem; display:none" class="text-en">Or read the comprehensive analysis</p>
+            <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+                <a href="/ucenje/bs.html" style="padding:0.55rem 1.25rem; background:rgba(247,183,49,0.1); border:1px solid rgba(247,183,49,0.25); border-radius:8px; color:var(--gold); text-decoration:none; font-size:0.88rem; font-weight:600; transition:all 0.2s;">Bosanski — Dubinska Analiza</a>
+                <a href="/ucenje/no.html" style="padding:0.55rem 1.25rem; background:rgba(247,183,49,0.1); border:1px solid rgba(247,183,49,0.25); border-radius:8px; color:var(--gold); text-decoration:none; font-size:0.88rem; font-weight:600; transition:all 0.2s;">Norsk — Dypdykk</a>
+                <a href="/ucenje/en.html" style="padding:0.55rem 1.25rem; background:rgba(247,183,49,0.1); border:1px solid rgba(247,183,49,0.25); border-radius:8px; color:var(--gold); text-decoration:none; font-size:0.88rem; font-weight:600; transition:all 0.2s;">English — Deep Dive</a>
+            </div>
+        </section>
+
+        <!-- KONVERZACIJE / PODCAST -->
+        <section class="podcast-section">
+            <div class="podcast-card">
+                <div class="podcast-header">
+                    <div class="podcast-mic">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <!-- Microphone body -->
+                            <rect x="11" y="3" width="10" height="15" rx="5" stroke="#f7b731" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Mic stand arm -->
+                            <path d="M6 14C6 20.6 10.5 24 16 24C21.5 24 26 20.6 26 14" stroke="#f7b731" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Stand pole -->
+                            <line x1="16" y1="24" x2="16" y2="29" stroke="#f7b731" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Base -->
+                            <line x1="11" y1="29" x2="21" y2="29" stroke="#f7b731" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Mic detail lines -->
+                            <line x1="13" y1="10" x2="19" y2="10" stroke="#f7b731" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+                            <line x1="13" y1="13" x2="19" y2="13" stroke="#f7b731" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <div class="podcast-header-text">
+                        <h3 class="text-bs active">Naše Konverzacije o Broju 19</h3>
+                        <h3 class="text-no" style="display:none">Våre Samtaler om Tallet 19</h3>
+                        <h3 class="text-en" style="display:none">Our Conversations About Number 19</h3>
+
+                        <p class="text-bs active">Audio snimci istraživanja — Alem Basic + John (ALAI)</p>
+                        <p class="text-no" style="display:none">Lydopptak av forskning — Alem Basic + John (ALAI)</p>
+                        <p class="text-en" style="display:none">Audio research recordings — Alem Basic + John (ALAI)</p>
+                    </div>
+                </div>
+
+                <div class="podcast-wave" id="podcast-wave"></div>
+
+                <div class="podcast-coming-soon">
+                    <div class="coming-soon-dot"></div>
+                    <span class="text-bs active">19. oktobar i druge sesije — u pripremi</span>
+                    <span class="text-no" style="display:none">19. oktober og andre sesjoner — under forberedelse</span>
+                    <span class="text-en" style="display:none">October 19th and other sessions — in preparation</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>ALAI — <a href="https://alai.no">alai.no</a> &nbsp;|&nbsp; Broj 19 u Kur'anu (Surah 74:30)</p>
+        </footer>
+    </div>
+
+    <script>
+        // Generate floating particles
+        function generateParticles() {
+            const container = document.getElementById('particles');
+            const count = window.innerWidth > 768 ? 18 : 9;
+            const sizes = ['1.2rem', '1.8rem', '2.4rem', '3rem', '3.8rem'];
+            const durations = [28, 35, 42, 50, 60];
+
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('div');
+                el.className = 'particle';
+                el.textContent = '١٩';
+                el.style.left = Math.random() * 100 + '%';
+                el.style.top = Math.random() * 110 + 10 + '%';
+                el.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)];
+                el.style.animationDuration = durations[Math.floor(Math.random() * durations.length)] + 's';
+                el.style.animationDelay = -(Math.random() * 60) + 's';
+                container.appendChild(el);
+            }
+        }
+
+        // Generate podcast wave bars
+        function generateWave() {
+            const wave = document.getElementById('podcast-wave');
+            const barCount = 32;
+            for (let i = 0; i < barCount; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'wave-bar';
+                const minH = 8;
+                const maxH = 36;
+                const h = Math.floor(Math.random() * (maxH - minH) + minH);
+                bar.style.height = h + 'px';
+                bar.style.animationDelay = (i * 0.06) + 's';
+                bar.style.animationDuration = (1.4 + Math.random() * 0.8) + 's';
+                wave.appendChild(bar);
+            }
+        }
+
+        // Language switching
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Hide all translatable blocks
+            ['bs', 'no', 'en'].forEach(l => {
+                document.querySelectorAll('.text-' + l).forEach(el => {
+                    el.classList.remove('active');
+                    el.style.display = 'none';
+                });
+            });
+
+            // Show active lang
+            document.querySelectorAll('.text-' + lang).forEach(el => {
+                el.classList.add('active');
+                // Determine display type based on tag
+                const tag = el.tagName.toLowerCase();
+                el.style.display = (tag === 'span' || tag === 'a') ? 'inline' : 'block';
+            });
+
+            const titles = {
+                bs: 'Broj 19 u Kur\'anu',
+                no: 'Tallet 19 i Koranen',
+                en: 'Number 19 in the Quran'
+            };
+            document.getElementById('main-title').textContent = titles[lang];
+
+            localStorage.setItem('ucenje-lang', lang);
+        }
+
+        window.addEventListener('DOMContentLoaded', function () {
+            generateParticles();
+            generateWave();
+            const saved = localStorage.getItem('ucenje-lang');
+            if (saved && saved !== 'bs') {
+                switchLanguage(saved);
+            }
+        });
+    </script>
 </body>
 </html>
