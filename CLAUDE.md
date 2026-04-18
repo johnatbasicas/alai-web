@@ -11,15 +11,37 @@ Prije traženja bilo čega — provjeri BookStack (https://docs.basicconsulting.
 
 ## Tech Stack
 - HTML5 + CSS3 + Vanilla JS (NO frameworks, NO build tools)
-- Deploy: **Vercel** (static, `public/` dir served directly)
+- Deploy: **Cloudflare Pages** (auto-deploy on git push to master)
 - Language: en (English)
 
 ## ⚠️ Deployment — READ THIS FIRST
-- **Live URL:** https://alai.no
-- **Hosting:** Vercel (confirmed — `server: Vercel` header)
+- **Live URL:** https://alai.no (DNS migration pending — see below)
+- **Hosting:** Cloudflare Pages
+- **Preview URL:** https://alai-web.pages.dev (LIVE — ucenje redesign active)
 - **Repo root:** `~/ALAI/web` ← THIS is the correct repo
-- **Deploy command:** `cd ~/ALAI/web && vercel --prod`
+- **Git repo:** https://github.com/johnatbasicas/alai-web.git
+- **Deploy:** Automatic on `git push origin master` (Cloudflare Pages watches repo)
+- **Manual deploy:** `wrangler pages deploy public --project-name=alai-web --branch=master`
 - ❌ `~/projects/ALAI/landing` — stale Next.js + Firebase experiment, NOT live, IGNORE
+- ❌ Vercel `ucenje-deploy` project — DEPRECATED, blocked by team config error (2026-04-18)
+
+## DNS Migration (PENDING — Alem action required)
+**Status:** Cloudflare Pages project created, site deployed and working at https://alai-web.pages.dev
+**Blocker:** alai.no nameservers still at one.com, need to point to Cloudflare
+**Action required:**
+1. Login to one.com: https://one.com (alembasic@gmail.com)
+2. Navigate to: alai.no → DNS settings
+3. Update nameservers from one.com defaults to:
+   - aspen.ns.cloudflare.com
+   - wells.ns.cloudflare.com
+4. Wait 5-60 minutes for propagation
+5. Verify: `curl -sI https://alai.no | grep server` → should show "cloudflare"
+
+**Once nameservers are updated:**
+- Custom domain alai.no will auto-activate on Cloudflare Pages
+- SSL certificate will be auto-issued
+- All traffic will route through Cloudflare (faster, more reliable than Vercel)
+- Ucenje redesign will be live
 
 ## Structure
 ```
