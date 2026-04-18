@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>19 Explorer — Interaktivni matematički istraživač — ALAI</title>
+  <meta name="description" content="Interaktivni istraživač broja 19 u Kur'anu. 114=6×19, Bismilla, Sura 96, ogledalni parovi.">
+  <link rel="stylesheet" href="/ucenje/assets/style.css">
+  <link rel="stylesheet" href="/ucenje/assets/animations.css">
+  <style>
+    /* Explorer-specific styles */
+    .explorer-section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .explorer-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .fact-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition-base);
+    }
+
+    .fact-card:hover {
+      box-shadow: var(--shadow-medium);
+      border-color: var(--border-gold);
+    }
+
+    .fact-card::before {
+      content: attr(data-num);
+      position: absolute;
+      top: -10px;
+      right: 12px;
+      font-family: var(--font-serif);
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.08;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .fact-label {
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: var(--space-2);
+    }
+
+    .fact-equation {
+      font-family: var(--font-mono);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: var(--space-3);
+    }
+
+    .fact-equation .equals { color: var(--gold-dark); }
+    .fact-equation .mult { color: var(--teal); }
+
+    .fact-desc {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      max-width: 40ch;
+    }
+
+    /* Metonic cycle viz */
+    .metonic-grid {
+      display: grid;
+      grid-template-columns: repeat(19, 1fr);
+      gap: 3px;
+      margin: 1.5rem 0;
+    }
+
+    .metonic-cell {
+      aspect-ratio: 1;
+      border-radius: 3px;
+      background: var(--parchment-dark);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      transition: transform 0.15s;
+    }
+
+    .metonic-cell:hover {
+      transform: scale(1.2);
+      z-index: 1;
+    }
+
+    .metonic-cell--year19 {
+      background: rgba(201,169,97,0.25);
+      border-color: var(--gold);
+      color: var(--gold-dark);
+      font-weight: 700;
+    }
+
+    /* Counter animation */
+    #counter-display {
+      font-family: var(--font-serif);
+      font-size: clamp(4rem, 15vw, 9rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      min-width: 3ch;
+      display: inline-block;
+      text-align: center;
+    }
+
+    /* Relationship table highlight */
+    .verified-row td:first-child::before {
+      content: "✓ ";
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    .not-verified-row td { color: var(--text-faint); font-style: italic; }
+    .not-verified-row td:first-child::before {
+      content: "✗ ";
+      color: #b85c5c;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" aria-label="Glavna navigacija">
+  <a href="/ucenje/" class="nav-brand">
+    <svg class="nav-brand-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12" stroke="#c9a961" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="14" cy="14" r="7" stroke="#c9a961" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="14" cy="14" r="2.5" fill="#c9a961" opacity="0.8"/>
+      <line x1="14" y1="2" x2="14" y2="5" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="14" y1="23" x2="14" y2="26" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="2" y1="14" x2="5" y2="14" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="23" y1="14" x2="26" y2="14" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+    </svg>
+    ALAI / Ucenje
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="/ucenje/">Hub</a></li>
+    <li><a href="/ucenje/audio/">Audio</a></li>
+    <li><a href="/ucenje/19-explorer/" class="active" aria-current="page">19 Explorer</a></li>
+  </ul>
+
+  <div class="lang-switcher" role="group" aria-label="Odabir jezika">
+    <button class="lang-btn active" data-lang="bs" onclick="switchLanguage('bs')" aria-pressed="true">BS</button>
+    <button class="lang-btn" data-lang="no" onclick="switchLanguage('no')" aria-pressed="false">NO</button>
+    <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')" aria-pressed="false">EN</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ===== HERO ===== -->
+  <section style="padding:5rem 0 3rem; text-align:center; position:relative; overflow:hidden;">
+
+    <!-- Animated star background -->
+    <div aria-hidden="true" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;">
+      <svg id="star-19-svg" viewBox="0 0 400 400" width="500" height="500" style="opacity:0.07;" role="img" aria-label="19-krak zvijezda">
+        <!-- Filled by app.js drawStar19() -->
+      </svg>
+    </div>
+
+    <div class="container--narrow" style="position:relative; z-index:1;">
+      <a href="/ucenje/" style="font-family:var(--font-sans); font-size:var(--text-sm); color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        &#8592;
+        <span data-lang-show="bs" class="lang-visible">Nazad na Hub</span>
+        <span data-lang-show="no">Tilbake til Hub</span>
+        <span data-lang-show="en">Back to Hub</span>
+      </a>
+
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Interaktivni matematički istraživač</span>
+        <span data-lang-show="no">Interaktiv matematisk utforsker</span>
+        <span data-lang-show="en">Interactive mathematical explorer</span>
+      </span>
+
+      <h1 class="hero-entrance" style="font-size:clamp(2rem,5vw,3.5rem); margin:1rem 0 1.5rem;">
+        <span data-lang-show="bs" class="lang-visible">Broj 19 — istraži matematiku</span>
+        <span data-lang-show="no">Tallet 19 — utforsk matematikken</span>
+        <span data-lang-show="en">The Number 19 — explore the math</span>
+      </h1>
+
+      <p class="hero-entrance hero-entrance-delay-1" style="font-style:italic; font-size:var(--text-xl); color:var(--text-secondary); max-width:50ch; margin:0 auto;">
+        <span data-lang-show="bs" class="lang-visible">13 računarski potvrđenih odnosa. 9 negativnih rezultata. Samo ono što brojevi zaista kažu.</span>
+        <span data-lang-show="no">13 datamaskinbekreftede relasjoner. 9 negative resultater. Bare det tallene faktisk sier.</span>
+        <span data-lang-show="en">13 computationally verified relationships. 9 negative results. Only what the numbers actually say.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== INTERACTIVE COUNTER ===== -->
+  <section class="explorer-section" style="background:var(--parchment);">
+    <div class="container--narrow" style="text-align:center;">
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Interaktivni counter</span>
+        <span data-lang-show="no">Interaktiv teller</span>
+        <span data-lang-show="en">Interactive counter</span>
+      </span>
+      <h2 class="fade-in" style="margin-bottom:3rem; font-size:var(--text-3xl);">
+        <span data-lang-show="bs" class="lang-visible">Prebroji i uvjeri se</span>
+        <span data-lang-show="no">Tell og overbevise deg selv</span>
+        <span data-lang-show="en">Count and see for yourself</span>
+      </h2>
+
+      <div style="display:flex; align-items:center; justify-content:center; gap:3rem; flex-wrap:wrap; margin-bottom:3rem;">
+        <div>
+          <span id="counter-display" data-counter="19">0</span>
+          <div style="font-family:var(--font-sans); font-size:var(--text-sm); color:var(--text-muted); margin-top:0.5rem;" id="counter-label">
+            <span data-lang-show="bs" class="lang-visible">slova u Bismilli</span>
+            <span data-lang-show="no">bokstaver i Bismillah</span>
+            <span data-lang-show="en">letters in Bismillah</span>
+          </div>
+        </div>
+
+        <!-- Bismillah letter-by-letter display -->
+        <div style="max-width:320px;">
+          <div lang="ar" style="font-family:var(--font-arabic); font-size:1.6rem; line-height:2.5; direction:rtl; text-align:right; letter-spacing:0.05em;">
+            <span id="bismillah-letters" style="cursor:default;">
+              <!-- Individual letter spans added by JS for hover counting -->
+              بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+            </span>
+          </div>
+          <div style="font-family:var(--font-sans); font-size:var(--text-xs); color:var(--text-muted); text-align:center; margin-top:0.5rem;">
+            <em>Bismillahir-Rahmanir-Rahim</em>
+          </div>
+        </div>
+      </div>
+
+      <!-- Counter buttons for different values -->
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <button class="btn btn--outline" onclick="showFact('bismillah')">
+          <span data-lang-show="bs" class="lang-visible">Bismilla: 19 slova</span>
+          <span data-lang-show="no">Bismillah: 19 bokstaver</span>
+          <span data-lang-show="en">Bismillah: 19 letters</span>
+        </button>
+        <button class="btn btn--outline" onclick="showFact('suras')">
+          <span data-lang-show="bs" class="lang-visible">Sure: 114 = 6×19</span>
+          <span data-lang-show="no">Suraer: 114 = 6×19</span>
+          <span data-lang-show="en">Surahs: 114 = 6×19</span>
+        </button>
+        <button class="btn btn--outline" onclick="showFact('s96')">
+          <span data-lang-show="bs" class="lang-visible">Sura 96: 19 ajeta</span>
+          <span data-lang-show="no">Sura 96: 19 vers</span>
+          <span data-lang-show="en">Surah 96: 19 verses</span>
+        </button>
+        <button class="btn btn--outline" onclick="showFact('7431')">
+          <span data-lang-show="bs" class="lang-visible">Ajet 74:31: 57 riječi</span>
+          <span data-lang-show="no">Vers 74:31: 57 ord</span>
+          <span data-lang-show="en">Verse 74:31: 57 words</span>
+        </button>
+      </div>
+
+      <p id="counter-fact" style="font-style:italic; color:var(--text-secondary); font-size:var(--text-base); max-width:50ch; margin:0 auto; min-height:3em; transition:opacity 0.3s;">
+        <span data-lang-show="bs" class="lang-visible">Kliknite dugme da vidite broj i kontekst.</span>
+        <span data-lang-show="no">Klikk en knapp for å se tall og kontekst.</span>
+        <span data-lang-show="en">Click a button to see the number and context.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== 13 VERIFIED RELATIONSHIPS ===== -->
+  <section class="explorer-section">
+    <div class="container">
+      <div style="margin-bottom:2.5rem;">
+        <span class="section-label">
+          <span data-lang-show="bs" class="lang-visible">Računarski potvrđeno</span>
+          <span data-lang-show="no">Datamaskinverifisert</span>
+          <span data-lang-show="en">Computationally verified</span>
+        </span>
+        <h2 class="fade-in" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">
+          <span data-lang-show="bs" class="lang-visible">13 potvrđenih odnosa — i 9 koji NE funkcionišu</span>
+          <span data-lang-show="no">13 bekreftede relasjoner — og 9 som IKKE fungerer</span>
+          <span data-lang-show="en">13 verified relationships — and 9 that do NOT work</span>
+        </h2>
+        <p class="fade-in" style="font-style:italic; color:var(--text-secondary); max-width:55ch;">
+          <span data-lang-show="bs" class="lang-visible">Intelektualna poštenja radi: pokazujemo i pozitivne i negativne rezultate. Uzorak je stvaran, ali nije sveprisutan.</span>
+          <span data-lang-show="no">For intellektuell ærlighets skyld: vi viser både positive og negative resultater. Mønsteret er ekte, men ikke allestedsnærværende.</span>
+          <span data-lang-show="en">For intellectual honesty: we show both positive and negative results. The pattern is real, but not universal.</span>
+        </p>
+      </div>
+
+      <!-- Verified relationships grid -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1.5rem; margin-bottom:3rem;">
+
+        <div class="fact-card fade-in" data-num="1">
+          <div class="fact-label">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #1</span>
+            <span data-lang-show="no">Bekreftet #1</span>
+            <span data-lang-show="en">Verified #1</span>
+          </div>
+          <div class="fact-equation">114 <span class="equals">=</span> 6 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Ukupan broj sura u Kur'anu je višekratnik broja 19.</span>
+            <span data-lang-show="no">Totalt antall suraer i Koranen er en multippel av 19.</span>
+            <span data-lang-show="en">Total number of surahs in the Quran is a multiple of 19.</span>
+          </p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-1" data-num="2">
+          <div class="fact-label">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #2</span>
+            <span data-lang-show="no">Bekreftet #2</span>
+            <span data-lang-show="en">Verified #2</span>
+          </div>
+          <div class="fact-equation">6555 <span class="equals">=</span> 345 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Zbir svih rednih brojeva sura (1+2+...+114) je višekratnik 19.</span>
+            <span data-lang-show="no">Summen av alle suranumre (1+2+...+114) er en multippel av 19.</span>
+            <span data-lang-show="en">Sum of all surah numbers (1+2+...+114) is a multiple of 19.</span>
+          </p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-2" data-num="3">
+          <div class="fact-label">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #3</span>
+            <span data-lang-show="no">Bekreftet #3</span>
+            <span data-lang-show="en">Verified #3</span>
+          </div>
+          <div class="fact-equation">19 <span class="equals">=</span> 1 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Bismilla ima tačno 19 slova. Broj 19 je sam po sebi.</span>
+            <span data-lang-show="no">Bismillah har nøyaktig 19 bokstaver. Tallet 19 er seg selv.</span>
+            <span data-lang-show="en">Bismillah has exactly 19 letters. The number 19 is itself.</span>
+          </p>
+        </div>
+
+        <div class="fact-card fade-in" data-num="4">
+          <div class="fact-label">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #4</span>
+            <span data-lang-show="no">Bekreftet #4</span>
+            <span data-lang-show="en">Verified #4</span>
+          </div>
+          <div class="fact-equation">114 <span class="equals">=</span> 6 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Ukupan broj Bismilli u Kur'anu (113 na početku + 1 u suri 27:30) = 114.</span>
+            <span data-lang-show="no">Totalt antall Bismillah i Koranen (113 i begynnelsen + 1 i sura 27:30) = 114.</span>
+            <span data-lang-show="en">Total number of Bismillahs in the Quran (113 at chapter openings + 1 in surah 27:30) = 114.</span>
+          </p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-1" data-num="5">
+          <div class="fact-label">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #5</span>
+            <span data-lang-show="no">Bekreftet #5</span>
+            <span data-lang-show="en">Verified #5</span>
+          </div>
+          <div class="fact-equation">19 <span class="equals">=</span> 1 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Od sure 9 (bez Bismille) do sure 27 (s extra Bismillom) ima tačno 19 sura.</span>
+            <span data-lang-show="no">Fra sura 9 (uten Bismillah) til sura 27 (med ekstra Bismillah) er det nøyaktig 19 suraer.</span>
+            <span data-lang-show="en">From surah 9 (missing Bismillah) to surah 27 (with extra Bismillah) there are exactly 19 surahs.</span>
+          </p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-2" data-num="6">
+          <div class="fact-label">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #6</span>
+            <span data-lang-show="no">Bekreftet #6</span>
+            <span data-lang-show="en">Verified #6</span>
+          </div>
+          <div class="fact-equation">19 <span class="equals">=</span> 1 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Sura 96 (Al-Alaq, prva objavljena) ima tačno 19 ajeta.</span>
+            <span data-lang-show="no">Sura 96 (Al-Alaq, første åpenbart) har nøyaktig 19 vers.</span>
+            <span data-lang-show="en">Surah 96 (Al-Alaq, first revealed) has exactly 19 verses.</span>
+          </p>
+        </div>
+
+        <div class="fact-card fade-in" data-num="7">
+          <div class="fact-label">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #7</span>
+            <span data-lang-show="no">Bekreftet #7</span>
+            <span data-lang-show="en">Verified #7</span>
+          </div>
+          <div class="fact-equation">19 <span class="equals">=</span> 1 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Sura 96 je 19. sura od kraja Kur'ana (114 - 96 + 1 = 19).</span>
+            <span data-lang-show="no">Sura 96 er den 19. sura fra slutten av Koranen (114 - 96 + 1 = 19).</span>
+            <span data-lang-show="en">Surah 96 is the 19th surah from the end of the Quran (114 - 96 + 1 = 19).</span>
+          </p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-1" data-num="8">
+          <div class="fact-label">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #8</span>
+            <span data-lang-show="no">Bekreftet #8</span>
+            <span data-lang-show="en">Verified #8</span>
+          </div>
+          <div class="fact-equation">95 <span class="equals">=</span> 5 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Prvih 5 ajeta sure 96 (uključujući Bismillu) sadrži tačno 95 slova.</span>
+            <span data-lang-show="no">De første 5 versene av sura 96 (inkludert Bismillah) inneholder nøyaktig 95 bokstaver.</span>
+            <span data-lang-show="en">The first 5 verses of surah 96 (including Bismillah) contain exactly 95 letters.</span>
+          </p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-2" data-num="9">
+          <div class="fact-label">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #9</span>
+            <span data-lang-show="no">Bekreftet #9</span>
+            <span data-lang-show="en">Verified #9</span>
+          </div>
+          <div class="fact-equation">57 <span class="equals">=</span> 3 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Ajet 74:31 (koji objašnjava svrhu broja 19) ima tačno 57 riječi — sam je strukturiran brojem koji objašnjava.</span>
+            <span data-lang-show="no">Vers 74:31 (som forklarer formålet med tallet 19) har nøyaktig 57 ord — det er selv strukturert av tallet det forklarer.</span>
+            <span data-lang-show="en">Verse 74:31 (which explains the purpose of the number 19) has exactly 57 words — it is itself structured by the number it explains.</span>
+          </p>
+        </div>
+
+        <div class="fact-card fade-in" data-num="10" style="border-left:3px solid var(--gold);">
+          <div class="fact-label" style="color:var(--gold-dark);">
+            <span data-lang-show="bs" class="lang-visible">Potvrđeno #10 — Najudarnije</span>
+            <span data-lang-show="no">Bekreftet #10 — Mest slående</span>
+            <span data-lang-show="en">Verified #10 — Most striking</span>
+          </div>
+          <div class="fact-equation">380 <span class="equals">=</span> 20 <span class="mult">×</span> 19</div>
+          <p class="fact-desc">
+            <span data-lang-show="bs" class="lang-visible">Kumulativni broj slova u suri 74 kroz prvih 29 ajeta — tačno do ajeta koji kaže "čineći svu istinu vidljivom" — iznosi 380. Sljedeći ajet je 74:30: "Nad njim je 19."</span>
+            <span data-lang-show="no">Det kumulative antallet bokstaver i sura 74 gjennom de første 29 versene — nøyaktig til verset som sier "gjør all sannhet synlig" — er 380. Neste vers er 74:30: "Over det er 19."</span>
+            <span data-lang-show="en">The cumulative letter count in surah 74 through the first 29 verses — exactly until the verse saying "making all truth visible" — is 380. The next verse is 74:30: "Over it is 19."</span>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Negative results (intellectual honesty) -->
+      <div style="background:var(--parchment); border:1px solid var(--border); border-radius:var(--radius-md); padding:2rem; margin-top:2rem;">
+        <h3 class="fade-in" style="font-size:var(--text-xl); margin-bottom:1rem; color:var(--ink);">
+          <span data-lang-show="bs" class="lang-visible">Što NE funkcioniše (intelektualna poštenja)</span>
+          <span data-lang-show="no">Det som IKKE fungerer (intellektuell ærlighet)</span>
+          <span data-lang-show="en">What does NOT work (intellectual honesty)</span>
+        </h3>
+        <p style="font-style:italic; color:var(--text-secondary); margin-bottom:1.5rem; max-width:55ch;">
+          <span data-lang-show="bs" class="lang-visible">Ne dijeli se sve sa 19. Evo šta smo testirali i pronašli negativne rezultate. Ako bismo prijavili samo pozitivne nalaze, analiza bi bila nepoštena.</span>
+          <span data-lang-show="no">Ikke alt deles på 19. Her er hva vi testet og fant negative resultater på. Hvis vi bare rapporterte positive funn, ville analysen vært uærlig.</span>
+          <span data-lang-show="en">Not everything divides by 19. Here is what we tested and found negative results on. If we only reported positive findings, the analysis would be dishonest.</span>
+        </p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1rem; font-family:var(--font-mono); font-size:var(--text-sm);">
+          <div style="color:var(--text-muted);">1616 mod 19 = 1 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(abjad vrijednost 74:30)</span></div>
+          <div style="color:var(--text-muted);">104 mod 19 = 9 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(74 + 30)</span></div>
+          <div style="color:var(--text-muted);">2220 mod 19 = 16 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(74 × 30)</span></div>
+          <div style="color:var(--text-muted);">6236 mod 19 = 4 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(ukupno ajeta)</span></div>
+          <div style="color:var(--text-muted);">1043 mod 19 = 17 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(slova u suri 74)</span></div>
+          <div style="color:var(--text-muted);">259 mod 19 = 12 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(riječi u suri 74)</span></div>
+          <div style="color:var(--text-muted);">56 mod 19 = 18 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(ajeta u suri 74)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== METONIC CYCLE ===== -->
+  <section class="explorer-section" style="background:var(--parchment);">
+    <div class="container--narrow">
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Astronomija</span>
+        <span data-lang-show="no">Astronomi</span>
+        <span data-lang-show="en">Astronomy</span>
+      </span>
+      <h2 class="fade-in" style="margin-bottom:1rem; font-size:clamp(1.5rem,3.5vw,2.2rem);">
+        <span data-lang-show="bs" class="lang-visible">Metonski ciklus — 19 solarnih godina</span>
+        <span data-lang-show="no">Metonisk syklus — 19 solår</span>
+        <span data-lang-show="en">Metonic Cycle — 19 solar years</span>
+      </h2>
+      <p class="fade-in" style="margin-bottom:2rem; max-width:55ch;">
+        <span data-lang-show="bs" class="lang-visible"><strong>19 solarnih godina = 235 sinodičnih (lunarnih) mjeseci</strong> sa tačnošću od svega 2 sata. Svake 19 godina Sunce i Mjesec se nalaze na istim relativnim pozicijama. Ajet 74:32 odmah nakon 74:30 kaže: "Razmisli o Mjesecu!" Blisnuće 19 → Mjesec nije slučajno.</span>
+        <span data-lang-show="no"><strong>19 solår = 235 synodiske (månedlige) måneder</strong> med en nøyaktighet på bare 2 timer. Hvert 19. år er solen og månen i de samme relative posisjonene. Vers 74:32, rett etter 74:30, sier: "Betrakt Månen!" Sammenhengen 19 → Måne er ikke tilfeldig.</span>
+        <span data-lang-show="en"><strong>19 solar years = 235 synodic (lunar) months</strong> with an accuracy of just 2 hours. Every 19 years the Sun and Moon return to the same relative positions. Verse 74:32, immediately after 74:30, says: "Consider the Moon!" The connection 19 → Moon is not accidental.</span>
+      </p>
+
+      <!-- Metonic cycle grid (19 years) -->
+      <div id="metonic-grid" class="metonic-grid fade-in" role="img" aria-label="Metonski ciklus: 19 godina, svaka 19. je označena">
+        <!-- Filled by JS below -->
+      </div>
+
+      <div style="display:flex; gap:2rem; flex-wrap:wrap; margin-top:1rem; font-family:var(--font-sans); font-size:var(--text-xs); color:var(--text-muted);">
+        <span style="display:flex; align-items:center; gap:0.4rem;">
+          <span style="width:12px;height:12px;background:rgba(201,169,97,0.25);border:1px solid #c9a961;border-radius:2px;display:inline-block;"></span>
+          <span data-lang-show="bs" class="lang-visible">19. godina — puna Metonska usklađenost</span>
+          <span data-lang-show="no">19. år — full Metonisk justering</span>
+          <span data-lang-show="en">19th year — full Metonic alignment</span>
+        </span>
+      </div>
+
+      <blockquote style="border-left:3px solid var(--gold); padding-left:1.5rem; margin:2rem 0; font-style:italic; color:var(--text-secondary); max-width:50ch;">
+        <span lang="ar" style="font-family:var(--font-arabic); direction:rtl; display:block; margin-bottom:0.5rem; text-align:right; font-size:1.2em;">وَلَبِثُوا فِي كَهْفِهِمْ ثَلَاثَ مِائَةٍ سِنِينَ وَازْدَادُوا تِسْعًا</span>
+        <span data-lang-show="bs" class="lang-visible">"I ostali su u svojoj pećini 300 godina, i dodali devet." — Kur'an 18:25. 300 solarnih = ~309 lunarnih godina. Razlika od 9 je posljedica Metonskog ciklusa od 19.</span>
+        <span data-lang-show="no">"Og de bodde i hulen sin i 300 år, og la til ni." — Koranen 18:25. 300 solår = ~309 månedår. Forskjellen på 9 er en konsekvens av den metonske syklusen på 19.</span>
+        <span data-lang-show="en">"And they stayed in their cave 300 years, and added nine." — Quran 18:25. 300 solar years = ~309 lunar years. The difference of 9 is a consequence of the 19-year Metonic cycle.</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ===== THE KEY VERSE IN CONTEXT ===== -->
+  <section class="explorer-section">
+    <div class="container--narrow">
+      <span class="section-label">Sura 74:26–34</span>
+      <h2 class="fade-in" style="margin-bottom:2rem; font-size:clamp(1.5rem,3.5vw,2.2rem);">
+        <span data-lang-show="bs" class="lang-visible">Kontekst ključnog ajeta</span>
+        <span data-lang-show="no">Konteksten til nøkkelverset</span>
+        <span data-lang-show="en">Context of the key verse</span>
+      </h2>
+
+      <div style="border:1px solid var(--border-gold); border-radius:var(--radius-md); overflow:hidden;">
+        <!-- Verses table -->
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-serif);">
+          <tbody>
+            <tr style="background:var(--parchment);">
+              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap; border-bottom:1px solid var(--border); width:80px;">74:26</td>
+              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.2em; line-height:2; border-bottom:1px solid var(--border); color:var(--ink);">سَأُصْلِيهِ سَقَرَ</td>
+              <td style="padding:1rem 1.5rem; font-style:italic; color:var(--text-secondary); border-bottom:1px solid var(--border);">
+                <span data-lang-show="bs" class="lang-visible">"Izložit ću ga Saqaru (Vatri)."</span>
+                <span data-lang-show="no">"Jeg vil utsette ham for Saqar (Helvedeilden)."</span>
+                <span data-lang-show="en">"I shall cause him to endure Saqar (Hellfire)."</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap; border-bottom:1px solid var(--border);">74:27</td>
+              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.2em; line-height:2; border-bottom:1px solid var(--border); color:var(--ink);">وَمَا أَدْرَاكَ مَا سَقَرُ</td>
+              <td style="padding:1rem 1.5rem; font-style:italic; color:var(--text-secondary); border-bottom:1px solid var(--border);">
+                <span data-lang-show="bs" class="lang-visible">"A šta ti znaš šta je Saqar?"</span>
+                <span data-lang-show="no">"Og hva vet du hva Saqar er?"</span>
+                <span data-lang-show="en">"And what could make thee conceive what Saqar is?"</span>
+              </td>
+            </tr>
+            <tr style="background:var(--parchment);">
+              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap; border-bottom:1px solid var(--border);">74:28–29</td>
+              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.2em; line-height:2; border-bottom:1px solid var(--border); color:var(--ink);">لَا تُبْقِي وَلَا تَذَرُ · لَوَّاحَةٌ لِّلْبَشَرِ</td>
+              <td style="padding:1rem 1.5rem; font-style:italic; color:var(--text-secondary); border-bottom:1px solid var(--border);">
+                <span data-lang-show="bs" class="lang-visible">"Ne ostavlja ni živim ni mrtvim. Čini svu istinu vidljivom smrtniku." — Na kraju ovog ajeta: 380 = 20×19 kumulativnih slova.</span>
+                <span data-lang-show="no">"Verken lar leve eller la dø. Gjør all sannhet synlig for et dødelig menneske." — På slutten av dette verset: 380 = 20×19 kumulative bokstaver.</span>
+                <span data-lang-show="en">"Does not allow to live, nor leaves to die. Making all truth visible to mortal man." — At the end of this verse: 380 = 20×19 cumulative letters.</span>
+              </td>
+            </tr>
+            <tr style="background:rgba(201,169,97,0.12); border-left:4px solid var(--gold);">
+              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--gold-dark); white-space:nowrap; border-bottom:1px solid var(--border-gold); font-weight:700;">74:30</td>
+              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.6em; line-height:2; border-bottom:1px solid var(--border-gold); color:var(--ink); font-weight:700;">عَلَيْهَا تِسْعَةَ عَشَرَ</td>
+              <td style="padding:1rem 1.5rem; border-bottom:1px solid var(--border-gold);">
+                <div style="font-family:var(--font-serif); font-size:var(--text-xl); font-weight:600; color:var(--ink); margin-bottom:0.5rem;">
+                  <span data-lang-show="bs" class="lang-visible">"Nad njim je devetnaest."</span>
+                  <span data-lang-show="no">"Over det er nitten."</span>
+                  <span data-lang-show="en">"Over it is nineteen."</span>
+                </div>
+                <div style="font-family:var(--font-sans); font-size:var(--text-xs); color:var(--gold-dark); font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">
+                  <span data-lang-show="bs" class="lang-visible">Ključni ajet — jedinstven u cijelom Kur'anu</span>
+                  <span data-lang-show="no">Nøkkelverset — unikt i hele Koranen</span>
+                  <span data-lang-show="en">The key verse — unique in the entire Quran</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap; border-bottom:1px solid var(--border);">74:31</td>
+              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.1em; line-height:2; border-bottom:1px solid var(--border); color:var(--ink); font-style:italic;">57 riječi · = 3×19</td>
+              <td style="padding:1rem 1.5rem; color:var(--text-secondary); border-bottom:1px solid var(--border);">
+                <span data-lang-show="bs" class="lang-visible">"Nismo postavili čuvare Vatre osim meleka... Njihov broj je fitna za nevjernike, uvjerenje za ljude Knjige, povećanje vjere za vjernike." 57 = 3×19 riječi.</span>
+                <span data-lang-show="no">"Vi har ikke gjort ildens voktere til noe annet enn engler... Deres tall er en prøvelse for vantro, overbevisning for Bokens folk, økt tro for troende." 57 = 3×19 ord.</span>
+                <span data-lang-show="en">"We have not made the keepers of the Fire except angels... Their number is a trial for disbelievers, certainty for People of the Book, increased faith for believers." 57 = 3×19 words.</span>
+              </td>
+            </tr>
+            <tr style="background:var(--parchment);">
+              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap;">74:32</td>
+              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.2em; line-height:2; color:var(--ink);">كَلَّا وَالْقَمَرِ</td>
+              <td style="padding:1rem 1.5rem; font-style:italic; color:var(--text-secondary);">
+                <span data-lang-show="bs" class="lang-visible">"Zaista, razmisli o Mjesecu!" — Odmah nakon 19 dolazi Mjesec. Metonski ciklus: 19 solarnih = 235 lunarnih.</span>
+                <span data-lang-show="no">"Sannelig, betrakt Månen!" — Umiddelbart etter 19 kommer Månen. Metonsk syklus: 19 solår = 235 månedsmåneder.</span>
+                <span data-lang-show="en">"Nay, but consider the Moon!" — Immediately after 19 comes the Moon. Metonic cycle: 19 solar years = 235 lunar months.</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BACK LINKS ===== -->
+  <section class="section--sm" style="background:var(--parchment);">
+    <div class="container--narrow" style="text-align:center;">
+      <h3 style="margin-bottom:2rem; font-size:var(--text-2xl);">
+        <span data-lang-show="bs" class="lang-visible">Nastavite istraživanje</span>
+        <span data-lang-show="no">Fortsett utforskningen</span>
+        <span data-lang-show="en">Continue the exploration</span>
+      </h3>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/ucenje/" class="btn btn--primary">
+          <span data-lang-show="bs" class="lang-visible">&#8592; Hub — sve perspektive</span>
+          <span data-lang-show="no">&#8592; Hub — alle perspektiver</span>
+          <span data-lang-show="en">&#8592; Hub — all perspectives</span>
+        </a>
+        <a href="/ucenje/audio/" class="btn btn--gold">
+          <span data-lang-show="bs" class="lang-visible">Audio — 7 kompozicija &#8594;</span>
+          <span data-lang-show="no">Audio — 7 komposisjoner &#8594;</span>
+          <span data-lang-show="en">Audio — 7 compositions &#8594;</span>
+        </a>
+        <a href="/ucenje/matematika.html" class="btn btn--outline">
+          <span data-lang-show="bs" class="lang-visible">Za matematičare &#8594;</span>
+          <span data-lang-show="no">For matematikere &#8594;</span>
+          <span data-lang-show="en">For mathematicians &#8594;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">ALAI / Ucenje — 19 Explorer</div>
+        <div style="color:var(--text-faint); font-size:var(--text-sm);">
+          <span data-lang-show="bs" class="lang-visible">Istraživanje broja 19 u Kur'anu · Petter Graff za ALAI, 2026</span>
+          <span data-lang-show="no">Forskning på tallet 19 i Koranen · Petter Graff for ALAI, 2026</span>
+          <span data-lang-show="en">Research on the number 19 in the Quran · Petter Graff for ALAI, 2026</span>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigacija">
+        <a href="/ucenje/">Hub</a>
+        <a href="/ucenje/audio/">Audio</a>
+        <a href="https://alai.no">ALAI</a>
+      </nav>
+    </div>
+  </footer>
+
+</div><!-- /.page -->
+
+<script src="/ucenje/assets/app.js" defer></script>
+<script>
+  // ===== Counter facts content =====
+  var FACTS = {
+    bismillah: {
+      value: 19,
+      bs: '19 slova Bismille: ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م — računano u standardnom arapskom pisanju, bez dijakritičkih znakova vokalnih kratki.',
+      no: '19 bokstaver i Bismillah: ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م — talt i standard arabisk skrift, uten korte vokaldiakritikk.',
+      en: '19 letters of Bismillah: ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م — counted in standard Arabic script, excluding short vowel diacritics.',
+    },
+    suras: {
+      value: 114,
+      bs: '114 sura u Kur'anu. 114 ÷ 19 = 6, tačno. Ni 113 ni 115 ne dijeli se sa 19. Ukupan broj poglavlja je tačan višekratnik.',
+      no: '114 suraer i Koranen. 114 ÷ 19 = 6, nøyaktig. Verken 113 eller 115 deler seg med 19. Totalt antall kapitler er en nøyaktig multippel.',
+      en: '114 surahs in the Quran. 114 ÷ 19 = 6, exactly. Neither 113 nor 115 divides by 19. The total chapter count is an exact multiple.',
+    },
+    s96: {
+      value: 19,
+      bs: 'Sura 96 — Al-Alaq ("Ugrušak") — prva je sura objavljena Poslaniku, s.a.v.s. Ima tačno 19 ajeta. Sura koja je počela Objavu ima u sebi broj koji je ključ Objave.',
+      no: 'Sura 96 — Al-Alaq ("Klumpen") — var den første suraen åpenbart for Profeten. Den har nøyaktig 19 vers. Suraen som begynte Åpenbaringen bærer i seg tallet som er nøkkelen til Åpenbaringen.',
+      en: 'Surah 96 — Al-Alaq ("The Clinging Form") — was the first surah revealed to the Prophet. It has exactly 19 verses. The surah that began Revelation carries within it the number that is the key to Revelation.',
+    },
+    '7431': {
+      value: 57,
+      bs: '57 = 3×19 riječi u ajetu 74:31 — tom ajetu koji objašnjava zašto je broj 19 važan. Ajet koji govori o broju je sam strukturisan tim brojem.',
+      no: '57 = 3×19 ord i vers 74:31 — det verset som forklarer hvorfor tallet 19 er viktig. Verset som snakker om tallet er selv strukturert av det tallet.',
+      en: '57 = 3×19 words in verse 74:31 — the very verse that explains why the number 19 matters. The verse that speaks about the number is itself structured by that number.',
+    },
+  };
+
+  function showFact(key) {
+    var fact = FACTS[key];
+    if (!fact) return;
+
+    var display = document.getElementById('counter-display');
+    var factEl = document.getElementById('counter-fact');
+    var lang = localStorage.getItem('ucenje-lang') || 'bs';
+
+    // Animate counter
+    var current = parseInt(display.textContent, 10) || 0;
+    animateCounter(display, current, fact.value, 1000);
+
+    // Show description
+    factEl.style.opacity = '0';
+    setTimeout(function() {
+      factEl.textContent = fact[lang] || fact['en'];
+      factEl.style.opacity = '1';
+    }, 200);
+  }
+
+  // Build Metonic cycle grid
+  document.addEventListener('DOMContentLoaded', function() {
+    var grid = document.getElementById('metonic-grid');
+    if (!grid) return;
+
+    // 5 Metonic cycles (95 years) to show pattern
+    for (var i = 1; i <= 95; i++) {
+      var cell = document.createElement('div');
+      cell.className = 'metonic-cell grid-cell';
+      if (i % 19 === 0) {
+        cell.classList.add('metonic-cell--year19');
+        cell.title = 'Metonska usklađenost';
+      }
+      cell.textContent = i;
+      grid.appendChild(cell);
+    }
+
+    // Observe for animation
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          var cells = grid.querySelectorAll('.grid-cell');
+          cells.forEach(function(c, idx) {
+            setTimeout(function() { c.classList.add('visible'); }, idx * 8);
+          });
+          obs.disconnect();
+        }
+      }, { threshold: 0.1 });
+      obs.observe(grid);
+    }
+  });
+
+  // Override metonic grid columns based on screen
+  var mGrid = document.getElementById('metonic-grid');
+  if (mGrid) {
+    if (window.innerWidth < 600) {
+      mGrid.style.gridTemplateColumns = 'repeat(19, 1fr)';
+    }
+  }
+</script>
+</body>
+</html>

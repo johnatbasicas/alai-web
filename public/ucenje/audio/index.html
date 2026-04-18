@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>19-TET Sonifikacija Kur'ana — ALAI</title>
+  <meta name="description" content="Sedam audio kompozicija: matematička struktura Kur'ana prevedena u zvuk kroz 19-TET tuning sistem.">
+  <link rel="stylesheet" href="/ucenje/assets/style.css">
+  <link rel="stylesheet" href="/ucenje/assets/animations.css">
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" aria-label="Glavna navigacija">
+  <a href="/ucenje/" class="nav-brand">
+    <svg class="nav-brand-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12" stroke="#c9a961" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="14" cy="14" r="7" stroke="#c9a961" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="14" cy="14" r="2.5" fill="#c9a961" opacity="0.8"/>
+      <line x1="14" y1="2" x2="14" y2="5" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="14" y1="23" x2="14" y2="26" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="2" y1="14" x2="5" y2="14" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="23" y1="14" x2="26" y2="14" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+    </svg>
+    ALAI / Ucenje
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="/ucenje/">Hub</a></li>
+    <li><a href="/ucenje/audio/" class="active" aria-current="page">Audio</a></li>
+    <li><a href="/ucenje/19-explorer/">19 Explorer</a></li>
+  </ul>
+
+  <div class="lang-switcher" role="group" aria-label="Odabir jezika">
+    <button class="lang-btn active" data-lang="bs" onclick="switchLanguage('bs')" aria-pressed="true">BS</button>
+    <button class="lang-btn" data-lang="no" onclick="switchLanguage('no')" aria-pressed="false">NO</button>
+    <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')" aria-pressed="false">EN</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ===== HERO ===== -->
+  <section style="padding:5rem 0 4rem; background:var(--ink); position:relative; overflow:hidden;">
+
+    <!-- Background decorative rings -->
+    <div aria-hidden="true" style="position:absolute; right:-100px; top:50%; transform:translateY(-50%); opacity:0.06;">
+      <svg viewBox="0 0 300 300" width="400" height="400">
+        <circle cx="150" cy="150" r="140" fill="none" stroke="#c9a961" stroke-width="1"/>
+        <circle cx="150" cy="150" r="110" fill="none" stroke="#c9a961" stroke-width="1"/>
+        <circle cx="150" cy="150" r="80" fill="none" stroke="#c9a961" stroke-width="1"/>
+        <circle cx="150" cy="150" r="50" fill="none" stroke="#c9a961" stroke-width="1"/>
+        <circle cx="150" cy="150" r="20" fill="none" stroke="#c9a961" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="container--narrow" style="position:relative; z-index:1;">
+
+      <a href="/ucenje/" style="font-family:var(--font-sans); font-size:var(--text-sm); color:rgba(201,169,97,0.7); text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        &#8592;
+        <span data-lang-show="bs" class="lang-visible">Nazad na Hub</span>
+        <span data-lang-show="no">Tilbake til Hub</span>
+        <span data-lang-show="en">Back to Hub</span>
+      </a>
+
+      <div class="hero-entrance">
+        <span class="section-label" style="color:var(--gold-light); opacity:0.8;">
+          19-TET ·
+          <span data-lang-show="bs" class="lang-visible">Istraživački rad Petter Graff za ALAI, 2026</span>
+          <span data-lang-show="no">Forskningsarbeid av Petter Graff for ALAI, 2026</span>
+          <span data-lang-show="en">Research by Petter Graff for ALAI, 2026</span>
+        </span>
+
+        <h1 style="color:var(--parchment); margin:1rem 0 1.5rem; font-size:clamp(1.8rem,5vw,3.2rem);">
+          <span data-lang-show="bs" class="lang-visible">Kur'an u Zvuku</span>
+          <span data-lang-show="no">Koranen i Lyd</span>
+          <span data-lang-show="en">The Quran in Sound</span>
+        </h1>
+
+        <p style="color:rgba(245,240,232,0.7); font-style:italic; font-size:var(--text-xl); max-width:52ch; margin-bottom:2rem;">
+          <span data-lang-show="bs" class="lang-visible">Matematička struktura 114 sura Kur'ana prevedena u sedam muzičkih kompozicija kroz 19-TET sistem ugađanja.</span>
+          <span data-lang-show="no">Den matematiske strukturen til Koranens 114 suraer oversatt til sju musikalske komposisjoner gjennom 19-TET-stemmesystemet.</span>
+          <span data-lang-show="en">The mathematical structure of the Quran's 114 surahs translated into seven musical compositions through the 19-TET tuning system.</span>
+        </p>
+      </div>
+
+      <!-- Waveform visual animation -->
+      <div class="hero-entrance hero-entrance-delay-2" style="display:flex; align-items:center; gap:2px; height:60px; margin-top:1rem;" id="hero-wave" aria-hidden="true">
+        <!-- Filled by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 19-TET EXPLAINER ===== -->
+  <section class="section--sm" style="background:var(--parchment);">
+    <div class="container--narrow">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
+        <div>
+          <span class="section-label">
+            <span data-lang-show="bs" class="lang-visible">Šta je 19-TET?</span>
+            <span data-lang-show="no">Hva er 19-TET?</span>
+            <span data-lang-show="en">What is 19-TET?</span>
+          </span>
+          <h2 class="fade-in" style="margin-bottom:1rem; font-size:var(--text-3xl);">
+            <span data-lang-show="bs" class="lang-visible">19 koraka do oktave</span>
+            <span data-lang-show="no">19 trinn til oktaven</span>
+            <span data-lang-show="en">19 steps to the octave</span>
+          </h2>
+          <p class="fade-in" style="margin-bottom:1rem;">
+            <span data-lang-show="bs" class="lang-visible">Standardna zapadna muzika koristi 12-TET — 12 jednakih koraka u oktavi. 19-TET dijeli oktavu na 19 jednakih koraka, svaki od <span class="math">2^(1/19) ≈ 1.03716</span>.</span>
+            <span data-lang-show="no">Standard vestlig musikk bruker 12-TET — 12 like trinn i en oktav. 19-TET deler oktaven i 19 like trinn, hvert <span class="math">2^(1/19) ≈ 1.03716</span>.</span>
+            <span data-lang-show="en">Standard Western music uses 12-TET — 12 equal steps in an octave. 19-TET divides the octave into 19 equal steps, each <span class="math">2^(1/19) ≈ 1.03716</span>.</span>
+          </p>
+          <p class="fade-in">
+            <span data-lang-show="bs" class="lang-visible">19-TET nije arbitraran izbor — to je jedan od musički najzanimljivijih alternativnih sistema ugađanja jer pruža izuzetno dobre aproksimiacije terce, kvinte i durske ljestvice.</span>
+            <span data-lang-show="no">19-TET er ikke et vilkårlig valg — det er et av de musikalsk mest interessante alternative stemmesystemene fordi det gir utmerkede tilnærminger til terts, kvint og durskala.</span>
+            <span data-lang-show="en">19-TET is not an arbitrary choice — it is one of the most musically interesting alternative tuning systems because it provides excellent approximations of the third, fifth, and major scale.</span>
+          </p>
+        </div>
+
+        <!-- 19-TET keyboard visualization -->
+        <div class="fade-in">
+          <div style="background:white; border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:1.5rem;">
+            <div style="font-family:var(--font-sans); font-size:var(--text-xs); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">
+              <span data-lang-show="bs" class="lang-visible">19-TET tipkovnica (1 oktava)</span>
+              <span data-lang-show="no">19-TET tastatur (1 oktav)</span>
+              <span data-lang-show="en">19-TET keyboard (1 octave)</span>
+            </div>
+            <svg id="tet-keyboard-svg" viewBox="0 0 760 150" width="100%" style="display:block; overflow:visible;" role="img" aria-label="19-TET keyboard visualization showing 19 steps in one octave">
+              <!-- Filled by app.js buildTetKeyboard() -->
+            </svg>
+            <div style="margin-top:1rem;">
+              <table class="data-table" style="font-size:var(--text-xs);">
+                <thead>
+                  <tr>
+                    <th>
+                      <span data-lang-show="bs" class="lang-visible">Interval</span>
+                      <span data-lang-show="no">Intervall</span>
+                      <span data-lang-show="en">Interval</span>
+                    </th>
+                    <th>
+                      <span data-lang-show="bs" class="lang-visible">Koraci</span>
+                      <span data-lang-show="no">Trinn</span>
+                      <span data-lang-show="en">Steps</span>
+                    </th>
+                    <th>
+                      <span data-lang-show="bs" class="lang-visible">Greška</span>
+                      <span data-lang-show="no">Feil</span>
+                      <span data-lang-show="en">Error</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><span data-lang-show="bs" class="lang-visible">Velika terca</span><span data-lang-show="no">Stor ters</span><span data-lang-show="en">Major third</span></td><td class="mono">6 / 19</td><td class="verified">+0.1 cnt</td></tr>
+                  <tr><td><span data-lang-show="bs" class="lang-visible">Mala terca</span><span data-lang-show="no">Liten ters</span><span data-lang-show="en">Minor third</span></td><td class="mono">5 / 19</td><td class="verified">−0.1 cnt</td></tr>
+                  <tr><td><span data-lang-show="bs" class="lang-visible">Kvinta</span><span data-lang-show="no">Kvint</span><span data-lang-show="en">Perfect fifth</span></td><td class="mono">11 / 19</td><td>−7.2 cnt</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ALL 7 AUDIO TRACKS ===== -->
+  <section class="section">
+    <div class="container--narrow">
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Sve kompozicije</span>
+        <span data-lang-show="no">Alle komposisjoner</span>
+        <span data-lang-show="en">All compositions</span>
+      </span>
+      <h2 class="fade-in" style="margin-bottom:0.5rem; font-size:clamp(1.5rem,3.5vw,2.2rem);">
+        <span data-lang-show="bs" class="lang-visible">Sedam komada</span>
+        <span data-lang-show="no">Sju stykker</span>
+        <span data-lang-show="en">Seven pieces</span>
+      </h2>
+      <p class="fade-in" style="font-style:italic; color:var(--text-secondary); margin-bottom:3rem; max-width:52ch;">
+        <span data-lang-show="bs" class="lang-visible">Svaka kompozicija otkriva drugačiji aspekt matematičke strukture Kur'ana.</span>
+        <span data-lang-show="no">Hvert stykke avslører et annet aspekt av Koranens matematiske struktur.</span>
+        <span data-lang-show="en">Each composition reveals a different aspect of the Quran's mathematical structure.</span>
+      </p>
+
+      <!-- Track 1: Bismillah -->
+      <div class="audio-player fade-in" data-audio-player data-audio-src="/ucenje/audio/quran-basmala.mp3" style="margin-bottom:2rem;">
+        <div class="audio-player-header">
+          <div style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; background:var(--parchment-dark); border-radius:50%; flex-shrink:0; font-family:var(--font-mono); font-size:var(--text-lg); font-weight:700; color:var(--gold-dark);">A</div>
+          <div class="audio-player-meta">
+            <div class="audio-player-title"><span lang="ar" style="font-family:var(--font-arabic);">البسملة</span> — Bismillah</div>
+            <div class="audio-player-duration">
+              <span data-lang-show="bs" class="lang-visible">33 sekunde · mono · 2.9 MB WAV originala</span>
+              <span data-lang-show="no">33 sekunder · mono · 2,9 MB WAV original</span>
+              <span data-lang-show="en">33 seconds · mono · 2.9 MB WAV original</span>
+            </div>
+            <p class="audio-player-desc">
+              <span data-lang-show="bs" class="lang-visible">19 slova Bismille, svako slovo je jedan ton u uzlaznoj ljestvici. Čujete 4 sekcije: naprijed, nazad, oboje zajedno, i sve odjednom kao akord.</span>
+              <span data-lang-show="no">19 bokstaver i Bismillah, hvert bokstav er én tone i en stigende skala. Du hører 4 seksjoner: frem, tilbake, begge sammen, og alle på en gang som akkord.</span>
+              <span data-lang-show="en">19 letters of Bismillah, each letter maps to one tone in an ascending scale. You hear 4 sections: forward, reverse, both simultaneously, and all at once as a chord.</span>
+            </p>
+          </div>
+        </div>
+        <div class="audio-controls">
+          <button class="play-btn" aria-label="Reprodukcija Bismillah">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="waveform-container"></div>
+          <div class="audio-time">0:33 total</div>
+        </div>
+      </div>
+
+      <!-- Track 2: Al-Fatiha -->
+      <div class="audio-player fade-in fade-in-delay-1" data-audio-player data-audio-src="/ucenje/audio/quran-fatiha.mp3" style="margin-bottom:2rem;">
+        <div class="audio-player-header">
+          <div style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; background:var(--parchment-dark); border-radius:50%; flex-shrink:0; font-family:var(--font-mono); font-size:var(--text-lg); font-weight:700; color:var(--gold-dark);">B</div>
+          <div class="audio-player-meta">
+            <div class="audio-player-title"><span lang="ar" style="font-family:var(--font-arabic);">الفاتحة</span> — Al-Fatiha</div>
+            <div class="audio-player-duration">
+              <span data-lang-show="bs" class="lang-visible">15 sekundi · mono · 7 ajeta = 7 tonova</span>
+              <span data-lang-show="no">15 sekunder · mono · 7 vers = 7 toner</span>
+              <span data-lang-show="en">15 seconds · mono · 7 verses = 7 tones</span>
+            </div>
+            <p class="audio-player-desc">
+              <span data-lang-show="bs" class="lang-visible">7 ajeta Al-Fatihe odgovara koracima dur ljestvice u 19-TET (0,3,6,8,11,14,17). Trajanje svakog tona je proporcionalno broju riječi. Ajeti 1 i 5 imaju tačno 19 slova — i zvuče identično po ritmu.</span>
+              <span data-lang-show="no">7 vers av Al-Fatiha tilsvarer trinnene i durskalaen i 19-TET (0,3,6,8,11,14,17). Varigheten til hver tone er proporsjonal med antall ord. Vers 1 og 5 har nøyaktig 19 bokstaver — og høres identisk rytmisk ut.</span>
+              <span data-lang-show="en">7 verses of Al-Fatiha correspond to major scale degrees in 19-TET (0,3,6,8,11,14,17). Duration of each tone is proportional to word count. Verses 1 and 5 have exactly 19 letters — and sound rhythmically identical.</span>
+            </p>
+          </div>
+        </div>
+        <div class="audio-controls">
+          <button class="play-btn" aria-label="Reprodukcija Al-Fatiha">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="waveform-container"></div>
+          <div class="audio-time">0:15 total</div>
+        </div>
+      </div>
+
+      <!-- Track 3: Surah 96 -->
+      <div class="audio-player fade-in" data-audio-player data-audio-src="/ucenje/audio/quran-surah96.mp3" style="margin-bottom:2rem;">
+        <div class="audio-player-header">
+          <div style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; background:rgba(45,125,122,0.15); border-radius:50%; flex-shrink:0; font-family:var(--font-mono); font-size:var(--text-lg); font-weight:700; color:var(--teal);">C</div>
+          <div class="audio-player-meta">
+            <div class="audio-player-title"><span lang="ar" style="font-family:var(--font-arabic);">العلق</span> — Sura 96 <span class="badge badge--teal" style="font-size:var(--text-xs); vertical-align:middle;"><span data-lang-show="bs" class="lang-visible">Prva objavljena</span><span data-lang-show="no">Første åpenbart</span><span data-lang-show="en">First revealed</span></span></div>
+            <div class="audio-player-duration">
+              <span data-lang-show="bs" class="lang-visible">30 sekundi · mono · 19 ajeta = 19 tonova = 1 oktava</span>
+              <span data-lang-show="no">30 sekunder · mono · 19 vers = 19 toner = 1 oktav</span>
+              <span data-lang-show="en">30 seconds · mono · 19 verses = 19 tones = 1 octave</span>
+            </div>
+            <p class="audio-player-desc">
+              <span data-lang-show="bs" class="lang-visible">Sura Al-Alaq ima tačno 19 ajeta — savršen sklad sa 19-TET: svaki ajat se penje za jedan korak kroz cijelu oktavu od 220 Hz do 440 Hz. Počinje "Iqra'!" — čitaj!, i penje se do poziva na sedždu.</span>
+              <span data-lang-show="no">Sura Al-Alaq har nøyaktig 19 vers — perfekt harmoni med 19-TET: hvert vers stiger ett trinn gjennom hele oktaven fra 220 Hz til 440 Hz. Begynner med "Iqra'!" — les!, og stiger til kallet til prostrasjon.</span>
+              <span data-lang-show="en">Surah Al-Alaq has exactly 19 verses — perfect fit with 19-TET: each verse rises one step through the complete octave from 220 Hz to 440 Hz. Begins with "Iqra'!" — Read!, and rises to the call to prostrate.</span>
+            </p>
+          </div>
+        </div>
+        <div class="audio-controls">
+          <button class="play-btn" aria-label="Reprodukcija Sure 96">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="waveform-container"></div>
+          <div class="audio-time">0:30 total</div>
+        </div>
+      </div>
+
+      <!-- Track 4: Full Melody -->
+      <div class="audio-player fade-in fade-in-delay-1" data-audio-player data-audio-src="/ucenje/audio/quran-full-melody.mp3" style="margin-bottom:2rem;">
+        <div class="audio-player-header">
+          <div style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; background:var(--parchment-dark); border-radius:50%; flex-shrink:0; font-family:var(--font-mono); font-size:var(--text-lg); font-weight:700; color:var(--gold-dark);">D</div>
+          <div class="audio-player-meta">
+            <div class="audio-player-title">
+              <span data-lang-show="bs" class="lang-visible">Puna melodija Kur'ana</span>
+              <span data-lang-show="no">Koranens fulle melodi</span>
+              <span data-lang-show="en">Full Quran Melody</span>
+            </div>
+            <div class="audio-player-duration">
+              <span data-lang-show="bs" class="lang-visible">2 minute · mono · svih 114 sura</span>
+              <span data-lang-show="no">2 minutter · mono · alle 114 suraer</span>
+              <span data-lang-show="en">2 minutes · mono · all 114 surahs</span>
+            </div>
+            <p class="audio-player-desc">
+              <span data-lang-show="bs" class="lang-visible">Svaka od 114 sura mapirana u ton: <span class="math">broj_ajeta mod 19</span> određuje visinu. Trajanje je proporcionalno dužini sure. Čujete dramatičan pad od dugih, niskih tonova (Al-Baqara) do kratkih, visokih (kratke mekanske sure na kraju).</span>
+              <span data-lang-show="no">Hver av de 114 suraene er kartlagt til en tone: <span class="math">antall_vers mod 19</span> bestemmer høyden. Varigheten er proporsjonal med suraens lengde. Du hører et dramatisk fall fra lange, lave toner (Al-Baqara) til korte, høye (korte mekanske suraer på slutten).</span>
+              <span data-lang-show="en">Each of the 114 surahs maps to a tone: <span class="math">ayah_count mod 19</span> determines the pitch. Duration is proportional to surah length. You hear a dramatic descent from long, deep tones (Al-Baqara) to rapid, high ones (the short Meccan surahs at the end).</span>
+            </p>
+          </div>
+        </div>
+        <div class="audio-controls">
+          <button class="play-btn" aria-label="Reprodukcija pune melodije">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="waveform-container"></div>
+          <div class="audio-time">2:00 total</div>
+        </div>
+      </div>
+
+      <!-- Track 5: Grid Harmony -->
+      <div class="audio-player fade-in" data-audio-player data-audio-src="/ucenje/audio/quran-grid-harmony.mp3" style="margin-bottom:2rem;">
+        <div class="audio-player-header">
+          <div style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; background:var(--parchment-dark); border-radius:50%; flex-shrink:0; font-family:var(--font-mono); font-size:var(--text-lg); font-weight:700; color:var(--gold-dark);">E</div>
+          <div class="audio-player-meta">
+            <div class="audio-player-title">
+              <span data-lang-show="bs" class="lang-visible">Harmonija rešetke 6×19</span>
+              <span data-lang-show="no">6×19-nettharmoni</span>
+              <span data-lang-show="en">6×19 Grid Harmony</span>
+            </div>
+            <div class="audio-player-duration">
+              <span data-lang-show="bs" class="lang-visible">54 sekunde · mono · redovi, kolone, višekratnici</span>
+              <span data-lang-show="no">54 sekunder · mono · rader, kolonner, multipler</span>
+              <span data-lang-show="en">54 seconds · mono · rows, columns, multiples</span>
+            </div>
+            <p class="audio-player-desc">
+              <span data-lang-show="bs" class="lang-visible">114 sura u rešetki 6×19. Svaki red od 19 sura svira kao akord od 19 tonova. Zatim 19 kolona od 6 sura. Na kraju, 6 sura na pozicijama višekratnika 19 zajedno.</span>
+              <span data-lang-show="no">114 suraer i et 6×19-rutenett. Hver rad med 19 suraer spilles som en 19-toneakkord. Deretter 19 kolonner med 6 suraer. Til slutt, 6 suraer i multipler av 19-posisjoner sammen.</span>
+              <span data-lang-show="en">114 surahs in a 6×19 grid. Each row of 19 surahs plays as a 19-tone chord. Then 19 columns of 6 surahs. Finally, the 6 surahs at multiples-of-19 positions together.</span>
+            </p>
+          </div>
+        </div>
+        <div class="audio-controls">
+          <button class="play-btn" aria-label="Reprodukcija Grid Harmony">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="waveform-container"></div>
+          <div class="audio-time">0:54 total</div>
+        </div>
+      </div>
+
+      <!-- Track 6: Mirrors -->
+      <div class="audio-player fade-in fade-in-delay-1" data-audio-player data-audio-src="/ucenje/audio/quran-mirrors.mp3" style="margin-bottom:2rem;">
+        <div class="audio-player-header">
+          <div style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; background:var(--parchment-dark); border-radius:50%; flex-shrink:0; font-family:var(--font-mono); font-size:var(--text-lg); font-weight:700; color:var(--gold-dark);">F</div>
+          <div class="audio-player-meta">
+            <div class="audio-player-title">
+              <span data-lang-show="bs" class="lang-visible">Ogledalni parovi</span>
+              <span data-lang-show="no">Speilpar</span>
+              <span data-lang-show="en">Mirror Pairs</span>
+            </div>
+            <div class="audio-player-duration">
+              <span data-lang-show="bs" class="lang-visible">40 sekundi · mono · 57 parova (1,114), (2,113)...</span>
+              <span data-lang-show="no">40 sekunder · mono · 57 par (1,114), (2,113)...</span>
+              <span data-lang-show="en">40 seconds · mono · 57 pairs (1,114), (2,113)...</span>
+            </div>
+            <p class="audio-player-desc">
+              <span data-lang-show="bs" class="lang-visible">114 sura formira 57 ogledalna para: (1,114), (2,113)... Svaki par svira kao dva simultana tona. 6 parova ima zbir ajeta koji je višekratnik 19. Par (19,96) — Maryam i Al-Alaq — je posebno naglašen.</span>
+              <span data-lang-show="no">114 suraer danner 57 speilpar: (1,114), (2,113)... Hvert par spilles som to samtidige toner. 6 par har et vers-sum som er en multippel av 19. Paret (19,96) — Maryam og Al-Alaq — er spesielt fremhevet.</span>
+              <span data-lang-show="en">114 surahs form 57 mirror pairs: (1,114), (2,113)... Each pair plays as two simultaneous tones. 6 pairs have ayah sums divisible by 19. The (19,96) pair — Maryam and Al-Alaq — is specially highlighted.</span>
+            </p>
+          </div>
+        </div>
+        <div class="audio-controls">
+          <button class="play-btn" aria-label="Reprodukcija ogledalni parovi">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="waveform-container"></div>
+          <div class="audio-time">0:40 total</div>
+        </div>
+      </div>
+
+      <!-- Track 7: Meccan/Medinan -->
+      <div class="audio-player fade-in" data-audio-player data-audio-src="/ucenje/audio/quran-meccan-medinan.mp3" style="margin-bottom:2rem;">
+        <div class="audio-player-header">
+          <div style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; background:var(--parchment-dark); border-radius:50%; flex-shrink:0; font-family:var(--font-mono); font-size:var(--text-lg); font-weight:700; color:var(--gold-dark);">G</div>
+          <div class="audio-player-meta">
+            <div class="audio-player-title">
+              <span data-lang-show="bs" class="lang-visible">Mekanska i Medinska sure</span>
+              <span data-lang-show="no">Mekanske og Medinska suraer</span>
+              <span data-lang-show="en">Meccan &amp; Medinan Surahs</span>
+            </div>
+            <div class="audio-player-duration">
+              <span data-lang-show="bs" class="lang-visible">90 sekundi · stereo · dva kanala, dva glasa</span>
+              <span data-lang-show="no">90 sekunder · stereo · to kanaler, to stemmer</span>
+              <span data-lang-show="en">90 seconds · stereo · two channels, two voices</span>
+            </div>
+            <p class="audio-player-desc">
+              <span data-lang-show="bs" class="lang-visible">Lijevi kanal: 86 mekanskih sura u nižem registru. Desni kanal: 28 medinskih sura u višem registru. Dva histrorijska glasa Kur'ana — proglašenje i zakonodavstvo — čuju se odvojeno i zajedno.</span>
+              <span data-lang-show="no">Venstre kanal: 86 mekanske suraer i lavere register. Høyre kanal: 28 medinske suraer i høyere register. To historiske stemmer i Koranen — proklamasjon og lovgivning — høres separat og sammen.</span>
+              <span data-lang-show="en">Left channel: 86 Meccan surahs in the lower register. Right channel: 28 Medinan surahs in the higher register. Two historical voices of the Quran — proclamation and legislation — heard separately and together.</span>
+            </p>
+          </div>
+        </div>
+        <div class="audio-controls">
+          <button class="play-btn" aria-label="Reprodukcija Mekanske Medinske">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="waveform-container"></div>
+          <div class="audio-time">1:30 total</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ATTRIBUTION ===== -->
+  <section class="section--sm" style="background:var(--parchment);">
+    <div class="container--narrow">
+      <div style="display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap;">
+        <div style="flex:1; min-width:240px;">
+          <span class="section-label">
+            <span data-lang-show="bs" class="lang-visible">Metodologija</span>
+            <span data-lang-show="no">Metodologi</span>
+            <span data-lang-show="en">Methodology</span>
+          </span>
+          <h3 class="fade-in" style="font-size:var(--text-2xl); margin-bottom:1rem;">
+            <span data-lang-show="bs" class="lang-visible">Kako je napravljeno</span>
+            <span data-lang-show="no">Hvordan det ble laget</span>
+            <span data-lang-show="en">How it was made</span>
+          </h3>
+          <div class="math-block">
+2^(1/19) = 1.03715504
+korak = 63.16 centa
+
+svaka sura → ton:
+  ton = ajeti mod 19
+
+trajanje ∝ broj ajeta
+baza = 440 Hz (A4)
+
+format: WAV 44100 Hz
+        16-bit PCM
+        sinusni valovi
+          </div>
+        </div>
+        <div style="flex:1; min-width:240px;">
+          <span class="section-label" style="visibility:hidden;">.</span>
+          <p class="fade-in" style="margin-bottom:1rem;">
+            <span data-lang-show="bs" class="lang-visible">Kompozicije su generisane Python skriptom koja mapira Kur'anske podatke (broj ajeta po suri, mekanske/medinske klasifikacije) u 19-TET frekvencije.</span>
+            <span data-lang-show="no">Komposisjonene ble generert av et Python-skript som kartlegger Koran-data (antall vers per sura, mekansk/medinan-klassifisering) til 19-TET-frekvenser.</span>
+            <span data-lang-show="en">Compositions were generated by a Python script that maps Quran data (ayah count per surah, Meccan/Medinan classification) to 19-TET frequencies.</span>
+          </p>
+          <p class="fade-in">
+            <span data-lang-show="bs" class="lang-visible"><strong>Autor istraživačkog rada:</strong> Petter Graff (ALAI istraživač), 2026-02-26. Originalni WAV fajlovi arhivirani. MP3 128kbps za web isporuku.</span>
+            <span data-lang-show="no"><strong>Forfatter av forskningsarbeidet:</strong> Petter Graff (ALAI-forsker), 2026-02-26. Originale WAV-filer arkivert. MP3 128kbps for webleveranse.</span>
+            <span data-lang-show="en"><strong>Research author:</strong> Petter Graff (ALAI researcher), 2026-02-26. Original WAV files archived. MP3 128kbps for web delivery.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">ALAI / Ucenje — Audio</div>
+        <div style="color:var(--text-faint); font-size:var(--text-sm);">
+          <span data-lang-show="bs" class="lang-visible">19-TET Sonifikacija Kur'ana · Petter Graff za ALAI, 2026</span>
+          <span data-lang-show="no">19-TET Sonifikasjon av Koranen · Petter Graff for ALAI, 2026</span>
+          <span data-lang-show="en">19-TET Quran Sonification · Petter Graff for ALAI, 2026</span>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigacija">
+        <a href="/ucenje/">Hub</a>
+        <a href="/ucenje/19-explorer/">19 Explorer</a>
+        <a href="https://alai.no">ALAI</a>
+      </nav>
+    </div>
+  </footer>
+
+</div><!-- /.page -->
+
+<style>
+  @media (max-width: 700px) {
+    section > .container--narrow > div[style*="grid-template-columns:1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+
+<script src="/ucenje/assets/app.js" defer></script>
+<script>
+  // Generate hero waveform
+  document.addEventListener('DOMContentLoaded', function() {
+    const wave = document.getElementById('hero-wave');
+    if (wave) {
+      const count = 60;
+      for (let i = 0; i < count; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        bar.style.height = (8 + Math.random() * 52) + 'px';
+        bar.style.animationDelay = (i * 0.05) + 's';
+        bar.style.background = 'rgba(201,169,97,' + (0.3 + Math.random() * 0.5) + ')';
+        wave.appendChild(bar);
+      }
+    }
+  });
+</script>
+</body>
+</html>

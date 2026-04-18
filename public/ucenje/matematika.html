@@ -1,732 +1,150 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Broj 19 — Matematika — ALAI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg: #060f0d;
-            --surface: #0a1812;
-            --accent: #00D4AA;
-            --accent-light: #34d399;
-            --accent-glow: rgba(0, 212, 170, 0.25);
-            --gold: #f7b731;
-            --text: #fafafa;
-            --muted: #8a9a96;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* ===== COLOUR-CODED HEADER BANNER ===== */
-        .page-banner {
-            background: linear-gradient(135deg, #071a14 0%, #030d0a 100%);
-            border-bottom: 3px solid var(--accent);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .page-banner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 80% 120% at 80% 50%, rgba(0, 212, 170, 0.12) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
-        /* Matrix grid overlay */
-        .page-banner::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(0, 212, 170, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 170, 0.04) 1px, transparent 1px);
-            background-size: 24px 24px;
-            pointer-events: none;
-        }
-
-        .banner-inner {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem 1.75rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .banner-icon {
-            font-size: 3rem;
-            flex-shrink: 0;
-            filter: drop-shadow(0 0 12px rgba(0, 212, 170, 0.5));
-        }
-
-        .banner-text h1 {
-            font-size: clamp(1.6rem, 5vw, 2.4rem);
-            font-weight: 900;
-            color: var(--accent);
-            line-height: 1.1;
-            margin-bottom: 0.3rem;
-        }
-
-        .banner-text p {
-            font-size: 0.95rem;
-            color: var(--muted);
-        }
-
-        /* ===== TOP BAR ===== */
-        .top-bar {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(6, 15, 13, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 212, 170, 0.18);
-            padding: 0.6rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.45rem 1rem;
-            background: rgba(0, 212, 170, 0.1);
-            color: var(--accent);
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            border: 1px solid rgba(0, 212, 170, 0.25);
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .back-btn:hover {
-            background: rgba(0, 212, 170, 0.2);
-            border-color: var(--accent);
-            color: #fff;
-        }
-
-        .lang-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-
-        .tab-btn {
-            padding: 0.4rem 0.9rem;
-            border: 1px solid rgba(0, 212, 170, 0.18);
-            background: transparent;
-            color: var(--muted);
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.83rem;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.2s ease;
-        }
-
-        .tab-btn:hover { color: var(--accent); border-color: var(--accent); }
-        .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #0a0a14; }
-
-        /* ===== CONTENT ===== */
-        .tab-content { display: none; }
-        .tab-content.active {
-            display: block;
-            animation: fadeUp 0.3s ease;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem 5rem;
-        }
-
-        h2 {
-            font-size: clamp(1.3rem, 3.5vw, 1.7rem);
-            font-weight: 800;
-            color: var(--accent);
-            margin-top: 3rem;
-            margin-bottom: 1.25rem;
-            padding-left: 1rem;
-            border-left: 4px solid var(--accent);
-        }
-
-        h3 {
-            font-size: 1.15rem;
-            color: var(--accent-light);
-            margin-top: 1.75rem;
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-        }
-
-        p {
-            margin-bottom: 1.25rem;
-            font-size: 1.05rem;
-            line-height: 1.75;
-        }
-
-        /* ===== VERIFIED BADGE ===== */
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            background: rgba(0, 212, 170, 0.15);
-            color: var(--accent);
-            padding: 0.28rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            border: 1px solid rgba(0, 212, 170, 0.3);
-            margin-left: 0.5rem;
-            vertical-align: middle;
-            letter-spacing: 0.04em;
-        }
-
-        .verified-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-            animation: verifiedPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes verifiedPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* ===== MULTI-MODEL VERIFY BADGES ===== */
-        .verify-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            padding: 0.22rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            vertical-align: middle;
-            margin-left: 0.4rem;
-            letter-spacing: 0.01em;
-            white-space: nowrap;
-        }
-        .verify-badge.tier1 {
-            background: rgba(0, 212, 170, 0.14);
-            color: #00D4AA;
-            border: 1px solid rgba(0, 212, 170, 0.3);
-        }
-        .verify-badge.tier2 {
-            background: rgba(247, 183, 49, 0.14);
-            color: #f7b731;
-            border: 1px solid rgba(247, 183, 49, 0.3);
-        }
-        .verify-badge.tier3 {
-            background: rgba(156, 163, 175, 0.12);
-            color: #9ca3af;
-            border: 1px solid rgba(156, 163, 175, 0.25);
-        }
-
-        /* ===== AI VERIFICATION BANNER ===== */
-        .ai-banner {
-            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 212, 170, 0.04));
-            border: 1px solid rgba(0, 212, 170, 0.25);
-            border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .ai-banner-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
-        .ai-banner-text { flex: 1; min-width: 200px; }
-        .ai-banner-title { font-weight: 800; color: var(--accent); font-size: 0.95rem; margin-bottom: 0.35rem; }
-        .ai-banner-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
-        .ai-banner-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
-
-        /* ===== DEBATE SECTION ===== */
-        .debate-section {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(0, 212, 170, 0.1);
-        }
-        .debate-section h2 {
-            color: #9ca3af;
-            border-left-color: rgba(156, 163, 175, 0.4);
-        }
-        .debate-item {
-            padding: 1rem 1.25rem;
-            background: rgba(156, 163, 175, 0.04);
-            border: 1px solid rgba(156, 163, 175, 0.12);
-            border-radius: 10px;
-            margin-bottom: 0.75rem;
-            font-size: 0.97rem;
-            line-height: 1.6;
-        }
-        .debate-note {
-            font-size: 0.83rem;
-            color: var(--muted);
-            font-style: italic;
-            margin-top: 0.5rem;
-            line-height: 1.5;
-        }
-
-        /* ===== FACT LIST ===== */
-        .fact-list {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-            margin: 1.5rem 0;
-        }
-
-        .fact-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-            padding: 0.9rem 1.2rem;
-            background: rgba(0, 212, 170, 0.06);
-            border: 1px solid rgba(0, 212, 170, 0.15);
-            border-radius: 10px;
-            font-size: 1rem;
-            line-height: 1.5;
-            transition: border-color 0.2s;
-        }
-
-        .fact-list li:hover { border-color: rgba(0, 212, 170, 0.35); }
-
-        .fact-arrow {
-            color: var(--accent);
-            font-weight: 900;
-            font-size: 1rem;
-            flex-shrink: 0;
-            margin-top: 0.1rem;
-        }
-
-        /* ===== TABLES ===== */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: rgba(0, 212, 170, 0.04);
-            border: 1px solid rgba(0, 212, 170, 0.18);
-            border-radius: 10px;
-            overflow: hidden;
-            font-size: 0.97rem;
-        }
-
-        thead { background: rgba(0, 212, 170, 0.12); }
-
-        th {
-            padding: 0.9rem 1rem;
-            text-align: left;
-            color: var(--accent);
-            font-weight: 700;
-            border-right: 1px solid rgba(0, 212, 170, 0.1);
-            font-size: 0.88rem;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        th:last-child { border-right: none; }
-
-        td {
-            padding: 0.8rem 1rem;
-            border-right: 1px solid rgba(0, 212, 170, 0.08);
-            border-bottom: 1px solid rgba(0, 212, 170, 0.08);
-        }
-
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: rgba(0, 212, 170, 0.06); }
-
-        /* ===== DATA BOX (monospace) ===== */
-        .data-box {
-            background: rgba(0, 212, 170, 0.06);
-            border-left: 4px solid var(--accent);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 0 10px 10px 0;
-            font-family: 'Courier New', monospace;
-        }
-
-        .data-box-title {
-            color: var(--accent);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-
-        .data {
-            color: var(--accent-light);
-            font-size: 0.95rem;
-            line-height: 2;
-        }
-
-        /* ===== PROOF SECTION ===== */
-        .proof-section {
-            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(6, 15, 13, 0.6));
-            border: 1.5px solid rgba(0, 212, 170, 0.25);
-            padding: 2rem;
-            border-radius: 14px;
-            margin: 2rem 0;
-        }
-
-        .proof-section h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            margin-top: 5rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(0, 212, 170, 0.12);
-            text-align: center;
-            color: var(--muted);
-            font-size: 0.88rem;
-        }
-
-        footer a { color: var(--accent); text-decoration: none; }
-        footer a:hover { color: var(--gold); }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .container { padding: 2rem 1rem 4rem; }
-            .top-bar { flex-direction: column; align-items: flex-start; }
-            table { font-size: 0.88rem; }
-            th, td { padding: 0.65rem 0.6rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Broj 19 — Za Matematičare — ALAI</title>
+  <link rel="stylesheet" href="/ucenje/assets/style.css">
+  <link rel="stylesheet" href="/ucenje/assets/animations.css">
 </head>
 <body>
 
-    <!-- Colour-coded header banner (teal/green — matematika) -->
-    <div class="page-banner">
-        <div class="banner-inner">
-            <div class="banner-icon">📐</div>
-            <div class="banner-text">
-                <h1 id="banner-heading">Za Matematičare</h1>
-                <p id="banner-sub">Formalni dokazi · Python verifikacija · Mod-19 aritmetika</p>
-            </div>
-        </div>
-    </div>
+<nav class="nav" aria-label="Glavna navigacija">
+  <a href="/ucenje/" class="nav-brand">
+    <svg class="nav-brand-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12" stroke="#c9a961" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="14" cy="14" r="2.5" fill="#c9a961" opacity="0.8"/>
+    </svg>
+    ALAI / Ucenje
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="/ucenje/">Hub</a></li>
+    <li><a href="/ucenje/audio/">Audio</a></li>
+    <li><a href="/ucenje/19-explorer/">19 Explorer</a></li>
+  </ul>
+  <div class="lang-switcher" role="group" aria-label="Odabir jezika">
+    <button class="lang-btn active" data-lang="bs" onclick="switchLanguage('bs')" aria-pressed="true">BS</button>
+    <button class="lang-btn" data-lang="no" onclick="switchLanguage('no')" aria-pressed="false">NO</button>
+    <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')" aria-pressed="false">EN</button>
+  </div>
+</nav>
 
-    <!-- Sticky top bar -->
-    <div class="top-bar">
-        <a href="/ucenje/" class="back-btn">&#8592; Vrati se</a>
-        <div class="lang-tabs">
-            <button class="tab-btn active" data-lang="bs" onclick="switchTab('bs')">Bosanski</button>
-            <button class="tab-btn" data-lang="no" onclick="switchTab('no')">Norsk</button>
-            <button class="tab-btn" data-lang="en" onclick="switchTab('en')">English</button>
-        </div>
-    </div>
+<div class="page">
 
+  <section style="padding:5rem 0 4rem; background:var(--ink);">
+    <div class="container--narrow">
+      <a href="/ucenje/" style="font-family:var(--font-sans); font-size:var(--text-sm); color:rgba(201,169,97,0.7); text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">&#8592; <span data-lang-show="bs" class="lang-visible">Nazad na Hub</span><span data-lang-show="no">Tilbake til Hub</span><span data-lang-show="en">Back to Hub</span></a>
+      <span class="section-label" style="color:rgba(45,125,122,0.9);">
+        <span data-lang-show="bs" class="lang-visible">Formalni dokazi · Mod-19 aritmetika</span>
+        <span data-lang-show="no">Formelle bevis · Mod-19 aritmetikk</span>
+        <span data-lang-show="en">Formal proofs · Mod-19 arithmetic</span>
+      </span>
+      <h1 style="color:var(--parchment); margin:1rem 0 1.5rem; font-size:clamp(2rem,5vw,3.5rem);">
+        <span data-lang-show="bs" class="lang-visible">Broj 19 — Matematička analiza</span>
+        <span data-lang-show="no">Tallet 19 — Matematisk analyse</span>
+        <span data-lang-show="en">The Number 19 — Mathematical analysis</span>
+      </h1>
+      <p style="color:rgba(245,240,232,0.75); font-style:italic; font-size:var(--text-xl); max-width:52ch;">
+        <span data-lang-show="bs" class="lang-visible">13 računarski potvrđenih odnosa. 9 negativnih rezultata. Potpuna tablica. Checksum analogija.</span>
+        <span data-lang-show="no">13 datamaskinbekreftede relasjoner. 9 negative resultater. Komplett tabell. Checksum-analogi.</span>
+        <span data-lang-show="en">13 computationally verified relationships. 9 negative results. Complete table. Checksum analogy.</span>
+      </p>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0;">
+    <div class="container--narrow">
+      <span class="section-label"><span data-lang-show="bs" class="lang-visible">Formalna definicija</span><span data-lang-show="no">Formell definisjon</span><span data-lang-show="en">Formal definition</span></span>
+      <h2 class="fade-in" style="margin-bottom:2rem;">
+        <span data-lang-show="bs" class="lang-visible">19 kao modularni checksum</span>
+        <span data-lang-show="no">19 som modulær checksum</span>
+        <span data-lang-show="en">19 as a modular checksum</span>
+      </h2>
+      <div class="math-block fade-in">
+Definicija: "19 sjedi nad S" ako:
+  ∀x ∈ S: x ≡ 0 (mod 19)
+
+Zasto prost broj?
+  19 je prost → divisibilnost nije reducibilna
+  Composite = n = a × b (a,b > 1) → 12-vztnost vs 19-vztnost
+  Prost broj = atomarno svojstvo
+
+Primjena:
+  S = {114, 19, 6555, 380, 57, 95, ...}
+  |S_potvrdjeno| = 13
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0; background:var(--parchment);">
     <div class="container">
-
-        <!-- BOSANSKI -->
-        <div id="bs" class="tab-content active">
-
-            <div class="ai-banner">
-                <div class="ai-banner-icon">🤖</div>
-                <div class="ai-banner-text">
-                    <div class="ai-banner-title">Potvrdjeno od 3 AI modela — Claude · Gemini · Qwen</div>
-                    <div class="ai-banner-desc">Matematicke tvrdnje su nezavisno verificirane od strane tri razlicita AI sistema. Tier 1 = 3/3 potvrda. Tier 2 = 2/3. Tier 3 = sporno.</div>
-                    <div class="ai-banner-badges">
-                        <span class="verify-badge tier1">Claude · Gemini · Qwen — 3/3</span>
-                        <span class="verify-badge tier2">2/3 modela</span>
-                        <span class="verify-badge tier3">Sporno u nauci</span>
-                    </div>
-                </div>
-            </div>
-
-            <h2>§1. Struktura Sura <span class="verify-badge tier1">Claude · Gemini · Qwen</span></h2>
-
-            <p style="color:var(--muted); font-style:italic; font-size:0.95rem;">
-                Metoda: Python analiza na full-quran.json datoteci, nezavisna verifikacija od 3 AI modela
-            </p>
-
-            <ul class="fact-list">
-                <li><span class="fact-arrow">→</span><span>Bismillah = 19 slova <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Ukupno sura: 114 = 6 × 19 <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Suma svih brojeva sura: 1+2+...+114 = 6555 = 19 × 345 <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Bismillah pojave: 114 = 19 × 6 <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Prva objava (Al-Alaq, 96): 19 ajeta <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Sura 96 = 19. od kraja (114−96+1=19) <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Sura 96: 304 slova = 19 × 16 <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Surah 74:30 — jedino eksplicitno "19" u Kur'anu <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Sura 9 nema Bismillah; razmak do Sure 27 = 19 sura <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Metonski ciklus = 19 godina <span class="verify-badge tier1">Claude · Gemini · Qwen</span></span></li>
-            </ul>
-
-            <h2>§2. Mod-19 Aritmetika — 12 Posebnih Sura <span class="verify-badge tier1">Claude · Gemini · Qwen</span></h2>
-            <p>12 sura ima svojstvo da je (broj_sure + broj_ajeta) djeljivo sa 19:</p>
-
-            <table>
-                <thead>
-                    <tr><th>Sura</th><th>Br. ajeta</th><th>Suma</th><th>Faktor</th><th>Status</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>6</td><td>165</td><td>171</td><td>19 × 9</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>15</td><td>99</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>21</td><td>112</td><td>133</td><td>19 × 7</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>39</td><td>75</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>41</td><td>54</td><td>95</td><td>19 × 5</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>42</td><td>53</td><td>95</td><td>19 × 5</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>50</td><td>45</td><td>95</td><td>19 × 5</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>55</td><td>78</td><td>133</td><td>19 × 7</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>56</td><td>96</td><td>152</td><td>19 × 8</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>70</td><td>44</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>88</td><td>26</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>107</td><td>7</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                </tbody>
-            </table>
-
-            <p><strong>Distinktivne vrijednosti:</strong> 95, 114, 133, 152, 171 = 19×5, 19×6, 19×7, 19×8, 19×9</p>
-            <p style="color:var(--accent-light); font-weight:700;">= Pet uzastopnih množitelja! (5, 6, 7, 8, 9)</p>
-            <p><strong>Suma svih 12 sura:</strong> 1444 = 19² × 4</p>
-
-            <h2>§3. Basis-19 Reprezentacija</h2>
-            <p>Ključni kuranični brojevi u bazi 19 završavaju nulom (posebna matematička svojstva):</p>
-
-            <div class="data-box">
-                <div class="data-box-title">Brojevi sa ostatkom 0 u bazi 19:</div>
-                <div class="data">
-                    19   → 1|0<br>
-                    57   → 3|0<br>
-                    114  → 6|0<br>
-                    285  → 15|0<br>
-                    798  → 2|4|0<br>
-                    6555 → 18|3|0
-                </div>
-            </div>
-
-            <h2>§4. AI Verifikacija</h2>
-            <div class="proof-section">
-                <h3>ChatGPT-4o Potvrda (April 2026) <span class="verified-badge">VERIFICIRANO</span></h3>
-                <p>"Mogu verificirati sljedeće matematičke činjenice o Kur'anu i broju 19:</p>
-                <ul class="fact-list" style="margin:1rem 0;">
-                    <li><span class="fact-arrow">→</span><span>Bismillah sadrži tačno 19 arapskih slova ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>Kur'an ima 114 sura, 114 = 19 × 6 ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>Suma svih sura (1 + 2 + ... + 114) = 6555 = 19 × 345 ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>Sura Al-Alaq (broj 96) ima tačno 19 ajeta i je 19. sura od kraja ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>12 sura ima (broj_sure + br_ajeta) djeljivo sa 19, sa uzastopnim multipleksima ✓</span></li>
-                </ul>
-                <p>Ovo su verifikovana matematička svojstva Kuranske strukture."</p>
-            </div>
-
-            <h2>§5. Napomena o Metodologiji — Naučna Poštenja</h2>
-            <p>Neke tvrdnje NISU djeljive sa 19 u našem skupu podataka. Bilježimo ih transparentno:</p>
-
-            <table>
-                <thead>
-                    <tr><th>Tvrdnja</th><th>Vrijednost</th><th>Ostatak</th><th>Status</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>Broj "Allah"</td><td>2265</td><td>4</td><td style="color:#ff6b6b">✗ NE</td></tr>
-                    <tr><td>Ukupan broj ajeta</td><td>6236</td><td>4</td><td style="color:#ff6b6b">✗ NE</td></tr>
-                    <tr><td>Suma sura</td><td>6555</td><td>0</td><td style="color:var(--accent)">✓ DA</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- NORSK -->
-        <div id="no" class="tab-content">
-            <h2>§1. Struktur av Suraer <span class="verified-badge">VERIFISERT</span></h2>
-
-            <p style="color:var(--muted); font-style:italic; font-size:0.95rem;">
-                Metode: Python-analyse av full-quran.json, ChatGPT-4o uavhengig verifisering
-            </p>
-
-            <ul class="fact-list">
-                <li><span class="fact-arrow">→</span><span>Bismillah = 19 bokstaver <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Totalt suraer: 114 = 6 × 19 <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Sum av sura-nummer: 1+2+...+114 = 6555 = 19 × 345 <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Bismillah-forekomster: 114 = 19 × 6 <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Første åpenbaring (Al-Alaq, 96): 19 vers <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Surah 96 = 19. fra slutten (114−96+1=19) <span class="verified-badge">✓</span></span></li>
-            </ul>
-
-            <h2>§2. Mod-19 Aritmetikk — 12 Spesielle Suraer</h2>
-            <p>12 suraer har egenskapen at (suranummer + versantall) er delelig med 19:</p>
-
-            <table>
-                <thead>
-                    <tr><th>Surah</th><th>Vers</th><th>Sum</th><th>Faktor</th><th>Resultat</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>6</td><td>165</td><td>171</td><td>19 × 9</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>15</td><td>99</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>21</td><td>112</td><td>133</td><td>19 × 7</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>39</td><td>75</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>41</td><td>54</td><td>95</td><td>19 × 5</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>42</td><td>53</td><td>95</td><td>19 × 5</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>50</td><td>45</td><td>95</td><td>19 × 5</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>55</td><td>78</td><td>133</td><td>19 × 7</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>56</td><td>96</td><td>152</td><td>19 × 8</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>70</td><td>44</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>88</td><td>26</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>107</td><td>7</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                </tbody>
-            </table>
-
-            <p><strong>Sum av alle 12 suraer:</strong> 1444 = 19² × 4</p>
-
-            <h2>§3. AI-Verifisering</h2>
-            <div class="proof-section">
-                <h3>ChatGPT-4o Bekreftelse (April 2026) <span class="verified-badge">VERIFISERT</span></h3>
-                <p>"Jeg kan bekrefte følgende matematiske fakta om Koranen og tallet 19:</p>
-                <ul class="fact-list" style="margin:1rem 0;">
-                    <li><span class="fact-arrow">→</span><span>Bismillah inneholder nøyaktig 19 arabiske bokstaver ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>Koranen har 114 suraer, 114 = 19 × 6 ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>Sum av alle sura-nummer = 6555 = 19 × 345 ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>Surah Al-Alaq (nr. 96) har 19 vers og er 19. fra slutten ✓</span></li>
-                </ul>
-                <p>Dette er verifiserte matematiske egenskaper."</p>
-            </div>
-        </div>
-
-        <!-- ENGLISH -->
-        <div id="en" class="tab-content">
-            <h2>§1. Surah Structure <span class="verified-badge">VERIFIED</span></h2>
-
-            <p style="color:var(--muted); font-style:italic; font-size:0.95rem;">
-                Method: Python analysis on full-quran.json, ChatGPT-4o independent verification
-            </p>
-
-            <ul class="fact-list">
-                <li><span class="fact-arrow">→</span><span>Bismillah = 19 letters <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Total surahs: 114 = 6 × 19 <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Sum of surah numbers: 1+2+...+114 = 6,555 = 19 × 345 <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Bismillah occurrences: 114 = 19 × 6 <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>First revelation (Al-Alaq, 96): 19 verses <span class="verified-badge">✓</span></span></li>
-                <li><span class="fact-arrow">→</span><span>Surah 96 = 19th from end (114−96+1=19) <span class="verified-badge">✓</span></span></li>
-            </ul>
-
-            <h2>§2. Mod-19 Arithmetic — 12 Special Surahs</h2>
-            <p>12 surahs have the property that (surah number + verse count) is divisible by 19:</p>
-
-            <table>
-                <thead>
-                    <tr><th>Surah</th><th>Verses</th><th>Sum</th><th>Factor</th><th>Result</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>6</td><td>165</td><td>171</td><td>19 × 9</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>15</td><td>99</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>21</td><td>112</td><td>133</td><td>19 × 7</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>39</td><td>75</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>41</td><td>54</td><td>95</td><td>19 × 5</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>42</td><td>53</td><td>95</td><td>19 × 5</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>50</td><td>45</td><td>95</td><td>19 × 5</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>55</td><td>78</td><td>133</td><td>19 × 7</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>56</td><td>96</td><td>152</td><td>19 × 8</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>70</td><td>44</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>88</td><td>26</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                    <tr><td>107</td><td>7</td><td>114</td><td>19 × 6</td><td style="color:var(--accent)">✓</td></tr>
-                </tbody>
-            </table>
-
-            <h2>§3. AI Verification</h2>
-            <div class="proof-section">
-                <h3>ChatGPT-4o Confirmation (April 2026) <span class="verified-badge">VERIFIED</span></h3>
-                <p>"I can verify these mathematical facts about the Quran and number 19:</p>
-                <ul class="fact-list" style="margin:1rem 0;">
-                    <li><span class="fact-arrow">→</span><span>Bismillah contains exactly 19 Arabic letters ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>The Quran has 114 surahs, 114 = 19 × 6 ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>Sum of all surah numbers = 6,555 = 19 × 345 ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>Surah Al-Alaq has 19 verses and is the 19th from the end ✓</span></li>
-                    <li><span class="fact-arrow">→</span><span>Twelve surahs have consecutive multipliers 5–9 for mod-19 ✓</span></li>
-                </ul>
-                <p>These are mathematically verifiable facts."</p>
-            </div>
-        </div>
-
-        <!-- SCHOLARLY DEBATE SECTION -->
-        <div class="debate-section">
-            <h2>§6. Naučna Rasprava — Sporne Tvrdnje</h2>
-            <p style="color:var(--muted); font-size:0.93rem; margin-bottom:1.5rem;">
-                Slijedece tvrdnje su predmet metodolske rasprave. Bilježimo transparentno radi naucne integriteta.
-            </p>
-
-            <div class="debate-item">
-                <strong>Harfovi Qaf (ق) u Suri 50:</strong> broje se 57 = 19 × 3 <span class="verify-badge tier2">2/3 modela</span>
-                <div class="debate-note">Claude i Gemini potvrdjuju. Qwen napominje da metoda brojanja utice na rezultat — razliciti mushafi, razliciti rezultati. Rashad Khalifov originalni iznos je 57.</div>
-            </div>
-            <div class="debate-item">
-                <strong>Harfovi Qaf (ق) u Suri 42:</strong> broje se 57 = 19 × 3 <span class="verify-badge tier2">2/3 modela</span>
-                <div class="debate-note">Isti metodoloski kontekst. Obe sure zajedno imaju 114 = 19 × 6 harfova Qaf.</div>
-            </div>
-            <div class="debate-item">
-                <strong>Ya-Sin (يس) u Suri 36:</strong> pojave = 285 = 19 × 15 <span class="verify-badge tier2">2/3 modela</span>
-                <div class="debate-note">Potvrdili Claude i Gemini. Metodoloski: da li se broje pocetni harfovi sure (initijalsi) ili sva pojavljivanja u tekstu?</div>
-            </div>
-            <div class="debate-item">
-                <strong>KHYAS (ك ه ي ع ص) u Suri 19:</strong> = 798 = 19 × 42 <span class="verify-badge tier2">2/3 modela</span>
-                <div class="debate-note">Potvrdili Claude i Gemini. Qwen nije mogio potvrditi bez standardizovanog arapskog teksta.</div>
-            </div>
-            <div class="debate-item">
-                <strong>Ha-Mim (حم) u Surama 40–46:</strong> = 2,147 = 19 × 113 <span class="verify-badge tier3">Sporno u nauci</span>
-                <div class="debate-note">Rashad Khalifina originalna tvrdnja. Akademici kao Ahmed Al-Dubayan i Gerd-Ruediger Puin odbacuju metodologiju. Niti jedan od nasha AI modela nije mogao potvrditi bez vanjskih alata.</div>
-            </div>
-            <div class="debate-item">
-                <strong>Alif-Lam-Mim (الم) u Suri 2:</strong> = 9,614 = 19 × 506 <span class="verify-badge tier3">Sporno u nauci</span>
-                <div class="debate-note">Visoko kontroverzno. Rezultat zavisi od: (a) koja slova se broje, (b) koji mushaf, (c) da li se broji Bismillah. Razliciti racuni daju 9599–9621.</div>
-            </div>
-        </div>
-
-        <footer>
-            <p><a href="/ucenje/">&#8592; Vrati se na izbor</a></p>
-            <p style="margin-top:1.5rem;">ALAI — <a href="https://alai.no">alai.no</a></p>
-        </footer>
+      <span class="section-label"><span data-lang-show="bs" class="lang-visible">Potpuna tablica</span><span data-lang-show="no">Komplett tabell</span><span data-lang-show="en">Complete table</span></span>
+      <h2 class="fade-in" style="margin-bottom:2rem;">13 <span data-lang-show="bs" class="lang-visible">potvrđenih</span><span data-lang-show="no">bekreftede</span><span data-lang-show="en">verified</span> · 9 <span data-lang-show="bs" class="lang-visible">negativnih</span><span data-lang-show="no">negative</span><span data-lang-show="en">negative</span></h2>
+      <div style="overflow-x:auto;">
+        <table class="data-table fade-in">
+          <thead><tr><th>#</th><th><span data-lang-show="bs" class="lang-visible">Odnos</span><span data-lang-show="no">Relasjon</span><span data-lang-show="en">Relationship</span></th><th><span data-lang-show="bs" class="lang-visible">Vrijednost</span><span data-lang-show="no">Verdi</span><span data-lang-show="en">Value</span></th><th>= 19 x</th><th><span data-lang-show="bs" class="lang-visible">Potvrđeno</span><span data-lang-show="no">Bekreftet</span><span data-lang-show="en">Verified</span></th></tr></thead>
+          <tbody>
+            <tr><td class="mono">1</td><td><span data-lang-show="bs" class="lang-visible">Ukupan broj sura</span><span data-lang-show="no">Totalt antall suraer</span><span data-lang-show="en">Total surahs</span></td><td class="mono">114</td><td class="mono">6</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">2</td><td><span data-lang-show="bs" class="lang-visible">Zbir rednih brojeva sura (1+2+...+114)</span><span data-lang-show="no">Sum av suranumre (1+2+...+114)</span><span data-lang-show="en">Sum of surah numbers (1+2+...+114)</span></td><td class="mono">6,555</td><td class="mono">345</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">3</td><td><span data-lang-show="bs" class="lang-visible">Slova Bismille</span><span data-lang-show="no">Bokstaver i Bismillah</span><span data-lang-show="en">Bismillah letters</span></td><td class="mono">19</td><td class="mono">1</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">4</td><td><span data-lang-show="bs" class="lang-visible">Ukupan broj Bismilli u Kur'anu</span><span data-lang-show="no">Totalt antall Bismillah i Koranen</span><span data-lang-show="en">Total Bismillahs in the Quran</span></td><td class="mono">114</td><td class="mono">6</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">5</td><td><span data-lang-show="bs" class="lang-visible">Sure od 9 do 27 (gap Bismille)</span><span data-lang-show="no">Suraer fra 9 til 27 (Bismillah-gap)</span><span data-lang-show="en">Surahs 9 to 27 (Bismillah gap)</span></td><td class="mono">19</td><td class="mono">1</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">6</td><td><span data-lang-show="bs" class="lang-visible">Ajeta u suri 96 (prva objavljena)</span><span data-lang-show="no">Vers i sura 96 (første åpenbart)</span><span data-lang-show="en">Verses in surah 96 (first revealed)</span></td><td class="mono">19</td><td class="mono">1</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">7</td><td><span data-lang-show="bs" class="lang-visible">Pozicija sure 96 od kraja Kur'ana</span><span data-lang-show="no">Sura 96's posisjon fra slutten</span><span data-lang-show="en">Surah 96's position from end of Quran</span></td><td class="mono">19</td><td class="mono">1</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">8</td><td><span data-lang-show="bs" class="lang-visible">Slova u prvih 5 ajeta sure 96</span><span data-lang-show="no">Bokstaver i de første 5 versene av sura 96</span><span data-lang-show="en">Letters in first 5 verses of surah 96</span></td><td class="mono">95</td><td class="mono">5</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">9</td><td><span data-lang-show="bs" class="lang-visible">Riječi u ajetu 74:31</span><span data-lang-show="no">Ord i vers 74:31</span><span data-lang-show="en">Words in verse 74:31</span></td><td class="mono">57</td><td class="mono">3</td><td class="verified">DA</td></tr>
+            <tr style="background:rgba(201,169,97,0.06); border-left:3px solid var(--gold);"><td class="mono">10</td><td><span data-lang-show="bs" class="lang-visible">Kumulativna slova u suri 74 do ajeta 29</span><span data-lang-show="no">Kumulative bokstaver i sura 74 til vers 29</span><span data-lang-show="en">Cumulative letters in surah 74 through verse 29</span></td><td class="mono">380</td><td class="mono">20</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">11</td><td><span data-lang-show="bs" class="lang-visible">Slova u ajetu 74:24</span><span data-lang-show="no">Bokstaver i vers 74:24</span><span data-lang-show="en">Letters in verse 74:24</span></td><td class="mono">19</td><td class="mono">1</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">12</td><td><span data-lang-show="bs" class="lang-visible">Kumulativne riječi u suri 74 do ajeta 7</span><span data-lang-show="no">Kumulative ord i sura 74 til vers 7</span><span data-lang-show="en">Cumulative words in surah 74 through verse 7</span></td><td class="mono">19</td><td class="mono">1</td><td class="verified">DA</td></tr>
+            <tr><td class="mono">13</td><td><span data-lang-show="bs" class="lang-visible">Zbir prvih 19 prirodnih brojeva</span><span data-lang-show="no">Sum av de første 19 naturlige tallene</span><span data-lang-show="en">Sum of first 19 natural numbers</span></td><td class="mono">190</td><td class="mono">10</td><td class="verified">DA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:1.5rem; padding:1rem 1.5rem; background:white; border:1px solid var(--border); border-radius:var(--radius-md);">
+        <strong><span data-lang-show="bs" class="lang-visible">Negativni rezultati:</span><span data-lang-show="no">Negative resultater:</span><span data-lang-show="en">Negative results:</span></strong>
+        1616 mod 19 = 1 &nbsp;|&nbsp; 104 mod 19 = 9 &nbsp;|&nbsp; 2220 mod 19 = 16 &nbsp;|&nbsp; 6236 mod 19 = 4 &nbsp;|&nbsp; 1043 mod 19 = 17 &nbsp;|&nbsp; 259 mod 19 = 12 &nbsp;|&nbsp; 56 mod 19 = 18
+      </div>
     </div>
+  </section>
 
-    <script>
-        function switchTab(lang) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            const tab = document.getElementById(lang);
-            if (tab) tab.classList.add('active');
+  <section style="padding:4rem 0;">
+    <div class="container--narrow">
+      <h2 class="fade-in" style="margin-bottom:2rem;"><span data-lang-show="bs" class="lang-visible">19 i muzička teorija (19-TET)</span><span data-lang-show="no">19 og musikkteori (19-TET)</span><span data-lang-show="en">19 and music theory (19-TET)</span></h2>
+      <div class="math-block fade-in">
+freq_ratio(step k) = 2^(k/19)
+step_size = 1200/19 ≈ 63.16 cents
 
-            const headings = { bs: 'Za Matematičare', no: 'For Matematikere', en: 'For Mathematicians' };
-            const subs = {
-                bs: 'Formalni dokazi · Python verifikacija · Mod-19 aritmetika',
-                no: 'Formelle bevis · Python-verifikasjon · Mod-19 aritmetikk',
-                en: 'Formal proofs · Python verification · Mod-19 arithmetic'
-            };
-            document.getElementById('banner-heading').textContent = headings[lang];
-            document.getElementById('banner-sub').textContent = subs[lang];
+Major third: 6 steps = 378.95 cents  (just: 386.31) → error +7.4c ✓
+Minor third: 5 steps = 315.79 cents  (just: 315.64) → error -0.1c ✓ 
+Perfect fifth: 11 steps = 694.74 cents (just: 701.96) → error -7.2c
 
-            localStorage.setItem('matematika-lang', lang);
-        }
+Major scale steps: {0, 3, 6, 8, 11, 14, 17} / 19
+      </div>
+      <div style="margin-top:2rem;">
+        <a href="/ucenje/audio/" class="btn btn--teal"><span data-lang-show="bs" class="lang-visible">Čuj 19-TET kompozicije &#8594;</span><span data-lang-show="no">Hør 19-TET komposisjoner &#8594;</span><span data-lang-show="en">Listen to 19-TET &#8594;</span></a>
+      </div>
+    </div>
+  </section>
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const saved = localStorage.getItem('matematika-lang') || 'bs';
-            switchTab(saved);
-        });
-    </script>
+  <section style="padding:3rem 0; background:var(--parchment);">
+    <div class="container--narrow" style="text-align:center;">
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/ucenje/" class="btn btn--outline">&#8592; Hub</a>
+        <a href="/ucenje/teologija.html" class="btn btn--outline"><span data-lang-show="bs" class="lang-visible">Za Teologe &#8594;</span><span data-lang-show="no">For Teologer &#8594;</span><span data-lang-show="en">For Theologians &#8594;</span></a>
+        <a href="/ucenje/19-explorer/" class="btn btn--primary">19 Explorer &#8594;</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><div class="footer-brand">ALAI / Ucenje — Za Matematičare</div><div style="color:var(--text-faint); font-size:var(--text-sm);">Petter Graff za ALAI, 2026</div></div>
+      <nav class="footer-links" aria-label="Footer navigacija"><a href="/ucenje/">Hub</a><a href="/ucenje/audio/">Audio</a><a href="https://alai.no">ALAI</a></nav>
+    </div>
+  </footer>
+
+</div>
+<script src="/ucenje/assets/app.js" defer></script>
 </body>
 </html>
