@@ -2,5 +2,11 @@ node_modules/
 .DS_Store
 *.db
 .vercel
+.vercel-backup/
+.vercel-broken-backup/
+.vercel-old/
+.vercel-web-linked/
+.vercelignore
 *.bak
 *.bak-*
+.env*.local

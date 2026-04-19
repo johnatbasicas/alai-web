@@ -1319,6 +1319,10 @@
                     </div>
                 </div>
                 <form class="contact-form" id="contactForm">
+                    <!-- Honeypot — hidden from real users, bots fill this -->
+                    <div style="display:none;" aria-hidden="true">
+                        <input type="text" name="_honey" tabindex="-1" autocomplete="off">
+                    </div>
                     <div class="form-group">
                         <label for="name" data-i18n="contact.form.name">Name</label>
                         <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -1334,7 +1338,9 @@
                         <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
                         <span class="form-error" data-i18n="contact.form.message_error">Please enter a message</span>
                     </div>
-                    <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit">Book a discovery call</button>
+                    <div id="formSuccess" style="display:none;padding:12px 16px;background:#00E5A0;color:#09090b;border-radius:8px;font-weight:600;margin-bottom:12px;" data-i18n="contact.form.success">Thank you! We'll get back to you within 24 hours.</div>
+                    <div id="formError" style="display:none;padding:12px 16px;background:#fee2e2;color:#991b1b;border-radius:8px;margin-bottom:12px;"></div>
+                    <button type="submit" class="btn btn-primary" id="formSubmitBtn" data-i18n="contact.form.submit">Book a discovery call</button>
                 </form>
             </div>
         </div>
@@ -1735,20 +1741,31 @@
             });
         });
 
-        // Contact form validation
+        // Contact form — wired to /api/contact (Cloudflare Pages Function)
         const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', (e) => {
+        const formSubmitBtn = document.getElementById('formSubmitBtn');
+        const formSuccess = document.getElementById('formSuccess');
+        const formError = document.getElementById('formError');
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // Hide previous messages
+            formSuccess.style.display = 'none';
+            formError.style.display = 'none';
+
+            // Client-side validation
             let isValid = true;
             const formGroups = contactForm.querySelectorAll('.form-group');
-
             formGroups.forEach(group => {
                 const input = group.querySelector('input, textarea');
+                if (!input) return;
                 const value = input.value.trim();
-
                 group.classList.remove('error');
-
                 if (!value) {
                     group.classList.add('error');
                     isValid = false;
@@ -1758,21 +1775,49 @@
                 }
             });
 
-            if (isValid) {
-                // Form submission logic would go here
-                alert('Thank you for your message! We will respond within 24 hours.');
-                contactForm.reset();
+            if (!isValid) return;
+
+            // Collect data
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const _honey = contactForm.querySelector('input[name="_honey"]').value;
+
+            // Disable button while sending
+            formSubmitBtn.disabled = true;
+            const originalText = formSubmitBtn.textContent;
+            formSubmitBtn.textContent = 'Sending...';
+
+            try {
+                const resp = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message, _honey }),
+                });
+
+                const data = await resp.json();
+
+                if (resp.ok && data.ok) {
+                    formSuccess.style.display = 'block';
+                    contactForm.reset();
+                } else {
+                    formError.textContent = data.error || 'Something went wrong. Please email info@alai.no directly.';
+                    formError.style.display = 'block';
+                }
+            } catch (err) {
+                formError.textContent = 'Network error. Please email info@alai.no directly.';
+                formError.style.display = 'block';
+            } finally {
+                formSubmitBtn.disabled = false;
+                formSubmitBtn.textContent = originalText;
             }
         });
-
-        function isValidEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
 
         // Remove error state on input
         contactForm.querySelectorAll('input, textarea').forEach(input => {
             input.addEventListener('input', () => {
-                input.closest('.form-group').classList.remove('error');
+                const group = input.closest('.form-group');
+                if (group) group.classList.remove('error');
             });
         });
     </script>
