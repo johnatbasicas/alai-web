@@ -1,6 +1,6 @@
 # Quran Sonification — 19-TET Audio Files
 
-**Author:** Petter Graff (ALAI researcher)
+**Author:** ALAI
 **Date:** 2026-02-26
 **Series:** Computational Analysis of the Quran — Sonification
 
@@ -38,6 +38,6 @@ MP3 conversion: `ffmpeg -codec:a libmp3lame -b:a 128k`
 
 ## Attribution
 
-Research and audio generation: **Petter Graff** for **ALAI Holding AS**  
+Research and audio generation: **ALAI Holding AS**  
 Published at: https://alai.no/ucenje/audio/  
 Date: 2026-02-26

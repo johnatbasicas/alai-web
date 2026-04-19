@@ -245,22 +245,22 @@
 
       <!-- Counter buttons for different values -->
       <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.5rem;">
-        <button class="btn btn--outline" onclick="showFact('bismillah')">
+        <button class="btn btn--outline" data-fact="bismillah">
           <span data-lang-show="bs" class="lang-visible">Bismilla: 19 slova</span>
           <span data-lang-show="no">Bismillah: 19 bokstaver</span>
           <span data-lang-show="en">Bismillah: 19 letters</span>
         </button>
-        <button class="btn btn--outline" onclick="showFact('suras')">
+        <button class="btn btn--outline" data-fact="suras">
           <span data-lang-show="bs" class="lang-visible">Sure: 114 = 6×19</span>
           <span data-lang-show="no">Suraer: 114 = 6×19</span>
           <span data-lang-show="en">Surahs: 114 = 6×19</span>
         </button>
-        <button class="btn btn--outline" onclick="showFact('s96')">
+        <button class="btn btn--outline" data-fact="s96">
           <span data-lang-show="bs" class="lang-visible">Sura 96: 19 ajeta</span>
           <span data-lang-show="no">Sura 96: 19 vers</span>
           <span data-lang-show="en">Surah 96: 19 verses</span>
         </button>
-        <button class="btn btn--outline" onclick="showFact('7431')">
+        <button class="btn btn--outline" data-fact="7431">
           <span data-lang-show="bs" class="lang-visible">Ajet 74:31: 57 riječi</span>
           <span data-lang-show="no">Vers 74:31: 57 ord</span>
           <span data-lang-show="en">Verse 74:31: 57 words</span>
@@ -623,9 +623,9 @@
       <div>
         <div class="footer-brand">ALAI / Ucenje — 19 Explorer</div>
         <div style="color:var(--text-faint); font-size:var(--text-sm);">
-          <span data-lang-show="bs" class="lang-visible">Istraživanje broja 19 u Kur'anu · Petter Graff za ALAI, 2026</span>
-          <span data-lang-show="no">Forskning på tallet 19 i Koranen · Petter Graff for ALAI, 2026</span>
-          <span data-lang-show="en">Research on the number 19 in the Quran · Petter Graff for ALAI, 2026</span>
+          <span data-lang-show="bs" class="lang-visible">Istraživanje broja 19 u Kur'anu · ALAI, 2026</span>
+          <span data-lang-show="no">Forskning på tallet 19 i Koranen · ALAI, 2026</span>
+          <span data-lang-show="en">Research on the number 19 in the Quran · ALAI, 2026</span>
         </div>
       </div>
       <nav class="footer-links" aria-label="Footer navigacija">
@@ -676,9 +676,13 @@
     var factEl = document.getElementById('counter-fact');
     var lang = localStorage.getItem('ucenje-lang') || 'bs';
 
-    // Animate counter
+    // Animate counter (animateCounter exposed on window by app.js)
     var current = parseInt(display.textContent, 10) || 0;
-    animateCounter(display, current, fact.value, 1000);
+    if (typeof window.animateCounter === 'function') {
+      window.animateCounter(display, current, fact.value, 1000);
+    } else {
+      display.textContent = fact.value;
+    }
 
     // Show description
     factEl.style.opacity = '0';
@@ -686,7 +690,25 @@
       factEl.textContent = fact[lang] || fact['en'];
       factEl.style.opacity = '1';
     }, 200);
+
+    // Visual feedback: mark active button
+    document.querySelectorAll('[data-fact]').forEach(function(btn) {
+      btn.classList.toggle('btn--primary', btn.dataset.fact === key);
+      btn.classList.toggle('btn--outline', btn.dataset.fact !== key);
+    });
   }
+
+  // Expose globally (fallback for any remaining onclick references)
+  window.showFact = showFact;
+
+  // Bind counter buttons via addEventListener (robust — works regardless of defer order)
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-fact]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        showFact(btn.dataset.fact);
+      });
+    });
+  });
 
   // Build Metonic cycle grid
   document.addEventListener('DOMContentLoaded', function() {
