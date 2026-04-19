@@ -48,7 +48,7 @@ export async function onRequestPost(context) {
         });
     } catch (err) {
         return new Response(
-            JSON.stringify({ error: 'Failed to send. Please email info@alai.no directly.' }),
+            JSON.stringify({ error: 'Failed to send. Please email info@alai.no directly.', _debug: err.message }),
             { status: 500, headers }
         );
     }
