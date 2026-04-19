@@ -1,12 +1,17 @@
 // Cloudflare Pages Function — POST /api/contact
-// Sends email via SMTP (one.com) to info@alai.no
+// Sends email via MailChannels (native CF Pages) to info@alai.no
 
 export async function onRequestPost(context) {
     const { request, env } = context;
 
+    // Allow both production domain and Pages preview subdomain
+    const origin = request.headers.get('Origin') || '';
+    const allowedOrigins = ['https://alai.no', 'https://alai-web.pages.dev'];
+    const corsOrigin = allowedOrigins.includes(origin) ? origin : 'https://alai.no';
+
     // CORS
     const headers = {
-        'Access-Control-Allow-Origin': 'https://alai.no',
+        'Access-Control-Allow-Origin': corsOrigin,
         'Content-Type': 'application/json',
     };
 
@@ -106,11 +111,14 @@ export async function onRequestPost(context) {
     }
 }
 
-export async function onRequestOptions() {
+export async function onRequestOptions(context) {
+    const origin = context.request.headers.get('Origin') || '';
+    const allowedOrigins = ['https://alai.no', 'https://alai-web.pages.dev'];
+    const corsOrigin = allowedOrigins.includes(origin) ? origin : 'https://alai.no';
     return new Response(null, {
         status: 204,
         headers: {
-            'Access-Control-Allow-Origin': 'https://alai.no',
+            'Access-Control-Allow-Origin': corsOrigin,
             'Access-Control-Allow-Methods': 'POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
         },
