@@ -93,75 +93,101 @@
     </div>
   </section>
 
-  <!-- ===== 19-TET EXPLAINER ===== -->
-  <section class="section--sm" style="background:var(--parchment);">
+  <!-- ===== POETIC INTRO — FEEL THE AWE FIRST ===== -->
+  <section class="section--sm" style="background:var(--cream);">
     <div class="container--narrow">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
-        <div>
-          <span class="section-label">
-            <span data-lang-show="bs" class="lang-visible">Šta je 19-TET?</span>
-            <span data-lang-show="no">Hva er 19-TET?</span>
-            <span data-lang-show="en">What is 19-TET?</span>
-          </span>
-          <h2 class="fade-in" style="margin-bottom:1rem; font-size:var(--text-3xl);">
-            <span data-lang-show="bs" class="lang-visible">19 koraka do oktave</span>
-            <span data-lang-show="no">19 trinn til oktaven</span>
-            <span data-lang-show="en">19 steps to the octave</span>
-          </h2>
-          <p class="fade-in" style="margin-bottom:1rem;">
-            <span data-lang-show="bs" class="lang-visible">Standardna zapadna muzika koristi 12-TET — 12 jednakih koraka u oktavi. 19-TET dijeli oktavu na 19 jednakih koraka, svaki od <span class="math">2^(1/19) ≈ 1.03716</span>.</span>
-            <span data-lang-show="no">Standard vestlig musikk bruker 12-TET — 12 like trinn i en oktav. 19-TET deler oktaven i 19 like trinn, hvert <span class="math">2^(1/19) ≈ 1.03716</span>.</span>
-            <span data-lang-show="en">Standard Western music uses 12-TET — 12 equal steps in an octave. 19-TET divides the octave into 19 equal steps, each <span class="math">2^(1/19) ≈ 1.03716</span>.</span>
-          </p>
-          <p class="fade-in">
-            <span data-lang-show="bs" class="lang-visible">19-TET nije arbitraran izbor — to je jedan od musički najzanimljivijih alternativnih sistema ugađanja jer pruža izuzetno dobre aproksimiacije terce, kvinte i durske ljestvice.</span>
-            <span data-lang-show="no">19-TET er ikke et vilkårlig valg — det er et av de musikalsk mest interessante alternative stemmesystemene fordi det gir utmerkede tilnærminger til terts, kvint og durskala.</span>
-            <span data-lang-show="en">19-TET is not an arbitrary choice — it is one of the most musically interesting alternative tuning systems because it provides excellent approximations of the third, fifth, and major scale.</span>
-          </p>
+
+      <!-- Main awe-opening quote -->
+      <blockquote style="
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(1.15rem, 2.8vw, 1.65rem);
+        line-height: 1.85;
+        color: var(--ink);
+        border-left: 3px solid var(--gold);
+        padding-left: 2rem;
+        margin: 0 0 3rem;
+      ">
+        <span data-lang-show="bs" class="lang-visible">Riječi Kur'ana — harfovi, ajeti, sure — su prebrojani. Ovaj računar je uzeo taj broj i pustio Kur'an da zvuči sam. Ono što slušate nije komponovano. Ono je — čuto.</span>
+        <span data-lang-show="no">Koranens ord — bokstaver, vers, suraer — er telte. Denne datamaskinen tok dette tallet og lot Koranen klinge selv. Det du hører er ikke komponert. Det er — hørt.</span>
+        <span data-lang-show="en">The words of the Quran — letters, verses, surahs — are counted. This computer took that count and let the Quran sound itself. What you hear is not composed. It is — heard.</span>
+      </blockquote>
+
+      <!-- 3-step visual metaphor: Word → Number → Tone -->
+      <div style="margin-bottom: 3rem;">
+        <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
+
+          <!-- Step 1: Word -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.75rem; text-align:center;">
+            <div style="
+              width:82px; height:82px;
+              border:1.5px solid var(--border-gold);
+              border-radius:var(--radius-md);
+              display:flex; align-items:center; justify-content:center;
+              background:var(--parchment);
+            ">
+              <span lang="ar" style="font-family:var(--font-arabic); font-size:1.6rem; color:var(--gold-dark); direction:rtl;">بِسْمِ</span>
+            </div>
+            <span style="font-family:var(--font-sans); font-size:var(--text-xs); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted);">
+              <span data-lang-show="bs" class="lang-visible">Riječ</span>
+              <span data-lang-show="no">Ord</span>
+              <span data-lang-show="en">Word</span>
+            </span>
+          </div>
+
+          <div style="font-size:1.8rem; color:var(--gold); opacity:0.55; flex-shrink:0;" aria-hidden="true">&#8594;</div>
+
+          <!-- Step 2: Number -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.75rem; text-align:center;">
+            <div style="
+              width:82px; height:82px;
+              border:1.5px solid var(--border-gold);
+              border-radius:var(--radius-md);
+              display:flex; align-items:center; justify-content:center;
+              background:var(--parchment);
+            ">
+              <span style="font-family:var(--font-mono); font-size:2.2rem; font-weight:700; color:var(--ink);">19</span>
+            </div>
+            <span style="font-family:var(--font-sans); font-size:var(--text-xs); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted);">
+              <span data-lang-show="bs" class="lang-visible">Broj</span>
+              <span data-lang-show="no">Tall</span>
+              <span data-lang-show="en">Number</span>
+            </span>
+          </div>
+
+          <div style="font-size:1.8rem; color:var(--gold); opacity:0.55; flex-shrink:0;" aria-hidden="true">&#8594;</div>
+
+          <!-- Step 3: Tone / waveform -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.75rem; text-align:center;">
+            <div style="
+              width:82px; height:82px;
+              border:1.5px solid var(--border-gold);
+              border-radius:var(--radius-md);
+              display:flex; align-items:center; justify-content:center;
+              background:var(--parchment);
+              overflow:hidden;
+            " aria-hidden="true">
+              <svg viewBox="0 0 80 40" width="72" height="36">
+                <path d="M2,20 Q8,4 14,20 Q20,36 26,20 Q32,4 38,20 Q44,36 50,20 Q56,4 62,20 Q68,36 74,20 Q78,12 80,20"
+                  fill="none" stroke="#c9a961" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span style="font-family:var(--font-sans); font-size:var(--text-xs); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted);">
+              <span data-lang-show="bs" class="lang-visible">Ton</span>
+              <span data-lang-show="no">Tone</span>
+              <span data-lang-show="en">Tone</span>
+            </span>
+          </div>
+
         </div>
 
-        <!-- 19-TET keyboard visualization -->
-        <div class="fade-in">
-          <div style="background:white; border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:1.5rem;">
-            <div style="font-family:var(--font-sans); font-size:var(--text-xs); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">
-              <span data-lang-show="bs" class="lang-visible">19-TET tipkovnica (1 oktava)</span>
-              <span data-lang-show="no">19-TET tastatur (1 oktav)</span>
-              <span data-lang-show="en">19-TET keyboard (1 octave)</span>
-            </div>
-            <svg id="tet-keyboard-svg" viewBox="0 0 760 150" width="100%" style="display:block; overflow:visible;" role="img" aria-label="19-TET keyboard visualization showing 19 steps in one octave">
-              <!-- Filled by app.js buildTetKeyboard() -->
-            </svg>
-            <div style="margin-top:1rem;">
-              <table class="data-table" style="font-size:var(--text-xs);">
-                <thead>
-                  <tr>
-                    <th>
-                      <span data-lang-show="bs" class="lang-visible">Interval</span>
-                      <span data-lang-show="no">Intervall</span>
-                      <span data-lang-show="en">Interval</span>
-                    </th>
-                    <th>
-                      <span data-lang-show="bs" class="lang-visible">Koraci</span>
-                      <span data-lang-show="no">Trinn</span>
-                      <span data-lang-show="en">Steps</span>
-                    </th>
-                    <th>
-                      <span data-lang-show="bs" class="lang-visible">Greška</span>
-                      <span data-lang-show="no">Feil</span>
-                      <span data-lang-show="en">Error</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td><span data-lang-show="bs" class="lang-visible">Velika terca</span><span data-lang-show="no">Stor ters</span><span data-lang-show="en">Major third</span></td><td class="mono">6 / 19</td><td class="verified">+0.1 cnt</td></tr>
-                  <tr><td><span data-lang-show="bs" class="lang-visible">Mala terca</span><span data-lang-show="no">Liten ters</span><span data-lang-show="en">Minor third</span></td><td class="mono">5 / 19</td><td class="verified">−0.1 cnt</td></tr>
-                  <tr><td><span data-lang-show="bs" class="lang-visible">Kvinta</span><span data-lang-show="no">Kvint</span><span data-lang-show="en">Perfect fifth</span></td><td class="mono">11 / 19</td><td>−7.2 cnt</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <p style="text-align:center; font-family:var(--font-sans); font-size:var(--text-sm); color:var(--text-muted); margin-top:1.25rem; letter-spacing:0.06em;">
+          <span data-lang-show="bs" class="lang-visible">Riječ &#8594; Broj &#8594; Ton</span>
+          <span data-lang-show="no">Ord &#8594; Tall &#8594; Tone</span>
+          <span data-lang-show="en">Word &#8594; Number &#8594; Tone</span>
+        </p>
       </div>
+
     </div>
   </section>
 
@@ -178,11 +204,28 @@
         <span data-lang-show="no">Sju stykker</span>
         <span data-lang-show="en">Seven pieces</span>
       </h2>
-      <p class="fade-in" style="font-style:italic; color:var(--text-secondary); margin-bottom:3rem; max-width:52ch;">
+      <p class="fade-in" style="font-style:italic; color:var(--text-secondary); margin-bottom:2rem; max-width:52ch;">
         <span data-lang-show="bs" class="lang-visible">Svaka kompozicija otkriva drugačiji aspekt matematičke strukture Kur'ana.</span>
         <span data-lang-show="no">Hvert stykke avslører et annet aspekt av Koranens matematiske struktur.</span>
         <span data-lang-show="en">Each composition reveals a different aspect of the Quran's mathematical structure.</span>
       </p>
+
+      <!-- Closing line just before players -->
+      <div style="
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: var(--text-lg);
+        color: var(--text-secondary);
+        background: var(--parchment);
+        border: 1px solid var(--border-gold);
+        border-radius: var(--radius-md);
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 2.5rem;
+      ">
+        <span data-lang-show="bs" class="lang-visible">Kad čuješ — slušaj kao znak, ne kao pjesmu. Allah je stvorio jezik matematike; ovdje je zvuči.</span>
+        <span data-lang-show="no">Når du hører — lytt som et tegn, ikke som en sang. Allah skapte matematikkens språk; her klinger den.</span>
+        <span data-lang-show="en">When you hear — listen as a sign, not a song. Allah created the language of mathematics; here it sounds.</span>
+      </div>
 
       <!-- Track 1: Bismillah -->
       <div class="audio-player fade-in" data-audio-player data-audio-src="/ucenje/audio/quran-basmala.mp3" style="margin-bottom:2rem;">
@@ -392,10 +435,87 @@
     </div>
   </section>
 
+  <!-- ===== 19-TET EXPLAINER — for those who want the math ===== -->
+  <section class="section--sm" style="background:var(--parchment);">
+    <div class="container--narrow">
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Za one koji žele matematiku</span>
+        <span data-lang-show="no">For de som ønsker matematikken</span>
+        <span data-lang-show="en">For those who want the mathematics</span>
+      </span>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
+        <div>
+          <h2 class="fade-in" style="margin-bottom:1rem; font-size:var(--text-3xl);">
+            <span data-lang-show="bs" class="lang-visible">Šta je 19-TET?</span>
+            <span data-lang-show="no">Hva er 19-TET?</span>
+            <span data-lang-show="en">What is 19-TET?</span>
+          </h2>
+          <h3 class="fade-in" style="font-size:var(--text-xl); margin-bottom:1rem; font-weight:400; color:var(--text-secondary);">
+            <span data-lang-show="bs" class="lang-visible">19 koraka do oktave</span>
+            <span data-lang-show="no">19 trinn til oktaven</span>
+            <span data-lang-show="en">19 steps to the octave</span>
+          </h3>
+          <p class="fade-in" style="margin-bottom:1rem;">
+            <span data-lang-show="bs" class="lang-visible">Standardna zapadna muzika koristi 12-TET — 12 jednakih koraka u oktavi. 19-TET dijeli oktavu na 19 jednakih koraka, svaki od <span class="math">2^(1/19) ≈ 1.03716</span>.</span>
+            <span data-lang-show="no">Standard vestlig musikk bruker 12-TET — 12 like trinn i en oktav. 19-TET deler oktaven i 19 like trinn, hvert <span class="math">2^(1/19) ≈ 1.03716</span>.</span>
+            <span data-lang-show="en">Standard Western music uses 12-TET — 12 equal steps in an octave. 19-TET divides the octave into 19 equal steps, each <span class="math">2^(1/19) ≈ 1.03716</span>.</span>
+          </p>
+          <p class="fade-in">
+            <span data-lang-show="bs" class="lang-visible">19-TET nije arbitraran izbor — to je jedan od musički najzanimljivijih alternativnih sistema ugađanja jer pruža izuzetno dobre aproksimiacije terce, kvinte i durske ljestvice.</span>
+            <span data-lang-show="no">19-TET er ikke et vilkårlig valg — det er et av de musikalsk mest interessante alternative stemmesystemene fordi det gir utmerkede tilnærminger til terts, kvint og durskala.</span>
+            <span data-lang-show="en">19-TET is not an arbitrary choice — it is one of the most musically interesting alternative tuning systems because it provides excellent approximations of the third, fifth, and major scale.</span>
+          </p>
+        </div>
+
+        <!-- 19-TET keyboard visualization -->
+        <div class="fade-in">
+          <div style="background:white; border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:1.5rem;">
+            <div style="font-family:var(--font-sans); font-size:var(--text-xs); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">
+              <span data-lang-show="bs" class="lang-visible">19-TET tipkovnica (1 oktava)</span>
+              <span data-lang-show="no">19-TET tastatur (1 oktav)</span>
+              <span data-lang-show="en">19-TET keyboard (1 octave)</span>
+            </div>
+            <svg id="tet-keyboard-svg" viewBox="0 0 760 150" width="100%" style="display:block; overflow:visible;" role="img" aria-label="19-TET keyboard visualization showing 19 steps in one octave">
+              <!-- Filled by app.js buildTetKeyboard() -->
+            </svg>
+            <div style="margin-top:1rem;">
+              <table class="data-table" style="font-size:var(--text-xs);">
+                <thead>
+                  <tr>
+                    <th>
+                      <span data-lang-show="bs" class="lang-visible">Interval</span>
+                      <span data-lang-show="no">Intervall</span>
+                      <span data-lang-show="en">Interval</span>
+                    </th>
+                    <th>
+                      <span data-lang-show="bs" class="lang-visible">Koraci</span>
+                      <span data-lang-show="no">Trinn</span>
+                      <span data-lang-show="en">Steps</span>
+                    </th>
+                    <th>
+                      <span data-lang-show="bs" class="lang-visible">Greška</span>
+                      <span data-lang-show="no">Feil</span>
+                      <span data-lang-show="en">Error</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><span data-lang-show="bs" class="lang-visible">Velika terca</span><span data-lang-show="no">Stor ters</span><span data-lang-show="en">Major third</span></td><td class="mono">6 / 19</td><td class="verified">+0.1 cnt</td></tr>
+                  <tr><td><span data-lang-show="bs" class="lang-visible">Mala terca</span><span data-lang-show="no">Liten ters</span><span data-lang-show="en">Minor third</span></td><td class="mono">5 / 19</td><td class="verified">−0.1 cnt</td></tr>
+                  <tr><td><span data-lang-show="bs" class="lang-visible">Kvinta</span><span data-lang-show="no">Kvint</span><span data-lang-show="en">Perfect fifth</span></td><td class="mono">11 / 19</td><td>−7.2 cnt</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== ATTRIBUTION ===== -->
   <section class="section--sm" style="background:var(--parchment);">
     <div class="container--narrow">
-      <div style="display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap;">
+      <div style="display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap; margin-bottom:3rem;">
         <div style="flex:1; min-width:240px;">
           <span class="section-label">
             <span data-lang-show="bs" class="lang-visible">Metodologija</span>
@@ -436,6 +556,55 @@ format: WAV 44100 Hz
           </p>
         </div>
       </div>
+
+      <!-- ===== ZAHVALA / ACKNOWLEDGMENT ===== -->
+      <hr class="divider" style="margin: 0 0 2.5rem;">
+
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Zahvala</span>
+        <span data-lang-show="no">Takk</span>
+        <span data-lang-show="en">Acknowledgment</span>
+      </span>
+
+      <div style="background:white; border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:var(--space-8); border-left:3px solid var(--gold-dark);" class="fade-in">
+
+        <div data-lang-show="bs" class="lang-visible">
+          <p style="margin-bottom:1rem;">
+            Ovo istraživanje nadograđuje djelo <strong>dr. Rashada Khalife</strong> (1974), koji je prvi matematički dokumentovao strukturu broja 19, i <strong>šejha Ahmeda Deedata</strong> (IPCI, 1979) koji je popularizirao to znanje. Deedat-ova knjiga <em>Al-Qur'an: The Ultimate Miracle</em> dostupna je u našoj arhivi: <code>/Public/Research/quran-19-research/deedat/</code>.
+          </p>
+          <p style="margin-bottom:1rem;">
+            Sonifikacijski rad — prevod matematičke strukture Kur'ana u 19-TET zvuk — je originalni istraživački rad ALAI tima, 2026.
+          </p>
+          <p style="color:var(--text-muted); font-style:italic;">
+            Allah zna najbolje. / Allahu'alem.
+          </p>
+        </div>
+
+        <div data-lang-show="no">
+          <p style="margin-bottom:1rem;">
+            Denne forskningen bygger på arbeidet til <strong>dr. Rashad Khalifa</strong> (1974), som var den første som matematisk dokumenterte strukturen til tallet 19, og <strong>sjekh Ahmed Deedat</strong> (IPCI, 1979) som populariserte denne kunnskapen. Deedats bok <em>Al-Qur'an: The Ultimate Miracle</em> er tilgjengelig i vårt arkiv: <code>/Public/Research/quran-19-research/deedat/</code>.
+          </p>
+          <p style="margin-bottom:1rem;">
+            Sonifikasjonsarbeidet — oversettelsen av Koranens matematiske struktur til 19-TET lyd — er originalt forskningsarbeid av ALAI-teamet, 2026.
+          </p>
+          <p style="color:var(--text-muted); font-style:italic;">
+            Og Allah vet best.
+          </p>
+        </div>
+
+        <div data-lang-show="en">
+          <p style="margin-bottom:1rem;">
+            This research builds upon the work of <strong>Dr. Rashad Khalifa</strong> (1974), who first mathematically documented the structure of the number 19, and <strong>Sheikh Ahmed Deedat</strong> (IPCI, 1979) who popularised that knowledge. Deedat's book <em>Al-Qur'an: The Ultimate Miracle</em> is available in our archive: <code>/Public/Research/quran-19-research/deedat/</code>.
+          </p>
+          <p style="margin-bottom:1rem;">
+            The sonification work — translating the Quran's mathematical structure into 19-TET sound — is original research by the ALAI team, 2026.
+          </p>
+          <p style="color:var(--text-muted); font-style:italic;">
+            Allah knows best.
+          </p>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -449,6 +618,7 @@ format: WAV 44100 Hz
           <span data-lang-show="no">19-TET Sonifikasjon av Koranen · ALAI, 2026</span>
           <span data-lang-show="en">19-TET Quran Sonification · ALAI, 2026</span>
         </div>
+        <div style="color:var(--text-faint); font-size:var(--text-xs); margin-top:0.5rem;">ALAI, 2026</div>
       </div>
       <nav class="footer-links" aria-label="Footer navigacija">
         <a href="/ucenje/">Hub</a>
@@ -472,11 +642,11 @@ format: WAV 44100 Hz
 <script>
   // Generate hero waveform
   document.addEventListener('DOMContentLoaded', function() {
-    const wave = document.getElementById('hero-wave');
+    var wave = document.getElementById('hero-wave');
     if (wave) {
-      const count = 60;
-      for (let i = 0; i < count; i++) {
-        const bar = document.createElement('div');
+      var count = 60;
+      for (var i = 0; i < count; i++) {
+        var bar = document.createElement('div');
         bar.className = 'wave-bar';
         bar.style.height = (8 + Math.random() * 52) + 'px';
         bar.style.animationDelay = (i * 0.05) + 's';

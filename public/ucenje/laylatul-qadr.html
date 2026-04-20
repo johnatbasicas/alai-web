@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Laylatul Qadr — Astronomski Znak — ALAI</title>
+  <meta name="description" content="Empirijski astronomski nalaz: Mjesec dosegne perigee u zadnjoj trećini Ramazana svakih 7 godina. Broj 19 kao matematički potpis Metonskog ciklusa.">
+  <link rel="stylesheet" href="/ucenje/assets/style.css">
+  <link rel="stylesheet" href="/ucenje/assets/animations.css">
+
+  <style>
+    /* ===== NIGHT HERO VARIANT ===== */
+    .night-hero {
+      background: #1a1a3e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .night-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(74, 59, 107, 0.6) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(20, 10, 50, 0.8) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Stars field */
+    .stars-field {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .star-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: #e8cfa0;
+      animation: starTwinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes starTwinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    /* Crescent moon SVG */
+    .crescent-moon {
+      animation: moonFloat 8s ease-in-out infinite;
+    }
+
+    @keyframes moonFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Night section label */
+    .section-label--night {
+      color: #c9a961;
+      opacity: 0.85;
+    }
+
+    /* Perigee orbit animation */
+    .moon-orbit {
+      animation: moonOrbit 12s linear infinite;
+      transform-origin: 50% 50%;
+    }
+
+    @keyframes moonOrbit {
+      from { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+    }
+
+    /* Perigee approach animation */
+    .moon-approach {
+      animation: moonApproach 6s ease-in-out infinite;
+    }
+
+    @keyframes moonApproach {
+      0%, 100% { transform: translateX(0) scale(1); opacity: 0.7; }
+      50% { transform: translateX(-30px) scale(1.25); opacity: 1; }
+    }
+
+    /* Table styling for night-on-parchment */
+    .perigee-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      margin: 1.5rem 0;
+    }
+
+    .perigee-table th {
+      background: var(--ink);
+      color: var(--gold-light);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .perigee-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+
+    .perigee-table tr:hover td {
+      background: var(--parchment-dark);
+    }
+
+    .perigee-table tr.apex td {
+      background: rgba(201, 169, 97, 0.12);
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .perigee-table tr.apex td:first-child::before {
+      content: '★ ';
+      color: var(--gold-dark);
+    }
+
+    /* Math connection boxes */
+    .math-connection {
+      background: var(--ink);
+      color: var(--gold-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      line-height: 2;
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--gold);
+    }
+
+    /* Night zone badge */
+    .badge--night {
+      background: rgba(74, 59, 107, 0.15);
+      color: #7b6aad;
+      border-color: rgba(74, 59, 107, 0.3);
+    }
+
+    /* 3-step flow */
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: var(--gold);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .flow-arrow { transform: rotate(90deg); }
+      .flow-steps { flex-direction: column; }
+      .perigee-table { font-size: var(--text-xs); }
+      .perigee-table th, .perigee-table td { padding: 0.5rem 0.6rem; }
+    }
+
+    /* Attribution box */
+    .attribution-box {
+      background: var(--parchment);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: var(--space-8);
+      border-left: 3px solid var(--gold-dark);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" aria-label="Glavna navigacija">
+  <a href="/ucenje/" class="nav-brand" aria-label="ALAI Ucenje — početna">
+    <svg class="nav-brand-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12" stroke="#c9a961" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="14" cy="14" r="7" stroke="#c9a961" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="14" cy="14" r="2.5" fill="#c9a961" opacity="0.8"/>
+      <line x1="14" y1="2" x2="14" y2="5" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="14" y1="23" x2="14" y2="26" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="2" y1="14" x2="5" y2="14" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="23" y1="14" x2="26" y2="14" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="5.3" y1="5.3" x2="7.4" y2="7.4" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+      <line x1="20.6" y1="20.6" x2="22.7" y2="22.7" stroke="#c9a961" stroke-width="1" opacity="0.6"/>
+    </svg>
+    ALAI / Ucenje
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="/ucenje/">Hub</a></li>
+    <li><a href="/ucenje/audio/">Audio</a></li>
+    <li><a href="/ucenje/19-explorer/">19 Explorer</a></li>
+  </ul>
+
+  <div class="lang-switcher" role="group" aria-label="Odabir jezika">
+    <button class="lang-btn active" data-lang="bs" onclick="switchLanguage('bs')" aria-pressed="true">BS</button>
+    <button class="lang-btn" data-lang="no" onclick="switchLanguage('no')" aria-pressed="false">NO</button>
+    <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')" aria-pressed="false">EN</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ===== NIGHT HERO ===== -->
+  <section class="night-hero" style="padding: 5rem 0 5rem;">
+
+    <!-- Stars field — generated by JS -->
+    <div class="stars-field" id="stars-field" aria-hidden="true"></div>
+
+    <!-- Crescent + perigee orbit visualization -->
+    <div aria-hidden="true" style="position:absolute; right: clamp(1rem, 8vw, 8rem); top: 50%; transform: translateY(-50%); opacity: 0.55;">
+      <svg viewBox="0 0 220 220" width="220" height="220">
+        <!-- Earth -->
+        <circle cx="110" cy="110" r="14" fill="#2a3a6e" stroke="#c9a961" stroke-width="1"/>
+        <!-- Orbit ring -->
+        <ellipse cx="110" cy="110" rx="90" ry="70" fill="none" stroke="rgba(201,169,97,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
+        <!-- Perigee marker — close point -->
+        <circle cx="25" cy="110" r="3" fill="rgba(201,169,97,0.6)"/>
+        <!-- Moving moon -->
+        <g class="moon-approach">
+          <!-- Crescent -->
+          <circle cx="30" cy="110" r="12" fill="#e8cfa0"/>
+          <circle cx="36" cy="107" r="9.5" fill="#1a1a3e"/>
+        </g>
+        <!-- Distance label -->
+        <text x="110" y="200" text-anchor="middle" fill="rgba(201,169,97,0.6)" font-family="monospace" font-size="9">362,975 km — APEX 2017</text>
+      </svg>
+    </div>
+
+    <div class="container--narrow" style="position:relative; z-index:1;">
+
+      <a href="/ucenje/" style="font-family:var(--font-sans); font-size:var(--text-sm); color:rgba(201,169,97,0.7); text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        &#8592;
+        <span data-lang-show="bs" class="lang-visible">Nazad na Hub</span>
+        <span data-lang-show="no">Tilbake til Hub</span>
+        <span data-lang-show="en">Back to Hub</span>
+      </a>
+
+      <!-- Badge -->
+      <div style="margin-bottom: 1.5rem;">
+        <span class="badge badge--night" style="background:rgba(74,59,107,0.35); color:#c9b8e8; border-color:rgba(74,59,107,0.5);">
+          <span data-lang-show="bs" class="lang-visible">Astronomski znak</span>
+          <span data-lang-show="no">Astronomisk tegn</span>
+          <span data-lang-show="en">Astronomical sign</span>
+        </span>
+      </div>
+
+      <!-- Surah 97 — Ayah 1-3 Arabic -->
+      <div class="hero-entrance" style="margin-bottom: 1.5rem;">
+        <div lang="ar" style="
+          font-family: var(--font-arabic);
+          direction: rtl;
+          text-align: right;
+          font-size: clamp(1.4rem, 4vw, 2.2rem);
+          line-height: 2.2;
+          color: #e8cfa0;
+          letter-spacing: 0.03em;
+        ">
+          إِنَّا أَنزَلْنَـٰهُ فِى لَيْلَةِ ٱلْقَدْرِ ﴿١﴾
+          وَمَآ أَدْرَىٰكَ مَا لَيْلَةُ ٱلْقَدْرِ ﴿٢﴾
+          لَيْلَةُ ٱلْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ ﴿٣﴾
+        </div>
+      </div>
+
+      <div class="hero-entrance hero-entrance-delay-1" style="margin-bottom: 2rem;">
+        <p style="font-family:var(--font-serif); font-style:italic; font-size:var(--text-xl); color: rgba(232,207,160,0.85); line-height: 1.7; max-width: 54ch;">
+          <span data-lang-show="bs" class="lang-visible">"Mi smo ga objavili u Noći Odredbe. A šta ti znaš šta je Noć Odredbe? Noć Odredbe je bolja od hiljadu mjeseci."</span>
+          <span data-lang-show="no">"Vi sendte den ned i Skjebnenattens natt. Og hva vet du hva Skjebnenattens natt er? Skjebnenattens natt er bedre enn tusen måneder."</span>
+          <span data-lang-show="en">"Indeed, We sent it down during the Night of Decree. And what can make you know what is the Night of Decree? The Night of Decree is better than a thousand months."</span>
+        </p>
+        <div style="font-family:var(--font-sans); font-size:var(--text-sm); color:rgba(201,169,97,0.6); margin-top:0.5rem;">
+          — Kur'an 97:1–3
+        </div>
+      </div>
+
+      <!-- Title -->
+      <h1 class="hero-entrance hero-entrance-delay-2" style="color: #f5f0e8; font-size:clamp(2rem,5vw,3.2rem); margin-bottom:1rem;">
+        <span data-lang-show="bs" class="lang-visible">Laylatul Qadr</span>
+        <span data-lang-show="no">Lailat al-Qadr</span>
+        <span data-lang-show="en">The Night of Decree</span>
+      </h1>
+
+      <p class="hero-entrance hero-entrance-delay-3" style="font-style:italic; color:rgba(245,240,232,0.7); font-size:var(--text-xl); max-width:52ch;">
+        <span data-lang-show="bs" class="lang-visible">Noć koja je bolja od hiljadu mjeseci — a Allah dž.š. nam je kroz astronomiju ostavio znak kada se vraća.</span>
+        <span data-lang-show="no">En natt bedre enn tusen måneder — og Allah har gjennom astronomien etterlatt et tegn på når den vender tilbake.</span>
+        <span data-lang-show="en">A night better than a thousand months — and Allah has left in the astronomy a sign of when it returns.</span>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ===== SETTING THE SCENE ===== -->
+  <section class="section--sm" style="background: var(--parchment);">
+    <div class="container--narrow">
+
+      <div class="sep-ornament" style="margin: 0 auto 3rem;">
+        <span class="sep-ornament-icon">&#9728;</span>
+      </div>
+
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Otkriveno je u noći</span>
+        <span data-lang-show="no">Åpenbart om natten</span>
+        <span data-lang-show="en">Revealed in the night</span>
+      </span>
+
+      <h2 class="fade-in" style="margin-bottom: 1.5rem;">
+        <span data-lang-show="bs" class="lang-visible">Muhammed a.s. u pećini Hira. Iqra!</span>
+        <span data-lang-show="no">Muhammad (fred være med ham) i Hira-grotten. Iqra!</span>
+        <span data-lang-show="en">The Prophet in the Cave of Hira. Iqra!</span>
+      </h2>
+
+      <div class="fade-in" style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center;">
+        <div>
+          <p style="margin-bottom:1rem;">
+            <span data-lang-show="bs" class="lang-visible">Prva objava Kur'ana desila se u Laylatul Qadr — Noći Odredbe. Džibril a.s. je stisnuo Muhammeda a.s. u pećini Hira i rekao jednu jedinu riječ: <strong>Iqra!</strong> — Čitaj!</span>
+            <span data-lang-show="no">Den første åpenbaringen av Koranen skjedde i Laylatul Qadr — Skjebnenattens natt. Jibril (fred være med ham) omfavnet profeten Muhammad i Hira-grotten og sa ett eneste ord: <strong>Iqra!</strong> — Les!</span>
+            <span data-lang-show="en">The first revelation of the Quran took place on Laylatul Qadr — the Night of Decree. Jibril (peace be upon him) embraced the Prophet Muhammad in the Cave of Hira and said one single word: <strong>Iqra!</strong> — Read!</span>
+          </p>
+          <p>
+            <span data-lang-show="bs" class="lang-visible">Ta noć, prema islamskoj tradiciji, pada u zadnjoj trećini Ramazana — najvjerovatnije u jednoj od neparnih noći: 21., 23., 25., 27. ili 29. Muslimani je traže svake godine u ibadet i zikru.</span>
+            <span data-lang-show="no">Den natten faller, ifølge islamsk tradisjon, i den siste tredjedelen av Ramadan — mest sannsynlig i en av de odde nettene: 21., 23., 25., 27. eller 29. Muslimer søker den hvert år i tilbedelse og dhikr.</span>
+            <span data-lang-show="en">That night, according to Islamic tradition, falls in the last third of Ramadan — most likely on one of the odd nights: 21st, 23rd, 25th, 27th or 29th. Muslims seek it every year in worship and dhikr.</span>
+          </p>
+        </div>
+
+        <!-- Hira visual -->
+        <div style="text-align:center;">
+          <svg viewBox="0 0 200 200" width="180" height="180" style="opacity:0.85;" aria-label="Pećina Hira — ilustracija" role="img">
+            <!-- Night sky background -->
+            <rect width="200" height="200" rx="12" fill="#1a1a3e"/>
+            <!-- Stars -->
+            <circle cx="40" cy="30" r="1.5" fill="#e8cfa0" opacity="0.8"/>
+            <circle cx="80" cy="20" r="1" fill="#e8cfa0" opacity="0.6"/>
+            <circle cx="120" cy="35" r="1.5" fill="#e8cfa0" opacity="0.9"/>
+            <circle cx="160" cy="25" r="1" fill="#e8cfa0" opacity="0.7"/>
+            <circle cx="170" cy="55" r="1.5" fill="#e8cfa0" opacity="0.5"/>
+            <circle cx="30" cy="60" r="1" fill="#e8cfa0" opacity="0.7"/>
+            <!-- Crescent moon -->
+            <circle cx="155" cy="40" r="16" fill="#e8cfa0" opacity="0.9"/>
+            <circle cx="161" cy="36" r="12.5" fill="#1a1a3e"/>
+            <!-- Mountain silhouette -->
+            <polygon points="100,170 10,170 50,90 80,130 100,75 120,130 150,90 190,170" fill="#2a2a50"/>
+            <!-- Cave opening -->
+            <ellipse cx="100" cy="120" rx="18" ry="12" fill="#0a0a1e"/>
+            <!-- Light from cave -->
+            <ellipse cx="100" cy="120" rx="10" ry="7" fill="rgba(201,169,97,0.15)"/>
+            <!-- Arabic: Iqra -->
+            <text x="100" y="155" text-anchor="middle" font-family="serif" font-size="14" fill="rgba(201,169,97,0.6)">اقرأ</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ASTRONOMICAL SIGN ===== -->
+  <section class="section--sm" style="background: var(--cream);">
+    <div class="container--narrow">
+
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Astronomski znak</span>
+        <span data-lang-show="no">Astronomisk tegn</span>
+        <span data-lang-show="en">Astronomical sign</span>
+      </span>
+
+      <h2 class="fade-in" style="margin-bottom: 1.5rem;">
+        <span data-lang-show="bs" class="lang-visible">Svakih 7 godina — Mjesec se vraća najbliže Zemlji</span>
+        <span data-lang-show="no">Hvert 7. år — Månen vender tilbake nærmest Jorden</span>
+        <span data-lang-show="en">Every 7 years — the Moon returns closest to Earth</span>
+      </h2>
+
+      <div class="fade-in" style="background: var(--ink); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; color: var(--parchment);">
+
+        <!-- Animated perigee visualization -->
+        <div style="text-align:center; margin-bottom: 1.5rem;" aria-hidden="true">
+          <svg viewBox="0 0 400 160" width="100%" style="max-width:440px; display:block; margin:0 auto;">
+            <!-- Labels -->
+            <text x="200" y="15" text-anchor="middle" fill="rgba(201,169,97,0.6)" font-family="monospace" font-size="10">ELIPTICNA ORBITA MJESECA</text>
+            <!-- Earth -->
+            <circle cx="200" cy="90" r="12" fill="#2a3a6e" stroke="#c9a961" stroke-width="1.2"/>
+            <text x="200" y="94" text-anchor="middle" fill="#c9a961" font-family="monospace" font-size="7">ZEM</text>
+            <!-- Orbit ellipse -->
+            <ellipse cx="200" cy="90" rx="170" ry="60" fill="none" stroke="rgba(201,169,97,0.2)" stroke-width="1" stroke-dasharray="6 4"/>
+            <!-- Perigee point marker -->
+            <circle cx="30" cy="90" r="4" fill="rgba(201,169,97,0.5)"/>
+            <text x="30" y="110" text-anchor="middle" fill="rgba(201,169,97,0.7)" font-family="monospace" font-size="8">PERIGEE</text>
+            <!-- Moon near perigee with CSS animation -->
+            <g class="moon-approach">
+              <circle cx="32" cy="90" r="10" fill="#e8cfa0" opacity="0.95"/>
+              <circle cx="37" cy="87" r="8" fill="#1a1a3e"/>
+            </g>
+            <!-- Distance arrows -->
+            <line x1="42" y1="80" x2="188" y2="80" stroke="rgba(201,169,97,0.3)" stroke-width="1" marker-end="url(#arr)"/>
+            <text x="115" y="75" text-anchor="middle" fill="rgba(201,169,97,0.5)" font-family="monospace" font-size="9">362,975 km (2017 APEX)</text>
+            <!-- Apogee label -->
+            <circle cx="370" cy="90" r="10" fill="#c9a961" opacity="0.2" stroke="rgba(201,169,97,0.3)" stroke-width="1"/>
+            <text x="370" y="110" text-anchor="middle" fill="rgba(201,169,97,0.4)" font-family="monospace" font-size="8">APOGEE</text>
+          </svg>
+        </div>
+
+        <p style="font-style:italic; color:rgba(245,240,232,0.8); text-align:center; margin:0; font-size:var(--text-lg);">
+          <span data-lang-show="bs" class="lang-visible">Empirijski nalaz: Mjesec dosegne perigee (apsolutno najbliže Zemlji) u zadnjoj trećini Ramazana <strong style="color:var(--gold-light);">svakih 7 godina.</strong></span>
+          <span data-lang-show="no">Empirisk funn: Månen når perigeum (absolutt nærmest Jorden) i den siste tredjedelen av Ramadan <strong style="color:var(--gold-light);">hvert 7. år.</strong></span>
+          <span data-lang-show="en">Empirical finding: The Moon reaches perigee (absolutely closest to Earth) in the last third of Ramadan <strong style="color:var(--gold-light);">every 7 years.</strong></span>
+        </p>
+      </div>
+
+      <!-- Methodology note -->
+      <p class="fade-in" style="font-size:var(--text-sm); color:var(--text-muted); margin-bottom:2rem;">
+        <span data-lang-show="bs" class="lang-visible">Metoda: Python/ephem astronomska efemerida, koordinate Meke (21.4225°N, 39.8262°E). Ramadan datumi per Umm al-Qura. Period: 2000–2043.</span>
+        <span data-lang-show="no">Metode: Python/ephem astronomisk efemeride, koordinater Mekka (21.4225°N, 39.8262°E). Ramadan-datoer per Umm al-Qura. Periode: 2000–2043.</span>
+        <span data-lang-show="en">Method: Python/ephem astronomical ephemeris, Mecca coordinates (21.4225°N, 39.8262°E). Ramadan dates per Umm al-Qura. Period: 2000–2043.</span>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ===== PERIGEE TABLE ===== -->
+  <section class="section--sm" style="background: var(--parchment);">
+    <div class="container--narrow">
+
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Šest događaja, 7-godišnji ritam</span>
+        <span data-lang-show="no">Seks hendelser, 7-årig rytme</span>
+        <span data-lang-show="en">Six events, 7-year rhythm</span>
+      </span>
+
+      <h2 class="fade-in" style="margin-bottom:0.75rem;">
+        <span data-lang-show="bs" class="lang-visible">Perigee u Ramazanu 2003–2038</span>
+        <span data-lang-show="no">Perigeum i Ramadan 2003–2038</span>
+        <span data-lang-show="en">Perigee in Ramadan 2003–2038</span>
+      </h2>
+
+      <p class="fade-in" style="font-style:italic; color:var(--text-secondary); margin-bottom:1.5rem;">
+        <span data-lang-show="bs" class="lang-visible">Zlatni red je 2017 — APEX cijelog ciklusa. U tom godištu razlika između Noći 27 i Noći 28 bila je samo 117 km — manja od prečnika Mjeseca.</span>
+        <span data-lang-show="no">Den gylne raden er 2017 — APEX for hele syklusen. Det året var forskjellen mellom natt 27 og natt 28 bare 117 km — mindre enn Månens diameter.</span>
+        <span data-lang-show="en">The golden row is 2017 — APEX of the entire cycle. That year the difference between Night 27 and Night 28 was only 117 km — less than the Moon's diameter.</span>
+      </p>
+
+      <div style="overflow-x:auto;">
+        <table class="perigee-table fade-in">
+          <thead>
+            <tr>
+              <th>
+                <span data-lang-show="bs" class="lang-visible">Godina</span>
+                <span data-lang-show="no">År</span>
+                <span data-lang-show="en">Year</span>
+              </th>
+              <th>
+                <span data-lang-show="bs" class="lang-visible">Datum N28</span>
+                <span data-lang-show="no">Dato N28</span>
+                <span data-lang-show="en">Date N28</span>
+              </th>
+              <th>
+                <span data-lang-show="bs" class="lang-visible">Udaljenost (km)</span>
+                <span data-lang-show="no">Avstand (km)</span>
+                <span data-lang-show="en">Distance (km)</span>
+              </th>
+              <th>
+                <span data-lang-show="bs" class="lang-visible">Faza</span>
+                <span data-lang-show="no">Fase</span>
+                <span data-lang-show="en">Phase</span>
+              </th>
+              <th>
+                <span data-lang-show="bs" class="lang-visible">Napomena</span>
+                <span data-lang-show="no">Merknad</span>
+                <span data-lang-show="en">Note</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2003</td>
+              <td>23.11.2003</td>
+              <td class="mono">363,196</td>
+              <td class="mono">0.0%</td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">perigee</span>
+                <span data-lang-show="no">perigeum</span>
+                <span data-lang-show="en">perigee</span>
+              </td>
+            </tr>
+            <tr>
+              <td>2010</td>
+              <td>07.09.2010</td>
+              <td class="mono">362,985</td>
+              <td class="mono">0.6%</td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">perigee</span>
+                <span data-lang-show="no">perigeum</span>
+                <span data-lang-show="en">perigee</span>
+              </td>
+            </tr>
+            <tr class="apex">
+              <td>2017</td>
+              <td>23.06.2017</td>
+              <td class="mono">362,975</td>
+              <td class="mono">0.2%</td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">APEX — minimum 2000–2043</span>
+                <span data-lang-show="no">APEX — minimum 2000–2043</span>
+                <span data-lang-show="en">APEX — minimum 2000–2043</span>
+              </td>
+            </tr>
+            <tr>
+              <td>2024</td>
+              <td>07.04.2024</td>
+              <td class="mono">364,721</td>
+              <td class="mono">1.2%</td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">perigee</span>
+                <span data-lang-show="no">perigeum</span>
+                <span data-lang-show="en">perigee</span>
+              </td>
+            </tr>
+            <tr>
+              <td>2031</td>
+              <td>11.01.2032</td>
+              <td class="mono">365,498</td>
+              <td class="mono">1.5%</td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">perigee</span>
+                <span data-lang-show="no">perigeum</span>
+                <span data-lang-show="en">perigee</span>
+              </td>
+            </tr>
+            <tr>
+              <td>2038</td>
+              <td>26.10.2038</td>
+              <td class="mono">365,144</td>
+              <td class="mono">2.7%</td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">perigee</span>
+                <span data-lang-show="no">perigeum</span>
+                <span data-lang-show="en">perigee</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Night 27 vs 28 in 2017 -->
+      <div class="fade-in" style="background: rgba(201,169,97,0.08); border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:1.5rem; margin-top:2rem;">
+        <h4 style="margin-bottom:0.75rem; font-size:var(--text-lg);">
+          <span data-lang-show="bs" class="lang-visible">2017 — Noć 27 vs Noć 28</span>
+          <span data-lang-show="no">2017 — Natt 27 vs Natt 28</span>
+          <span data-lang-show="en">2017 — Night 27 vs Night 28</span>
+        </h4>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; font-family:var(--font-mono); font-size:var(--text-sm);">
+          <div>
+            <div style="color:var(--text-muted); font-size:var(--text-xs); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem;">
+              <span data-lang-show="bs" class="lang-visible">Noć 27</span>
+              <span data-lang-show="no">Natt 27</span>
+              <span data-lang-show="en">Night 27</span>
+            </div>
+            <div style="font-size:var(--text-xl); color:var(--ink);">363,092 km</div>
+          </div>
+          <div>
+            <div style="color:var(--gold-dark); font-size:var(--text-xs); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem;">
+              <span data-lang-show="bs" class="lang-visible">Noć 28 (perigee)</span>
+              <span data-lang-show="no">Natt 28 (perigeum)</span>
+              <span data-lang-show="en">Night 28 (perigee)</span>
+            </div>
+            <div style="font-size:var(--text-xl); color:var(--gold-dark); font-weight:700;">362,975 km</div>
+          </div>
+        </div>
+        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border-gold);">
+          <span style="font-family:var(--font-sans); font-size:var(--text-sm); color:var(--text-secondary);">
+            <span data-lang-show="bs" class="lang-visible">Razlika: <strong>117 km</strong> — manja od prečnika Mjeseca (3,474 km). U astronomskom smislu, obje noći su "Laylatul Qadr zona."</span>
+            <span data-lang-show="no">Forskjell: <strong>117 km</strong> — mindre enn Månens diameter (3 474 km). I astronomisk forstand er begge netter i "Laylatul Qadr-sonen."</span>
+            <span data-lang-show="en">Difference: <strong>117 km</strong> — less than the Moon's diameter (3,474 km). Astronomically, both nights are the "Laylatul Qadr zone."</span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== MATHEMATICS OF 19 ===== -->
+  <section class="section--sm" style="background:var(--ink); color:var(--parchment);">
+    <div class="container--narrow">
+
+      <span class="section-label" style="color:var(--gold-light); opacity:0.8;">
+        <span data-lang-show="bs" class="lang-visible">Matematika broja 19</span>
+        <span data-lang-show="no">Matematikken til tallet 19</span>
+        <span data-lang-show="en">The mathematics of 19</span>
+      </span>
+
+      <h2 class="fade-in" style="color:var(--parchment); margin-bottom:1rem;">
+        <span data-lang-show="bs" class="lang-visible">19 = 12 + 7 — Metonski ciklus</span>
+        <span data-lang-show="no">19 = 12 + 7 — Den metonske syklusen</span>
+        <span data-lang-show="en">19 = 12 + 7 — The Metonic Cycle</span>
+      </h2>
+
+      <p class="fade-in" style="color:rgba(245,240,232,0.75); font-style:italic; margin-bottom:2rem; max-width:52ch;">
+        <span data-lang-show="bs" class="lang-visible">Metonski ciklus (grčki astronom Meton, 432 p.n.e.) govori: 19 solarnih godina = 235 lunarnih mjeseci. Od 19 godina, 12 su regularne (12 mjese.) a 7 su embolizmičke (13 mjes.). Ta struktura 12+7 sačuvana je u Kur'anu.</span>
+        <span data-lang-show="no">Den metonske syklusen (gresk astronom Meton, 432 f.Kr.) sier: 19 solår = 235 månedssykluser. Av 19 år er 12 vanlige (12 mnd.) og 7 er embolismiske (13 mnd.). Strukturen 12+7 er bevart i Koranen.</span>
+        <span data-lang-show="en">The Metonic cycle (Greek astronomer Meton, 432 BCE) states: 19 solar years = 235 lunar months. Of 19 years, 12 are regular (12 mo.) and 7 are embolismic (13 mo.). That 12+7 structure is preserved in the Quran.</span>
+      </p>
+
+      <!-- Math block 1: 19 = 12 + 7 -->
+      <div class="math-connection fade-in">
+19 = 12 + 7
+      ↑      ↑
+regularne  embolizmičke
+(solarne)   (lunarni +1)
+
+7 = sub-ciklus perigee u Ramazanu
+12 = 1000 mod 19 (Surah 97:3 ÷ Surah 74:30)
+      </div>
+
+      <!-- Math block 2: 1000 / 19 -->
+      <h3 class="fade-in" style="color:var(--gold-light); font-size:var(--text-xl); margin-bottom:1rem; margin-top:2rem;">
+        <span data-lang-show="bs" class="lang-visible">1000 mj ÷ 19 — Surah 97:3</span>
+        <span data-lang-show="no">1000 mnd ÷ 19 — Sure 97:3</span>
+        <span data-lang-show="en">1000 mo ÷ 19 — Surah 97:3</span>
+      </h3>
+
+      <div class="math-connection fade-in">
+Surah 97:3 — "bolja od 1000 mjeseci"
+
+1000 ÷ 19 = 52, ostatak 12
+
+  ostatak 12 = broj regularnih Metonskih godina
+  52 × 19 ≈ 988 mj ≈ Metonski ciklusi
+
+1000 mod 19 = 12  ←→  12 od 19 regularnih god.
+      </div>
+
+      <!-- Math block 3: Surah 18:25 -->
+      <h3 class="fade-in" style="color:var(--gold-light); font-size:var(--text-xl); margin-bottom:1rem; margin-top:2rem;">
+        <span data-lang-show="bs" class="lang-visible">Surah 18:25 — Ljudi Pećine</span>
+        <span data-lang-show="no">Sure 18:25 — Grottefolket</span>
+        <span data-lang-show="en">Surah 18:25 — The Cave People</span>
+      </h3>
+
+      <p class="fade-in" style="color:rgba(245,240,232,0.75); margin-bottom:1rem;">
+        <span data-lang-show="bs" class="lang-visible">"I ostali su u pećini svojoj trista godina, a dodali su još devet." — Kur'an 18:25</span>
+        <span data-lang-show="no">"Og de ble i sin grotte i tre hundre år, og de la til ni." — Koranen 18:25</span>
+        <span data-lang-show="en">"And they remained in their cave for three hundred years and exceeded by nine." — Quran 18:25</span>
+      </p>
+
+      <div class="math-connection fade-in">
+300 solarnih = 309 lunarnih godina
+
+309 / 300 = 1.030  ← solarno-lunarni faktor
+
+Metonski ciklus:
+235 lunacija ÷ 19 = 12.368 mj/god
+12.368 / 12 = 1.031  ← identičan faktor!
+
+Oba broja opisuju isti mehanizam:
+solarna ↔ lunarna korekcija = 1.03
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SPIRITUAL CLOSE ===== -->
+  <section class="section--sm" style="background:var(--parchment);">
+    <div class="container--narrow" style="text-align:center;">
+
+      <!-- Crescent ornament -->
+      <div style="margin-bottom:2rem;" aria-hidden="true">
+        <svg viewBox="0 0 80 80" width="60" height="60">
+          <circle cx="40" cy="40" r="28" fill="rgba(74,59,107,0.12)" stroke="rgba(74,59,107,0.3)" stroke-width="1"/>
+          <circle cx="40" cy="40" r="22" fill="rgba(201,169,97,0.2)"/>
+          <circle cx="48" cy="36" r="18" fill="var(--parchment)"/>
+          <!-- Small star -->
+          <circle cx="20" cy="22" r="2.5" fill="#c9a961" opacity="0.7"/>
+          <circle cx="60" cy="18" r="1.5" fill="#c9a961" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <blockquote class="pullquote fade-in" style="border-left-color: #4a3b6b; text-align:left;">
+        <span data-lang-show="bs" class="lang-visible">"Ne tvrdimo da znamo. Tvrdimo da je dostojno razmišljanja. Astronomija nam otkriva ritam koji se podudara sa onim što je u Kur'anu zapisano — a Allah zna najbolje."</span>
+        <span data-lang-show="no">"Vi hevder ikke å vite. Vi hevder at det er verdt å tenke over. Astronomien avslører en rytme som stemmer overens med det som er skrevet i Koranen — og Allah vet best."</span>
+        <span data-lang-show="en">"We do not claim to know. We claim it is worthy of contemplation. Astronomy reveals a rhythm that corresponds to what is written in the Quran — and Allah knows best."</span>
+        <footer style="margin-top:1rem; font-size:var(--text-sm); font-family:var(--font-sans); font-style:normal; color:var(--text-muted);">
+          — <em>ALAI, 2026</em>
+        </footer>
+      </blockquote>
+
+      <div style="margin-top:2.5rem;">
+        <p style="font-family:var(--font-serif); font-size:var(--text-xl); font-style:italic; color:var(--text-secondary); max-width:52ch; margin:0 auto 2rem;">
+          <span data-lang-show="bs" class="lang-visible">Svakih 7 godina Noć Odredbe dobija kosmički marker — Mjesec na svom najnižem, najbližem, najtoplijom putu. Da li je ovo slučaj? Ili je ovo jedan od ajeta koji se ne može čitati, samo gledati.</span>
+          <span data-lang-show="no">Hvert 7. år får Skjebnenattens natt et kosmisk merke — Månen i sin laveste, nærmeste, varmeste bane. Er dette tilfeldig? Eller er dette ett av de vers som ikke kan leses, bare betraktes.</span>
+          <span data-lang-show="en">Every 7 years the Night of Decree receives a cosmic marker — the Moon at its lowest, closest, warmest passage. Is this a coincidence? Or is this one of those signs that cannot be read, only witnessed.</span>
+        </p>
+
+        <div lang="ar" style="font-family:var(--font-arabic); font-size:clamp(1.4rem,3vw,2rem); color:var(--gold-dark); direction:rtl; text-align:center; margin-bottom:0.5rem;">
+          وَٱللَّهُ أَعْلَمُ
+        </div>
+        <div style="font-family:var(--font-sans); font-size:var(--text-sm); color:var(--text-muted); letter-spacing:0.05em;">
+          <span data-lang-show="bs" class="lang-visible">Allahu'alem.</span>
+          <span data-lang-show="no">Og Allah vet best.</span>
+          <span data-lang-show="en">And Allah knows best.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ATTRIBUTION / ZAHVALA ===== -->
+  <section class="section--sm" style="background:var(--cream);">
+    <div class="container--narrow">
+
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Zahvala</span>
+        <span data-lang-show="no">Takk</span>
+        <span data-lang-show="en">Acknowledgment</span>
+      </span>
+
+      <div class="attribution-box fade-in">
+
+        <div data-lang-show="bs" class="lang-visible">
+          <p style="margin-bottom:1rem;">
+            Ovo istraživanje nadograđuje djelo <strong>dr. Rashada Khalife</strong> (1974), koji je prvi matematički dokumentovao strukturu broja 19, i <strong>šejha Ahmeda Deedata</strong> (IPCI, 1979) koji je popularizirao to znanje. Deedat-ova knjiga <em>Al-Qur'an: The Ultimate Miracle</em> dostupna je u našoj arhivi: <code>/Public/Research/quran-19-research/deedat/</code>.
+          </p>
+          <p style="margin-bottom:1rem;">
+            Astronomski nalaz 7-godišnjeg perigee ciklusa i matematička veza sa Metonskom strukturom (12+7) je originalni rad ALAI tima, 2026.
+          </p>
+          <p style="color:var(--text-muted); font-style:italic;">
+            Allah zna najbolje. / Allahu'alem.
+          </p>
+        </div>
+
+        <div data-lang-show="no">
+          <p style="margin-bottom:1rem;">
+            Denne forskningen bygger på arbeidet til <strong>dr. Rashad Khalifa</strong> (1974), som var den første som matematisk dokumenterte strukturen til tallet 19, og <strong>sjekh Ahmed Deedat</strong> (IPCI, 1979) som populariserte denne kunnskapen. Deedats bok <em>Al-Qur'an: The Ultimate Miracle</em> er tilgjengelig i vårt arkiv: <code>/Public/Research/quran-19-research/deedat/</code>.
+          </p>
+          <p style="margin-bottom:1rem;">
+            Det astronomiske funnet om den 7-årige perigeumsyklusen og den matematiske forbindelsen med den metonske strukturen (12+7) er originalt arbeid av ALAI-teamet, 2026.
+          </p>
+          <p style="color:var(--text-muted); font-style:italic;">
+            Og Allah vet best.
+          </p>
+        </div>
+
+        <div data-lang-show="en">
+          <p style="margin-bottom:1rem;">
+            This research builds upon the work of <strong>Dr. Rashad Khalifa</strong> (1974), who first mathematically documented the structure of the number 19, and <strong>Sheikh Ahmed Deedat</strong> (IPCI, 1979) who popularised that knowledge. Deedat's book <em>Al-Qur'an: The Ultimate Miracle</em> is available in our archive: <code>/Public/Research/quran-19-research/deedat/</code>.
+          </p>
+          <p style="margin-bottom:1rem;">
+            The astronomical finding of the 7-year perigee cycle and the mathematical connection with the Metonic structure (12+7) is original work by the ALAI team, 2026.
+          </p>
+          <p style="color:var(--text-muted); font-style:italic;">
+            Allah knows best.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">ALAI / Ucenje — Laylatul Qadr</div>
+        <div style="color:var(--text-faint); font-size:var(--text-sm);">
+          <span data-lang-show="bs" class="lang-visible">Astronomski istraživački nalaz · ALAI, 2026</span>
+          <span data-lang-show="no">Astronomisk forskningsfunn · ALAI, 2026</span>
+          <span data-lang-show="en">Astronomical research finding · ALAI, 2026</span>
+        </div>
+        <div style="color:var(--text-faint); font-size:var(--text-xs); margin-top:0.5rem;">ALAI, 2026</div>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigacija">
+        <a href="/ucenje/">Hub</a>
+        <a href="/ucenje/audio/">Audio</a>
+        <a href="/ucenje/19-explorer/">19 Explorer</a>
+        <a href="https://alai.no">ALAI</a>
+      </nav>
+    </div>
+  </footer>
+
+</div><!-- /.page -->
+
+<script src="/ucenje/assets/app.js" defer></script>
+<script>
+  // Generate stars
+  document.addEventListener('DOMContentLoaded', function() {
+    const field = document.getElementById('stars-field');
+    if (!field) return;
+    const starData = [
+      {cx:8,cy:12},{cx:22,cy:7},{cx:38,cy:18},{cx:55,cy:5},{cx:70,cy:22},
+      {cx:85,cy:10},{cx:92,cy:28},{cx:15,cy:35},{cx:45,cy:30},{cx:65,cy:38},
+      {cx:78,cy:15},{cx:12,cy:50},{cx:30,cy:55},{cx:50,cy:48},{cx:68,cy:52},
+      {cx:88,cy:42},{cx:95,cy:60},{cx:25,cy:70},{cx:42,cy:65},{cx:60,cy:72},
+      {cx:75,cy:62},{cx:5,cy:75},{cx:18,cy:85},{cx:35,cy:80},{cx:55,cy:88},
+      {cx:72,cy:78},{cx:90,cy:82},{cx:48,cy:82},{cx:82,cy:92},{cx:10,cy:92}
+    ];
+    starData.forEach(function(s, i) {
+      const dot = document.createElement('div');
+      dot.className = 'star-dot';
+      const size = 1 + Math.random() * 2.5;
+      dot.style.cssText = [
+        'left:' + s.cx + '%',
+        'top:' + s.cy + '%',
+        'width:' + size + 'px',
+        'height:' + size + 'px',
+        'animation-delay:' + (i * 0.18) + 's',
+        'animation-duration:' + (2.5 + Math.random() * 2) + 's'
+      ].join(';');
+      field.appendChild(dot);
+    });
+  });
+</script>
+</body>
+</html>
