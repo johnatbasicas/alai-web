@@ -1789,7 +1789,7 @@
             formSubmitBtn.textContent = 'Sending...';
 
             try {
-                const resp = await fetch('https://api.basicconsulting.no/contact', {
+                const resp = await fetch('/api/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, message, _honey }),
