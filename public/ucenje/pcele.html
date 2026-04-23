@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pčele, Sace i 6×19 — ALAI</title>
+  <link rel="stylesheet" href="/ucenje/assets/style.css">
+  <link rel="stylesheet" href="/ucenje/assets/animations.css">
+  <style>
+    /* ===== PCELE PAGE STYLES ===== */
+
+    /* Hex hero animation */
+    .hex-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+
+    .hex-svg-wrap {
+      position: relative;
+      width: min(420px, 90vw);
+      margin: 0 auto;
+    }
+
+    /* Animated hex tiling */
+    @keyframes hexPulse {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1; }
+    }
+    @keyframes hexFade {
+      from { opacity: 0; transform: scale(0.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .hex-cell {
+      animation: hexFade 0.4s ease backwards;
+    }
+    .hex-cell--gold {
+      animation: hexPulse 2.5s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hex-cell, .hex-cell--gold { animation: none; }
+    }
+
+    /* Comparison table */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-serif);
+      font-size: var(--text-base);
+    }
+    .compare-table th {
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      padding: 0.75rem 1.25rem;
+      background: var(--parchment-dark);
+      border-bottom: 2px solid var(--border-gold);
+      text-align: left;
+    }
+    .compare-table td {
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:nth-child(even) td { background: var(--parchment); }
+    .compare-table td:first-child { color: var(--ink); font-weight: 500; }
+    .compare-table td:last-child  { color: var(--teal); font-weight: 500; }
+
+    /* Blockquote arabic style */
+    .quran-blockquote {
+      border-left: 4px solid var(--gold);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background: rgba(201,169,97,0.05);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+    .quran-blockquote .arabic {
+      font-family: var(--font-arabic);
+      direction: rtl;
+      text-align: right;
+      font-size: 1.5em;
+      line-height: 2.2;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .quran-blockquote .translation {
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: var(--text-base);
+    }
+    .quran-blockquote .ref {
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
+      color: var(--gold-dark);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    /* Facts grid */
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .fact-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .fact-item::before {
+      content: attr(data-icon);
+      position: absolute;
+      top: -0.5rem;
+      right: 0.75rem;
+      font-size: 3rem;
+      opacity: 0.07;
+      line-height: 1;
+    }
+    .fact-item-label {
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 0.5rem;
+    }
+    .fact-item-value {
+      font-family: var(--font-mono);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .fact-item-desc {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+
+    /* Source list */
+    .source-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .source-list li {
+      padding: 0.75rem 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+    .source-list li strong {
+      color: var(--ink);
+      display: block;
+    }
+
+    /* Structural callout */
+    .structure-callout {
+      background: var(--ink);
+      color: var(--parchment);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .structure-callout::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52' viewBox='0 0 60 52'%3E%3Cpolygon points='30,0 60,17 60,35 30,52 0,35 0,17' fill='none' stroke='%23c9a961' stroke-width='0.3' opacity='0.15'/%3E%3C/svg%3E") repeat;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .structure-callout-content { position: relative; z-index: 1; }
+    .structure-callout h3 {
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+      font-size: var(--text-2xl);
+    }
+    .structure-callout p {
+      color: rgba(245,240,232,0.8);
+      margin-bottom: 0.75rem;
+    }
+    .structure-callout .mono {
+      font-family: var(--font-mono);
+      color: var(--gold-light);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Glavna navigacija">
+  <a href="/ucenje/" class="nav-brand">
+    <svg class="nav-brand-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12" stroke="#c9a961" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="14" cy="14" r="2.5" fill="#c9a961" opacity="0.8"/>
+    </svg>
+    ALAI / Ucenje
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="/ucenje/">Hub</a></li>
+    <li><a href="/ucenje/matematika.html">
+      <span data-lang-show="bs" class="lang-visible">Matematika</span>
+      <span data-lang-show="no">Matematikk</span>
+      <span data-lang-show="en">Math</span>
+    </a></li>
+    <li><a href="/ucenje/19-explorer/">19 Explorer</a></li>
+  </ul>
+  <div class="lang-switcher" role="group" aria-label="Odabir jezika">
+    <button class="lang-btn active" data-lang="bs" onclick="switchLanguage('bs')" aria-pressed="true">BS</button>
+    <button class="lang-btn" data-lang="no" onclick="switchLanguage('no')" aria-pressed="false">NO</button>
+    <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')" aria-pressed="false">EN</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ===== HERO ===== -->
+  <section style="padding:5rem 0 3rem; background:var(--ink); text-align:center; position:relative; overflow:hidden;">
+
+    <!-- Background hex pattern -->
+    <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none; opacity:0.05;">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hex-bg" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+            <polygon points="30,0 60,17 60,35 30,52 0,35 0,17" fill="none" stroke="#c9a961" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hex-bg)"/>
+      </svg>
+    </div>
+
+    <div class="container--narrow" style="position:relative; z-index:1;">
+      <a href="/ucenje/" style="font-family:var(--font-sans); font-size:var(--text-sm); color:rgba(201,169,97,0.7); text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">&#8592;
+        <span data-lang-show="bs" class="lang-visible">Nazad na Hub</span>
+        <span data-lang-show="no">Tilbake til Hub</span>
+        <span data-lang-show="en">Back to Hub</span>
+      </a>
+
+      <span class="section-label" style="color:rgba(201,169,97,0.9);">
+        <span data-lang-show="bs" class="lang-visible">Geometrija · Surah 16 · 6×19</span>
+        <span data-lang-show="no">Geometri · Surah 16 · 6×19</span>
+        <span data-lang-show="en">Geometry · Surah 16 · 6×19</span>
+      </span>
+
+      <h1 style="color:var(--parchment); margin:1rem 0 1.5rem; font-size:clamp(2rem,5vw,3.2rem); line-height:1.2;">
+        <span data-lang-show="bs" class="lang-visible">Pčele, heksagonalno sace<br>i 6×19 struktura Kur'ana</span>
+        <span data-lang-show="no">Bier, hexagonalt vokskam<br>og 6×19-strukturen i Koranen</span>
+        <span data-lang-show="en">Bees, the hexagonal honeycomb<br>and the 6×19 structure of the Quran</span>
+      </h1>
+
+      <p style="color:rgba(245,240,232,0.75); font-style:italic; font-size:var(--text-xl); max-width:50ch; margin:0 auto 3rem;">
+        <span data-lang-show="bs" class="lang-visible">114 sura = 6 × 19. Sura o pčelama = sura broj 16. Sace pčela ima 6 strana. Ovo nije numerološka igra — to je geometrijska i strukturalna paralela.</span>
+        <span data-lang-show="no">114 suraer = 6 × 19. Suraen om bier = sura nummer 16. Bienes vokskam har 6 sider. Dette er ikke numerologi — det er en geometrisk og strukturell parallell.</span>
+        <span data-lang-show="en">114 surahs = 6 × 19. The surah about bees = surah number 16. The honeycomb has 6 sides. This is not numerology — it is a geometric and structural parallel.</span>
+      </p>
+
+      <!-- Animated SVG hex → 6×19 -->
+      <div class="hex-hero" role="img" aria-label="Animirani heksagonalni prikaz koji prikazuje vezu između pčelinjih saća i 6×19 strukture Kur'ana">
+        <div class="hex-svg-wrap">
+          <svg id="hex-hero-svg" viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+            <!-- Hex tiling (2 rows × 6 hexagons) to illustrate honeycomb -->
+            <!-- Row 1: offset -->
+            <g id="honeycomb-group">
+              <!-- Row 1 (y=0, offset) -->
+              <polygon class="hex-cell" style="animation-delay:0.0s" points="30,8 54,21 54,47 30,60 6,47 6,21" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.5"/>
+              <polygon class="hex-cell" style="animation-delay:0.1s" points="78,8 102,21 102,47 78,60 54,47 54,21" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.5"/>
+              <polygon class="hex-cell" style="animation-delay:0.2s" points="126,8 150,21 150,47 126,60 102,47 102,21" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.5"/>
+              <polygon class="hex-cell hex-cell--gold" style="animation-delay:0.3s" points="174,8 198,21 198,47 174,60 150,47 150,21" fill="rgba(201,169,97,0.2)" stroke="#c9a961" stroke-width="2" opacity="0.9"/>
+              <polygon class="hex-cell" style="animation-delay:0.4s" points="222,8 246,21 246,47 222,60 198,47 198,21" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.5"/>
+              <polygon class="hex-cell" style="animation-delay:0.5s" points="270,8 294,21 294,47 270,60 246,47 246,21" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.5"/>
+              <polygon class="hex-cell" style="animation-delay:0.6s" points="318,8 342,21 342,47 318,60 294,47 294,21" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.5"/>
+              <polygon class="hex-cell" style="animation-delay:0.7s" points="366,8 390,21 390,47 366,60 342,47 342,21" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.5"/>
+
+              <!-- Row 2 (y shifted by 39, no offset) -->
+              <polygon class="hex-cell" style="animation-delay:0.1s" points="6,60 30,73 30,99 6,112 -18,99 -18,73" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.4"/>
+              <polygon class="hex-cell" style="animation-delay:0.2s" points="54,60 78,73 78,99 54,112 30,99 30,73" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.4"/>
+              <polygon class="hex-cell" style="animation-delay:0.3s" points="102,60 126,73 126,99 102,112 78,99 78,73" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.4"/>
+              <polygon class="hex-cell" style="animation-delay:0.4s" points="150,60 174,73 174,99 150,112 126,99 126,73" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.4"/>
+              <polygon class="hex-cell hex-cell--gold" style="animation-delay:0.5s" points="198,60 222,73 222,99 198,112 174,99 174,73" fill="rgba(201,169,97,0.15)" stroke="#c9a961" stroke-width="2" opacity="0.9"/>
+              <polygon class="hex-cell" style="animation-delay:0.6s" points="246,60 270,73 270,99 246,112 222,99 222,73" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.4"/>
+              <polygon class="hex-cell" style="animation-delay:0.7s" points="294,60 318,73 318,99 294,112 270,99 270,73" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.4"/>
+              <polygon class="hex-cell" style="animation-delay:0.8s" points="342,60 366,73 366,99 342,112 318,99 318,73" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.4"/>
+
+              <!-- Row 3 (y=112) -->
+              <polygon class="hex-cell" style="animation-delay:0.2s" points="30,112 54,125 54,151 30,164 6,151 6,125" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.3"/>
+              <polygon class="hex-cell" style="animation-delay:0.3s" points="78,112 102,125 102,151 78,164 54,151 54,125" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.3"/>
+              <polygon class="hex-cell" style="animation-delay:0.4s" points="126,112 150,125 150,151 126,164 102,151 102,125" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.3"/>
+              <polygon class="hex-cell" style="animation-delay:0.5s" points="174,112 198,125 198,151 174,164 150,151 150,125" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.3"/>
+              <polygon class="hex-cell" style="animation-delay:0.6s" points="222,112 246,125 246,151 222,164 198,151 198,125" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.3"/>
+              <polygon class="hex-cell hex-cell--gold" style="animation-delay:0.7s" points="270,112 294,125 294,151 270,164 246,151 246,125" fill="rgba(201,169,97,0.12)" stroke="#c9a961" stroke-width="2" opacity="0.9"/>
+              <polygon class="hex-cell" style="animation-delay:0.8s" points="318,112 342,125 342,151 318,164 294,151 294,125" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.3"/>
+              <polygon class="hex-cell" style="animation-delay:0.9s" points="366,112 390,125 390,151 366,164 342,151 342,125" fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.3"/>
+            </g>
+
+            <!-- Labels -->
+            <text x="174" y="37" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#c9a961" font-weight="700">6×</text>
+            <text x="198" y="90" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#c9a961" font-weight="700">6×</text>
+            <text x="270" y="141" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#c9a961" font-weight="700">6×</text>
+          </svg>
+        </div>
+        <p style="font-family:var(--font-sans); font-size:var(--text-xs); color:rgba(201,169,97,0.7); margin-top:0.75rem; letter-spacing:0.08em; text-transform:uppercase;">
+          <span data-lang-show="bs" class="lang-visible">Zlatne ćelije = svaki 6. heksagon — kao 6 redova u 6×19 mreži</span>
+          <span data-lang-show="no">Gylne celler = hver 6. hexagon — som 6 rader i 6×19-nettet</span>
+          <span data-lang-show="en">Gold cells = every 6th hexagon — like 6 rows in the 6×19 grid</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 1: MATEMATIKA SACA ===== -->
+  <section style="padding:4rem 0;">
+    <div class="container--narrow">
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Matematika · Honeycomb Conjecture</span>
+        <span data-lang-show="no">Matematikk · Honeycomb Conjecture</span>
+        <span data-lang-show="en">Mathematics · Honeycomb Conjecture</span>
+      </span>
+      <h2 class="fade-in" style="margin-bottom:1.5rem; font-size:clamp(1.5rem,3.5vw,2.2rem);">
+        <span data-lang-show="bs" class="lang-visible">Zašto šest strana — ne pet, ne sedam</span>
+        <span data-lang-show="no">Hvorfor seks sider — ikke fem, ikke syv</span>
+        <span data-lang-show="en">Why six sides — not five, not seven</span>
+      </h2>
+
+      <p class="fade-in">
+        <span data-lang-show="bs" class="lang-visible">Postoje samo tri pravilna poligona koji mogu bez praznina pokriti ravnu površinu: jednakostranicni trokut (3 strane), kvadrat (4 strane), i pravilni šestougao — heksagon (6 strana). Pčele instinktivno koriste trecu od ove tri opcije.</span>
+        <span data-lang-show="no">Det finnes bare tre regulære polygoner som kan dekke en flat flate uten mellomrom: likesidet trekant (3 sider), kvadrat (4 sider), og regulær sekskant — heksagon (6 sider). Bier bruker instinktivt den tredje av disse tre alternativene.</span>
+        <span data-lang-show="en">There are only three regular polygons that can cover a flat surface without gaps: equilateral triangle (3 sides), square (4 sides), and the regular hexagon (6 sides). Bees instinctively use the third of these three options.</span>
+      </p>
+
+      <div class="structure-callout fade-in">
+        <div class="structure-callout-content">
+          <h3>
+            <span data-lang-show="bs" class="lang-visible">Honeycomb Conjecture — Thomas C. Hales, 1999</span>
+            <span data-lang-show="no">Honeycomb Conjecture — Thomas C. Hales, 1999</span>
+            <span data-lang-show="en">Honeycomb Conjecture — Thomas C. Hales, 1999</span>
+          </h3>
+          <p>
+            <span data-lang-show="bs" class="lang-visible">Od svih mogucih oblika kojima se može podijeliti ravnina na jednake površine, pravilni heksagon zahtijeva najmanji ukupni perimetar po ćeliji. Heksagon enkodira maksimalnu zapreminu uz minimalni utrošak voska.</span>
+            <span data-lang-show="no">Av alle mulige former som kan dele planet i like arealer, krever den regulære heksagonen minst totalt omkrets per celle. Heksagonen koder maksimalt volum med minimal voksbruk.</span>
+            <span data-lang-show="en">Of all possible shapes that can divide a plane into equal areas, the regular hexagon requires the smallest total perimeter per cell. The hexagon encodes maximum volume with minimum wax usage.</span>
+          </p>
+          <p>
+            <span data-lang-show="bs" class="lang-visible"><strong class="mono">Kvadrat:</strong> za istu površinu zahtijeva ~15% više perimetra od heksagona. <strong class="mono">Trokut:</strong> ~29% više. Evolucijska ekonomija voska gurala je pčele prema matematički optimalnoj formi.</span>
+            <span data-lang-show="no"><strong class="mono">Kvadrat:</strong> krever ~15% mer omkrets enn heksagonen for samme areal. <strong class="mono">Trekant:</strong> ~29% mer. Evolusjonær økonomi rundt voks drev biene mot den matematisk optimale formen.</span>
+            <span data-lang-show="en"><strong class="mono">Square:</strong> requires ~15% more perimeter than hexagon for the same area. <strong class="mono">Triangle:</strong> ~29% more. Evolutionary wax economy drove bees toward the mathematically optimal form.</span>
+          </p>
+          <p style="font-size:var(--text-sm); color:rgba(245,240,232,0.55); margin-top:1rem;">
+            Hales, T.C. (2001). The Honeycomb Conjecture. Discrete &amp; Computational Geometry, 25(1), 1–22.
+          </p>
+        </div>
+      </div>
+
+      <p>
+        <span data-lang-show="bs" class="lang-visible">Matematičar <strong>Papus Aleksandrijski</strong> (c. 320. n.e.) je prvi formulisao tu intuiciju, tvrdeci da su pčele "primile od bogova određenu mudrost". No Papus nije pružio opšti matematički dokaz. Taj dokaz čekao je skoro <strong>1.700 godina</strong> — dok ga Thomas Hales nije dokazao 1999.</span>
+        <span data-lang-show="no">Matematikeren <strong>Pappos av Aleksandria</strong> (ca. 320 e.Kr.) formulerte intuisjonen først, og hevdet at bier hadde "fått en viss visdom fra gudene". Men Pappos ga ikke et generelt matematisk bevis. Det beviset ventet nesten <strong>1700 år</strong> — til Thomas Hales beviste det i 1999.</span>
+        <span data-lang-show="en">The mathematician <strong>Pappus of Alexandria</strong> (c. 320 CE) first formulated the intuition, claiming bees had "received a certain wisdom from the gods." But Pappus provided no general mathematical proof. That proof waited nearly <strong>1,700 years</strong> — until Thomas Hales proved it in 1999.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: SURAH 16 ===== -->
+  <section style="padding:4rem 0; background:var(--parchment);">
+    <div class="container--narrow">
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Kur'an · Surah 16 · An-Nahl (النَّحۡل)</span>
+        <span data-lang-show="no">Koranen · Surah 16 · An-Nahl (النَّحۡل)</span>
+        <span data-lang-show="en">Quran · Surah 16 · An-Nahl (النَّحۡل)</span>
+      </span>
+      <h2 class="fade-in" style="margin-bottom:1.5rem; font-size:clamp(1.5rem,3.5vw,2.2rem);">
+        <span data-lang-show="bs" class="lang-visible">Jedina sura nazvana po insektu</span>
+        <span data-lang-show="no">Den eneste suraen oppkalt etter et insekt</span>
+        <span data-lang-show="en">The only surah named after an insect</span>
+      </h2>
+
+      <p class="fade-in">
+        <span data-lang-show="bs" class="lang-visible">Od svih 114 sura Kur'ana, samo jedna nosi ime insekta: <strong>Surah 16, An-Nahl (النَّحۡل) — Pčela</strong>. Ovo je mekanska sura sa 128 ajeta. Nigdje drugdje u Kur'anu nije opisano direktno "božansko nadahnuće" dato životinji sa ovakvim specifičnim tehničkim detaljima.</span>
+        <span data-lang-show="no">Av alle 114 suraer i Koranen bærer bare én et insekts navn: <strong>Surah 16, An-Nahl (النَّحۡل) — Bien</strong>. Dette er en mekka-sura med 128 vers. Ingen annen sted i Koranen er det beskrevet direkte "guddommelig inspirasjon" gitt til et dyr med slike spesifikke tekniske detaljer.</span>
+        <span data-lang-show="en">Of all 114 surahs in the Quran, only one bears an insect's name: <strong>Surah 16, An-Nahl (النَّحۡل) — The Bee</strong>. This is a Meccan surah with 128 verses. Nowhere else in the Quran is "divine inspiration" given to an animal with such specific technical details described.</span>
+      </p>
+
+      <blockquote class="quran-blockquote fade-in">
+        <span class="arabic" lang="ar">وَأَوْحَىٰ رَبُّكَ إِلَى النَّحْلِ أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا وَمِنَ الشَّجَرِ وَمِمَّا يَعْرِشُونَ</span>
+        <span class="translation">
+          <span data-lang-show="bs" class="lang-visible">"I tvoj Gospodar nadahnu pčelu: 'Gradi stanove u planinama i u drveću, i u onom što [ljudi] podignu [kao košnice].'"</span>
+          <span data-lang-show="no">"Og din Herre inspirerte bien: 'Ta deg boliger i fjellene og i trærne, og i det [menneskene] reiser [som bikuber].'"</span>
+          <span data-lang-show="en">"And your Lord inspired the bee: 'Take up your dwelling in the mountains and the trees, and in what [people] build [as hives].'"</span>
+        </span>
+        <span class="ref">Al-Kur'an 16:68</span>
+      </blockquote>
+
+      <blockquote class="quran-blockquote fade-in">
+        <span class="arabic" lang="ar">ثُمَّ كُلِي مِن كُلِّ الثَّمَرَاتِ فَاسْلُكِي سُبُلَ رَبِّكِ ذُلُلًا ۚ يَخْرُجُ مِن بُطُونِهَا شَرَابٌ مُّخْتَلِفٌ أَلْوَانُهُ فِيهِ شِفَاءٌ لِّلنَّاسِ ۗ إِنَّ فِي ذَٰلِكَ لَآيَةً لِّقَوْمٍ يَتَفَكَّرُونَ</span>
+        <span class="translation">
+          <span data-lang-show="bs" class="lang-visible">"Zatim jedi od svakovrsnog voća i idi ponizno stazama Gospodara svog. Iz njihovih utroba izlazi piće različitih boja — u njemu je lijek za ljude. U tome je, uistinu, znak za ljude koji misle."</span>
+          <span data-lang-show="no">"Spis deretter av alle frukter og følg din Herres stier i ydmykhet. Fra deres indre comes en drikk av forskjellige farger — i den er en kur for menneskene. Sannelig, i dette er et tegn for folk som tenker."</span>
+          <span data-lang-show="en">"Then eat of all fruits and follow the ways of your Lord, made smooth. From their bellies comes a drink of varying colors — in it is healing for people. Verily, in this is a sign for people who reflect."</span>
+        </span>
+        <span class="ref">Al-Kur'an 16:69</span>
+      </blockquote>
+
+      <div style="background:white; border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:1.5rem; margin-top:1.5rem;">
+        <p style="margin:0; font-size:var(--text-sm); color:var(--text-secondary);">
+          <strong style="color:var(--ink);">
+            <span data-lang-show="bs" class="lang-visible">Tefsirska napomena:</span>
+            <span data-lang-show="no">Kommentar:</span>
+            <span data-lang-show="en">Commentary note:</span>
+          </strong>
+          <span data-lang-show="bs" class="lang-visible">Arapska glagolska forma <span lang="ar">أَوْحَىٰ</span> (<em>awha</em>) u 16:68 je ista forma koja se koristi za božansko objavljivanje poslanicima — <em>wahj</em> (وحي). Ibn Kathir (14. st.) ove ajete tumači kao dokaz sveobuhvatne Božije mudrosti — da je Bog naučio pčelu arhitekturi koja je ispod sposobnosti razuma, a ipak savršena.</span>
+          <span data-lang-show="no">Den arabiske verbformen <span lang="ar">أَوْحَىٰ</span> (<em>awha</em>) i 16:68 er den samme formen som brukes for guddommelig åpenbaring til profeter — <em>wahj</em> (وحي). Ibn Kathir (1300-tallet) tolker disse versene som bevis på Allahs altomfattende visdom.</span>
+          <span data-lang-show="en">The Arabic verb form <span lang="ar">أَوْحَىٰ</span> (<em>awha</em>) in 16:68 is the same form used for divine revelation to prophets — <em>wahj</em> (وحي). Ibn Kathir (14th c.) interprets these verses as evidence of God's encompassing wisdom — that God taught the bee an architecture beyond rational capacity, yet perfect.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: PARALELA ===== -->
+  <section style="padding:4rem 0;">
+    <div class="container">
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Geometrijska paralela</span>
+        <span data-lang-show="no">Geometrisk parallell</span>
+        <span data-lang-show="en">Geometric parallel</span>
+      </span>
+      <h2 class="fade-in" style="margin-bottom:1.5rem; font-size:clamp(1.5rem,3.5vw,2.2rem);">
+        <span data-lang-show="bs" class="lang-visible">Sace pčela i 6×19 mreža — isti arhitekturalni princip</span>
+        <span data-lang-show="no">Bienes vokskam og 6×19-nettet — samme arkitektoniske prinsipp</span>
+        <span data-lang-show="en">The honeycomb and the 6×19 grid — the same architectural principle</span>
+      </h2>
+
+      <p class="fade-in" style="max-width:60ch; margin-bottom:2.5rem;">
+        <span data-lang-show="bs" class="lang-visible">Oba sistema rješavaju isti tip problema — kako pokriti prostor sa modulima koji su jednake veličine, bez preklapanja i bez praznina. Odgovor je u oba slučaja: šest.</span>
+        <span data-lang-show="no">Begge systemer løser den samme typen problem — hvordan dekke et rom med moduler av lik størrelse, uten overlapping og uten hull. Svaret er i begge tilfeller: seks.</span>
+        <span data-lang-show="en">Both systems solve the same type of problem — how to cover a space with equal-sized modules, without overlap and without gaps. The answer in both cases: six.</span>
+      </p>
+
+      <div style="overflow-x:auto;">
+        <table class="compare-table fade-in">
+          <thead>
+            <tr>
+              <th>
+                <span data-lang-show="bs" class="lang-visible">Sace pčela</span>
+                <span data-lang-show="no">Bienes vokskam</span>
+                <span data-lang-show="en">Honeycomb</span>
+              </th>
+              <th>
+                <span data-lang-show="bs" class="lang-visible">6×19 mreža sura</span>
+                <span data-lang-show="no">6×19 sura-nett</span>
+                <span data-lang-show="en">6×19 surah grid</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">6 strana svake ćelije</span>
+                <span data-lang-show="no">6 sider per celle</span>
+                <span data-lang-show="en">6 sides per cell</span>
+              </td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">6 redova u mreži</span>
+                <span data-lang-show="no">6 rader i nettet</span>
+                <span data-lang-show="en">6 rows in the grid</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">Svaka ćelija jednake veličine</span>
+                <span data-lang-show="no">Alle celler er like store</span>
+                <span data-lang-show="en">Every cell is equal size</span>
+              </td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">Svaka kolona = 6 sura</span>
+                <span data-lang-show="no">Hver kolonne = 6 suraer</span>
+                <span data-lang-show="en">Each column = 6 surahs</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">Besprjecorno pokrivanje ravnine</span>
+                <span data-lang-show="no">Sømløs flatedekning</span>
+                <span data-lang-show="en">Seamless plane tiling</span>
+              </td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">Svaka sura tačno u jednoj klasi ostataka mod 19</span>
+                <span data-lang-show="no">Hver surah nøyaktig i én restklasse mod 19</span>
+                <span data-lang-show="en">Every surah exactly in one residue class mod 19</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">Optimalna efikasnost (min. perimetar)</span>
+                <span data-lang-show="no">Optimal effektivitet (min. omkrets)</span>
+                <span data-lang-show="en">Optimal efficiency (min. perimeter)</span>
+              </td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">Jedina ne-trivijalna pravougaona faktorizacija od 114</span>
+                <span data-lang-show="no">Den eneste ikke-trivielle rektangulære faktoriseringen av 114</span>
+                <span data-lang-show="en">The only non-trivial rectangular factorization of 114</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">Ponovljivi modularni obrazac</span>
+                <span data-lang-show="no">Gjentakbart modulært mønster</span>
+                <span data-lang-show="en">Repeatable modular pattern</span>
+              </td>
+              <td>
+                <span data-lang-show="bs" class="lang-visible">Svaki red je potpuni ciklus od 1 do 19</span>
+                <span data-lang-show="no">Hver rad er en komplett syklus fra 1 til 19</span>
+                <span data-lang-show="en">Each row is a complete cycle from 1 to 19</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Structural bridge callout -->
+      <div style="background:rgba(201,169,97,0.08); border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:2rem; margin-top:2.5rem;">
+        <h3 style="font-size:var(--text-xl); margin-bottom:1rem;">
+          <span data-lang-show="bs" class="lang-visible">Surah 16 kao strukturalni most</span>
+          <span data-lang-show="no">Surah 16 som strukturell bro</span>
+          <span data-lang-show="en">Surah 16 as a structural bridge</span>
+        </h3>
+        <p>
+          <span data-lang-show="bs" class="lang-visible">Surah An-Nahl nije samo tematski posvecena pčelama — ona je 16. sura od 114. Unutar 6×19 mreže, ona se nalazi u Redu 1 (sure 1–19), na poziciji 16. Njena kolona: sure 16, 35, 54, 73, 92, 111.</span>
+          <span data-lang-show="no">Surah An-Nahl er ikke bare tematisk viet bier — den er den 16. suraen av 114. I 6×19-nettet er den i Rad 1 (suraer 1–19), på posisjon 16. Dens kolonne: suraer 16, 35, 54, 73, 92, 111.</span>
+          <span data-lang-show="en">Surah An-Nahl is not only thematically devoted to bees — it is the 16th surah of 114. Within the 6×19 grid, it sits in Row 1 (surahs 1–19), at position 16. Its column: surahs 16, 35, 54, 73, 92, 111.</span>
+        </p>
+        <p style="font-style:italic; color:var(--text-secondary);">
+          <span data-lang-show="bs" class="lang-visible">Sura o pčelama stoji na 16. poziciji; pčele grade ćelije sa 6 strana; a 6 je broj redova u cjelokupnoj 6×19 arhitekturi Kur'ana. Tri broja. Isti sistem.</span>
+          <span data-lang-show="no">Suraen om bier er på posisjon 16; bier bygger celler med 6 sider; og 6 er antallet rader i hele 6×19-arkitekturen til Koranen. Tre tall. Ett system.</span>
+          <span data-lang-show="en">The surah about bees stands at position 16; bees build cells with 6 sides; and 6 is the number of rows in the entire 6×19 architecture of the Quran. Three numbers. One system.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4: ADDITIONAL FACTS ===== -->
+  <section style="padding:4rem 0; background:var(--parchment);">
+    <div class="container">
+      <span class="section-label">
+        <span data-lang-show="bs" class="lang-visible">Dodatni fakti o pčelama</span>
+        <span data-lang-show="no">Ytterligere fakta om bier</span>
+        <span data-lang-show="en">Additional facts about bees</span>
+      </span>
+      <h2 class="fade-in" style="margin-bottom:2rem; font-size:clamp(1.4rem,3vw,2rem);">
+        <span data-lang-show="bs" class="lang-visible">Biologija, arhitektura i broj 16</span>
+        <span data-lang-show="no">Biologi, arkitektur og tallet 16</span>
+        <span data-lang-show="en">Biology, architecture and the number 16</span>
+      </h2>
+
+      <div class="facts-grid">
+
+        <div class="fact-item fade-in" data-icon="🔬">
+          <div class="fact-item-label">
+            <span data-lang-show="bs" class="lang-visible">Hromosomi truta</span>
+            <span data-lang-show="no">Droners kromosomer</span>
+            <span data-lang-show="en">Drone chromosomes</span>
+          </div>
+          <div class="fact-item-value">16</div>
+          <p class="fact-item-desc">
+            <span data-lang-show="bs" class="lang-visible">Trut (mužjak pčele, <em>Apis mellifera</em>) ima 16 hromosoma — haploidan je, razvija se iz neoplođenog jajašca. Radnice i matice imaju 32. Broj hromosoma truta = redni broj sure An-Nahl.</span>
+            <span data-lang-show="no">Dronen (hannbien, <em>Apis mellifera</em>) har 16 kromosomer — er haploid, utvikles fra ubefruktet egg. Arbeidsbier og dronninger har 32. Antall dronekromosomer = ordenstallet til surah An-Nahl.</span>
+            <span data-lang-show="en">The drone (male bee, <em>Apis mellifera</em>) has 16 chromosomes — haploid, develops from an unfertilized egg. Workers and queens have 32. Drone chromosome count = ordinal number of surah An-Nahl.</span>
+          </p>
+        </div>
+
+        <div class="fact-item fade-in fade-in-delay-1" data-icon="🏗">
+          <div class="fact-item-label">
+            <span data-lang-show="bs" class="lang-visible">Jedinstvenost heksagona</span>
+            <span data-lang-show="no">Heksagonens unikhet</span>
+            <span data-lang-show="en">Hexagon uniqueness</span>
+          </div>
+          <div class="fact-item-value">120°</div>
+          <p class="fact-item-desc">
+            <span data-lang-show="bs" class="lang-visible">Samo tri pravilna poligona imaju unutrašnje uglove koji dijele 360° bez ostatka: trokut (60°), kvadrat (90°), heksagon (120°). Heksagon je treći i posljednji. Šest strana nije slučajnost — one su matematička granica.</span>
+            <span data-lang-show="no">Bare tre regulære polygoner har indre vinkler som deler 360° uten rest: trekant (60°), kvadrat (90°), heksagon (120°). Heksagonen er den tredje og siste. Seks sider er ikke tilfeldig — de er en matematisk grense.</span>
+            <span data-lang-show="en">Only three regular polygons have interior angles that divide 360° without remainder: triangle (60°), square (90°), hexagon (120°). The hexagon is the third and last. Six sides are not chance — they are a mathematical boundary.</span>
+          </p>
+        </div>
+
+        <div class="fact-item fade-in fade-in-delay-2" data-icon="🌙">
+          <div class="fact-item-label">
+            <span data-lang-show="bs" class="lang-visible">Izgradnja — noćna arhitektura</span>
+            <span data-lang-show="no">Bygging — nattlig arkitektur</span>
+            <span data-lang-show="en">Construction — nocturnal architecture</span>
+          </div>
+          <div class="fact-item-value">
+            <span data-lang-show="bs" class="lang-visible">noć</span>
+            <span data-lang-show="no">natt</span>
+            <span data-lang-show="en">night</span>
+          </div>
+          <p class="fact-item-desc">
+            <span data-lang-show="bs" class="lang-visible">Pčele grade nove ćelije saća uglavnom tokom noći kada su temperature košnice stabilnije. Jednom izgrađena ćelija nikad se ne mijenja — heksagonalna forma je permanentna arhitektura, ne privremena.</span>
+            <span data-lang-show="no">Bier bygger nye vokskamceller hovedsakelig om natten når temperaturen i bikuben er mer stabil. En bygget celle endres aldri — heksagonformen er permanent arkitektur, ikke midlertidig.</span>
+            <span data-lang-show="en">Bees build new honeycomb cells mainly at night when hive temperatures are more stable. Once built, a cell is never changed — the hexagonal form is permanent architecture, not temporary.</span>
+          </p>
+        </div>
+
+        <div class="fact-item fade-in" data-icon="⚖">
+          <div class="fact-item-label">
+            <span data-lang-show="bs" class="lang-visible">Efikasnost voska</span>
+            <span data-lang-show="no">Vokseffektivitet</span>
+            <span data-lang-show="en">Wax efficiency</span>
+          </div>
+          <div class="fact-item-value">6–8 g/g</div>
+          <p class="fact-item-desc">
+            <span data-lang-show="bs" class="lang-visible">Svaki gram voska zahtijeva energetski ekvivalent od 6–8 grama meda. Ova "cijena" voska bila je evolucijski pritisak koji je optimizovao pčele prema heksagonalnoj formi — minimalni vosak, maksimalni prostor.</span>
+            <span data-lang-show="no">Hvert gram voks krever energiekvivalenten av 6–8 gram honning. Denne "voksprisen" var det evolusjonære presset som optimaliserte bier mot heksagonformen — minimal voks, maksimalt rom.</span>
+            <span data-lang-show="en">Each gram of wax requires the energy equivalent of 6–8 grams of honey. This "wax cost" was the evolutionary pressure that optimized bees toward the hexagonal form — minimal wax, maximum space.</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOURCES ===== -->
+  <section style="padding:4rem 0;">
+    <div class="container--narrow">
+      <h2 class="fade-in" style="font-size:var(--text-2xl); margin-bottom:1.5rem;">
+        <span data-lang-show="bs" class="lang-visible">Izvori</span>
+        <span data-lang-show="no">Kilder</span>
+        <span data-lang-show="en">Sources</span>
+      </h2>
+
+      <ul class="source-list">
+        <li>
+          <strong>Hales, T. C. (2001). The Honeycomb Conjecture.</strong>
+          Discrete &amp; Computational Geometry, 25(1), 1–22. arXiv: math/9906042
+        </li>
+        <li>
+          <strong>
+            <span data-lang-show="bs" class="lang-visible">Papus Aleksandrijski (c. 320. n.e.). Matematička zbirka (Synagoge), Knjiga V.</span>
+            <span data-lang-show="no">Pappos av Aleksandria (ca. 320 e.Kr.). Matematisk samling (Synagoge), Bok V.</span>
+            <span data-lang-show="en">Pappus of Alexandria (c. 320 CE). Mathematical Collection (Synagoge), Book V.</span>
+          </strong>
+          <span data-lang-show="bs" class="lang-visible">Najranija sačuvana formulacija hipoteze o optimalnosti heksagona.</span>
+          <span data-lang-show="no">Tidligste bevarte formulering av hypotesen om heksagonens optimalitet.</span>
+          <span data-lang-show="en">Earliest preserved formulation of the hexagon optimality hypothesis.</span>
+        </li>
+        <li>
+          <strong>Apis mellifera — hromosomi.</strong>
+          Penn State Extension (psu.edu), Bee Listener (beelistener.co.uk), NIH genomska baza.
+        </li>
+        <li>
+          <strong>Al-Kur'an, Surah 16 (An-Nahl), ajeti 68–69.</strong>
+          <span data-lang-show="bs" class="lang-visible">Prijevod: adaptacija Muhammad Asad (<em>The Message of the Quran</em>, 1980).</span>
+          <span data-lang-show="no">Oversettelse: tilpasset fra Muhammad Asad (<em>The Message of the Quran</em>, 1980).</span>
+          <span data-lang-show="en">Translation: adapted from Muhammad Asad (<em>The Message of the Quran</em>, 1980).</span>
+        </li>
+        <li>
+          <strong>Ibn Kathir, Ismail ibn Umar (14. st.). Tafsir al-Quran al-Azim.</strong>
+          islamicstudies.info, quran.com/tafsir
+        </li>
+        <li>
+          <strong>Al-Tabari, Muhammad ibn Jarir (9–10. st.). Jami' al-Bayan fi Ta'wil al-Quran.</strong>
+          <span data-lang-show="bs" class="lang-visible">Rani tefsir s analizom glagola <em>dhululan</em> (ذُلُلًا) u 16:69.</span>
+          <span data-lang-show="no">Tidlig tafsir med analyse av verbet <em>dhululan</em> (ذُلُلًا) i 16:69.</span>
+          <span data-lang-show="en">Early tafsir with analysis of the verb <em>dhululan</em> (ذُلُلًا) in 16:69.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== NAVIGATION ===== -->
+  <section style="padding:3rem 0; background:var(--parchment);">
+    <div class="container--narrow" style="text-align:center;">
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/ucenje/" class="btn btn--outline">&#8592; Hub</a>
+        <a href="/ucenje/matematika.html" class="btn btn--outline">
+          <span data-lang-show="bs" class="lang-visible">Za Matematičare &#8594;</span>
+          <span data-lang-show="no">For Matematikere &#8594;</span>
+          <span data-lang-show="en">For Mathematicians &#8594;</span>
+        </a>
+        <a href="/ucenje/19-explorer/" class="btn btn--primary">19 Explorer &#8594;</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">ALAI / Ucenje — Pčele &amp; 6×19</div>
+        <div style="color:var(--text-faint); font-size:var(--text-sm);">ALAI, 2026</div>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigacija">
+        <a href="/ucenje/">Hub</a>
+        <a href="/ucenje/matematika.html">
+          <span data-lang-show="bs" class="lang-visible">Matematika</span>
+          <span data-lang-show="no">Matematikk</span>
+          <span data-lang-show="en">Math</span>
+        </a>
+        <a href="/ucenje/19-explorer/">19 Explorer</a>
+        <a href="https://alai.no">ALAI</a>
+      </nav>
+    </div>
+  </footer>
+
+</div>
+<script src="/ucenje/assets/app.js" defer></script>
+</body>
+</html>

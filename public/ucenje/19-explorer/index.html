@@ -4,140 +4,415 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>19 Explorer — Interaktivni matematički istraživač — ALAI</title>
-  <meta name="description" content="Interaktivni istraživač broja 19 u Kur'anu. 114=6×19, Bismilla, Sura 96, ogledalni parovi.">
+  <title>19 Explorer — Interaktivni 6×19 Grid — ALAI</title>
+  <meta name="description" content="Interaktivni 6×19 grid svih 114 sura Kur'ana. Hover za detalje, klik za više. Zlatne ćelije = višekratnici 19.">
   <link rel="stylesheet" href="/ucenje/assets/style.css">
   <link rel="stylesheet" href="/ucenje/assets/animations.css">
   <style>
-    /* Explorer-specific styles */
-    .explorer-section {
-      padding: 3rem 0;
-      border-bottom: 1px solid var(--border);
+    /* ===== 19-EXPLORER STYLES ===== */
+
+    /* ---- Grid container ---- */
+    .grid-viewport {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.5rem;
     }
 
-    .explorer-section:last-of-type {
-      border-bottom: none;
-    }
-
-    .fact-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: var(--space-6);
-      position: relative;
-      overflow: hidden;
-      transition: all var(--transition-base);
-    }
-
-    .fact-card:hover {
-      box-shadow: var(--shadow-medium);
-      border-color: var(--border-gold);
-    }
-
-    .fact-card::before {
-      content: attr(data-num);
-      position: absolute;
-      top: -10px;
-      right: 12px;
-      font-family: var(--font-serif);
-      font-size: 5rem;
-      font-weight: 700;
-      color: var(--gold);
-      opacity: 0.08;
-      line-height: 1;
-      user-select: none;
-    }
-
-    .fact-label {
-      font-family: var(--font-sans);
-      font-size: var(--text-xs);
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold-dark);
-      margin-bottom: var(--space-2);
-    }
-
-    .fact-equation {
-      font-family: var(--font-mono);
-      font-size: var(--text-xl);
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: var(--space-3);
-    }
-
-    .fact-equation .equals { color: var(--gold-dark); }
-    .fact-equation .mult { color: var(--teal); }
-
-    .fact-desc {
-      font-size: var(--text-base);
-      color: var(--text-secondary);
-      max-width: 40ch;
-    }
-
-    /* Metonic cycle viz */
-    .metonic-grid {
+    .surah-grid-19 {
       display: grid;
-      grid-template-columns: repeat(19, 1fr);
-      gap: 3px;
-      margin: 1.5rem 0;
+      grid-template-columns: repeat(19, minmax(44px, 1fr));
+      gap: 4px;
+      min-width: 860px;
+      padding: 1rem;
+      background: var(--parchment);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      position: relative;
     }
 
-    .metonic-cell {
-      aspect-ratio: 1;
-      border-radius: 3px;
-      background: var(--parchment-dark);
-      border: 1px solid var(--border);
+    /* Row labels (1–6) */
+    .grid-row-labels {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 1rem 0;
+      width: 28px;
+      flex-shrink: 0;
+    }
+    .grid-row-label {
+      height: 54px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-mono);
-      font-size: 9px;
-      color: var(--text-muted);
-      transition: transform 0.15s;
-    }
-
-    .metonic-cell:hover {
-      transform: scale(1.2);
-      z-index: 1;
-    }
-
-    .metonic-cell--year19 {
-      background: rgba(201,169,97,0.25);
-      border-color: var(--gold);
-      color: var(--gold-dark);
+      font-size: var(--text-xs);
+      color: var(--text-faint);
       font-weight: 700;
     }
 
-    /* Counter animation */
-    #counter-display {
+    /* ---- Surah cell ---- */
+    .sc {
+      position: relative;
+      aspect-ratio: 1;
+      min-height: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      outline: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .sc:hover, .sc:focus {
+      transform: scale(1.12);
+      z-index: 10;
+      box-shadow: var(--shadow-medium);
+      border-color: var(--gold);
+    }
+
+    .sc:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+
+    .sc-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      line-height: 1;
+    }
+
+    .sc-ar {
+      font-family: var(--font-arabic);
+      font-size: 8px;
+      color: var(--text-muted);
+      line-height: 1.2;
+      text-align: center;
+      max-width: 90%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+      display: none; /* shown at larger cells */
+    }
+
+    /* Gold: multiples of 19 */
+    .sc--mult19 {
+      background: rgba(201,169,97,0.15);
+      border-color: var(--gold);
+    }
+    .sc--mult19 .sc-num { color: var(--gold-dark); }
+
+    /* Teal: Surah 96 (first revealed) */
+    .sc--s96 {
+      background: rgba(45,125,122,0.15);
+      border-color: var(--teal);
+    }
+    .sc--s96 .sc-num { color: var(--teal); }
+
+    /* Dark gold: Surah 74 (contains 74:30) */
+    .sc--s74 {
+      background: rgba(201,169,97,0.28);
+      border-color: var(--gold-dark);
+    }
+    .sc--s74 .sc-num { color: var(--gold-dark); font-weight: 900; }
+
+    /* Surah 16 (An-Nahl — The Bee) */
+    .sc--s16 {
+      background: rgba(45,125,122,0.08);
+      border-color: rgba(45,125,122,0.5);
+      border-style: dashed;
+    }
+    .sc--s16 .sc-num { color: var(--teal); }
+
+    /* Surah 9 (no Bismillah) */
+    .sc--s9 {
+      background: rgba(184,92,92,0.08);
+      border-color: rgba(184,92,92,0.4);
+      border-style: dashed;
+    }
+    .sc--s9 .sc-num { color: #b85c5c; }
+
+    /* Surah 27 (extra Bismillah) */
+    .sc--s27 {
+      background: rgba(45,125,122,0.08);
+      border-color: rgba(45,125,122,0.4);
+      border-style: dashed;
+    }
+    .sc--s27 .sc-num { color: var(--teal); }
+
+    /* Medinan */
+    .sc--medinan::after {
+      content: '';
+      position: absolute;
+      bottom: 3px;
+      right: 3px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(74,59,107,0.4);
+    }
+
+    /* ---- Tooltip / Detail panel ---- */
+    .detail-panel {
+      background: white;
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      margin-top: 1rem;
+      display: none;
+      animation: panelIn 0.2s ease;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .detail-panel.visible {
+      display: block;
+    }
+
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .detail-panel-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .detail-panel-num {
       font-family: var(--font-serif);
-      font-size: clamp(4rem, 15vw, 9rem);
+      font-size: clamp(2.5rem, 8vw, 4rem);
       font-weight: 700;
       color: var(--ink);
       line-height: 1;
-      min-width: 3ch;
-      display: inline-block;
-      text-align: center;
+      flex-shrink: 0;
     }
 
-    /* Relationship table highlight */
-    .verified-row td:first-child::before {
-      content: "✓ ";
-      color: var(--teal);
+    .detail-panel-info { flex: 1; min-width: 180px; }
+
+    .detail-panel-arabic {
+      font-family: var(--font-arabic);
+      direction: rtl;
+      font-size: 1.8em;
+      line-height: 1.6;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-panel-en {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .detail-panel-tr {
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: var(--text-base);
+    }
+
+    .detail-panel-badges {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+
+    .detail-badge {
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
       font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25em 0.75em;
+      border-radius: var(--radius-sm);
     }
 
-    .not-verified-row td { color: var(--text-faint); font-style: italic; }
-    .not-verified-row td:first-child::before {
-      content: "✗ ";
-      color: #b85c5c;
+    .detail-badge--gold {
+      background: rgba(201,169,97,0.15);
+      color: var(--gold-dark);
+      border: 1px solid var(--border-gold);
+    }
+    .detail-badge--teal {
+      background: rgba(45,125,122,0.12);
+      color: var(--teal);
+      border: 1px solid rgba(45,125,122,0.3);
+    }
+    .detail-badge--muted {
+      background: var(--parchment-dark);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .detail-badge--purple {
+      background: rgba(74,59,107,0.1);
+      color: #4a3b6b;
+      border: 1px solid rgba(74,59,107,0.2);
+    }
+    .detail-badge--red {
+      background: rgba(184,92,92,0.1);
+      color: #8a3a3a;
+      border: 1px solid rgba(184,92,92,0.2);
+    }
+
+    .detail-panel-notes {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    .detail-panel-link {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .detail-panel-link:hover { text-decoration: underline; }
+
+    /* ---- Legend ---- */
+    .legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* ---- Column header (1–19) ---- */
+    .col-header-row {
+      display: grid;
+      grid-template-columns: repeat(19, minmax(44px, 1fr));
+      gap: 4px;
+      min-width: 860px;
+      padding: 0 1rem;
+    }
+    .col-header {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-faint);
+      padding: 0.2rem 0;
+    }
+    .col-header--19 { color: var(--gold-dark); font-weight: 700; }
+
+    /* ---- Fact cards (bottom) ---- */
+    .explorer-fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .efcard {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .efcard::before {
+      content: attr(data-num);
+      position: absolute;
+      top: -0.5rem;
+      right: 0.75rem;
+      font-family: var(--font-serif);
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.07;
+      line-height: 1;
+    }
+
+    .efcard-label {
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .efcard-formula {
+      font-family: var(--font-mono);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .efcard-desc {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+
+    /* ---- Negative results ---- */
+    .neg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+    }
+    .neg-item {
+      padding: 0.5rem 0.75rem;
+      background: var(--parchment);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+    }
+    .neg-item small {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .surah-grid-19 { min-width: 640px; gap: 3px; padding: 0.75rem; }
+      .col-header-row { min-width: 640px; }
+      .sc { min-height: 34px; }
+      .sc-num { font-size: 8px; }
+      .grid-row-label { height: 41px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sc { transition: none; }
+      .detail-panel { animation: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- ===== NAVIGATION ===== -->
 <nav class="nav" aria-label="Glavna navigacija">
   <a href="/ucenje/" class="nav-brand">
     <svg class="nav-brand-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
@@ -151,13 +426,11 @@
     </svg>
     ALAI / Ucenje
   </a>
-
   <ul class="nav-links" role="list">
     <li><a href="/ucenje/">Hub</a></li>
     <li><a href="/ucenje/audio/">Audio</a></li>
     <li><a href="/ucenje/19-explorer/" class="active" aria-current="page">19 Explorer</a></li>
   </ul>
-
   <div class="lang-switcher" role="group" aria-label="Odabir jezika">
     <button class="lang-btn active" data-lang="bs" onclick="switchLanguage('bs')" aria-pressed="true">BS</button>
     <button class="lang-btn" data-lang="no" onclick="switchLanguage('no')" aria-pressed="false">NO</button>
@@ -169,14 +442,9 @@
 
   <!-- ===== HERO ===== -->
   <section style="padding:5rem 0 3rem; text-align:center; position:relative; overflow:hidden;">
-
-    <!-- Animated star background -->
     <div aria-hidden="true" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;">
-      <svg id="star-19-svg" viewBox="0 0 400 400" width="500" height="500" style="opacity:0.07;" role="img" aria-label="19-krak zvijezda">
-        <!-- Filled by app.js drawStar19() -->
-      </svg>
+      <svg id="star-19-svg" viewBox="0 0 400 400" width="500" height="500" style="opacity:0.07;" role="img" aria-label="19-krak zvijezda"></svg>
     </div>
-
     <div class="container--narrow" style="position:relative; z-index:1;">
       <a href="/ucenje/" style="font-family:var(--font-sans); font-size:var(--text-sm); color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
         &#8592;
@@ -184,99 +452,147 @@
         <span data-lang-show="no">Tilbake til Hub</span>
         <span data-lang-show="en">Back to Hub</span>
       </a>
-
       <span class="section-label">
-        <span data-lang-show="bs" class="lang-visible">Interaktivni matematički istraživač</span>
-        <span data-lang-show="no">Interaktiv matematisk utforsker</span>
-        <span data-lang-show="en">Interactive mathematical explorer</span>
+        <span data-lang-show="bs" class="lang-visible">Interaktivni 6×19 istraživač sura</span>
+        <span data-lang-show="no">Interaktiv 6×19 sura-utforsker</span>
+        <span data-lang-show="en">Interactive 6×19 surah explorer</span>
       </span>
-
       <h1 class="hero-entrance" style="font-size:clamp(2rem,5vw,3.5rem); margin:1rem 0 1.5rem;">
-        <span data-lang-show="bs" class="lang-visible">Broj 19 — istraži matematiku</span>
-        <span data-lang-show="no">Tallet 19 — utforsk matematikken</span>
-        <span data-lang-show="en">The Number 19 — explore the math</span>
+        <span data-lang-show="bs" class="lang-visible">19 Explorer — 114 sura u 6×19 mreži</span>
+        <span data-lang-show="no">19 Explorer — 114 suraer i 6×19-nettet</span>
+        <span data-lang-show="en">19 Explorer — 114 surahs in a 6×19 grid</span>
       </h1>
-
       <p class="hero-entrance hero-entrance-delay-1" style="font-style:italic; font-size:var(--text-xl); color:var(--text-secondary); max-width:50ch; margin:0 auto;">
-        <span data-lang-show="bs" class="lang-visible">13 računarski potvrđenih odnosa. 9 negativnih rezultata. Samo ono što brojevi zaista kažu.</span>
-        <span data-lang-show="no">13 datamaskinbekreftede relasjoner. 9 negative resultater. Bare det tallene faktisk sier.</span>
-        <span data-lang-show="en">13 computationally verified relationships. 9 negative results. Only what the numbers actually say.</span>
+        <span data-lang-show="bs" class="lang-visible">Klikni na bilo koju suru za detalje. Zlatne ćelije su višekratnici od 19. Svaki red je potpuni ciklus od 1 do 19.</span>
+        <span data-lang-show="no">Klikk på en surah for detaljer. Gylne celler er multipler av 19. Hver rad er en komplett syklus fra 1 til 19.</span>
+        <span data-lang-show="en">Click any surah for details. Gold cells are multiples of 19. Each row is a complete cycle from 1 to 19.</span>
       </p>
     </div>
   </section>
 
-  <!-- ===== INTERACTIVE COUNTER ===== -->
-  <section class="explorer-section" style="background:var(--parchment);">
-    <div class="container--narrow" style="text-align:center;">
-      <span class="section-label">
-        <span data-lang-show="bs" class="lang-visible">Interaktivni counter</span>
-        <span data-lang-show="no">Interaktiv teller</span>
-        <span data-lang-show="en">Interactive counter</span>
-      </span>
-      <h2 class="fade-in" style="margin-bottom:3rem; font-size:var(--text-3xl);">
-        <span data-lang-show="bs" class="lang-visible">Prebroji i uvjeri se</span>
-        <span data-lang-show="no">Tell og overbevise deg selv</span>
-        <span data-lang-show="en">Count and see for yourself</span>
-      </h2>
+  <!-- ===== 6×19 INTERACTIVE GRID ===== -->
+  <section style="padding:3rem 0; background:var(--parchment);">
+    <div class="container" style="max-width:1100px;">
 
-      <div style="display:flex; align-items:center; justify-content:center; gap:3rem; flex-wrap:wrap; margin-bottom:3rem;">
-        <div>
-          <span id="counter-display" data-counter="19">0</span>
-          <div style="font-family:var(--font-sans); font-size:var(--text-sm); color:var(--text-muted); margin-top:0.5rem;" id="counter-label">
-            <span data-lang-show="bs" class="lang-visible">slova u Bismilli</span>
-            <span data-lang-show="no">bokstaver i Bismillah</span>
-            <span data-lang-show="en">letters in Bismillah</span>
-          </div>
+      <!-- Column headers -->
+      <div class="grid-viewport" aria-hidden="true">
+        <div class="col-header-row">
+          <div class="col-header col-header--19" aria-hidden="true">col 1</div>
+          <div class="col-header">2</div>
+          <div class="col-header">3</div>
+          <div class="col-header">4</div>
+          <div class="col-header">5</div>
+          <div class="col-header">6</div>
+          <div class="col-header">7</div>
+          <div class="col-header">8</div>
+          <div class="col-header">9</div>
+          <div class="col-header">10</div>
+          <div class="col-header">11</div>
+          <div class="col-header">12</div>
+          <div class="col-header">13</div>
+          <div class="col-header">14</div>
+          <div class="col-header">15</div>
+          <div class="col-header">16</div>
+          <div class="col-header">17</div>
+          <div class="col-header">18</div>
+          <div class="col-header col-header--19">19</div>
+        </div>
+      </div>
+
+      <!-- Main grid wrapper (with row labels) -->
+      <div style="display:flex; align-items:flex-start; gap:0.5rem;">
+
+        <!-- Row labels -->
+        <div class="grid-row-labels" aria-hidden="true">
+          <div class="grid-row-label">R1</div>
+          <div class="grid-row-label">R2</div>
+          <div class="grid-row-label">R3</div>
+          <div class="grid-row-label">R4</div>
+          <div class="grid-row-label">R5</div>
+          <div class="grid-row-label">R6</div>
         </div>
 
-        <!-- Bismillah letter-by-letter display -->
-        <div style="max-width:320px;">
-          <div lang="ar" style="font-family:var(--font-arabic); font-size:1.6rem; line-height:2.5; direction:rtl; text-align:right; letter-spacing:0.05em;">
-            <span id="bismillah-letters" style="cursor:default;">
-              <!-- Individual letter spans added by JS for hover counting -->
-              بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
-            </span>
-          </div>
-          <div style="font-family:var(--font-sans); font-size:var(--text-xs); color:var(--text-muted); text-align:center; margin-top:0.5rem;">
-            <em>Bismillahir-Rahmanir-Rahim</em>
+        <!-- Grid -->
+        <div class="grid-viewport" style="flex:1;">
+          <div
+            id="surah-grid-6x19"
+            class="surah-grid-19"
+            role="grid"
+            aria-label="6×19 grid svih 114 sura Kur'ana"
+            aria-rowcount="6"
+            aria-colcount="19"
+          >
+            <!-- Filled by JS below -->
           </div>
         </div>
       </div>
 
-      <!-- Counter buttons for different values -->
-      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.5rem;">
-        <button class="btn btn--outline" data-fact="bismillah">
-          <span data-lang-show="bs" class="lang-visible">Bismilla: 19 slova</span>
-          <span data-lang-show="no">Bismillah: 19 bokstaver</span>
-          <span data-lang-show="en">Bismillah: 19 letters</span>
-        </button>
-        <button class="btn btn--outline" data-fact="suras">
-          <span data-lang-show="bs" class="lang-visible">Sure: 114 = 6×19</span>
-          <span data-lang-show="no">Suraer: 114 = 6×19</span>
-          <span data-lang-show="en">Surahs: 114 = 6×19</span>
-        </button>
-        <button class="btn btn--outline" data-fact="s96">
-          <span data-lang-show="bs" class="lang-visible">Sura 96: 19 ajeta</span>
-          <span data-lang-show="no">Sura 96: 19 vers</span>
-          <span data-lang-show="en">Surah 96: 19 verses</span>
-        </button>
-        <button class="btn btn--outline" data-fact="7431">
-          <span data-lang-show="bs" class="lang-visible">Ajet 74:31: 57 riječi</span>
-          <span data-lang-show="no">Vers 74:31: 57 ord</span>
-          <span data-lang-show="en">Verse 74:31: 57 words</span>
-        </button>
+      <!-- Legend -->
+      <div class="legend" role="list" aria-label="Legenda boja mreže">
+        <div class="legend-item" role="listitem">
+          <span class="legend-swatch" style="background:rgba(201,169,97,0.25); border:1px solid var(--gold);"></span>
+          <span data-lang-show="bs" class="lang-visible">Višekratnici od 19 (19,38,57,76,95,114)</span>
+          <span data-lang-show="no">Multipler av 19 (19,38,57,76,95,114)</span>
+          <span data-lang-show="en">Multiples of 19 (19,38,57,76,95,114)</span>
+        </div>
+        <div class="legend-item" role="listitem">
+          <span class="legend-swatch" style="background:rgba(45,125,122,0.2); border:1px solid var(--teal);"></span>
+          <span data-lang-show="bs" class="lang-visible">Sura 96 (prva objavljena, 19 ajeta)</span>
+          <span data-lang-show="no">Sura 96 (første åpenbart, 19 vers)</span>
+          <span data-lang-show="en">Surah 96 (first revealed, 19 verses)</span>
+        </div>
+        <div class="legend-item" role="listitem">
+          <span class="legend-swatch" style="background:rgba(201,169,97,0.35); border:2px solid var(--gold-dark);"></span>
+          <span data-lang-show="bs" class="lang-visible">Sura 74 (sadrži 74:30 — "Nad njim je 19")</span>
+          <span data-lang-show="no">Sura 74 (inneholder 74:30 — "Over det er 19")</span>
+          <span data-lang-show="en">Surah 74 (contains 74:30 — "Over it is 19")</span>
+        </div>
+        <div class="legend-item" role="listitem">
+          <span class="legend-swatch" style="background:rgba(45,125,122,0.08); border:1px dashed rgba(45,125,122,0.5);"></span>
+          <span data-lang-show="bs" class="lang-visible">Sura 16 (An-Nahl — Pčela) &amp; Sura 27 (extra Bismilla)</span>
+          <span data-lang-show="no">Sura 16 (An-Nahl — Bien) &amp; Sura 27 (ekstra Bismillah)</span>
+          <span data-lang-show="en">Surah 16 (An-Nahl — The Bee) &amp; Surah 27 (extra Bismillah)</span>
+        </div>
+        <div class="legend-item" role="listitem">
+          <span class="legend-swatch" style="background:rgba(184,92,92,0.08); border:1px dashed rgba(184,92,92,0.4);"></span>
+          <span data-lang-show="bs" class="lang-visible">Sura 9 (nema Bismille)</span>
+          <span data-lang-show="no">Sura 9 (mangler Bismillah)</span>
+          <span data-lang-show="en">Surah 9 (no Bismillah)</span>
+        </div>
+        <div class="legend-item" role="listitem">
+          <span style="width:14px; height:14px; display:inline-flex; align-items:flex-end; justify-content:flex-end;">
+            <span style="width:5px; height:5px; border-radius:50%; background:rgba(74,59,107,0.4); display:inline-block;"></span>
+          </span>
+          <span data-lang-show="bs" class="lang-visible">Medinska sura (dot u uglu)</span>
+          <span data-lang-show="no">Medina-surah (prikk i hjørnet)</span>
+          <span data-lang-show="en">Medinan surah (dot in corner)</span>
+        </div>
       </div>
 
-      <p id="counter-fact" style="font-style:italic; color:var(--text-secondary); font-size:var(--text-base); max-width:50ch; margin:0 auto; min-height:3em; transition:opacity 0.3s;">
-        <span data-lang-show="bs" class="lang-visible">Kliknite dugme da vidite broj i kontekst.</span>
-        <span data-lang-show="no">Klikk en knapp for å se tall og kontekst.</span>
-        <span data-lang-show="en">Click a button to see the number and context.</span>
-      </p>
+      <!-- Detail panel -->
+      <div id="detail-panel" class="detail-panel" role="region" aria-live="polite" aria-label="Detalji o odabranoj suri">
+        <div class="detail-panel-header">
+          <div class="detail-panel-num" id="dp-num" aria-hidden="true">—</div>
+          <div class="detail-panel-info">
+            <div class="detail-panel-arabic" id="dp-ar" lang="ar">—</div>
+            <div class="detail-panel-en" id="dp-en">—</div>
+            <div class="detail-panel-tr" id="dp-tr">—</div>
+            <div class="detail-panel-badges" id="dp-badges"></div>
+          </div>
+        </div>
+        <div class="detail-panel-notes" id="dp-notes"></div>
+        <a id="dp-link" class="detail-panel-link" href="#" target="_blank" rel="noopener">
+          <span data-lang-show="bs" class="lang-visible">Otvori na quran.com &#8594;</span>
+          <span data-lang-show="no">Åpne på quran.com &#8594;</span>
+          <span data-lang-show="en">Open on quran.com &#8594;</span>
+        </a>
+      </div>
+
     </div>
   </section>
 
-  <!-- ===== 13 VERIFIED RELATIONSHIPS ===== -->
-  <section class="explorer-section">
+  <!-- ===== KEY VERIFIED RELATIONSHIPS ===== -->
+  <section style="padding:4rem 0;">
     <div class="container">
       <div style="margin-bottom:2.5rem;">
         <span class="section-label">
@@ -285,312 +601,127 @@
           <span data-lang-show="en">Computationally verified</span>
         </span>
         <h2 class="fade-in" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">
-          <span data-lang-show="bs" class="lang-visible">13 potvrđenih odnosa — i 9 koji NE funkcionišu</span>
-          <span data-lang-show="no">13 bekreftede relasjoner — og 9 som IKKE fungerer</span>
-          <span data-lang-show="en">13 verified relationships — and 9 that do NOT work</span>
+          <span data-lang-show="bs" class="lang-visible">13 potvrđenih odnosa</span>
+          <span data-lang-show="no">13 bekreftede relasjoner</span>
+          <span data-lang-show="en">13 verified relationships</span>
         </h2>
-        <p class="fade-in" style="font-style:italic; color:var(--text-secondary); max-width:55ch;">
-          <span data-lang-show="bs" class="lang-visible">Intelektualna poštenja radi: pokazujemo i pozitivne i negativne rezultate. Uzorak je stvaran, ali nije sveprisutan.</span>
-          <span data-lang-show="no">For intellektuell ærlighets skyld: vi viser både positive og negative resultater. Mønsteret er ekte, men ikke allestedsnærværende.</span>
-          <span data-lang-show="en">For intellectual honesty: we show both positive and negative results. The pattern is real, but not universal.</span>
-        </p>
       </div>
 
-      <!-- Verified relationships grid -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1.5rem; margin-bottom:3rem;">
+      <div class="explorer-fact-grid">
 
-        <div class="fact-card fade-in" data-num="1">
-          <div class="fact-label">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #1</span>
-            <span data-lang-show="no">Bekreftet #1</span>
-            <span data-lang-show="en">Verified #1</span>
+        <div class="efcard fade-in" data-num="1">
+          <div class="efcard-label">
+            <span data-lang-show="bs" class="lang-visible">Relacija #1</span>
+            <span data-lang-show="no">Relasjon #1</span>
+            <span data-lang-show="en">Relation #1</span>
           </div>
-          <div class="fact-equation">114 <span class="equals">=</span> 6 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Ukupan broj sura u Kur'anu je višekratnik broja 19.</span>
-            <span data-lang-show="no">Totalt antall suraer i Koranen er en multippel av 19.</span>
-            <span data-lang-show="en">Total number of surahs in the Quran is a multiple of 19.</span>
+          <div class="efcard-formula">114 = 6 × 19</div>
+          <p class="efcard-desc">
+            <span data-lang-show="bs" class="lang-visible">Ukupan broj sura u Kur'anu je tačan višekratnik od 19.</span>
+            <span data-lang-show="no">Totalt antall suraer i Koranen er et nøyaktig multiplum av 19.</span>
+            <span data-lang-show="en">Total number of surahs in the Quran is an exact multiple of 19.</span>
           </p>
         </div>
 
-        <div class="fact-card fade-in fade-in-delay-1" data-num="2">
-          <div class="fact-label">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #2</span>
-            <span data-lang-show="no">Bekreftet #2</span>
-            <span data-lang-show="en">Verified #2</span>
+        <div class="efcard fade-in fade-in-delay-1" data-num="5">
+          <div class="efcard-label">
+            <span data-lang-show="bs" class="lang-visible">Relacija #5 — Gap Bismille</span>
+            <span data-lang-show="no">Relasjon #5 — Bismillah-gap</span>
+            <span data-lang-show="en">Relation #5 — Bismillah gap</span>
           </div>
-          <div class="fact-equation">6555 <span class="equals">=</span> 345 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Zbir svih rednih brojeva sura (1+2+...+114) je višekratnik 19.</span>
-            <span data-lang-show="no">Summen av alle suranumre (1+2+...+114) er en multippel av 19.</span>
-            <span data-lang-show="en">Sum of all surah numbers (1+2+...+114) is a multiple of 19.</span>
+          <div class="efcard-formula">27 − 9 + 1 = 19</div>
+          <p class="efcard-desc">
+            <span data-lang-show="bs" class="lang-visible">Od sure 9 (bez Bismille) do sure 27 (s extra Bismillom) = tačno 19 sura. Anomalija prati isto pravilo.</span>
+            <span data-lang-show="no">Fra sura 9 (uten Bismillah) til sura 27 (med ekstra Bismillah) = nøyaktig 19 suraer. Anomalien følger samme regel.</span>
+            <span data-lang-show="en">From surah 9 (without Bismillah) to surah 27 (with extra Bismillah) = exactly 19 surahs. The anomaly follows the same rule.</span>
           </p>
         </div>
 
-        <div class="fact-card fade-in fade-in-delay-2" data-num="3">
-          <div class="fact-label">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #3</span>
-            <span data-lang-show="no">Bekreftet #3</span>
-            <span data-lang-show="en">Verified #3</span>
+        <div class="efcard fade-in fade-in-delay-2" data-num="9">
+          <div class="efcard-label">
+            <span data-lang-show="bs" class="lang-visible">Relacija #9 — Poruka o 19</span>
+            <span data-lang-show="no">Relasjon #9 — Budskapet om 19</span>
+            <span data-lang-show="en">Relation #9 — Message about 19</span>
           </div>
-          <div class="fact-equation">19 <span class="equals">=</span> 1 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Bismilla ima tačno 19 slova. Broj 19 je sam po sebi.</span>
-            <span data-lang-show="no">Bismillah har nøyaktig 19 bokstaver. Tallet 19 er seg selv.</span>
-            <span data-lang-show="en">Bismillah has exactly 19 letters. The number 19 is itself.</span>
+          <div class="efcard-formula">57 = 3 × 19</div>
+          <p class="efcard-desc">
+            <span data-lang-show="bs" class="lang-visible">Ajet 74:31 — jedini koji eksplicitno pominje broj 19 — ima tačno 57 = 3×19 riječi. Poruka nosi vlastiti potpis.</span>
+            <span data-lang-show="no">Vers 74:31 — det eneste som eksplisitt nevner 19 — har nøyaktig 57 = 3×19 ord. Budskapet bærer sin egen signatur.</span>
+            <span data-lang-show="en">Verse 74:31 — the only one explicitly mentioning 19 — has exactly 57 = 3×19 words. The message carries its own signature.</span>
           </p>
         </div>
 
-        <div class="fact-card fade-in" data-num="4">
-          <div class="fact-label">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #4</span>
-            <span data-lang-show="no">Bekreftet #4</span>
-            <span data-lang-show="en">Verified #4</span>
+        <div class="efcard fade-in" data-num="13">
+          <div class="efcard-label">
+            <span data-lang-show="bs" class="lang-visible">Relacija #13 — Zbir 1→19</span>
+            <span data-lang-show="no">Relasjon #13 — Sum 1→19</span>
+            <span data-lang-show="en">Relation #13 — Sum 1→19</span>
           </div>
-          <div class="fact-equation">114 <span class="equals">=</span> 6 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Ukupan broj Bismilli u Kur'anu (113 na početku + 1 u suri 27:30) = 114.</span>
-            <span data-lang-show="no">Totalt antall Bismillah i Koranen (113 i begynnelsen + 1 i sura 27:30) = 114.</span>
-            <span data-lang-show="en">Total number of Bismillahs in the Quran (113 at chapter openings + 1 in surah 27:30) = 114.</span>
+          <div class="efcard-formula">1+...+19 = 190 = 10×19</div>
+          <p class="efcard-desc">
+            <span data-lang-show="bs" class="lang-visible">Broj koji strukturiše tekst vraća se sam sebi kroz sopstveni zbir. Nije svaki broj tako zatvoren.</span>
+            <span data-lang-show="no">Tallet som strukturerer teksten vender tilbake til seg selv gjennom sin egen sum. Ikke hvert tall er slik lukket.</span>
+            <span data-lang-show="en">The number that structures the text returns to itself through its own sum. Not every number is so closed.</span>
           </p>
         </div>
 
-        <div class="fact-card fade-in fade-in-delay-1" data-num="5">
-          <div class="fact-label">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #5</span>
-            <span data-lang-show="no">Bekreftet #5</span>
-            <span data-lang-show="en">Verified #5</span>
+        <div class="efcard fade-in fade-in-delay-1" data-num="10">
+          <div class="efcard-label">
+            <span data-lang-show="bs" class="lang-visible">Relacija #10 — Najudarnije</span>
+            <span data-lang-show="no">Relasjon #10 — Mest slående</span>
+            <span data-lang-show="en">Relation #10 — Most striking</span>
           </div>
-          <div class="fact-equation">19 <span class="equals">=</span> 1 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Od sure 9 (bez Bismille) do sure 27 (s extra Bismillom) ima tačno 19 sura.</span>
-            <span data-lang-show="no">Fra sura 9 (uten Bismillah) til sura 27 (med ekstra Bismillah) er det nøyaktig 19 suraer.</span>
-            <span data-lang-show="en">From surah 9 (missing Bismillah) to surah 27 (with extra Bismillah) there are exactly 19 surahs.</span>
+          <div class="efcard-formula">380 = 20 × 19</div>
+          <p class="efcard-desc">
+            <span data-lang-show="bs" class="lang-visible">Kumulativna slova u suri 74 do ajeta 29 = 380 = 19×20. Sljedeći ajet (74:30): "Nad njim je 19." Najava dolazi poslije dokaza.</span>
+            <span data-lang-show="no">Kumulative bokstaver i sura 74 til vers 29 = 380 = 19×20. Neste vers (74:30): "Over det er 19." Kunngjøringen kommer etter beviset.</span>
+            <span data-lang-show="en">Cumulative letters in surah 74 through verse 29 = 380 = 19×20. Next verse (74:30): "Over it is 19." The announcement comes after the proof.</span>
           </p>
         </div>
 
-        <div class="fact-card fade-in fade-in-delay-2" data-num="6">
-          <div class="fact-label">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #6</span>
-            <span data-lang-show="no">Bekreftet #6</span>
-            <span data-lang-show="en">Verified #6</span>
+        <div class="efcard fade-in fade-in-delay-2" data-num="6">
+          <div class="efcard-label">
+            <span data-lang-show="bs" class="lang-visible">Relacija #6 — Prva objava</span>
+            <span data-lang-show="no">Relasjon #6 — Første åpenbaring</span>
+            <span data-lang-show="en">Relation #6 — First revelation</span>
           </div>
-          <div class="fact-equation">19 <span class="equals">=</span> 1 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Sura 96 (Al-Alaq, prva objavljena) ima tačno 19 ajeta.</span>
-            <span data-lang-show="no">Sura 96 (Al-Alaq, første åpenbart) har nøyaktig 19 vers.</span>
-            <span data-lang-show="en">Surah 96 (Al-Alaq, first revealed) has exactly 19 verses.</span>
-          </p>
-        </div>
-
-        <div class="fact-card fade-in" data-num="7">
-          <div class="fact-label">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #7</span>
-            <span data-lang-show="no">Bekreftet #7</span>
-            <span data-lang-show="en">Verified #7</span>
-          </div>
-          <div class="fact-equation">19 <span class="equals">=</span> 1 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Sura 96 je 19. sura od kraja Kur'ana (114 - 96 + 1 = 19).</span>
-            <span data-lang-show="no">Sura 96 er den 19. sura fra slutten av Koranen (114 - 96 + 1 = 19).</span>
-            <span data-lang-show="en">Surah 96 is the 19th surah from the end of the Quran (114 - 96 + 1 = 19).</span>
-          </p>
-        </div>
-
-        <div class="fact-card fade-in fade-in-delay-1" data-num="8">
-          <div class="fact-label">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #8</span>
-            <span data-lang-show="no">Bekreftet #8</span>
-            <span data-lang-show="en">Verified #8</span>
-          </div>
-          <div class="fact-equation">95 <span class="equals">=</span> 5 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Prvih 5 ajeta sure 96 (uključujući Bismillu) sadrži tačno 95 slova.</span>
-            <span data-lang-show="no">De første 5 versene av sura 96 (inkludert Bismillah) inneholder nøyaktig 95 bokstaver.</span>
-            <span data-lang-show="en">The first 5 verses of surah 96 (including Bismillah) contain exactly 95 letters.</span>
-          </p>
-        </div>
-
-        <div class="fact-card fade-in fade-in-delay-2" data-num="9">
-          <div class="fact-label">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #9</span>
-            <span data-lang-show="no">Bekreftet #9</span>
-            <span data-lang-show="en">Verified #9</span>
-          </div>
-          <div class="fact-equation">57 <span class="equals">=</span> 3 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Ajet 74:31 (koji objašnjava svrhu broja 19) ima tačno 57 riječi — sam je strukturiran brojem koji objašnjava.</span>
-            <span data-lang-show="no">Vers 74:31 (som forklarer formålet med tallet 19) har nøyaktig 57 ord — det er selv strukturert av tallet det forklarer.</span>
-            <span data-lang-show="en">Verse 74:31 (which explains the purpose of the number 19) has exactly 57 words — it is itself structured by the number it explains.</span>
-          </p>
-        </div>
-
-        <div class="fact-card fade-in" data-num="10" style="border-left:3px solid var(--gold);">
-          <div class="fact-label" style="color:var(--gold-dark);">
-            <span data-lang-show="bs" class="lang-visible">Potvrđeno #10 — Najudarnije</span>
-            <span data-lang-show="no">Bekreftet #10 — Mest slående</span>
-            <span data-lang-show="en">Verified #10 — Most striking</span>
-          </div>
-          <div class="fact-equation">380 <span class="equals">=</span> 20 <span class="mult">×</span> 19</div>
-          <p class="fact-desc">
-            <span data-lang-show="bs" class="lang-visible">Kumulativni broj slova u suri 74 kroz prvih 29 ajeta — tačno do ajeta koji kaže "čineći svu istinu vidljivom" — iznosi 380. Sljedeći ajet je 74:30: "Nad njim je 19."</span>
-            <span data-lang-show="no">Det kumulative antallet bokstaver i sura 74 gjennom de første 29 versene — nøyaktig til verset som sier "gjør all sannhet synlig" — er 380. Neste vers er 74:30: "Over det er 19."</span>
-            <span data-lang-show="en">The cumulative letter count in surah 74 through the first 29 verses — exactly until the verse saying "making all truth visible" — is 380. The next verse is 74:30: "Over it is 19."</span>
+          <div class="efcard-formula">Sura 96: 19 ajeta</div>
+          <p class="efcard-desc">
+            <span data-lang-show="bs" class="lang-visible">Prva objavljena sura ima tačno 19 ajeta. Početak već nosi ključ cijele strukture.</span>
+            <span data-lang-show="no">Den første åpenbarte suraen har nøyaktig 19 vers. Begynnelsen bærer allerede nøkkelen til hele strukturen.</span>
+            <span data-lang-show="en">The first revealed surah has exactly 19 verses. The beginning already carries the key to the entire structure.</span>
           </p>
         </div>
 
       </div>
 
-      <!-- Negative results (intellectual honesty) -->
+      <!-- Negative results -->
       <div style="background:var(--parchment); border:1px solid var(--border); border-radius:var(--radius-md); padding:2rem; margin-top:2rem;">
-        <h3 class="fade-in" style="font-size:var(--text-xl); margin-bottom:1rem; color:var(--ink);">
-          <span data-lang-show="bs" class="lang-visible">Što NE funkcioniše (intelektualna poštenja)</span>
-          <span data-lang-show="no">Det som IKKE fungerer (intellektuell ærlighet)</span>
-          <span data-lang-show="en">What does NOT work (intellectual honesty)</span>
+        <h3 class="fade-in" style="font-size:var(--text-xl); margin-bottom:0.75rem;">
+          <span data-lang-show="bs" class="lang-visible">Što NE funkcioniše — intelektualna poštenja</span>
+          <span data-lang-show="no">Hva IKKE fungerer — intellektuell ærlighet</span>
+          <span data-lang-show="en">What does NOT work — intellectual honesty</span>
         </h3>
-        <p style="font-style:italic; color:var(--text-secondary); margin-bottom:1.5rem; max-width:55ch;">
-          <span data-lang-show="bs" class="lang-visible">Ne dijeli se sve sa 19. Evo šta smo testirali i pronašli negativne rezultate. Ako bismo prijavili samo pozitivne nalaze, analiza bi bila nepoštena.</span>
-          <span data-lang-show="no">Ikke alt deles på 19. Her er hva vi testet og fant negative resultater på. Hvis vi bare rapporterte positive funn, ville analysen vært uærlig.</span>
-          <span data-lang-show="en">Not everything divides by 19. Here is what we tested and found negative results on. If we only reported positive findings, the analysis would be dishonest.</span>
+        <p style="font-style:italic; color:var(--text-secondary); margin-bottom:1rem; max-width:55ch; font-size:var(--text-sm);">
+          <span data-lang-show="bs" class="lang-visible">Ne dijeli se sve sa 19. Prikazujemo i negativne rezultate jer su dio pune slike.</span>
+          <span data-lang-show="no">Ikke alt deles med 19. Vi viser negative resultater fordi de er del av det fulle bildet.</span>
+          <span data-lang-show="en">Not everything divides by 19. We show negative results because they are part of the complete picture.</span>
         </p>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1rem; font-family:var(--font-mono); font-size:var(--text-sm);">
-          <div style="color:var(--text-muted);">1616 mod 19 = 1 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(abjad vrijednost 74:30)</span></div>
-          <div style="color:var(--text-muted);">104 mod 19 = 9 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(74 + 30)</span></div>
-          <div style="color:var(--text-muted);">2220 mod 19 = 16 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(74 × 30)</span></div>
-          <div style="color:var(--text-muted);">6236 mod 19 = 4 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(ukupno ajeta)</span></div>
-          <div style="color:var(--text-muted);">1043 mod 19 = 17 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(slova u suri 74)</span></div>
-          <div style="color:var(--text-muted);">259 mod 19 = 12 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(riječi u suri 74)</span></div>
-          <div style="color:var(--text-muted);">56 mod 19 = 18 <span style="font-family:var(--font-sans); font-size:var(--text-xs);">(ajeta u suri 74)</span></div>
+        <div class="neg-grid">
+          <div class="neg-item">1616 mod 19 = 1 <small data-lang-show="bs" class="lang-visible">abjad 74:30</small><small data-lang-show="no">abjad 74:30</small><small data-lang-show="en">abjad 74:30</small></div>
+          <div class="neg-item">104 mod 19 = 9 <small>74 + 30</small></div>
+          <div class="neg-item">2220 mod 19 = 16 <small>74 × 30</small></div>
+          <div class="neg-item">6236 mod 19 = 4 <small data-lang-show="bs" class="lang-visible">ukupno ajeta</small><small data-lang-show="no">totalt vers</small><small data-lang-show="en">total verses</small></div>
+          <div class="neg-item">1043 mod 19 = 17 <small data-lang-show="bs" class="lang-visible">slova sura 74</small><small data-lang-show="no">bokstaver sura 74</small><small data-lang-show="en">letters surah 74</small></div>
+          <div class="neg-item">259 mod 19 = 12 <small data-lang-show="bs" class="lang-visible">riječi sura 74</small><small data-lang-show="no">ord sura 74</small><small data-lang-show="en">words surah 74</small></div>
+          <div class="neg-item">56 mod 19 = 18 <small data-lang-show="bs" class="lang-visible">ajeta sura 74</small><small data-lang-show="no">vers sura 74</small><small data-lang-show="en">verses surah 74</small></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== METONIC CYCLE ===== -->
-  <section class="explorer-section" style="background:var(--parchment);">
-    <div class="container--narrow">
-      <span class="section-label">
-        <span data-lang-show="bs" class="lang-visible">Astronomija</span>
-        <span data-lang-show="no">Astronomi</span>
-        <span data-lang-show="en">Astronomy</span>
-      </span>
-      <h2 class="fade-in" style="margin-bottom:1rem; font-size:clamp(1.5rem,3.5vw,2.2rem);">
-        <span data-lang-show="bs" class="lang-visible">Metonski ciklus — 19 solarnih godina</span>
-        <span data-lang-show="no">Metonisk syklus — 19 solår</span>
-        <span data-lang-show="en">Metonic Cycle — 19 solar years</span>
-      </h2>
-      <p class="fade-in" style="margin-bottom:2rem; max-width:55ch;">
-        <span data-lang-show="bs" class="lang-visible"><strong>19 solarnih godina = 235 sinodičnih (lunarnih) mjeseci</strong> sa tačnošću od svega 2 sata. Svake 19 godina Sunce i Mjesec se nalaze na istim relativnim pozicijama. Ajet 74:32 odmah nakon 74:30 kaže: "Razmisli o Mjesecu!" Blisnuće 19 → Mjesec nije slučajno.</span>
-        <span data-lang-show="no"><strong>19 solår = 235 synodiske (månedlige) måneder</strong> med en nøyaktighet på bare 2 timer. Hvert 19. år er solen og månen i de samme relative posisjonene. Vers 74:32, rett etter 74:30, sier: "Betrakt Månen!" Sammenhengen 19 → Måne er ikke tilfeldig.</span>
-        <span data-lang-show="en"><strong>19 solar years = 235 synodic (lunar) months</strong> with an accuracy of just 2 hours. Every 19 years the Sun and Moon return to the same relative positions. Verse 74:32, immediately after 74:30, says: "Consider the Moon!" The connection 19 → Moon is not accidental.</span>
-      </p>
-
-      <!-- Metonic cycle grid (19 years) -->
-      <div id="metonic-grid" class="metonic-grid fade-in" role="img" aria-label="Metonski ciklus: 19 godina, svaka 19. je označena">
-        <!-- Filled by JS below -->
-      </div>
-
-      <div style="display:flex; gap:2rem; flex-wrap:wrap; margin-top:1rem; font-family:var(--font-sans); font-size:var(--text-xs); color:var(--text-muted);">
-        <span style="display:flex; align-items:center; gap:0.4rem;">
-          <span style="width:12px;height:12px;background:rgba(201,169,97,0.25);border:1px solid #c9a961;border-radius:2px;display:inline-block;"></span>
-          <span data-lang-show="bs" class="lang-visible">19. godina — puna Metonska usklađenost</span>
-          <span data-lang-show="no">19. år — full Metonisk justering</span>
-          <span data-lang-show="en">19th year — full Metonic alignment</span>
-        </span>
-      </div>
-
-      <blockquote style="border-left:3px solid var(--gold); padding-left:1.5rem; margin:2rem 0; font-style:italic; color:var(--text-secondary); max-width:50ch;">
-        <span lang="ar" style="font-family:var(--font-arabic); direction:rtl; display:block; margin-bottom:0.5rem; text-align:right; font-size:1.2em;">وَلَبِثُوا فِي كَهْفِهِمْ ثَلَاثَ مِائَةٍ سِنِينَ وَازْدَادُوا تِسْعًا</span>
-        <span data-lang-show="bs" class="lang-visible">"I ostali su u svojoj pećini 300 godina, i dodali devet." — Kur'an 18:25. 300 solarnih = ~309 lunarnih godina. Razlika od 9 je posljedica Metonskog ciklusa od 19.</span>
-        <span data-lang-show="no">"Og de bodde i hulen sin i 300 år, og la til ni." — Koranen 18:25. 300 solår = ~309 månedår. Forskjellen på 9 er en konsekvens av den metonske syklusen på 19.</span>
-        <span data-lang-show="en">"And they stayed in their cave 300 years, and added nine." — Quran 18:25. 300 solar years = ~309 lunar years. The difference of 9 is a consequence of the 19-year Metonic cycle.</span>
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- ===== THE KEY VERSE IN CONTEXT ===== -->
-  <section class="explorer-section">
-    <div class="container--narrow">
-      <span class="section-label">Sura 74:26–34</span>
-      <h2 class="fade-in" style="margin-bottom:2rem; font-size:clamp(1.5rem,3.5vw,2.2rem);">
-        <span data-lang-show="bs" class="lang-visible">Kontekst ključnog ajeta</span>
-        <span data-lang-show="no">Konteksten til nøkkelverset</span>
-        <span data-lang-show="en">Context of the key verse</span>
-      </h2>
-
-      <div style="border:1px solid var(--border-gold); border-radius:var(--radius-md); overflow:hidden;">
-        <!-- Verses table -->
-        <table style="width:100%; border-collapse:collapse; font-family:var(--font-serif);">
-          <tbody>
-            <tr style="background:var(--parchment);">
-              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap; border-bottom:1px solid var(--border); width:80px;">74:26</td>
-              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.2em; line-height:2; border-bottom:1px solid var(--border); color:var(--ink);">سَأُصْلِيهِ سَقَرَ</td>
-              <td style="padding:1rem 1.5rem; font-style:italic; color:var(--text-secondary); border-bottom:1px solid var(--border);">
-                <span data-lang-show="bs" class="lang-visible">"Izložit ću ga Saqaru (Vatri)."</span>
-                <span data-lang-show="no">"Jeg vil utsette ham for Saqar (Helvedeilden)."</span>
-                <span data-lang-show="en">"I shall cause him to endure Saqar (Hellfire)."</span>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap; border-bottom:1px solid var(--border);">74:27</td>
-              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.2em; line-height:2; border-bottom:1px solid var(--border); color:var(--ink);">وَمَا أَدْرَاكَ مَا سَقَرُ</td>
-              <td style="padding:1rem 1.5rem; font-style:italic; color:var(--text-secondary); border-bottom:1px solid var(--border);">
-                <span data-lang-show="bs" class="lang-visible">"A šta ti znaš šta je Saqar?"</span>
-                <span data-lang-show="no">"Og hva vet du hva Saqar er?"</span>
-                <span data-lang-show="en">"And what could make thee conceive what Saqar is?"</span>
-              </td>
-            </tr>
-            <tr style="background:var(--parchment);">
-              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap; border-bottom:1px solid var(--border);">74:28–29</td>
-              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.2em; line-height:2; border-bottom:1px solid var(--border); color:var(--ink);">لَا تُبْقِي وَلَا تَذَرُ · لَوَّاحَةٌ لِّلْبَشَرِ</td>
-              <td style="padding:1rem 1.5rem; font-style:italic; color:var(--text-secondary); border-bottom:1px solid var(--border);">
-                <span data-lang-show="bs" class="lang-visible">"Ne ostavlja ni živim ni mrtvim. Čini svu istinu vidljivom smrtniku." — Na kraju ovog ajeta: 380 = 20×19 kumulativnih slova.</span>
-                <span data-lang-show="no">"Verken lar leve eller la dø. Gjør all sannhet synlig for et dødelig menneske." — På slutten av dette verset: 380 = 20×19 kumulative bokstaver.</span>
-                <span data-lang-show="en">"Does not allow to live, nor leaves to die. Making all truth visible to mortal man." — At the end of this verse: 380 = 20×19 cumulative letters.</span>
-              </td>
-            </tr>
-            <tr style="background:rgba(201,169,97,0.12); border-left:4px solid var(--gold);">
-              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--gold-dark); white-space:nowrap; border-bottom:1px solid var(--border-gold); font-weight:700;">74:30</td>
-              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.6em; line-height:2; border-bottom:1px solid var(--border-gold); color:var(--ink); font-weight:700;">عَلَيْهَا تِسْعَةَ عَشَرَ</td>
-              <td style="padding:1rem 1.5rem; border-bottom:1px solid var(--border-gold);">
-                <div style="font-family:var(--font-serif); font-size:var(--text-xl); font-weight:600; color:var(--ink); margin-bottom:0.5rem;">
-                  <span data-lang-show="bs" class="lang-visible">"Nad njim je devetnaest."</span>
-                  <span data-lang-show="no">"Over det er nitten."</span>
-                  <span data-lang-show="en">"Over it is nineteen."</span>
-                </div>
-                <div style="font-family:var(--font-sans); font-size:var(--text-xs); color:var(--gold-dark); font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">
-                  <span data-lang-show="bs" class="lang-visible">Ključni ajet — jedinstven u cijelom Kur'anu</span>
-                  <span data-lang-show="no">Nøkkelverset — unikt i hele Koranen</span>
-                  <span data-lang-show="en">The key verse — unique in the entire Quran</span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap; border-bottom:1px solid var(--border);">74:31</td>
-              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.1em; line-height:2; border-bottom:1px solid var(--border); color:var(--ink); font-style:italic;">57 riječi · = 3×19</td>
-              <td style="padding:1rem 1.5rem; color:var(--text-secondary); border-bottom:1px solid var(--border);">
-                <span data-lang-show="bs" class="lang-visible">"Nismo postavili čuvare Vatre osim meleka... Njihov broj je fitna za nevjernike, uvjerenje za ljude Knjige, povećanje vjere za vjernike." 57 = 3×19 riječi.</span>
-                <span data-lang-show="no">"Vi har ikke gjort ildens voktere til noe annet enn engler... Deres tall er en prøvelse for vantro, overbevisning for Bokens folk, økt tro for troende." 57 = 3×19 ord.</span>
-                <span data-lang-show="en">"We have not made the keepers of the Fire except angels... Their number is a trial for disbelievers, certainty for People of the Book, increased faith for believers." 57 = 3×19 words.</span>
-              </td>
-            </tr>
-            <tr style="background:var(--parchment);">
-              <td style="padding:1rem 1.5rem; font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-muted); white-space:nowrap;">74:32</td>
-              <td lang="ar" style="padding:1rem 1.5rem; text-align:right; font-family:var(--font-arabic); font-size:1.2em; line-height:2; color:var(--ink);">كَلَّا وَالْقَمَرِ</td>
-              <td style="padding:1rem 1.5rem; font-style:italic; color:var(--text-secondary);">
-                <span data-lang-show="bs" class="lang-visible">"Zaista, razmisli o Mjesecu!" — Odmah nakon 19 dolazi Mjesec. Metonski ciklus: 19 solarnih = 235 lunarnih.</span>
-                <span data-lang-show="no">"Sannelig, betrakt Månen!" — Umiddelbart etter 19 kommer Månen. Metonsk syklus: 19 solår = 235 månedsmåneder.</span>
-                <span data-lang-show="en">"Nay, but consider the Moon!" — Immediately after 19 comes the Moon. Metonic cycle: 19 solar years = 235 lunar months.</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </section>
 
   <!-- ===== BACK LINKS ===== -->
-  <section class="section--sm" style="background:var(--parchment);">
+  <section style="padding:3rem 0; background:var(--parchment);">
     <div class="container--narrow" style="text-align:center;">
       <h3 style="margin-bottom:2rem; font-size:var(--text-2xl);">
         <span data-lang-show="bs" class="lang-visible">Nastavite istraživanje</span>
@@ -603,15 +734,20 @@
           <span data-lang-show="no">&#8592; Hub — alle perspektiver</span>
           <span data-lang-show="en">&#8592; Hub — all perspectives</span>
         </a>
-        <a href="/ucenje/audio/" class="btn btn--gold">
-          <span data-lang-show="bs" class="lang-visible">Audio — 7 kompozicija &#8594;</span>
-          <span data-lang-show="no">Audio — 7 komposisjoner &#8594;</span>
-          <span data-lang-show="en">Audio — 7 compositions &#8594;</span>
+        <a href="/ucenje/matematika.html" class="btn btn--teal">
+          <span data-lang-show="bs" class="lang-visible">Za Matematičare &#8594;</span>
+          <span data-lang-show="no">For Matematikere &#8594;</span>
+          <span data-lang-show="en">For Mathematicians &#8594;</span>
         </a>
-        <a href="/ucenje/matematika.html" class="btn btn--outline">
-          <span data-lang-show="bs" class="lang-visible">Za matematičare &#8594;</span>
-          <span data-lang-show="no">For matematikere &#8594;</span>
-          <span data-lang-show="en">For mathematicians &#8594;</span>
+        <a href="/ucenje/pcele.html" class="btn btn--gold">
+          <span data-lang-show="bs" class="lang-visible">Pčele &amp; 6×19 &#8594;</span>
+          <span data-lang-show="no">Bier &amp; 6×19 &#8594;</span>
+          <span data-lang-show="en">Bees &amp; 6×19 &#8594;</span>
+        </a>
+        <a href="/ucenje/audio/" class="btn btn--outline">
+          <span data-lang-show="bs" class="lang-visible">Audio &#8594;</span>
+          <span data-lang-show="no">Lyd &#8594;</span>
+          <span data-lang-show="en">Audio &#8594;</span>
         </a>
       </div>
     </div>
@@ -630,7 +766,16 @@
       </div>
       <nav class="footer-links" aria-label="Footer navigacija">
         <a href="/ucenje/">Hub</a>
-        <a href="/ucenje/audio/">Audio</a>
+        <a href="/ucenje/matematika.html">
+          <span data-lang-show="bs" class="lang-visible">Matematika</span>
+          <span data-lang-show="no">Matematikk</span>
+          <span data-lang-show="en">Math</span>
+        </a>
+        <a href="/ucenje/pcele.html">
+          <span data-lang-show="bs" class="lang-visible">Pčele</span>
+          <span data-lang-show="no">Bier</span>
+          <span data-lang-show="en">Bees</span>
+        </a>
         <a href="https://alai.no">ALAI</a>
       </nav>
     </div>
@@ -640,115 +785,206 @@
 
 <script src="/ucenje/assets/app.js" defer></script>
 <script>
-  // ===== Counter facts content =====
-  var FACTS = {
-    bismillah: {
-      value: 19,
-      bs: '19 slova Bismille: ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م — računano u standardnom arapskom pisanju, bez dijakritičkih znakova vokalnih kratki.',
-      no: '19 bokstaver i Bismillah: ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م — talt i standard arabisk skrift, uten korte vokaldiakritikk.',
-      en: '19 letters of Bismillah: ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م — counted in standard Arabic script, excluding short vowel diacritics.',
-    },
-    suras: {
-      value: 114,
-      bs: '114 sura u Kur'anu. 114 ÷ 19 = 6, tačno. Ni 113 ni 115 ne dijeli se sa 19. Ukupan broj poglavlja je tačan višekratnik.',
-      no: '114 suraer i Koranen. 114 ÷ 19 = 6, nøyaktig. Verken 113 eller 115 deler seg med 19. Totalt antall kapitler er en nøyaktig multippel.',
-      en: '114 surahs in the Quran. 114 ÷ 19 = 6, exactly. Neither 113 nor 115 divides by 19. The total chapter count is an exact multiple.',
-    },
-    s96: {
-      value: 19,
-      bs: 'Sura 96 — Al-Alaq ("Ugrušak") — prva je sura objavljena Poslaniku, s.a.v.s. Ima tačno 19 ajeta. Sura koja je počela Objavu ima u sebi broj koji je ključ Objave.',
-      no: 'Sura 96 — Al-Alaq ("Klumpen") — var den første suraen åpenbart for Profeten. Den har nøyaktig 19 vers. Suraen som begynte Åpenbaringen bærer i seg tallet som er nøkkelen til Åpenbaringen.',
-      en: 'Surah 96 — Al-Alaq ("The Clinging Form") — was the first surah revealed to the Prophet. It has exactly 19 verses. The surah that began Revelation carries within it the number that is the key to Revelation.',
-    },
-    '7431': {
-      value: 57,
-      bs: '57 = 3×19 riječi u ajetu 74:31 — tom ajetu koji objašnjava zašto je broj 19 važan. Ajet koji govori o broju je sam strukturisan tim brojem.',
-      no: '57 = 3×19 ord i vers 74:31 — det verset som forklarer hvorfor tallet 19 er viktig. Verset som snakker om tallet er selv strukturert av det tallet.',
-      en: '57 = 3×19 words in verse 74:31 — the very verse that explains why the number 19 matters. The verse that speaks about the number is itself structured by that number.',
-    },
+(function() {
+  'use strict';
+
+  // ===== SURAH DATA (from full-quran.json — 114 entries) =====
+  var SURAHS = [{"n":1,"ar":"سُورَةُ ٱلْفَاتِحَةِ","en":"Al-Faatiha","tr":"The Opening","type":"Meccan","ayahs":7},{"n":2,"ar":"سُورَةُ البَقَرَةِ","en":"Al-Baqara","tr":"The Cow","type":"Medinan","ayahs":286},{"n":3,"ar":"سُورَةُ آلِ عِمۡرَانَ","en":"Aal-i-Imraan","tr":"The Family of Imraan","type":"Medinan","ayahs":200},{"n":4,"ar":"سُورَةُ النِّسَاءِ","en":"An-Nisaa","tr":"The Women","type":"Medinan","ayahs":176},{"n":5,"ar":"سُورَةُ المَائـِدَةِ","en":"Al-Maaida","tr":"The Table","type":"Medinan","ayahs":120},{"n":6,"ar":"سُورَةُ الأَنۡعَامِ","en":"Al-An'aam","tr":"The Cattle","type":"Meccan","ayahs":165},{"n":7,"ar":"سُورَةُ الأَعۡرَافِ","en":"Al-A'raaf","tr":"The Heights","type":"Meccan","ayahs":206},{"n":8,"ar":"سُورَةُ الأَنفَالِ","en":"Al-Anfaal","tr":"The Spoils of War","type":"Medinan","ayahs":75},{"n":9,"ar":"سُورَةُ التَّوۡبَةِ","en":"At-Tawba","tr":"The Repentance","type":"Medinan","ayahs":129},{"n":10,"ar":"سُورَةُ يُونُسَ","en":"Yunus","tr":"Jonas","type":"Meccan","ayahs":109},{"n":11,"ar":"سُورَةُ هُودٍ","en":"Hud","tr":"Hud","type":"Meccan","ayahs":123},{"n":12,"ar":"سُورَةُ يُوسُفَ","en":"Yusuf","tr":"Joseph","type":"Meccan","ayahs":111},{"n":13,"ar":"سُورَةُ الرَّعۡدِ","en":"Ar-Ra'd","tr":"The Thunder","type":"Medinan","ayahs":43},{"n":14,"ar":"سُورَةُ إِبۡرَاهِيمَ","en":"Ibrahim","tr":"Abraham","type":"Meccan","ayahs":52},{"n":15,"ar":"سُورَةُ الحِجۡرِ","en":"Al-Hijr","tr":"The Rock","type":"Meccan","ayahs":99},{"n":16,"ar":"سُورَةُ النَّحۡلِ","en":"An-Nahl","tr":"The Bee","type":"Meccan","ayahs":128},{"n":17,"ar":"سُورَةُ الإِسۡرَاءِ","en":"Al-Israa","tr":"The Night Journey","type":"Meccan","ayahs":111},{"n":18,"ar":"سُورَةُ الكَهۡفِ","en":"Al-Kahf","tr":"The Cave","type":"Meccan","ayahs":110},{"n":19,"ar":"سُورَةُ مَرۡيَمَ","en":"Maryam","tr":"Mary","type":"Meccan","ayahs":98},{"n":20,"ar":"سُورَةُ طه","en":"Taa-Haa","tr":"Taa-Haa","type":"Meccan","ayahs":135},{"n":21,"ar":"سُورَةُ الأَنبِيَاءِ","en":"Al-Anbiyaa","tr":"The Prophets","type":"Meccan","ayahs":112},{"n":22,"ar":"سُورَةُ الحَجِّ","en":"Al-Hajj","tr":"The Pilgrimage","type":"Medinan","ayahs":78},{"n":23,"ar":"سُورَةُ المُؤۡمِنُونَ","en":"Al-Muminoon","tr":"The Believers","type":"Meccan","ayahs":118},{"n":24,"ar":"سُورَةُ النُّورِ","en":"An-Noor","tr":"The Light","type":"Medinan","ayahs":64},{"n":25,"ar":"سُورَةُ الفُرۡقَانِ","en":"Al-Furqaan","tr":"The Criterion","type":"Meccan","ayahs":77},{"n":26,"ar":"سُورَةُ الشُّعَرَاءِ","en":"Ash-Shu'araa","tr":"The Poets","type":"Meccan","ayahs":227},{"n":27,"ar":"سُورَةُ النَّمۡلِ","en":"An-Naml","tr":"The Ant","type":"Meccan","ayahs":93},{"n":28,"ar":"سُورَةُ القَصَصِ","en":"Al-Qasas","tr":"The Stories","type":"Meccan","ayahs":88},{"n":29,"ar":"سُورَةُ العَنكَبُوتِ","en":"Al-Ankaboot","tr":"The Spider","type":"Meccan","ayahs":69},{"n":30,"ar":"سُورَةُ الرُّومِ","en":"Ar-Room","tr":"The Romans","type":"Meccan","ayahs":60},{"n":31,"ar":"سُورَةُ لُقۡمَانَ","en":"Luqman","tr":"Luqman","type":"Meccan","ayahs":34},{"n":32,"ar":"سُورَةُ السَّجۡدَةِ","en":"As-Sajda","tr":"The Prostration","type":"Meccan","ayahs":30},{"n":33,"ar":"سُورَةُ الأَحۡزَابِ","en":"Al-Ahzaab","tr":"The Clans","type":"Medinan","ayahs":73},{"n":34,"ar":"سُورَةُ سَبَإٍ","en":"Saba","tr":"Sheba","type":"Meccan","ayahs":54},{"n":35,"ar":"سُورَةُ فَاطِرٍ","en":"Faatir","tr":"The Originator","type":"Meccan","ayahs":45},{"n":36,"ar":"سُورَةُ يسٓ","en":"Yaseen","tr":"Yaseen","type":"Meccan","ayahs":83},{"n":37,"ar":"سُورَةُ الصَّافَّاتِ","en":"As-Saaffaat","tr":"Those drawn up in Ranks","type":"Meccan","ayahs":182},{"n":38,"ar":"سُورَةُ صٓ","en":"Saad","tr":"The letter Saad","type":"Meccan","ayahs":88},{"n":39,"ar":"سُورَةُ الزُّمَرِ","en":"Az-Zumar","tr":"The Groups","type":"Meccan","ayahs":75},{"n":40,"ar":"سُورَةُ غَافِرٍ","en":"Ghafir","tr":"The Forgiver","type":"Meccan","ayahs":85},{"n":41,"ar":"سُورَةُ فُصِّلَتۡ","en":"Fussilat","tr":"Explained in detail","type":"Meccan","ayahs":54},{"n":42,"ar":"سُورَةُ الشُّورَىٰ","en":"Ash-Shura","tr":"Consultation","type":"Meccan","ayahs":53},{"n":43,"ar":"سُورَةُ الزُّخۡرُفِ","en":"Az-Zukhruf","tr":"Ornaments of gold","type":"Meccan","ayahs":89},{"n":44,"ar":"سُورَةُ الدُّخَانِ","en":"Ad-Dukhaan","tr":"The Smoke","type":"Meccan","ayahs":59},{"n":45,"ar":"سُورَةُ الجَاثِيَةِ","en":"Al-Jaathiya","tr":"Crouching","type":"Meccan","ayahs":37},{"n":46,"ar":"سُورَةُ الأَحۡقَافِ","en":"Al-Ahqaf","tr":"The Dunes","type":"Meccan","ayahs":35},{"n":47,"ar":"سُورَةُ مُحَمَّدٍ","en":"Muhammad","tr":"Muhammad","type":"Medinan","ayahs":38},{"n":48,"ar":"سُورَةُ الفَتۡحِ","en":"Al-Fath","tr":"The Victory","type":"Medinan","ayahs":29},{"n":49,"ar":"سُورَةُ الحُجُرَاتِ","en":"Al-Hujuraat","tr":"The Inner Apartments","type":"Medinan","ayahs":18},{"n":50,"ar":"سُورَةُ قٓ","en":"Qaaf","tr":"The letter Qaaf","type":"Meccan","ayahs":45},{"n":51,"ar":"سُورَةُ الذَّارِيَاتِ","en":"Adh-Dhaariyat","tr":"The Winnowing Winds","type":"Meccan","ayahs":60},{"n":52,"ar":"سُورَةُ الطُّورِ","en":"At-Tur","tr":"The Mount","type":"Meccan","ayahs":49},{"n":53,"ar":"سُورَةُ النَّجۡمِ","en":"An-Najm","tr":"The Star","type":"Meccan","ayahs":62},{"n":54,"ar":"سُورَةُ القَمَرِ","en":"Al-Qamar","tr":"The Moon","type":"Meccan","ayahs":55},{"n":55,"ar":"سُورَةُ الرَّحۡمَٰن","en":"Ar-Rahmaan","tr":"The Beneficent","type":"Medinan","ayahs":78},{"n":56,"ar":"سُورَةُ الوَاقِعَةِ","en":"Al-Waaqia","tr":"The Inevitable","type":"Meccan","ayahs":96},{"n":57,"ar":"سُورَةُ الحَدِيدِ","en":"Al-Hadid","tr":"The Iron","type":"Medinan","ayahs":29},{"n":58,"ar":"سُورَةُ المُجَادلَةِ","en":"Al-Mujaadila","tr":"The Pleading Woman","type":"Medinan","ayahs":22},{"n":59,"ar":"سُورَةُ الحَشۡرِ","en":"Al-Hashr","tr":"The Exile","type":"Medinan","ayahs":24},{"n":60,"ar":"سُورَةُ المُمۡتَحنَةِ","en":"Al-Mumtahana","tr":"She that is to be examined","type":"Medinan","ayahs":13},{"n":61,"ar":"سُورَةُ الصَّفِّ","en":"As-Saff","tr":"The Ranks","type":"Medinan","ayahs":14},{"n":62,"ar":"سُورَةُ الجُمُعَةِ","en":"Al-Jumu'a","tr":"Friday","type":"Medinan","ayahs":11},{"n":63,"ar":"سُورَةُ المُنَافِقُونَ","en":"Al-Munaafiqoon","tr":"The Hypocrites","type":"Medinan","ayahs":11},{"n":64,"ar":"سُورَةُ التَّغَابُنِ","en":"At-Taghaabun","tr":"Mutual Disillusion","type":"Medinan","ayahs":18},{"n":65,"ar":"سُورَةُ الطَّلَاقِ","en":"At-Talaaq","tr":"Divorce","type":"Medinan","ayahs":12},{"n":66,"ar":"سُورَةُ التَّحۡرِيمِ","en":"At-Tahrim","tr":"The Prohibition","type":"Medinan","ayahs":12},{"n":67,"ar":"سُورَةُ المُلۡكِ","en":"Al-Mulk","tr":"The Sovereignty","type":"Meccan","ayahs":30},{"n":68,"ar":"سُورَةُ القَلَمِ","en":"Al-Qalam","tr":"The Pen","type":"Meccan","ayahs":52},{"n":69,"ar":"سُورَةُ الحَاقَّةِ","en":"Al-Haaqqa","tr":"The Reality","type":"Meccan","ayahs":52},{"n":70,"ar":"سُورَةُ المَعَارِجِ","en":"Al-Ma'aarij","tr":"The Ascending Stairways","type":"Meccan","ayahs":44},{"n":71,"ar":"سُورَةُ نُوحٍ","en":"Nooh","tr":"Noah","type":"Meccan","ayahs":28},{"n":72,"ar":"سُورَةُ الجِنِّ","en":"Al-Jinn","tr":"The Jinn","type":"Meccan","ayahs":28},{"n":73,"ar":"سُورَةُ المُزَّمِّلِ","en":"Al-Muzzammil","tr":"The Enshrouded One","type":"Meccan","ayahs":20},{"n":74,"ar":"سُورَةُ المُدَّثِّرِ","en":"Al-Muddaththir","tr":"The Cloaked One","type":"Meccan","ayahs":56},{"n":75,"ar":"سُورَةُ القِيَامَةِ","en":"Al-Qiyaama","tr":"The Resurrection","type":"Meccan","ayahs":40},{"n":76,"ar":"سُورَةُ الإِنسَانِ","en":"Al-Insaan","tr":"Man","type":"Medinan","ayahs":31},{"n":77,"ar":"سُورَةُ المُرۡسَلَاتِ","en":"Al-Mursalaat","tr":"The Emissaries","type":"Meccan","ayahs":50},{"n":78,"ar":"سُورَةُ النَّبَإِ","en":"An-Naba","tr":"The Announcement","type":"Meccan","ayahs":40},{"n":79,"ar":"سُورَةُ النَّازِعَاتِ","en":"An-Naazi'aat","tr":"Those who drag forth","type":"Meccan","ayahs":46},{"n":80,"ar":"سُورَةُ عَبَسَ","en":"Abasa","tr":"He frowned","type":"Meccan","ayahs":42},{"n":81,"ar":"سُورَةُ التَّكۡوِيرِ","en":"At-Takwir","tr":"The Overthrowing","type":"Meccan","ayahs":29},{"n":82,"ar":"سُورَةُ الانفِطَارِ","en":"Al-Infitaar","tr":"The Cleaving","type":"Meccan","ayahs":19},{"n":83,"ar":"سُورَةُ المُطَفِّفِينَ","en":"Al-Mutaffifin","tr":"Defrauding","type":"Meccan","ayahs":36},{"n":84,"ar":"سُورَةُ الانشِقَاقِ","en":"Al-Inshiqaaq","tr":"The Splitting Open","type":"Meccan","ayahs":25},{"n":85,"ar":"سُورَةُ البُرُوجِ","en":"Al-Burooj","tr":"The Constellations","type":"Meccan","ayahs":22},{"n":86,"ar":"سُورَةُ الطَّارِقِ","en":"At-Taariq","tr":"The Morning Star","type":"Meccan","ayahs":17},{"n":87,"ar":"سُورَةُ الأَعۡلَىٰ","en":"Al-A'laa","tr":"The Most High","type":"Meccan","ayahs":19},{"n":88,"ar":"سُورَةُ الغَاشِيَةِ","en":"Al-Ghaashiya","tr":"The Overwhelming","type":"Meccan","ayahs":26},{"n":89,"ar":"سُورَةُ الفَجۡرِ","en":"Al-Fajr","tr":"The Dawn","type":"Meccan","ayahs":30},{"n":90,"ar":"سُورَةُ البَلَدِ","en":"Al-Balad","tr":"The City","type":"Meccan","ayahs":20},{"n":91,"ar":"سُورَةُ الشَّمۡسِ","en":"Ash-Shams","tr":"The Sun","type":"Meccan","ayahs":15},{"n":92,"ar":"سُورَةُ اللَّيۡلِ","en":"Al-Lail","tr":"The Night","type":"Meccan","ayahs":21},{"n":93,"ar":"سُورَةُ الضُّحَىٰ","en":"Ad-Dhuhaa","tr":"The Morning Hours","type":"Meccan","ayahs":11},{"n":94,"ar":"سُورَةُ الشَّرۡحِ","en":"Ash-Sharh","tr":"The Consolation","type":"Meccan","ayahs":8},{"n":95,"ar":"سُورَةُ التِّينِ","en":"At-Tin","tr":"The Fig","type":"Meccan","ayahs":8},{"n":96,"ar":"سُورَةُ العَلَقِ","en":"Al-Alaq","tr":"The Clot","type":"Meccan","ayahs":19},{"n":97,"ar":"سُورَةُ القَدۡرِ","en":"Al-Qadr","tr":"The Power, Fate","type":"Meccan","ayahs":5},{"n":98,"ar":"سُورَةُ البَيِّنَةِ","en":"Al-Bayyina","tr":"The Evidence","type":"Medinan","ayahs":8},{"n":99,"ar":"سُورَةُ الزَّلۡزَلَةِ","en":"Az-Zalzala","tr":"The Earthquake","type":"Medinan","ayahs":8},{"n":100,"ar":"سُورَةُ العَادِيَاتِ","en":"Al-Aadiyaat","tr":"The Chargers","type":"Meccan","ayahs":11},{"n":101,"ar":"سُورَةُ القَارِعَةِ","en":"Al-Qaari'a","tr":"The Calamity","type":"Meccan","ayahs":11},{"n":102,"ar":"سُورَةُ التَّكَاثُرِ","en":"At-Takaathur","tr":"Competition","type":"Meccan","ayahs":8},{"n":103,"ar":"سُورَةُ العَصۡرِ","en":"Al-Asr","tr":"The Declining Day","type":"Meccan","ayahs":3},{"n":104,"ar":"سُورَةُ الهُمَزَةِ","en":"Al-Humaza","tr":"The Traducer","type":"Meccan","ayahs":9},{"n":105,"ar":"سُورَةُ الفِيلِ","en":"Al-Fil","tr":"The Elephant","type":"Meccan","ayahs":5},{"n":106,"ar":"سُورَةُ قُرَيۡشٍ","en":"Quraish","tr":"Quraysh","type":"Meccan","ayahs":4},{"n":107,"ar":"سُورَةُ المَاعُونِ","en":"Al-Maa'un","tr":"Almsgiving","type":"Meccan","ayahs":7},{"n":108,"ar":"سُورَةُ الكَوۡثَرِ","en":"Al-Kawthar","tr":"Abundance","type":"Meccan","ayahs":3},{"n":109,"ar":"سُورَةُ الكَافِرُونَ","en":"Al-Kaafiroon","tr":"The Disbelievers","type":"Meccan","ayahs":6},{"n":110,"ar":"سُورَةُ النَّصۡرِ","en":"An-Nasr","tr":"Divine Support","type":"Medinan","ayahs":3},{"n":111,"ar":"سُورَةُ المَسَدِ","en":"Al-Masad","tr":"The Palm Fibre","type":"Meccan","ayahs":5},{"n":112,"ar":"سُورَةُ الإِخۡلَاصِ","en":"Al-Ikhlaas","tr":"Sincerity","type":"Meccan","ayahs":4},{"n":113,"ar":"سُورَةُ الفَلَقِ","en":"Al-Falaq","tr":"The Dawn","type":"Meccan","ayahs":5},{"n":114,"ar":"سُورَةُ النَّاسِ","en":"An-Naas","tr":"Mankind","type":"Meccan","ayahs":6}];
+
+  // Special annotations per surah
+  var NOTES = {
+    9:  { bs: 'Jedina sura bez Bismille na početku.', no: 'Den eneste suraen uten Bismillah i begynnelsen.', en: 'The only surah without Bismillah at its start.' },
+    16: { bs: 'An-Nahl — Jedina sura nazvana po insektu. Sura o pčelama stoji na 16. poziciji; pčele grade ćelije sa 6 strana; 6 = broj redova u 6×19 mreži.', no: 'An-Nahl — Den eneste suraen oppkalt etter et insekt. Surah om bier er på posisjon 16; bier bygger celler med 6 sider; 6 = antall rader i 6×19-nettet.', en: 'An-Nahl — The only surah named after an insect. The surah about bees is at position 16; bees build 6-sided cells; 6 = number of rows in the 6×19 grid.' },
+    19: { bs: 'Maryam — 19. sura, višekratnik od 19. Sura o majci Isaa, a.s.', no: 'Maryam — 19. surah, multiplum av 19.', en: 'Maryam — 19th surah, multiple of 19.' },
+    27: { bs: 'An-Naml — Sadrži extra Bismillu unutar teksta (ajet 30, u pismu kraljice Sabe), čime se restaurira ravnoteža izgubljena u suri 9. Razmak 9→27 = 19 sura.', no: 'An-Naml — Inneholder ekstra Bismillah i teksten (vers 30, i dronningens brev), som gjenoppretter balansen mistet i sura 9. Avstand 9→27 = 19 suraer.', en: 'An-Naml — Contains an extra Bismillah within the text (verse 30, in the Queen\'s letter), restoring the balance lost in surah 9. Gap 9→27 = 19 surahs.' },
+    38: { bs: 'Saad — 38 = 2×19. Drugi višekratnik od 19 u Kur'anu.', no: 'Saad — 38 = 2×19. Andre multiplum av 19 i Koranen.', en: 'Saad — 38 = 2×19. Second multiple of 19 in the Quran.' },
+    57: { bs: 'Al-Hadid — 57 = 3×19. Broj riječi u ajetu 74:31 je također 57.', no: 'Al-Hadid — 57 = 3×19. Antall ord i vers 74:31 er også 57.', en: 'Al-Hadid — 57 = 3×19. The word count in verse 74:31 is also 57.' },
+    74: { bs: 'Al-Muddaththir — Sadrži ključni ajet 74:30: "عَلَيْهَا تِسْعَةَ عَشَرَ" (Nad njim je devetnaest). Jedini ajet koji eksplicitno navodi broj 19 kao strukturalni čuvar teksta.', no: 'Al-Muddaththir — Inneholder nøkkelvers 74:30: "عَلَيْهَا تِسْعَةَ عَشَرَ" (Over det er nitten). Det eneste verset som eksplisitt nevner 19 som tekstens strukturelle vokter.', en: 'Al-Muddaththir — Contains key verse 74:30: "عَلَيْهَا تِسْعَةَ عَشَرَ" (Over it is nineteen). The only verse explicitly naming 19 as the structural guardian of the text.' },
+    76: { bs: 'Al-Insaan — 76 = 4×19. Četvrti višekratnik od 19.', no: 'Al-Insaan — 76 = 4×19. Fjerde multiplum av 19.', en: 'Al-Insaan — 76 = 4×19. Fourth multiple of 19.' },
+    95: { bs: 'At-Tin — 95 = 5×19. Peti višekratnik od 19. Sura 96 sadrži 95 slova u prvih 5 ajeta (= 19×5).', no: 'At-Tin — 95 = 5×19. Femte multiplum av 19. Sura 96 inneholder 95 bokstaver i de første 5 versene (= 19×5).', en: 'At-Tin — 95 = 5×19. Fifth multiple of 19. Surah 96 contains 95 letters in its first 5 verses (= 19×5).' },
+    96: { bs: 'Al-Alaq — Prva sura objavljena Poslaniku ﷺ. Ima tačno 19 ajeta. Nalazi se na 19. poziciji od kraja Kur'ana (114−96+1=19). Prvih 5 ajeta ima 95 = 19×5 slova.', no: 'Al-Alaq — Den første suraen åpenbart for Profeten ﷺ. Har nøyaktig 19 vers. Er på 19. plass fra slutten av Koranen (114−96+1=19). De første 5 versene har 95 = 19×5 bokstaver.', en: 'Al-Alaq — First surah revealed to the Prophet ﷺ. Has exactly 19 verses. Is at position 19 from the end of the Quran (114−96+1=19). First 5 verses have 95 = 19×5 letters.' },
+    114: { bs: 'An-Naas — 114 = 6×19. Posljednja sura, broj koji zatvara krug: 114 = 6×19 sura ukupno.', no: 'An-Naas — 114 = 6×19. Siste surah, tallet som lukker sirkelen: 114 = 6×19 suraer totalt.', en: 'An-Naas — 114 = 6×19. The final surah, the number that closes the circle: 114 = 6×19 total surahs.' }
   };
 
-  function showFact(key) {
-    var fact = FACTS[key];
-    if (!fact) return;
+  var MULTIPLES_19 = [19, 38, 57, 76, 95, 114];
 
-    var display = document.getElementById('counter-display');
-    var factEl = document.getElementById('counter-fact');
-    var lang = localStorage.getItem('ucenje-lang') || 'bs';
+  var currentSelected = null;
+  var currentLangFn = function() {
+    return (typeof currentLang !== 'undefined' ? currentLang : null) ||
+           localStorage.getItem('ucenje-lang') || 'bs';
+  };
 
-    // Animate counter (animateCounter exposed on window by app.js)
-    var current = parseInt(display.textContent, 10) || 0;
-    if (typeof window.animateCounter === 'function') {
-      window.animateCounter(display, current, fact.value, 1000);
-    } else {
-      display.textContent = fact.value;
-    }
-
-    // Show description
-    factEl.style.opacity = '0';
-    setTimeout(function() {
-      factEl.textContent = fact[lang] || fact['en'];
-      factEl.style.opacity = '1';
-    }, 200);
-
-    // Visual feedback: mark active button
-    document.querySelectorAll('[data-fact]').forEach(function(btn) {
-      btn.classList.toggle('btn--primary', btn.dataset.fact === key);
-      btn.classList.toggle('btn--outline', btn.dataset.fact !== key);
-    });
-  }
-
-  // Expose globally (fallback for any remaining onclick references)
-  window.showFact = showFact;
-
-  // Bind counter buttons via addEventListener (robust — works regardless of defer order)
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('[data-fact]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        showFact(btn.dataset.fact);
-      });
-    });
-  });
-
-  // Build Metonic cycle grid
-  document.addEventListener('DOMContentLoaded', function() {
-    var grid = document.getElementById('metonic-grid');
+  function buildGrid() {
+    var grid = document.getElementById('surah-grid-6x19');
     if (!grid) return;
 
-    // 5 Metonic cycles (95 years) to show pattern
-    for (var i = 1; i <= 95; i++) {
-      var cell = document.createElement('div');
-      cell.className = 'metonic-cell grid-cell';
-      if (i % 19 === 0) {
-        cell.classList.add('metonic-cell--year19');
-        cell.title = 'Metonska usklađenost';
-      }
-      cell.textContent = i;
+    SURAHS.forEach(function(s, i) {
+      var cell = document.createElement('button');
+      cell.className = 'sc';
+      cell.setAttribute('role', 'gridcell');
+      cell.setAttribute('aria-label', 'Sura ' + s.n + ' — ' + s.en + ' — ' + s.tr + ' — ' + s.ayahs + ' ajeta');
+      cell.setAttribute('data-n', s.n);
+      cell.tabIndex = 0;
+
+      // Set row/col aria
+      var row = Math.floor(i / 19) + 1;
+      var col = (i % 19) + 1;
+      cell.setAttribute('aria-rowindex', row);
+      cell.setAttribute('aria-colindex', col);
+
+      // Apply special classes
+      if (MULTIPLES_19.indexOf(s.n) !== -1) cell.classList.add('sc--mult19');
+      if (s.n === 96) cell.classList.add('sc--s96');
+      if (s.n === 74) cell.classList.add('sc--s74');
+      if (s.n === 16) cell.classList.add('sc--s16');
+      if (s.n === 9)  cell.classList.add('sc--s9');
+      if (s.n === 27) cell.classList.add('sc--s27');
+      if (s.type === 'Medinan') cell.classList.add('sc--medinan');
+
+      // Number
+      var numEl = document.createElement('span');
+      numEl.className = 'sc-num';
+      numEl.textContent = s.n;
+      cell.appendChild(numEl);
+
+      // Click / keyboard activation
+      cell.addEventListener('click', function() { showDetail(s); });
+      cell.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          showDetail(s);
+        }
+      });
+
       grid.appendChild(cell);
+    });
+  }
+
+  function showDetail(s) {
+    var lang = currentLangFn();
+
+    // Highlight selected cell
+    if (currentSelected) currentSelected.style.outline = '';
+    var allCells = document.querySelectorAll('.sc');
+    allCells.forEach(function(c) { if (parseInt(c.dataset.n) === s.n) { c.style.outline = '2px solid var(--gold)'; currentSelected = c; } });
+
+    // Update panel
+    document.getElementById('dp-num').textContent = s.n;
+    document.getElementById('dp-ar').textContent = s.ar;
+    document.getElementById('dp-en').textContent = s.en;
+    document.getElementById('dp-tr').textContent = s.tr;
+
+    // Badges
+    var badgesEl = document.getElementById('dp-badges');
+    badgesEl.innerHTML = '';
+
+    var typeBadge = document.createElement('span');
+    typeBadge.className = 'detail-badge ' + (s.type === 'Meccan' ? 'detail-badge--gold' : 'detail-badge--purple');
+    typeBadge.textContent = s.type === 'Meccan'
+      ? (lang === 'bs' ? 'Mekanska' : lang === 'no' ? 'Mekka' : 'Meccan')
+      : (lang === 'bs' ? 'Medinska' : lang === 'no' ? 'Medina' : 'Medinan');
+    badgesEl.appendChild(typeBadge);
+
+    var ayahBadge = document.createElement('span');
+    ayahBadge.className = 'detail-badge detail-badge--muted';
+    var ayahLabel = lang === 'bs' ? 'ajeta' : lang === 'no' ? 'vers' : 'verses';
+    ayahBadge.textContent = s.ayahs + ' ' + ayahLabel;
+    badgesEl.appendChild(ayahBadge);
+
+    if (MULTIPLES_19.indexOf(s.n) !== -1) {
+      var mBadge = document.createElement('span');
+      mBadge.className = 'detail-badge detail-badge--gold';
+      mBadge.textContent = s.n + ' = ' + (s.n / 19) + ' \u00D7 19';
+      badgesEl.appendChild(mBadge);
+    }
+    if (s.n === 9) {
+      var b9 = document.createElement('span');
+      b9.className = 'detail-badge detail-badge--red';
+      b9.textContent = lang === 'bs' ? 'Nema Bismille' : lang === 'no' ? 'Mangler Bismillah' : 'No Bismillah';
+      badgesEl.appendChild(b9);
+    }
+    if (s.n === 27) {
+      var b27 = document.createElement('span');
+      b27.className = 'detail-badge detail-badge--teal';
+      b27.textContent = lang === 'bs' ? 'Extra Bismilla (27:30)' : 'Extra Bismillah (27:30)';
+      badgesEl.appendChild(b27);
+    }
+    if (s.n === 96) {
+      var b96 = document.createElement('span');
+      b96.className = 'detail-badge detail-badge--teal';
+      b96.textContent = lang === 'bs' ? 'Prva objavljena' : lang === 'no' ? 'F\u00f8rst \u00e5penbart' : 'First revealed';
+      badgesEl.appendChild(b96);
+    }
+    if (s.n === 74) {
+      var b74 = document.createElement('span');
+      b74.className = 'detail-badge detail-badge--gold';
+      b74.textContent = lang === 'bs' ? 'Sadr\u017ei 74:30' : 'Contains 74:30';
+      badgesEl.appendChild(b74);
+    }
+    if (s.n === 16) {
+      var b16 = document.createElement('span');
+      b16.className = 'detail-badge detail-badge--teal';
+      b16.textContent = lang === 'bs' ? 'Sura o p\u010delama' : lang === 'no' ? 'Bien-surah' : 'The Bee surah';
+      badgesEl.appendChild(b16);
     }
 
-    // Observe for animation
-    if ('IntersectionObserver' in window) {
-      var obs = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting) {
-          var cells = grid.querySelectorAll('.grid-cell');
-          cells.forEach(function(c, idx) {
-            setTimeout(function() { c.classList.add('visible'); }, idx * 8);
-          });
-          obs.disconnect();
-        }
-      }, { threshold: 0.1 });
-      obs.observe(grid);
+    // Notes
+    var notesEl = document.getElementById('dp-notes');
+    var note = NOTES[s.n];
+    if (note) {
+      notesEl.textContent = note[lang] || note['en'];
+      notesEl.style.display = '';
+    } else {
+      // Generic note: grid position
+      var colNum = ((s.n - 1) % 19) + 1;
+      var rowNum = Math.floor((s.n - 1) / 19) + 1;
+      if (lang === 'bs') {
+        notesEl.textContent = 'Mre\u017ea: Red ' + rowNum + ', Kolona ' + colNum + '. ' + s.en + ' — ' + s.tr + '.';
+      } else if (lang === 'no') {
+        notesEl.textContent = 'Nett: Rad ' + rowNum + ', Kolonne ' + colNum + '. ' + s.en + ' — ' + s.tr + '.';
+      } else {
+        notesEl.textContent = 'Grid: Row ' + rowNum + ', Column ' + colNum + '. ' + s.en + ' — ' + s.tr + '.';
+      }
+      notesEl.style.display = '';
+    }
+
+    // Link
+    document.getElementById('dp-link').href = 'https://quran.com/' + s.n;
+
+    // Show panel
+    var panel = document.getElementById('detail-panel');
+    panel.classList.add('visible');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Grid keyboard navigation (arrow keys)
+  document.addEventListener('keydown', function(e) {
+    var focused = document.activeElement;
+    if (!focused || !focused.classList.contains('sc')) return;
+
+    var n = parseInt(focused.dataset.n);
+    var target = null;
+
+    if (e.key === 'ArrowRight' && n < 114) target = n + 1;
+    if (e.key === 'ArrowLeft'  && n > 1)   target = n - 1;
+    if (e.key === 'ArrowDown'  && n + 19 <= 114) target = n + 19;
+    if (e.key === 'ArrowUp'    && n - 19 >= 1)   target = n - 19;
+
+    if (target) {
+      e.preventDefault();
+      var targetCell = document.querySelector('.sc[data-n="' + target + '"]');
+      if (targetCell) targetCell.focus();
     }
   });
 
-  // Override metonic grid columns based on screen
-  var mGrid = document.getElementById('metonic-grid');
-  if (mGrid) {
-    if (window.innerWidth < 600) {
-      mGrid.style.gridTemplateColumns = 'repeat(19, 1fr)';
-    }
+  // Build on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildGrid);
+  } else {
+    buildGrid();
   }
+
+})();
 </script>
 </body>
 </html>
