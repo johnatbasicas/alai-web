@@ -229,3 +229,15 @@ Tekstovi mješaju:
 ---
 
 **Lexicon / ALAI, 2026-04-24**
+
+---
+
+## ADDENDUM — 2026-04-24 (Vizu implementation)
+
+`audio/index.html` was originally out of scope in this audit. Added and fixed 2026-04-24 (MC #9092):
+- Line 111 BS: "Ono je — čuto." → "Ono se — čuje." (gramatika — prezent medijalni)
+- Line 225 BS: "ovdje je zvuči." → "ovdje zvuči." (gramatika — suvišni pomoćni glagol)
+
+`bs.html` systemic diacritic sweep also completed (MC #9092) — ~30 strings corrected across entire file.
+
+**Ready for Lexicon re-audit on expanded scope (audio/index.html + bs.html full sweep) + Proveo re-verify.**
