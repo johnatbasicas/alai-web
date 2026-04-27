@@ -87,11 +87,17 @@ function initScrollAnimations() {
         }
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
 
   document.querySelectorAll('.fade-in, .grid-animate-parent, .svg-draw, .timeline-bar').forEach(el => {
     observer.observe(el);
   });
+
+  setTimeout(() => {
+    document.querySelectorAll('.fade-in, .grid-animate-parent, .svg-draw, .timeline-bar, .grid-cell').forEach(el => {
+      el.classList.add('visible');
+    });
+  }, 2000);
 }
 
 // ===== AUDIO PLAYER SYSTEM =====
