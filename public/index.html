@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ALAI Holding AS — We build digital. You build business. Full-service digital agency: software, design, security, AI. Fixed prices, AI-native delivery. Based in Norway.">
+    <meta name="description" content="Full-service digital agency: software, design, security &amp; AI. Fixed prices, AI-native delivery. Based in Norway — ALAI Holding AS.">
     <title>ALAI — We build digital. You build business.</title>
     <link rel="canonical" href="https://alai.no/">
     <link rel="icon" type="image/svg+xml" href="brand/logos/logo-icon.svg">
@@ -19,12 +19,15 @@
     <meta property="og:title" content="ALAI — We build digital. You build business.">
     <meta property="og:description" content="Full-service digital agency: software, design, security, AI. Fixed prices, AI-native delivery. Based in Norway.">
     <meta property="og:image" content="https://alai.no/brand/social/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
     <meta property="og:url" content="https://alai.no/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="ALAI Holding AS">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="nb_NO">
-    <meta property="og:locale:alternate" content="bs_BA">
+    <meta property="og:locale:alternate" content="sr_BA">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
@@ -43,16 +46,22 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": ["Organization", "ProfessionalService"],
         "name": "ALAI Holding AS",
         "alternateName": "ALAI",
-        "url": "https://alai.no",
-        "logo": "https://alai.no/brand/logos/profile-pic.png",
+        "url": "https://alai.no/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://alai.no/brand/logos/nav-logo.png",
+            "width": 280,
+            "height": 280
+        },
         "description": "Full-service digital agency: software, design, security, AI. Fixed prices, AI-native delivery.",
         "foundingDate": "2024",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Klofta",
+            "addressLocality": "Kløfta",
+            "postalCode": "2040",
             "addressCountry": "NO"
         },
         "contactPoint": {
@@ -65,14 +74,71 @@
             "https://linkedin.com/company/alai-as"
         ],
         "knowsAbout": ["Software Development", "UI/UX Design", "Cybersecurity", "Artificial Intelligence", "Cloud Infrastructure", "Digital Marketing"],
-        "areaServed": {
-            "@type": "GeoCircle",
-            "geoMidpoint": {
-                "@type": "GeoCoordinates",
-                "latitude": 60.0,
-                "longitude": 11.1
+        "areaServed": ["NO", "EU"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ALAI",
+        "url": "https://alai.no/"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What does ALAI build?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ALAI builds custom web apps, mobile apps, APIs, and integrations. We also provide UI/UX design, security audits, and AI/ML integrations — everything from the first pixel to production server."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does ALAI's process work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our six-step process: (1) Discovery — we listen first and understand your business; (2) Scope & price — fixed price or custom quote, no ambiguity; (3) Build — AI-assisted development with human oversight; (4) Validation — independent QA, security scan, performance test; (5) Deploy — staging preview then zero-downtime production deploy; (6) Support — post-launch monitoring, bug fixes, new features."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does ALAI offer fixed prices?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. ALAI offers fixed-price packages and custom quotes. You approve the price before we start — no ambiguity, no surprises."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Where is ALAI based?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ALAI Holding AS is based in Kløfta, Norway, and serves clients across Norway and Europe."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What AI services does ALAI provide?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ALAI provides business intelligence, ML models, and LLM integrations. We use the same AI we build for clients, enabling faster delivery, lower cost, and fewer errors."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How quickly does ALAI respond to inquiries?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ALAI responds to all project inquiries within 24 hours with a tailored proposal."
+                }
             }
-        }
+        ]
     }
     </script>
 
@@ -1067,7 +1133,7 @@
         <div class="container">
             <div class="section-header">
                 <span class="overline" data-i18n="services.eyebrow">Services</span>
-                <h2 data-i18n="services.title">Full-service digital</h2>
+                <h2 data-i18n="services.title">Full-service digital agency</h2>
                 <h5 data-i18n="services.subtitle">Everything you need to build, launch, and grow — from one team.</h5>
             </div>
             <div class="services-grid">
@@ -1416,7 +1482,7 @@
                 'about.founder_role': 'Founder & CEO',
                 'about.founder_bio': 'Engineer turned entrepreneur. 25+ years shipping enterprise software across Norway and Europe. Built ALAI to prove that a small team with the right AI can outdeliver agencies ten times its size. No subcontractors. No finger-pointing. One person, full accountability.',
                 'services.eyebrow': 'Services',
-                'services.title': 'Full-service digital',
+                'services.title': 'Full-service digital agency',
                 'services.subtitle': 'Everything you need to build, launch, and grow — from one team.',
                 'services.software.title': 'Software',
                 'services.software.desc': 'Custom web apps, mobile, APIs, and integrations. Modern stack, production-grade.',
@@ -1508,7 +1574,7 @@
                 'about.founder_role': 'Grunnlegger og daglig leder',
                 'about.founder_bio': 'Ingeniør som ble grunder. 25+ år med leveranse av enterprise-programvare i Norge og Europa. Bygde ALAI for å bevise at et lite team med riktig AI kan levere bedre enn byråer ti ganger større. Ingen underleverandører. Ingen ansvarsfraskrivelse. Én person, fullt ansvar.',
                 'services.eyebrow': 'Tjenester',
-                'services.title': 'Full-service digital',
+                'services.title': 'Full-service digitalbyrå',
                 'services.subtitle': 'Alt du trenger for å bygge, lansere og vokse — fra étt team.',
                 'services.software.title': 'Programvare',
                 'services.software.desc': 'Skreddersydde webapper, mobilapper, API-er og integrasjoner. Moderne stack, produksjonsklart.',
@@ -1600,7 +1666,7 @@
                 'about.founder_role': 'Osnivač i direktor',
                 'about.founder_bio': 'Inžinjer koji je postao preduzetnik. 25+ godina isporuke enterprise softwarea u Norveškoj i Evropi. Osnovao ALAI da dokaže da mali tim sa pravim AI-em može nadmašiti agencije deset puta veće. Bez podizvođača. Bez prebacivanja odgovornosti. Jedna osoba, puna odgovornost.',
                 'services.eyebrow': 'Usluge',
-                'services.title': 'Full-service digitalno',
+                'services.title': 'Full-service digitalna agencija',
                 'services.subtitle': 'Sve što vam treba da izgradite, lansirate i rastete — od jednog tima.',
                 'services.software.title': 'Software',
                 'services.software.desc': 'Web aplikacije po mjeri, mobilne, API-ji i integracije. Moderan stack, produkcioni kvalitet.',
@@ -1696,9 +1762,9 @@
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
             const metaDesc = {
-                en: 'ALAI Holding AS — We build digital. You build business. Full-service digital agency: software, design, security, AI. Fixed prices, AI-native delivery. Based in Norway.',
-                no: 'ALAI Holding AS — Vi bygger digitalt. Du bygger virksomhet. Full-service digitalbyrå: programvare, design, sikkerhet, AI. Faste priser. Basert i Norge.',
-                bs: 'ALAI Holding AS — Mi gradimo digitalno. Vi gradite biznis. Full-service digitalna agencija: software, dizajn, sigurnost, AI. Fiksne cijene. Bazirani u Norveškoj.'
+                en: 'Full-service digital agency: software, design, security &amp; AI. Fixed prices, AI-native delivery. Based in Norway — ALAI Holding AS.',
+                no: 'Full-service digitalbyrå: programvare, design, sikkerhet og AI. Faste priser, AI-native leveranse. Basert i Norge — ALAI Holding AS.',
+                bs: 'Full-service digitalna agencija: software, dizajn, sigurnost i AI. Fiksne cijene, AI isporuka. Bazirani u Norveškoj — ALAI Holding AS.'
             };
             const descTag = document.querySelector('meta[name="description"]');
             if (descTag && metaDesc[lang]) descTag.setAttribute('content', metaDesc[lang]);
