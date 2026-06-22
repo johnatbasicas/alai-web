@@ -1,3 +1,6 @@
 # 301 redirects — ucenje moved to its own subdomain (MC #99710 Phase B.2)
 /ucenje/  https://ucenje.alai.no/  301
 /ucenje/*  https://ucenje.alai.no/:splat  301
+
+# www → apex redirect (OCD-4)
+https://www.alai.no/*  https://alai.no/:splat  301!
